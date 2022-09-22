@@ -13,18 +13,18 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('objets', function (Blueprint $table) {
+        Schema::create('objects', function (Blueprint $table) {
             $table->id();
-            $table->integer('quantite');
-            $table->string('unite');
-            $table->unsignedBigInteger('categorie_id');
-            $table->unsignedBigInteger('marque_id');
+            $table->integer('quantity');
+            $table->string('unit');
+            $table->unsignedBigInteger('category_id');
+            $table->unsignedBigInteger('brand_id');
             $table->string('reference');
-            $table->string('commentaire');
+            $table->string('comment');
             $table->timestamps();
 
-            $table->foreign('categorie_id')->references('id')->on('categories')->onUpdate('restrict')->onDelete('cascade');
-            $table->foreign('marque_id')->references('id')->on('marques')->onUpdate('restrict')->onDelete('cascade');
+            $table->foreign('category_id')->references('id')->on('categories')->onUpdate('restrict')->onDelete('cascade');
+            $table->foreign('brand_id')->references('id')->on('brands')->onUpdate('restrict')->onDelete('cascade');
         });
     }
 
