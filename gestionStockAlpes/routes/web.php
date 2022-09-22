@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\AddOrEditItem;
+use App\Http\Controllers\displayController;
+use App\Http\Livewire\ViewAll;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,3 +23,5 @@ Route::get('/', function () {
 /*----- Ajouter des nouveaux objet dans la BD -----*/
 Route::get('/ajouterObjet', [AddOrEditItem::class, 'render']);
 Route::post('/createItem', [ItemController::class, 'createOrUpdateItem']);
+
+Route::get('/voirStock', [displayController::class, 'displayStock']);
