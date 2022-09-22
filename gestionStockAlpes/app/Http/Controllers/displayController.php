@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Item;
 
 class displayController extends Controller
 {
@@ -11,7 +12,7 @@ class displayController extends Controller
     }
 
     public function displayStock(){
-        $items = ["bjour", "monde", "!"];
+        $items = Item::all();
         return view('displayStock', [
             'items' => $items
         ]);
