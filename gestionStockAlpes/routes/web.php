@@ -1,9 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Livewire\AddOrEditItem;
 use App\Http\Controllers\displayController;
-use App\Http\Livewire\ViewAll;
+use App\Http\Controllers\ItemController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,11 +16,10 @@ use App\Http\Livewire\ViewAll;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('/voirStock');
 });
 
 /*----- Ajouter des nouveaux objet dans la BD -----*/
-Route::get('/ajouterObjet', [AddOrEditItem::class, 'render']);
 Route::post('/createItem', [ItemController::class, 'createOrUpdateItem']);
 
 Route::get('/voirStock', [displayController::class, 'displayStock']);
