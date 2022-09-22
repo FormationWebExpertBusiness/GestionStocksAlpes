@@ -8,6 +8,6 @@ class ItemController extends Controller
 {
     /* Affiche le formulaire de création */
     public function addItem(){
-        return view('livewire/add-or-edit-objet');
+        return view('livewire.add-or-edit-item');
     }
 }

@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ObjetController;
+use App\Http\Livewire\AddOrEditItem;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,5 +19,5 @@ Route::get('/', function () {
 });
 
 /*----- Ajouter des nouveaux objet dans la BD -----*/
-Route::get('/ajouterObjet', [ObjetController::class, 'addItem']);
-Route::post('/createItem', [ObjetController::class, 'createOrUpdateItem']);
+Route::get('/ajouterObjet', [AddOrEditItem::class, 'render']);
+Route::post('/createItem', [ItemController::class, 'createOrUpdateItem']);

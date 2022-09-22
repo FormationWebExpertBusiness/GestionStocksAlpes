@@ -15,12 +15,12 @@ return new class extends Migration
     {
         Schema::create('items', function (Blueprint $table) {
             $table->id();
-            $table->integer('quantity');
-            $table->string('unit');
-            $table->unsignedBigInteger('category_id');
-            $table->unsignedBigInteger('brand_id');
-            $table->string('reference');
-            $table->string('comment');
+            $table->integer('quantity')->default(0);
+            $table->string('unit')->nullable();
+            $table->unsignedBigInteger('category_id')->nullable();
+            $table->unsignedBigInteger('brand_id')->nullable();
+            $table->string('model');
+            $table->string('comment')->nullable();
             $table->timestamps();
 
             $table->foreign('category_id')->references('id')->on('categories')->onUpdate('restrict')->onDelete('cascade');
