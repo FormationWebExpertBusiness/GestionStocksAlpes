@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ObjetController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,3 +17,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+/*----- Ajouter des nouveaux objet dans la BD -----*/
+Route::get('/ajouterObjet', [ObjetController::class, 'addItem']);
+Route::post('/createItem', [ObjetController::class, 'createOrUpdateItem']);
