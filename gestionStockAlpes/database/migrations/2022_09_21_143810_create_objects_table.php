@@ -16,6 +16,8 @@ return new class extends Migration
         Schema::create('items', function (Blueprint $table) {
             $table->id();
             $table->integer('quantity')->default(0);
+            $table->integer('price')->default(0);
+            $table->string('currency')->default("EUR");
             $table->string('unit')->nullable();
             $table->unsignedBigInteger('category_id')->nullable();
             $table->unsignedBigInteger('brand_id')->nullable();

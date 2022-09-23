@@ -36,12 +36,14 @@ class DatabaseSeeder extends Seeder
             'quantity' => 3,
             'category_id' => 1,
             'brand_id' => 1,
+            'price' => 100,
             'model' => '7xpkz3',
             'comment' => 'switch 12 prises',
         ]);
 
         \App\Models\Item::create([
             'quantity' => 5,
+            'price' => 25,
             'category_id' => 2,
             'brand_id' => 2,
             'model' => 'hjfh87hdh',
@@ -51,6 +53,7 @@ class DatabaseSeeder extends Seeder
         \App\Models\Item::create([
             'quantity' => 25,
             'category_id' => 2,
+            'price' => 30,
             'brand_id' => 2,
             'unit' => 'm',
             'model' => 'kvkele0945',

@@ -22,4 +22,4 @@ Route::get('/', function () {
 /*----- Ajouter des nouveaux objet dans la BD -----*/
 Route::post('/createItem', [ItemController::class, 'createOrUpdateItem']);
 
-Route::get('/voirStock', [displayController::class, 'displayStock']);
+Route::get('/Stock', [displayController::class, 'displayStock']);
