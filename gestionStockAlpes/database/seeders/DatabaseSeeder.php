@@ -14,50 +14,143 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
+        // BRAND
 
         \App\Models\Brand::create([
-            'name' => 'hp',
+            'name' => 'HP',
         ]);
 
         \App\Models\Brand::create([
-            'name' => 'cisco',
+            'name' => 'tp-link',
+        ]);
+
+        \App\Models\Brand::create([
+            'name' => 'Alpes Network',
+        ]);
+
+        \App\Models\Brand::create([
+            'name' => 'Makita',
+        ]);
+
+        \App\Models\Brand::create([
+            'name' => 'LinkSys',
+        ]);
+
+        \App\Models\Brand::create([
+            'name' => 'Asus',
+        ]);
+
+        \App\Models\Brand::create([
+            'name' => 'Prysmian Group',
+        ]);
+
+        // CATEGORY
+
+        \App\Models\Category::create([
+            'name' => 'Switch',
         ]);
 
         \App\Models\Category::create([
-            'name' => 'switch',
+            'name' => 'Lampe',
         ]);
 
         \App\Models\Category::create([
-            'name' => 'cable',
+            'name' => 'FireWall',
+        ]);
+
+        \App\Models\Category::create([
+            'name' => 'Routeur',
+        ]);
+
+        \App\Models\Category::create([
+            'name' => 'Caméra',
+        ]);
+
+        \App\Models\Category::create([
+            'name' => 'Lecteur de badge',
+        ]);
+
+        \App\Models\Category::create([
+            'name' => 'Téléphone',
+        ]);
+
+        \App\Models\Category::create([
+            'name' => 'Cable',
+        ]);
+
+        // ITEM
+
+        \App\Models\Item::create([
+            'quantity' => 7,
+            'category_id' => 3,
+            'price' => 385,
+            'brand_id' => 3,
+            'model' => 'ALPN-01'
         ]);
 
         \App\Models\Item::create([
-            'quantity' => 3,
+            'quantity' => 1,
+            'category_id' => 4,
+            'price' => 125,
+            'brand_id' => 6,
+            'model' => 'AX6000',
+            'comment' => 'Routeur Wifi 6',
+        ]);
+
+        \App\Models\Item::create([
+            'quantity' => 2,
+            'category_id' => 2,
+            'price' => 74,
+            'brand_id' => 4,
+            'model' => 'GGDSCF53',
+            'comment' => 'Petit Projecteur',
+        ]);
+
+        \App\Models\Item::create([
+            'quantity' => 6,
+            'category_id' => 7,
+            'price' => 120,
+            'brand_id' => 5,
+            'model' => 'G5436-GG',
+            'comment' => 'Poste Téléphonique Fixe',
+        ]);
+
+        \App\Models\Item::create([
+            'quantity' => 6,
+            'category_id' => 7,
+            'price' => 150,
+            'brand_id' => 5,
+            'model' => 'SPA962',
+            'comment' => 'Poste Téléphonique Fixe',
+        ]);
+
+        \App\Models\Item::create([
+            'quantity' => 10,
             'category_id' => 1,
             'brand_id' => 1,
-            'price' => 100,
-            'model' => '7xpkz3',
-            'comment' => 'switch 12 prises',
+            'price' => 1000,
+            'model' => 'J9147A',
+            'comment' => 'Switch 48 ports',
         ]);
 
         \App\Models\Item::create([
-            'quantity' => 5,
-            'price' => 25,
-            'category_id' => 2,
+            'quantity' => 2,
+            'price' => 120,
+            'category_id' => 1,
             'brand_id' => 2,
-            'model' => 'hjfh87hdh',
-            'comment' => 'cable rj45',
+            'model' => 'TL-SG1016',
+            'comment' => 'Switch 16 ports',
         ]);
 
         \App\Models\Item::create([
-            'quantity' => 25,
-            'category_id' => 2,
-            'price' => 30,
-            'brand_id' => 2,
+            'quantity' => 4500,
+            'category_id' => 8,
+            'price' => 270,
+            'brand_id' => 7,
             'unit' => 'm',
-            'model' => 'kvkele0945',
-            'comment' => 'fibre optique',
+            'currency' => 'USD',
+            'model' => 'L1084-1',
+            'comment' => 'Fibre optique',
         ]);
     }
 }
