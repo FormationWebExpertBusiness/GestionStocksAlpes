@@ -24,6 +24,7 @@
                     'model' => $model,
                     'quantity' => $quantity,
                     'currency' => $currency,
+                    'comment' => $comment,
                     'unit' => $unit
                   ])
           </div>
@@ -33,6 +34,6 @@
   </div>  
     @endif
     <button wire:click="toggleModal" class="text-indigo-500">
-        Detail
+        Détail
     </button>
 </div>
