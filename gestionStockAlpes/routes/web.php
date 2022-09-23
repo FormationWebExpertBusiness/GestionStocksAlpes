@@ -16,12 +16,8 @@ use App\Http\Livewire\ViewAll;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 /*----- Ajouter des nouveaux objet dans la BD -----*/
 Route::get('/ajouterObjet', [AddOrEditItem::class, 'render']);
 Route::post('/createItem', [ItemController::class, 'createOrUpdateItem']);
 
-Route::get('/voirStock', [displayController::class, 'displayStock']);
+Route::get('/', [displayController::class, 'displayStock']);

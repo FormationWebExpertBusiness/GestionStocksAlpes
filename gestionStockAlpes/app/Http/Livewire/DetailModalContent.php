@@ -1,12 +1,11 @@
 <?php
- 
+
 namespace App\Http\Livewire;
- 
+
 use Livewire\Component;
- 
-class DetailModal extends Component
+
+class DetailModalContent extends Component
 {
-    public $show = false;
     public $category;
     public $price;
     public $brand;
@@ -15,16 +14,10 @@ class DetailModal extends Component
     public $comment;
     public $unit;
     public $currency;
- 
-    public function toggleModal()
-    {
-        $this->show = !$this->show;
-    }
 
     public function render()
     {
-        return view('livewire.detail-modal', [
-            'show' => $this->show,
+        return view('livewire.detail-modal-content', [
             'category' => $this->category,
             'price' => $this->price,
             'brand' => $this->brand,
