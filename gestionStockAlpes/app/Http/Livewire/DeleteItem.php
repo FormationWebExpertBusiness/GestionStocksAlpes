@@ -13,6 +13,7 @@ class DeleteItem extends Component
     {
         $item = Item::findOrFail($this->itemId);
         $item->delete();
+        
     }
 
     public function render()

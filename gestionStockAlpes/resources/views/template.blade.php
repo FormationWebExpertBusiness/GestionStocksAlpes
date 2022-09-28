@@ -9,7 +9,7 @@
       <div class="flex min-h-0 flex-1 flex-col bg-indigo-700">
         <div class="flex flex-1 flex-col pt-5 pb-4">
           <div class="flex justify-center flex-shrink-0 px-4">
-            <img class="h-10 w-auto" src="https://www.datacenterplatform.com/wp-content/uploads/2022/05/Alpes-Networks-SAS-1.png" alt="Your Company">
+            <img class="h-10 w-auto" src="https://www.datacenterplatform.com/wp-content/uploads/2022/05/Alpes-Networks-SAS-1.png" alt="Alpes Networks">
           </div>
           <nav class="mt-5 flex-1 space-y-1 px-2">
             <a href="#" class="bg-indigo-800 text-white group flex items-center px-2 py-2 text-sm font-medium rounded-md">
@@ -19,7 +19,6 @@
               Stock
             </a>
           </nav>
-          </div>
         </div>
       </div>
     </div>
