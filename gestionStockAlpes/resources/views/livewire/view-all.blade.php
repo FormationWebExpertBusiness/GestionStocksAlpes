@@ -21,6 +21,7 @@
                                     <th wire:click="reOrder('category')" scope="col"
                                         class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
                                         Categorie
+
                                         @if ($champ == 'category')
                                             @if ($mode == 'desc')
                                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"

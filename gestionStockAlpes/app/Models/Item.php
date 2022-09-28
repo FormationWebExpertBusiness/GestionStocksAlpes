@@ -9,6 +9,23 @@ class Item extends Model
 {
     use HasFactory;
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = 
+    [
+        'quantity',
+        'price',
+        'currency',
+        'unit',
+        'category_id',
+        'brand_id',
+        'model',
+        'comment'
+    ];
+
     public function brand()
     {
         return $this->belongsTo(Brand::class);
