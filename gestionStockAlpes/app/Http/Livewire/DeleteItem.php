@@ -8,16 +8,14 @@ use Livewire\Component;
 class DeleteItem extends Component
 {
     public $itemId;
-
-    public function deleteItem()
-    {
-        $item = Item::findOrFail($this->itemId);
-        $item->delete();
-        
-    }
+    public $champ;
+    public $mode;
 
     public function render()
     {
-        return view('livewire.delete-item');
+        return view('livewire.delete-item', [
+            'champ' => $this->champ,
+            'mode' => $this->mode
+        ]);
     }
 }

@@ -8,9 +8,19 @@ use App\Models\Item;
 class ViewAll extends Component
 {
     public $isCreatingNewItem = false;
+
+    
     public $champ = 'id';
     public $mode = 'asc';
-    public $i = 1;
+    
+    protected $queryString = ['champ', 'mode'];
+
+    public function deleteItem($itemId)
+    {
+        $item = Item::findOrFail($itemId);
+        $item->delete();
+        return redirect();
+    }
 
     public function toggleMode(){
         if($this->mode == 'asc'){
@@ -23,7 +33,6 @@ class ViewAll extends Component
     public function reOrder($champO){
         $this->toggleMode();
         $this->champ = $champO;
-        $this->i += 1;
     }
 
     public function render()
@@ -67,6 +76,5 @@ class ViewAll extends Component
     public function toggleAddForm()
     {
         $this->isCreatingNewItem = !$this->isCreatingNewItem;
-        // dd($this->isCreatingNewItem);
     }
 }
