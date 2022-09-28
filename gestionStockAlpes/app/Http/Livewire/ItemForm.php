@@ -10,7 +10,7 @@ use App\Models\Category;
 class ItemForm extends Component
 {
 
-    public $category, $brand, $model, $quantity, $unit, $price;
+    public $category_id, $brand_id, $model, $quantity, $unit, $price;
 
     public $isCreatingNewItem = false;
 
@@ -26,25 +26,15 @@ class ItemForm extends Component
     public function saveItem()
     {
         $validatedData = $this->validate([
-            'category' => '',
-            'brand' => 'required',
+            'category_id' => 'nullable',
+            'brand_id' => 'required',
             'model' => 'required',
             'quantity' => 'required',
-            'unit' => '',
+            'unit' => 'nullable',
             'price' => 'required'
         ]);
 
         Item::create($validatedData);
-        // dd($this);
-        
-        // $item = new Item();
-        // $item->category_id = $this->category ?? $item->category_id;
-        // $item->brand_id = $this->brand ?? $item->brand_id;
-        // $item->model = $this->model ?? $item->model;
-        // $item->quantity = $this->quantity ?? $item->quantity;
-        // $item->unit = $this->unit ?? $item->unit;
-        // $item->price = $this->price ?? $item->price; 
-        // $item->save();
 
         session()->flash('message', 'Post Created Successfully.');
 
