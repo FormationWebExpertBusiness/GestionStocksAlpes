@@ -87,9 +87,6 @@
                                 </tr>
                             </thead>
                             <tbody class="bg-white">
-                                @if ($isCreatingNewItem)
-                                    @livewire('item-form')
-                                @endif
                                 <div>
                                     <!-- Even row -->
                                     @foreach ($items as $item)
