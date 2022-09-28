@@ -7,7 +7,9 @@ use Livewire\Component;
 class SelectMenu extends Component
 {
 
-    public $name, $label, $listOption;
+    public $name, $listOption, $inputValue;
+
+    public $label = "";
     public $isOptional = false;
 
     public function render()

@@ -1,3 +1,5 @@
+@props(['class' => '', 'name', 'label', 'isoptionnal' => false, 'type', 'model', 'placeholder'])
+
 <div class="{{ $class }}">
     <div class="flex justify-between">
         <label for="{{ $name }}" class="block text-sm font-medium text-gray-700">{{ $label }}</label>

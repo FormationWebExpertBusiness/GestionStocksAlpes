@@ -16,10 +16,10 @@ use App\Http\Controllers\ItemController;
 */
 
 Route::get('/', function () {
-    return redirect('/voirStock');
+    return redirect('/stock');
 });
 
 /*----- Ajouter des nouveaux objet dans la BD -----*/
 Route::post('/createItem', [ItemController::class, 'createOrUpdateItem']);
 
-Route::get('/Stock', [displayController::class, 'displayStock']);
+Route::get('/stock', [displayController::class, 'displayStock']);

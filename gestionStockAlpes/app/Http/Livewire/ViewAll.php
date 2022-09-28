@@ -17,8 +17,9 @@ class ViewAll extends Component
         ]);
     }
 
-    public function openForm(){
-        return $this->isCreatingNewItem = true;
+    public function toggleAddForm()
+    {
+        $this->isCreatingNewItem = !$this->isCreatingNewItem;
+        // dd($this->isCreatingNewItem);
     }
 }
- 

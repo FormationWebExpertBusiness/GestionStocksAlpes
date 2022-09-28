@@ -6,7 +6,11 @@ use Livewire\Component;
 
 class InputText extends Component
 {
-    public $name, $label, $placeholder, $class;
+    public $name, $inputValue;
+
+    public $class = "";
+    public $placeholder = "";
+    public $label = "";
     public $isOptional = false;
     public $type = 'text';
 
