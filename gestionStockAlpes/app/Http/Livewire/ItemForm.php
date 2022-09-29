@@ -12,12 +12,20 @@ class ItemForm extends Component
 
     public $category_id, $brand_id, $model, $quantity, $unit, $price;
 
-    public $isCreatingNewItem = false;
+    public $isformOpen = false;
+
+    public $itemToUpdate = null;
 
     public function render()
     {
+        $this->category_id = $this->itemToUpdate?->category_id;
+        $this->brand_id = $this->itemToUpdate?->brand_id;
+        $this->model = $this->itemToUpdate?->model;
+        $this->quantity = $this->itemToUpdate?->quantity;
+        $this->unit = $this->itemToUpdate?->unit;
+        $this->price = $this->itemToUpdate?->price;
+
         return view('livewire.item-form', [
-            'item' => $this->item ?? new Item(),
             'brands' => Brand::all(),
             'categories' => Category::all()
         ]);
@@ -34,11 +42,14 @@ class ItemForm extends Component
             'price' => 'required'
         ]);
 
-        Item::create($validatedData);
+        if(isset($this->itemToUpdate))
+            $this->itemToUpdate->update($validatedData);
+        else
+            Item::create($validatedData);
 
         session()->flash('message', 'Post Created Successfully.');
 
-        $this->isCreatingNewItem = false;
+        $this->isformOpen = false;
 
         return redirect('/stock');
     }
