@@ -23,7 +23,7 @@ cp .env.exemple .env
 composer install
 npm install
 ```
-* Run livewire
+* Run the livewire server
 ```bash
 npm run dev
 ```
