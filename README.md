@@ -8,28 +8,28 @@
         tailwind 3.1.8
         
 ## Cmd to start the project
-*Go the the project folder
+* Go the the project folder
 ```bash
 cd gestionStockAlpes
 ```
-*Create a .env file
+* Create a .env file
 ```bash
 cp .env.exemple .env
 ```
-*Install dependencies
+* Install dependencies
 ```bash
 composer install
 npm install
 ```
-*Run livewire
+* Run livewire
 ```bash
 npm run dev
 ```
-*Generate the project key to access your localhost
+* Generate the project key to access your localhost
 ```bash
 php artisan key:generate
 ```
 
-*Access the project on your local host
+* Access the project on your local host
 
 **If database related cmd don't run change the DB_HOST line in your .env to "mysql"**
