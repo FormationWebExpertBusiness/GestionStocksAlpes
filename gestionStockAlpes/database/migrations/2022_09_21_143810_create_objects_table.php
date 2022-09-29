@@ -19,8 +19,8 @@ return new class extends Migration
             $table->integer('price')->default(0);
             $table->string('currency')->default("EUR");
             $table->string('unit')->nullable();
-            $table->unsignedBigInteger('category_id')->nullable();
-            $table->unsignedBigInteger('brand_id')->nullable();
+            $table->unsignedBigInteger('category_id')->default(1);
+            $table->unsignedBigInteger('brand_id')->default(1);
             $table->string('model');
             $table->string('comment')->nullable();
             $table->timestamps();

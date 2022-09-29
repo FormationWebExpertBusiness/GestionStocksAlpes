@@ -12,7 +12,7 @@ class ItemForm extends Component
 
     public $itemToUpdate = null;
     
-    public $category_id, $brand_id, $model, $quantity, $unit, $price;
+    public $category_id, $brand_id, $model, $quantity, $unit, $price, $comment;
     
     public $isFormOpen = false;
 
@@ -23,7 +23,8 @@ class ItemForm extends Component
         $this->model = $this->itemToUpdate?->model;
         $this->quantity = $this->itemToUpdate?->quantity;
         $this->unit = $this->itemToUpdate?->unit;
-        $this->price = $this->itemToUpdate?->price;    
+        $this->price = $this->itemToUpdate?->price;
+        $this->comment = $this->itemToUpdate?->comment;
     }
 
     public function render()
@@ -37,12 +38,13 @@ class ItemForm extends Component
     public function saveItem()
     {
         $validatedData = $this->validate([
-            'category_id' => 'nullable',
+            'category_id' => 'required',
             'brand_id' => 'required',
             'model' => 'required',
             'quantity' => 'required',
             'unit' => 'nullable',
-            'price' => 'required'
+            'price' => 'required',
+            'comment' => 'nullable'
         ]);
 
         if (isset($this->itemToUpdate)) {
@@ -51,7 +53,18 @@ class ItemForm extends Component
             Item::create($validatedData);
         }
 
-        session()->flash('message', 'Post Created Successfully.');
+        closeForm();
+    }
+
+    public function closeForm()
+    {
+        $this->category_id = null;
+        $this->brand_id = null;
+        $this->model = null;
+        $this->quantity = null;
+        $this->unit = null;
+        $this->price = null;
+        $this->comment = null;
 
         $this->isFormOpen = false;
 
