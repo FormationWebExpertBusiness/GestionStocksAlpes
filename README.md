@@ -1,11 +1,11 @@
 # GestionStocksAlpes
 
 ## Configuration
-        mysql 8.0.30
-        php 8.0.2
-        laravel 9.19
-        livewire 2.10
-        tailwind 3.1.8
+ mysql 8.0.30
+ php 8.0.2
+ laravel 9.19
+ livewire 2.10
+ tailwind 3.1.8
         
 ## Cmd to start the project
 * Go the project folder
