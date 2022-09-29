@@ -8,7 +8,7 @@
         tailwind 3.1.8
         
 ## Cmd to start the project
-* Go the the project folder
+* Go the project folder
 ```bash
 cd gestionStockAlpes
 ```
