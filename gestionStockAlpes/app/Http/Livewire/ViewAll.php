@@ -45,13 +45,13 @@ class ViewAll extends Component
                 $items = $items->sortBy(function($item) { 
                             $champF = $this->champ;
                             return $item->$champF->name;
-                        });
+                        }, SORT_NATURAL|SORT_FLAG_CASE);
             }else{
                 $items = Item::all();
                 $items = $items->sortByDesc(function($item) { 
                             $champF = $this->champ;
                             return $item->$champF->name;
-                        });
+                        }, SORT_NATURAL|SORT_FLAG_CASE);
             }
         }else{
             if($this->mode == 'asc'){
@@ -59,13 +59,13 @@ class ViewAll extends Component
                 $items = $items->sortBy(function($item) { 
                             $champF = $this->champ;
                             return $item->$champF;
-                        });
+                        }, SORT_NATURAL|SORT_FLAG_CASE);
             }else{
                 $items = Item::all();
                 $items = $items->sortByDesc(function($item) { 
                             $champF = $this->champ;
                             return $item->$champF;
-                        });
+                        }, SORT_NATURAL|SORT_FLAG_CASE);
             }
 
         }
