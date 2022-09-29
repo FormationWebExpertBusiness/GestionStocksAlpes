@@ -32,7 +32,7 @@
                                                 <x-input-field type='text' name='model' label='Modèle'
                                                     model='model' placeholder='Modèle'></x-input-field>
 
-                                                <x-input-field class='inline-block' type='text' name='quantity'
+                                                <x-input-field class='inline-block' type='number' name='quantity'
                                                     label='Quantité' model='quantity' placeholder='Quantité'>
                                                 </x-input-field>
 
@@ -43,13 +43,16 @@
                                                 <x-input-field type='text' name='price' label='Prix total'
                                                     model='price' placeholder='Prix total'></x-input-field>
 
+                                                <x-textarea-field name='comment' label='Commentaire'
+                                                    model='comment' placeholder='Commentaire'></x-textarea-field>
+
                                             </div>
                                             <div class="bg-gray-50 px-4 py-3 text-right sm:px-6">
                                                 <button wire:click="saveItem" type="button"
                                                     class="inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
                                                     Enregistrer
                                                 </button>
-                                                <button wire:click="$toggle('isFormOpen')" type="button"
+                                                <button wire:click="closeForm" type="button"
                                                     class="inline-flex items-center rounded-md border border-transparent bg-red-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2">
                                                     Annuler
                                                 </button>
