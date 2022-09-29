@@ -69,7 +69,7 @@
                                             <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-500">
                                                 {{ $item->quantity }} {{ $item->unit }}</td>
                                             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                                {{ $item->price }} {{ $item->currency }}</td>
+                                                {{ round($item->price, 2) }} {{ $item->currency }}</td>
                                             <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-center text-sm font-medium sm:pr-6">
                                                 @livewire('detail-modal', ['item' => $item], key('item-detail-' . $item->id))
                                             </td>
