@@ -22,32 +22,27 @@
                                     <th wire:click="reOrder('category')" scope="col"
                                         class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
                                         Categorie
-                                        <x-ordering-arrows champ='category' champF={{ $champ }}
-                                            modeF={{ $mode }}></x-ordering-arrows>
+                                        <x-ordering-arrows champ='category' champF={{$champ}} modeF={{$mode}}></x-ordering-arrows>
                                     </th>
                                     <th wire:click="reOrder('brand')" scope="col"
                                         class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
                                         Marque
-                                        <x-ordering-arrows champ='brand' champF={{ $champ }}
-                                            modeF={{ $mode }}></x-ordering-arrows>
+                                        <x-ordering-arrows champ='brand' champF={{$champ}} modeF={{$mode}}></x-ordering-arrows>
                                     </th>
                                     <th wire:click="reOrder('model')" scope="col"
                                         class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
                                         Modele
-                                        <x-ordering-arrows champ='model' champF={{ $champ }}
-                                            modeF={{ $mode }}></x-ordering-arrows>
+                                        <x-ordering-arrows champ='model' champF={{$champ}} modeF={{$mode}}></x-ordering-arrows>
                                     </th>
                                     <th wire:click="reOrder('quantity')" scope="col"
                                         class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">
                                         Quantité
-                                        <x-ordering-arrows champ='quantity' champF={{ $champ }}
-                                            modeF={{ $mode }}></x-ordering-arrows>
+                                        <x-ordering-arrows champ='quantity' champF={{$champ}} modeF={{$mode}}></x-ordering-arrows>
                                     </th>
                                     <th wire:click="reOrder('price')" scope="col"
                                         class="inline-flex px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
                                         Prix Total
-                                        <x-ordering-arrows champ='price' champF={{ $champ }}
-                                            modeF={{ $mode }}></x-ordering-arrows>
+                                        <x-ordering-arrows champ='price' champF={{$champ}} modeF={{$mode}}></x-ordering-arrows>
                                     </th>
                                     <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-6">
                                         <span class="sr-only">Detail</span>
