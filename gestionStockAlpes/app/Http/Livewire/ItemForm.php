@@ -37,7 +37,7 @@ class ItemForm extends Component
     public function saveItem()
     {
         $validatedData = $this->validate([
-            'category_id' => 'nullable',
+            'category_id' => 'required',
             'brand_id' => 'required',
             'model' => 'required',
             'quantity' => 'required',
