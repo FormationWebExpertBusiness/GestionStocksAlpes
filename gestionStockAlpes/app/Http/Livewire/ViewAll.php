@@ -9,10 +9,10 @@ class ViewAll extends Component
 {
     public $isCreatingNewItem = false;
 
-    
+
     public $champ = 'id';
     public $mode = 'asc';
-    
+
     protected $queryString = ['champ', 'mode'];
 
     protected $listeners = ['stockUpdated' => 'reloadView'];
@@ -24,50 +24,38 @@ class ViewAll extends Component
         return redirect();
     }
 
-    public function toggleMode(){
-        if($this->mode == 'asc'){
+    public function toggleMode()
+    {
+        if ($this->mode == 'asc') {
             $this->mode = 'desc';
-        }else{
+        } else {
             $this->mode = 'asc';
         }
     }
 
-    public function reOrder($champO){
+    public function reOrder($champO)
+    {
         $this->toggleMode();
         $this->champ = $champO;
     }
 
     public function render()
     {
-        if($this->champ == 'category' || $this->champ == 'brand'){
-            if($this->mode == 'asc'){
-                $items = Item::all();
-                $items = $items->sortBy(function($item) { 
-                            $champF = $this->champ;
-                            return $item->$champF->name;
-                        });
-            }else{
-                $items = Item::all();
-                $items = $items->sortByDesc(function($item) { 
-                            $champF = $this->champ;
-                            return $item->$champF->name;
-                        });
+        if ($this->champ == 'category' || $this->champ == 'brand') {
+            $items = Item::all();
+            if ($this->mode == 'asc') {
+                $items = $items->sortBy(function ($item) {
+                    $champF = $this->champ;
+                    return $item->$champF->name;
+                }, SORT_NATURAL | SORT_FLAG_CASE);
+            } else {
+                $items = $items->sortByDesc(function ($item) {
+                    $champF = $this->champ;
+                    return $item->$champF->name;
+                }, SORT_NATURAL | SORT_FLAG_CASE);
             }
-        }else{
-            if($this->mode == 'asc'){
-                $items = Item::all();
-                $items = $items->sortBy(function($item) { 
-                            $champF = $this->champ;
-                            return $item->$champF;
-                        });
-            }else{
-                $items = Item::all();
-                $items = $items->sortByDesc(function($item) { 
-                            $champF = $this->champ;
-                            return $item->$champF;
-                        });
-            }
-
+        } else {
+            $items = Item::orderBy($this->champ, $this->mode)->get();
         }
 
         return view('livewire.view-all', [

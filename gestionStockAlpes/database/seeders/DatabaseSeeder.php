@@ -15,6 +15,10 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // BRAND
+        
+        \App\Models\Brand::create([
+            'name' => 'Non défini',
+        ]);
 
         \App\Models\Brand::create([
             'name' => 'HP',
@@ -45,6 +49,10 @@ class DatabaseSeeder extends Seeder
         ]);
 
         // CATEGORY
+
+        \App\Models\Category::create([
+            'name' => 'Non défini',
+        ]);
 
         \App\Models\Category::create([
             'name' => 'Switch',
@@ -82,52 +90,52 @@ class DatabaseSeeder extends Seeder
 
         \App\Models\Item::create([
             'quantity' => 7,
-            'category_id' => 3,
+            'category_id' => 4,
             'price' => 385,
-            'brand_id' => 3,
+            'brand_id' => 4,
             'model' => 'ALPN-01'
         ]);
 
         \App\Models\Item::create([
             'quantity' => 1,
-            'category_id' => 4,
+            'category_id' => 5,
             'price' => 125,
-            'brand_id' => 6,
+            'brand_id' => 7,
             'model' => 'AX6000',
             'comment' => 'Routeur Wifi 6',
         ]);
 
         \App\Models\Item::create([
             'quantity' => 2,
-            'category_id' => 2,
+            'category_id' => 3,
             'price' => 74,
-            'brand_id' => 4,
+            'brand_id' => 5,
             'model' => 'GGDSCF53',
             'comment' => 'Petit Projecteur',
         ]);
 
         \App\Models\Item::create([
             'quantity' => 6,
-            'category_id' => 7,
+            'category_id' => 8,
             'price' => 120,
-            'brand_id' => 5,
+            'brand_id' => 6,
             'model' => 'G5436-GG',
             'comment' => 'Poste Téléphonique Fixe',
         ]);
 
         \App\Models\Item::create([
             'quantity' => 6,
-            'category_id' => 7,
+            'category_id' => 8,
             'price' => 150,
-            'brand_id' => 5,
+            'brand_id' => 6,
             'model' => 'SPA962',
             'comment' => 'Poste Téléphonique Fixe',
         ]);
 
         \App\Models\Item::create([
             'quantity' => 10,
-            'category_id' => 1,
-            'brand_id' => 1,
+            'category_id' => 2,
+            'brand_id' => 2,
             'price' => 1000,
             'model' => 'J9147A',
             'comment' => 'Switch 48 ports',
@@ -136,17 +144,17 @@ class DatabaseSeeder extends Seeder
         \App\Models\Item::create([
             'quantity' => 2,
             'price' => 120,
-            'category_id' => 1,
-            'brand_id' => 2,
+            'category_id' => 2,
+            'brand_id' => 3,
             'model' => 'TL-SG1016',
             'comment' => 'Switch 16 ports',
         ]);
 
         \App\Models\Item::create([
             'quantity' => 4500,
-            'category_id' => 8,
+            'category_id' => 9,
             'price' => 270,
-            'brand_id' => 7,
+            'brand_id' => 8,
             'unit' => 'm',
             'currency' => 'USD',
             'model' => 'L1084-1',
