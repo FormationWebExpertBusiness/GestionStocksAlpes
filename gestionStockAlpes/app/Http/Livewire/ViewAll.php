@@ -15,6 +15,8 @@ class ViewAll extends Component
     
     protected $queryString = ['champ', 'mode'];
 
+    protected $listeners = ['stockUpdated' => 'reloadView'];
+
     public function deleteItem($itemId)
     {
         $item = Item::findOrFail($itemId);
@@ -76,5 +78,10 @@ class ViewAll extends Component
     public function toggleAddForm()
     {
         $this->isCreatingNewItem = !$this->isCreatingNewItem;
+    }
+
+    public function reloadView()
+    {
+        return redirect();
     }
 }

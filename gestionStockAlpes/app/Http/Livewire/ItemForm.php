@@ -10,14 +10,25 @@ use App\Models\Category;
 class ItemForm extends Component
 {
 
+    public $itemToUpdate = null;
+    
     public $category_id, $brand_id, $model, $quantity, $unit, $price;
+    
+    public $isFormOpen = false;
 
-    public $isCreatingNewItem = false;
+    public function mount()
+    {
+        $this->category_id = $this->itemToUpdate?->category_id;
+        $this->brand_id = $this->itemToUpdate?->brand_id;
+        $this->model = $this->itemToUpdate?->model;
+        $this->quantity = $this->itemToUpdate?->quantity;
+        $this->unit = $this->itemToUpdate?->unit;
+        $this->price = $this->itemToUpdate?->price;    
+    }
 
     public function render()
     {
         return view('livewire.item-form', [
-            'item' => $this->item ?? new Item(),
             'brands' => Brand::all(),
             'categories' => Category::all()
         ]);
@@ -34,13 +45,17 @@ class ItemForm extends Component
             'price' => 'required'
         ]);
 
-        Item::create($validatedData);
+        if (isset($this->itemToUpdate)) {
+            $this->itemToUpdate->update($validatedData);
+        } else {
+            Item::create($validatedData);
+        }
 
         session()->flash('message', 'Post Created Successfully.');
 
-        $this->isCreatingNewItem = false;
+        $this->isFormOpen = false;
 
-        return redirect('/stock');
+        $this->emit('stockUpdated');
     }
 
 }
