@@ -1,6 +1,6 @@
 <div>
     {{-- modal qui s'ouvre pour ajouter un produit  --}}
-    @if ($isformOpen)
+    @if ($isCreatingNewItem)
         <div class="relative z-10" aria-labelledby="modal-title" role="dialog" aria-modal="true">
             <div class="fixed inset-0 bg-gray-500 bg-opacity-50 transition-opacity"></div>
             <div class="fixed inset-0 z-10 overflow-y-auto">
@@ -49,7 +49,7 @@
                                                     class="inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
                                                     Enregistrer
                                                 </button>
-                                                <button wire:click="$toggle('isformOpen')" type="button"
+                                                <button wire:click="$toggle('isCreatingNewItem')" type="button"
                                                     class="inline-flex items-center rounded-md border border-transparent bg-red-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2">
                                                     Annuler
                                                 </button>
@@ -65,22 +65,9 @@
         </div>
     @endif
     {{-- bouton pour afficher le formulaire --}}
-    @if(isset($itemToUpdate))
-        <button
-            class="text-indigo-600 hover:text-indigo-900"
-            wire:click.prevent="$toggle('isformOpen')">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none"
-                viewBox="0 0 24 24" stroke-width="1.5"
-                stroke="currentColor" class="w-6 h-6">
-                <path stroke-linecap="round" stroke-linejoin="round"
-                d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125" />
-            </svg>
-        </button>
-    @else
-        <button
-            class="inline-flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:w-auto"
-            wire:click.prevent="$toggle('isformOpen')">
-            Ajouter un produit
-        </button>
-    @endif
+    <button
+        class="inline-flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:w-auto"
+        wire:click.prevent="$toggle('isCreatingNewItem')">
+        Ajouter un produit
+    </button>
 </div>
