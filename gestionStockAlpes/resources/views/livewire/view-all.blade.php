@@ -61,7 +61,7 @@
                                         <tr
                                             class="{{ $loop->index % 2 === 0 ? 'bg-white' : 'bg-gray-50' }}  divide-x divide-gray-200">
                                             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                                {{ $item->category->name }}</td>
+                                                {{$item->category->name ?? 'Non défini'}}</td>
                                             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                                                 {{ $item->brand->name }}</td>
                                             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
