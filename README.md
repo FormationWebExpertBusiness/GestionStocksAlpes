@@ -3,9 +3,9 @@
 ## Configuration ⚙️
 
 ```
- MYSQL 8.0.30
- PHP 8.0.2 
- LARAVEL 9.19 
+ MYSQL    8.0.30https://tailwindcss.com/docs/utility-first
+ PHP      8.0.2 
+ LARAVEL  9.19 
  LIVEWIRE 2.10 
  TAILWIND 3.1.8
  ```
