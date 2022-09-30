@@ -52,7 +52,7 @@ php artisan key:generate
 > If database related cmd don't run change the DB_HOST line in your .env to "mysql"
 
 ## Documentation 📚
-* [![Laravel](https://laravel.com/docs/9.x)]
+* [Laravel](https://laravel.com/docs/9.x)
 
 * https://tailwindui.com/documentation
 * https://laravel-livewire.com/docs/2.x/quickstart
