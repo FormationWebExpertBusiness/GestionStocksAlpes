@@ -25,9 +25,11 @@ cp .env.exemple .env
 ```bash
 docker compose up or docker-compose up
 ```
-
+  
+  
 🚨  **The next cmd needs to be in the sail container** 🚨
-
+  
+  
 ### Install dependencies 🐡
 ```bash
 composer install
@@ -41,11 +43,15 @@ npm run dev
 ```bash
 php artisan key:generate
 ```
-
+  
 ### Access the project on your localhost 🌐
-
+  
+  
 ## Errors :rage:
 
 > If database related cmd don't run change the DB_HOST line in your .env to "mysql"
 
 ## Documentation 📚
+* https://laravel.com/docs/9.x
+* https://tailwindui.com/documentation
+* https://laravel-livewire.com/docs/2.x/quickstart
