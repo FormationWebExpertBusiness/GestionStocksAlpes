@@ -25,11 +25,10 @@ cp .env.exemple .env
 ```bash
 docker compose up or docker-compose up
 ```
-  
-  
+<br /> 
 🚨  **The next commands needs to be in the sail container** 🚨
-  
-  
+<br />  
+
 ### Install dependencies 🐡
 ```bash
 composer install
