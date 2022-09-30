@@ -35,13 +35,14 @@ docker compose up or docker-compose up
 composer install
 npm install
 ```
-### Run the livewire server :octopus:
-```bash
-npm run dev
-```
 ### Generate the project key to access your localhost 🔑
 ```bash
 php artisan key:generate
+```
+
+### Run the livewire server :octopus:
+```bash
+npm run dev
 ```
   
 ### Access the project on your localhost 🌐
