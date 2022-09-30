@@ -11,7 +11,7 @@
  ```
  
         
-## Cmd to launch the project 🚀
+## Cmds to launch the project 🚀
 
 ### Go the project folder 📂
 ```bash
@@ -27,7 +27,7 @@ docker compose up or docker-compose up
 ```
   
   
-🚨  **The next cmd needs to be in the sail container** 🚨
+🚨  **The next commands needs to be in the sail container** 🚨
   
   
 ### Install dependencies 🐡
