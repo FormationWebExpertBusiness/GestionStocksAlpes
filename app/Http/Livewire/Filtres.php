@@ -4,6 +4,8 @@ namespace App\Http\Livewire;
 use App\Models\Category;
 use App\Models\Brand;
 use Livewire\Component;
+use Illuminate\Http\Request;
+use PhpParser\Node\Expr\Cast\Object_;
 
 class Filtres extends Component
 {
@@ -13,6 +15,11 @@ class Filtres extends Component
     public $categories;
     public $brands;
 
+    public function mount()
+    {
+        $this->categories = Category::all();
+        $this->brands = Brand::all();
+    }
 
     public function toggleCatDropdown()
     {
@@ -26,10 +33,18 @@ class Filtres extends Component
         if($this->isVisibleCat == true) $this->isVisibleCat = !$this->isVisibleCat;
     }
 
-    public function render()
+    public function appendCat($cat)
     {
-        $this->categories = Category::all();
-        $this->brands = Brand::all();
+        $this->emit("catFilter", $cat);
+    }
+
+    public function appendBrand($brand)
+    {
+        $this->emit("brandFilter", $brand);
+    }
+
+    public function render(Request $request)
+    {
         return view('livewire.filtres');
     }
 }

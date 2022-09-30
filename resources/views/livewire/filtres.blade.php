@@ -49,12 +49,13 @@
                     @if ($isVisibleCat)
                         <div class="absolute transform -translate-x-[25%] p-4 z-10 mt-2 w-56 origin-top divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
                             role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
-                            <div class="py-1 content-center" role="none">
+                            <div name="categories" class="py-1 content-center" role="none">
                                 @foreach ($categories as $category)
-                                    <div class="flex items-center">
-                                        <input id="{{$category->id}}" name="{{$category->id}}" value="{{$category->id}}" type="checkbox"
+                                    <div class="flex items-center" wire:click='appendCat({{$category->id}})'>
+                                        {{-- value="{{"cat".$category->id}}" --}}
+                                        <input id="{{"cat".$category->id}}" name="{{"cat".$category->id}}" type="checkbox"
                                             class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
-                                        <label for="{{$category->id}}"
+                                        <label wire:click='appendCat({{$category->id}})' for="{{"cat".$category->id}}"
                                             class="ml-3 text-sm text-gray-500">{{ $category->name }}</label>
                                     </div>
                                 @endforeach
@@ -88,12 +89,13 @@
                     @if ($isVisibleBrand)
                         <div class="absolute transform -translate-x-[25%] p-4 z-10 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
                             role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
-                            <div class="py-1" role="none">
+                            <div name="brands" class="py-1" role="none">
+                                {{-- <select id="categories" name="categories" onchange="this.form.submit()"></select> --}}
                                 @foreach ($brands as $brand)
-                                    <div class="flex items-center">
-                                        <input id="{{$brand->id}}" name="{{$brand->id}}" value="{{$brand->id}}" type="checkbox"
+                                    <div class="flex items-center" wire:click='appendBrand({{$brand->id}})'>
+                                        <input id="{{"brand".$brand->id}}" name="{{"brand".$brand->id}}" value="{{"brand".$brand->id}}" type="checkbox"
                                             class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
-                                        <label for="{{$brand->id}}"
+                                        <label wire:click='appendBrand({{$brand->id}})' for="{{"brand".$brand->id}}"
                                             class="ml-3 text-sm text-gray-500">{{ $brand->name }}</label>
                                     </div>
                                 @endforeach

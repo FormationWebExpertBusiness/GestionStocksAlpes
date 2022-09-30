@@ -13,15 +13,38 @@ class ViewAll extends Component
     public $champ = 'id';
     public $mode = 'asc';
 
-    protected $queryString = ['champ', 'mode'];
+    public $categoriesF = array();
+    public $brandsF = array();
 
-    protected $listeners = ['stockUpdated' => 'reloadView'];
+    protected $queryString = ['champ', 'mode', 'categoriesF', 'brandsF'];
+
+    protected $listeners = ['stockUpdated' => 'reloadView', 'catFilter' => 'updateCatF', 'brandFilter' => 'updateBrandF'];
 
     public function deleteItem($itemId)
     {
         $item = Item::findOrFail($itemId);
         $item->delete();
         return redirect();
+    }
+
+    public function updateCatF($cat)
+    {
+        if(in_array($cat, $this->categoriesF))
+        {
+            unset($this->categoriesF[array_search($cat, $this->categoriesF)]);
+        }else{
+            array_push($this->categoriesF, $cat);
+        }
+    }
+
+    public function updateBrandF($brand)
+    {
+        if(in_array($brand, $this->brandsF))
+        {
+            unset($this->brandsF[array_search($brand, $this->brandsF)]);
+        }else{
+            array_push($this->brandsF, $brand);
+        }
     }
 
     public function toggleMode()
