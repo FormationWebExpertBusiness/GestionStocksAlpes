@@ -40,11 +40,11 @@
                                                     label='Unité' model='unit' placeholder='Unité' isOptional="true">
                                                 </x-input-field>
 
-                                                <x-input-field type='text' name='price' label='Prix total'
+                                                <x-input-field type='number' name='price' label='Prix total'
                                                     model='price' placeholder='Prix total'></x-input-field>
 
                                                 <x-textarea-field name='comment' label='Commentaire'
-                                                    model='comment' placeholder='Commentaire'></x-textarea-field>
+                                                    model='comment' placeholder='Commentaire' isOptional="true"></x-textarea-field>
 
                                             </div>
                                             <div class="bg-gray-50 px-4 py-3 text-right sm:px-6">
