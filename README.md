@@ -9,29 +9,35 @@
  tailwind 3.1.8
  ```
         
-## Cmd to start the project
-* Go the project folder
+## Cmd to launch the project 🚀
+
+### Go the project folder
 ```bash
 cd gestionStockAlpes
 ```
-* Create a .env file
+### Create a .env file
 ```bash
 cp .env.exemple .env
 ```
-* Install dependencies
+### Build images 🐳
+```bash
+docker compose up or docker-compose up
+```
+
+### Install dependencies
 ```bash
 composer install
 npm install
 ```
-* Run the livewire server
+### Run the livewire server
 ```bash
 npm run dev
 ```
-* Generate the project key to access your localhost
+### Generate the project key to access your localhost 🔐
 ```bash
 php artisan key:generate
 ```
 
-* Access the project on your local host
-
-**If database related cmd don't run change the DB_HOST line in your .env to "mysql"**
+### Access the project on your localhost
+🐳
+🚨 **If database related cmd don't run change the DB_HOST line in your .env to "mysql"** 🚨
