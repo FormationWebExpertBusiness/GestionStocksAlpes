@@ -26,6 +26,7 @@ cp .env.exemple .env
 docker compose up or docker-compose up
 ```
 <br /> 
+<br /> 
 
 🚨  **The next commands needs to be in the sail container** 🚨
 
