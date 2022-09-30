@@ -52,7 +52,8 @@ npm run dev
   
 ## Errors :rage:
 
-> If database related cmd don't run change the DB_HOST line in your .env to "mysql"
+> If database related cmd don't run 
+```change the DB_HOST line in your .env to "mysql"
 <br />
 
 ## Documentation 📚
