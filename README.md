@@ -24,12 +24,12 @@ cp .env.exemple .env
 docker compose up or docker-compose up
 ```
 
-### Install dependencies
+### Install dependencies 🐡
 ```bash
 composer install
 npm install
 ```
-### Run the livewire server
+### Run the livewire server :octopus:
 ```bash
 npm run dev
 ```
@@ -39,5 +39,5 @@ php artisan key:generate
 ```
 
 ### Access the project on your localhost
-🐳
+
 🚨 **If database related cmd don't run change the DB_HOST line in your .env to "mysql"** 🚨
