@@ -1,6 +1,6 @@
-# GestionStocksAlpes
+# GestionStocksAlpes 📦
 
-## Configuration
+## Configuration ⚙️
 ```
  mysql 8.0.30
  php 8.0.2
@@ -11,11 +11,11 @@
         
 ## Cmd to launch the project 🚀
 
-### Go the project folder
+### Go the project folder 📂
 ```bash
 cd gestionStockAlpes
 ```
-### Create a .env file
+### Create a .env file :page_facing_up:
 ```bash
 cp .env.exemple .env
 ```
@@ -23,6 +23,8 @@ cp .env.exemple .env
 ```bash
 docker compose up or docker-compose up
 ```
+
+🚨 > The next cmd needs to be in the sail container 🚨
 
 ### Install dependencies 🐡
 ```bash
