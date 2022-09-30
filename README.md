@@ -2,12 +2,11 @@
 
 ## Configuration ⚙️
 
- mysql 8.0.30 <img src="(https://www.mysql.com/common/logos/logo-mysql-170x115.png)" alt="drawing" width="100"/>
- 
- php 8.0.2 ![php]()
- laravel 9.19 ![laravel](http://url/to/img.png)
- livewire 2.10 ![livewire](http://url/to/img.png)
- tailwind 3.1.8 ![tailwind](http://url/to/img.png)
+ mysql 8.0.30 :database:
+ php 8.0.2 
+ laravel 9.19 
+ livewire 2.10 
+ tailwind 3.1.8
  
         
 ## Cmd to launch the project 🚀
