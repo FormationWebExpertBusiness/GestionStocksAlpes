@@ -53,6 +53,6 @@ php artisan key:generate
 
 ## Documentation 📚
 * [Laravel](https://laravel.com/docs/9.x)
-
-* https://tailwindui.com/documentation
-* https://laravel-livewire.com/docs/2.x/quickstart
+* [Livewire](https://laravel-livewire.com/docs/2.x/quickstart)
+* [Tailwindui](https://tailwindui.com/documentation)
+* [Tailwindcss](https://tailwindcss.com/docs/utility-first)
