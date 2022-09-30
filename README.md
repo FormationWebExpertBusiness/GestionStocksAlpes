@@ -48,7 +48,7 @@ npm run dev
 ```
   
 ### Access the project on your localhost 🌐
-  
+ <br />
   
 ## Errors :rage:
 
