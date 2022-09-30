@@ -9,7 +9,7 @@
  LIVEWIRE 2.10 
  TAILWIND 3.1.8
  ```
- 
+ <br />
         
 ## Cmds to launch the project 🚀
 
@@ -53,6 +53,7 @@ npm run dev
 ## Errors :rage:
 
 > If database related cmd don't run change the DB_HOST line in your .env to "mysql"
+<br />
 
 ## Documentation 📚
 * [Laravel](https://laravel.com/docs/9.x)
