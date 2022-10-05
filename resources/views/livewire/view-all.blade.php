@@ -59,7 +59,7 @@
                                 @foreach ($items as $item)
                                     <div wire:key="item-{{ $item->id }}">
                                         <tr
-                                            class="{{ $loop->index % 2 === 0 ? 'bg-white' : 'bg-gray-50' }} divide-x divide-gray-200 table w-full table-fixed">
+                                            class="{{ $loop->index % 2 === 0 ? 'bg-white' : 'bg-gray-50' }} divide-x divide-gray-200 table w-full">
                                             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 {{ $this->getDataColumnWidth() }}">
                                                 {{$item->category->name}}</td>
                                             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 {{ $this->getDataColumnWidth() }}">
