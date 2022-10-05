@@ -15,6 +15,8 @@ class ViewAll extends Component
     public $champ = 'id';
     public $mode = 'asc';
 
+    public $searchValue = "";
+
     public $categoriesF = array();
     public $brandsF = array();
 
@@ -25,7 +27,7 @@ class ViewAll extends Component
         'brandsF' => ['as' => 'bra']
     ];
 
-    protected $listeners = ['stockUpdated' => 'reloadView', 'catFilter' => 'updateCatF', 'brandFilter' => 'updateBrandF'];
+    protected $listeners = ['stockUpdated' => 'reloadView', 'catFilter' => 'updateCatF', 'brandFilter' => 'updateBrandF', 'resetFilters' => 'resetAllFilters', 'searchF' => 'search', 'resetSearchBar' => 'resetValueSearchBar'];
 
     protected $nbCol = 5;//le nombre de colonne sans compter les icones
 
@@ -34,6 +36,11 @@ class ViewAll extends Component
         $item = Item::findOrFail($itemId);
         $item->delete();
         return redirect();
+    }
+
+    public function resetValueSearchBar()
+    {
+        $this->searchValue = "";
     }
 
     public function updateCatF($cat)
@@ -75,40 +82,34 @@ class ViewAll extends Component
         $this->champ = $champO;
     }
 
+    public function resetAllFilters()
+    {
+        $this->categoriesF = array();
+        $this->brandsF = array();
+    }
+
+    public function search($searchV)
+    {
+        $this->searchValue = $searchV;
+    }
+
     public function render()
     {
-        if ($this->champ == 'category' || $this->champ == 'brand') {
-            $items = Item::all();
-            if ($this->mode == 'asc') {
-                $items = $items->sortBy(function ($item) {
-                    $champF = $this->champ;
-                    return $item->$champF->name;
-                }, SORT_NATURAL | SORT_FLAG_CASE);
-            } else {
-                $items = $items->sortByDesc(function ($item) {
-                    $champF = $this->champ;
-                    return $item->$champF->name;
-                }, SORT_NATURAL | SORT_FLAG_CASE);
-            }
-            // Test 2
-            // $items = Item::all()->sortBy(function($item) {
-            //     $champF = $this->champ;
-            //     return $item->$champF->name;
-            // }, SORT_NATURAL | SORT_FLAG_CASE, $this->mode);
-            // Test 3
-            // $champPlur = $this->champ == "category" ? "categories" : "brands";
-            // $items = Item::where('items.id', '>', 0)->join($champPlur, $champPlur.'.id', '=', 'items.'.$this->champ.'_id')->orderBy($champPlur.'.name')->get();
-        } else {
-            $items = Item::orderBy($this->champ, $this->mode)->get();
-        }
-
-        $items = $items->filter(function ($value) {
+        $items = Item::where('items.id', '>', 0)
+        ->join('brands as brand', 'brand.id', '=', 'items.brand_id')
+        ->join('categories as category', 'category.id', '=', 'items.category_id')
+        ->join('items as ite', 'ite.id', '=', 'items.id') // I joined items on items because else eloquent erase the items id to replace it with the last joined table id 
+        ->where('items.model','LIKE','%'.$this->searchValue.'%')
+        ->orWhere('items.comment','LIKE','%'.$this->searchValue.'%')
+        ->orWhere('category.name','LIKE','%'.$this->searchValue.'%')
+        ->orWhere('brand.name','LIKE','%'.$this->searchValue.'%')
+        ->orderBy(($this->champ == 'category' || $this->champ == 'brand') ? $this->champ.'.name' : 'items.'.$this->champ, $this->mode) // if champ is category or brand order on champ.name instead of champ
+        ->get()
+        ->filter(function ($value) {
             $catF = empty($this->categoriesF) ? Category::where('id' ,'>' ,0)->pluck('id')->toArray() : $this->categoriesF;
             $brandF = empty($this->brandsF) ? Brand::where('id' ,'>' ,0)->pluck('id')->toArray() : $this->brandsF;
             if(in_array($value->category->id, $catF) && in_array($value->brand->id, $brandF)) return $value;
         });
-         
-        $items->all();
 
         return view('livewire.view-all', [
             'items' => $items

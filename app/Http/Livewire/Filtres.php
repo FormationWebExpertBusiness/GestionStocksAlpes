@@ -18,6 +18,8 @@ class Filtres extends Component
     public $catsFilter = array();
     public $brandsFilter = array();
 
+    public $search;
+
     protected $listeners = ['catsFilter' => 'getCatF', 'brandsFilter' => 'getBrandF'];
 
     public function mount()
@@ -56,6 +58,24 @@ class Filtres extends Component
     public function appendBrand($brand)
     {
         $this->emit("brandFilter", $brand);
+    }
+
+    public function resetFilters()
+    {
+        $this->catsFilter = array();
+        $this->brandsFilter = array();
+        $this->emit("resetFilters");
+    }
+
+    public function resetSearchBar()
+    {
+        $this->search = "";
+        $this->emit("resetSearchBar");
+    }
+
+    public function getSearchInput()
+    {
+        $this->emit("searchF", $this->search);
     }
 
     public function render(Request $request)
