@@ -25,7 +25,7 @@ class ViewAll extends Component
         'brandsF' => ['as' => 'bra']
     ];
 
-    protected $listeners = ['stockUpdated' => 'reloadView', 'catFilter' => 'updateCatF', 'brandFilter' => 'updateBrandF'];
+    protected $listeners = ['stockUpdated' => 'reloadView', 'catFilter' => 'updateCatF', 'brandFilter' => 'updateBrandF', 'resetFilters' => 'resetAllFilters'];
 
     protected $nbCol = 5;//le nombre de colonne sans compter les icones
 
@@ -73,6 +73,12 @@ class ViewAll extends Component
     {
         $this->toggleMode();
         $this->champ = $champO;
+    }
+
+    public function resetAllFilters()
+    {
+        $this->categoriesF = array();
+        $this->brandsF = array();
     }
 
     public function render()

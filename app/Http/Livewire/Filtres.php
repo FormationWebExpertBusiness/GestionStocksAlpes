@@ -58,6 +58,19 @@ class Filtres extends Component
         $this->emit("brandFilter", $brand);
     }
 
+    public function resetFilters()
+    {
+        $this->catsFilter = array();
+        $this->brandsFilter = array();
+        $this->emit("resetFilters");
+    }
+
+    public function getSearchInput($searchValue)
+    {
+        $this->resetFilters();
+        dd($searchValue);
+    }
+
     public function render(Request $request)
     {
         // if($this->catsFilter != null) dd($this->catsFilter);
