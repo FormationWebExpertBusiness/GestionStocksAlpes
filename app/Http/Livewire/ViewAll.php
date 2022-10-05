@@ -88,6 +88,14 @@ class ViewAll extends Component
                     return $item->$champF->name;
                 }, SORT_NATURAL | SORT_FLAG_CASE);
             }
+            // Test 2
+            // $items = Item::all()->sortBy(function($item) {
+            //     $champF = $this->champ;
+            //     return $item->$champF->name;
+            // }, SORT_NATURAL | SORT_FLAG_CASE, $this->mode);
+            // Test 3
+            // $champPlur = $this->champ == "category" ? "categories" : "brands";
+            // $items = Item::where('items.id', '>', 0)->join($champPlur, $champPlur.'.id', '=', 'items.'.$this->champ.'_id')->orderBy($champPlur.'.name')->get();
         } else {
             $items = Item::orderBy($this->champ, $this->mode)->get();
         }
