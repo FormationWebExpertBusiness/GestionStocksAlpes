@@ -4,6 +4,8 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 use App\Models\Item;
+use App\Models\Category;
+use App\Models\Brand;
 
 class ViewAll extends Component
 {
@@ -89,6 +91,14 @@ class ViewAll extends Component
         } else {
             $items = Item::orderBy($this->champ, $this->mode)->get();
         }
+
+        $items = $items->filter(function ($value) {
+            $catF = empty($this->categoriesF) ? Category::where('id' ,'>' ,0)->pluck('id')->toArray() : $this->categoriesF;
+            $brandF = empty($this->brandsF) ? Brand::where('id' ,'>' ,0)->pluck('id')->toArray() : $this->brandsF;
+            if(in_array($value->category->id, $catF) && in_array($value->brand->id, $brandF)) return $value;
+        });
+         
+        $items->all();
 
         return view('livewire.view-all', [
             'items' => $items
