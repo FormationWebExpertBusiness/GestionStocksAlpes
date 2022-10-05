@@ -67,6 +67,12 @@ class Filtres extends Component
         $this->emit("resetFilters");
     }
 
+    public function resetSearchBar()
+    {
+        $this->search = "";
+        $this->emit("resetSearchBar");
+    }
+
     public function getSearchInput()
     {
         $this->emit("searchF", $this->search);

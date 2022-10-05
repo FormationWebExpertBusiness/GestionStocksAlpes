@@ -5,10 +5,15 @@
                 <div class="relative z-0 flex flex-1 items-center justify-center px-2 sm:absolute sm:inset-0">
                     <div class="w-full sm:max-w-xs inline-flex">
                         <label for="search" class="sr-only">Recherche</label>
-                        <div class="relative">
+                        <div class="relative inline-flex">
                             <input id="search" name="search"
                                 class="w-full rounded-md border border-gray-300 bg-white py-2 pl-2.5 pr-3 text-sm placeholder-gray-500 focus:border-indigo-500 focus:text-gray-900 focus:placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm"
                                 placeholder="Recherche" type="search" wire:model="search">
+                                <div wire:click="resetSearchBar" class="absolute right-1 top-1.5 hover:bg-red-200 p-0.5 rounded-full  text-red-600 inline-flex">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                                    </svg>
+                                </div>    
                         </div>
                         <button wire:click="getSearchInput" type="button" class="ml-5 inline-flex items-center rounded-full border border-transparent bg-indigo-600 px-2.5 py-1.5 text-xs font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">                                
                             <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">

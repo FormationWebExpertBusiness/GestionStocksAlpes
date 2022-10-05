@@ -27,7 +27,7 @@ class ViewAll extends Component
         'brandsF' => ['as' => 'bra']
     ];
 
-    protected $listeners = ['stockUpdated' => 'reloadView', 'catFilter' => 'updateCatF', 'brandFilter' => 'updateBrandF', 'resetFilters' => 'resetAllFilters', 'searchF' => 'search'];
+    protected $listeners = ['stockUpdated' => 'reloadView', 'catFilter' => 'updateCatF', 'brandFilter' => 'updateBrandF', 'resetFilters' => 'resetAllFilters', 'searchF' => 'search', 'resetSearchBar' => 'resetValueSearchBar'];
 
     protected $nbCol = 5;//le nombre de colonne sans compter les icones
 
@@ -36,6 +36,11 @@ class ViewAll extends Component
         $item = Item::findOrFail($itemId);
         $item->delete();
         return redirect();
+    }
+
+    public function resetValueSearchBar()
+    {
+        $this->searchValue = "";
     }
 
     public function updateCatF($cat)
@@ -105,7 +110,7 @@ class ViewAll extends Component
             $brandF = empty($this->brandsF) ? Brand::where('id' ,'>' ,0)->pluck('id')->toArray() : $this->brandsF;
             if(in_array($value->category->id, $catF) && in_array($value->brand->id, $brandF)) return $value;
         });
-        
+
         return view('livewire.view-all', [
             'items' => $items
         ]);
