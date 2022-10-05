@@ -16,7 +16,12 @@ class ViewAll extends Component
     public $categoriesF = array();
     public $brandsF = array();
 
-    protected $queryString = ['champ', 'mode', 'categoriesF', 'brandsF'];
+    protected $queryString = [
+        'champ' => ['except' => 'id', 'as' => 'cha'],
+        'mode' => ['as' => 'mod'],
+        'categoriesF' => ['as' => 'cat'],
+        'brandsF' => ['as' => 'bra']
+    ];
 
     protected $listeners = ['stockUpdated' => 'reloadView', 'catFilter' => 'updateCatF', 'brandFilter' => 'updateBrandF'];
 
@@ -35,6 +40,8 @@ class ViewAll extends Component
         }else{
             array_push($this->categoriesF, $cat);
         }
+
+        $this->emit("catsFilter", $this->categoriesF);
     }
 
     public function updateBrandF($brand)
@@ -45,6 +52,8 @@ class ViewAll extends Component
         }else{
             array_push($this->brandsF, $brand);
         }
+
+        $this->emit("brandsFilter", $this->brandsF);
     }
 
     public function toggleMode()

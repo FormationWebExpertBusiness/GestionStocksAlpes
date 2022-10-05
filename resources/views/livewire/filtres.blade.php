@@ -53,8 +53,11 @@
                                 @foreach ($categories as $category)
                                     <div class="flex items-center" wire:click='appendCat({{$category->id}})'>
                                         {{-- value="{{"cat".$category->id}}" --}}
-                                        <input id="{{"cat".$category->id}}" name="{{"cat".$category->id}}" type="checkbox"
-                                            class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+                                        @if(in_array($category->id, $catsFilter))
+                                            <input id="{{"cat".$category->id}}" name="{{"cat".$category->id}}" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500" checked>
+                                        @else 
+                                            <input id="{{"cat".$category->id}}" name="{{"cat".$category->id}}" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+                                        @endif
                                         <label wire:click='appendCat({{$category->id}})' for="{{"cat".$category->id}}"
                                             class="ml-3 text-sm text-gray-500">{{ $category->name }}</label>
                                     </div>
@@ -93,8 +96,11 @@
                                 {{-- <select id="categories" name="categories" onchange="this.form.submit()"></select> --}}
                                 @foreach ($brands as $brand)
                                     <div class="flex items-center" wire:click='appendBrand({{$brand->id}})'>
-                                        <input id="{{"brand".$brand->id}}" name="{{"brand".$brand->id}}" value="{{"brand".$brand->id}}" type="checkbox"
-                                            class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+                                        @if(in_array($brand->id, $brandsFilter))
+                                            <input id="{{"brand".$brand->id}}" name="{{"brand".$brand->id}}" value="{{"brand".$brand->id}}" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500" checked>
+                                        @else 
+                                            <input id="{{"brand".$brand->id}}" name="{{"brand".$brand->id}}" value="{{"brand".$brand->id}}" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+                                        @endif
                                         <label wire:click='appendBrand({{$brand->id}})' for="{{"brand".$brand->id}}"
                                             class="ml-3 text-sm text-gray-500">{{ $brand->name }}</label>
                                     </div>

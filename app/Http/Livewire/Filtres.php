@@ -15,10 +15,25 @@ class Filtres extends Component
     public $categories;
     public $brands;
 
+    public $catsFilter = array();
+    public $brandsFilter = array();
+
+    protected $listeners = ['catsFilter' => 'getCatF', 'brandsFilter' => 'getBrandF'];
+
     public function mount()
     {
         $this->categories = Category::all();
         $this->brands = Brand::all();
+    }
+
+    public function getBrandF($brand)
+    {
+        $this->brandsFilter = $brand;
+    }
+
+    public function getCatF($cat)
+    {
+        $this->catsFilter = $cat;
     }
 
     public function toggleCatDropdown()
@@ -45,6 +60,7 @@ class Filtres extends Component
 
     public function render(Request $request)
     {
+        // if($this->catsFilter != null) dd($this->catsFilter);
         return view('livewire.filtres');
     }
 }
