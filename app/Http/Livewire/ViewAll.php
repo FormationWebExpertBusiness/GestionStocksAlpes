@@ -98,7 +98,7 @@ class ViewAll extends Component
         $items = Item::where('items.id', '>', 0)
         ->join('brands as brand', 'brand.id', '=', 'items.brand_id')
         ->join('categories as category', 'category.id', '=', 'items.category_id')
-        ->join('items as ite', 'ite.id', '=', 'items.id')
+        ->join('items as ite', 'ite.id', '=', 'items.id') // I joined items on items because else eloquent erase the items id to replace it with the last joined table id 
         ->where('items.model','LIKE','%'.$this->searchValue.'%')
         ->orWhere('items.comment','LIKE','%'.$this->searchValue.'%')
         ->orWhere('category.name','LIKE','%'.$this->searchValue.'%')
