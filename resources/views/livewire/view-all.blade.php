@@ -70,7 +70,7 @@
                                                 <p class="inline-block w-4/5">{{ $item->quantity }} {{ $item->unit }} </p>
                                                 @livewire('quantity-update-form', ['itemToUpdate' => $item], key('item-update-form' . $item->id))</td>
                                             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                                {{ $item->price }} {{ $item->currency }}</td>
+                                                {{ round($item->price, 2) }} {{ $item->currency }}</td>
                                             <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-center text-sm font-medium sm:pr-6">
                                                 @livewire('detail-modal', ['item' => $item], key('item-detail-' . $item->id))
                                             </td>
