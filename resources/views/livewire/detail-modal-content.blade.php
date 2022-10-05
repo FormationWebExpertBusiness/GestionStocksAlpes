@@ -24,7 +24,7 @@
                 <dt class="truncate text-sm font-medium text-gray-500">
                     Prix Total (en {{$item->currency}})
                 </dt>
-                <dd class="mt-1 text-2xl font-semibold tracking-tight text-gray-900">{{$item->price}}</dd>
+                <dd class="mt-1 text-2xl font-semibold tracking-tight text-gray-900">{{round($item->price, 2)}}</dd>
             </div>
             @if($item->quantity > 1)
                 <div class="break-all inline rounded-lg bg-white px-4 py-5 shadow sm:p-6">
