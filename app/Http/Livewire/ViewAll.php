@@ -17,6 +17,8 @@ class ViewAll extends Component
 
     protected $listeners = ['stockUpdated' => 'reloadView'];
 
+    protected $nbCol = 5;//le nombre de colonne sans compter les icones
+
     public function deleteItem($itemId)
     {
         $item = Item::findOrFail($itemId);
@@ -71,5 +73,10 @@ class ViewAll extends Component
     public function reloadView()
     {
         return redirect();
+    }
+
+    public function getDataColumnWidth()
+    {
+        return 'w-['.((1 / ($this->nbCol + 2)) * 100).'%]';
     }
 }
