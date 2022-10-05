@@ -18,6 +18,8 @@ class Filtres extends Component
     public $catsFilter = array();
     public $brandsFilter = array();
 
+    public $search;
+
     protected $listeners = ['catsFilter' => 'getCatF', 'brandsFilter' => 'getBrandF'];
 
     public function mount()
@@ -65,10 +67,9 @@ class Filtres extends Component
         $this->emit("resetFilters");
     }
 
-    public function getSearchInput($searchValue)
+    public function getSearchInput()
     {
-        $this->resetFilters();
-        dd($searchValue);
+        $this->emit("searchF", $this->search);
     }
 
     public function render(Request $request)
