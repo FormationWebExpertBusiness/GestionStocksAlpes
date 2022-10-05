@@ -12,4 +12,5 @@
             <option value="{{ $option->id }}">{{ $option->name }}</option>
         @endforeach
     </select>
+    @error($model) <span class="error">{{ $message }}</span> @enderror
 </div>

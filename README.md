@@ -1,21 +1,23 @@
-# GestionStocksAlpes
+# GestionStocksAlpes 📦
 
-## Configuration
+## Configuration ⚙️
+
 ```
- mysql 8.0.30
- php 8.0.2
- laravel 9.19
- livewire 2.10
- tailwind 3.1.8
+ MYSQL    8.0.30
+ PHP      8.0.2 
+ LARAVEL  9.19 
+ LIVEWIRE 2.10 
+ TAILWIND 3.1.8
  ```
+ <br />
         
-## Cmd to launch the project 🚀
+## Cmds to launch the project 🚀
 
-### Go the project folder
+### Go the project folder 📂
 ```bash
 cd gestionStockAlpes
 ```
-### Create a .env file
+### Create a .env file :page_facing_up:
 ```bash
 cp .env.exemple .env
 ```
@@ -23,21 +25,41 @@ cp .env.exemple .env
 ```bash
 docker compose up or docker-compose up
 ```
+<br /> 
+<br /> 
 
-### Install dependencies
+🚨  **The next commands needs to be in the sail container** 🚨
+
+<br />  
+
+### Install dependencies 🐡
 ```bash
 composer install
 npm install
 ```
-### Run the livewire server
-```bash
-npm run dev
-```
-### Generate the project key to access your localhost 🔐
+### Generate the project key to access your localhost 🔑
 ```bash
 php artisan key:generate
 ```
 
-### Access the project on your localhost
-🐳
-🚨 **If database related cmd don't run change the DB_HOST line in your .env to "mysql"** 🚨
+### Run the livewire server :octopus:
+```bash
+npm run dev
+```
+  
+### Access the project on your localhost 🌐
+ <br />
+  
+## Errors :rage:
+
+> If database related cmd don't run 
+```
+Change the DB_HOST line in your .env to "mysql"
+```
+<br />
+
+## Documentation 📚
+* [Laravel](https://laravel.com/docs/9.x)
+* [Livewire](https://laravel-livewire.com/docs/2.x/quickstart)
+* [Tailwindui](https://tailwindui.com/documentation)
+* [Tailwindcss](https://tailwindcss.com/docs/utility-first)
