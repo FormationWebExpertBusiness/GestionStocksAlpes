@@ -59,7 +59,7 @@
                                 @foreach ($items as $item)
                                     <div wire:key="item-{{ $item->id }}">
                                         <tr
-                                            class="{{ $loop->index % 2 === 0 ? 'bg-white' : 'bg-gray-50' }} divide-x divide-gray-200">
+                                            class="{{ $loop->index % 2 === 0 ? 'bg-white' : 'bg-gray-50' }} divide-x divide-gray-200 table w-full table-fixed">
                                             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 {{ $this->getDataColumnWidth() }}">
                                                 {{$item->category->name}}</td>
                                             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 {{ $this->getDataColumnWidth() }}">
@@ -67,10 +67,9 @@
                                             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 {{ $this->getDataColumnWidth() }}">
                                                 {{ $item->model }}</td>
                                             <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-500 {{ $this->getDataColumnWidth() }}">
-                                                <p class="inline-block w-4/5">{{ $item->quantity }} {{ $item->unit }} </p>
-                                                @livewire('quantity-update-form', ['itemToUpdate' => $item], key('item-update-form' . $item->id))</td>
+                                                {{ $item->quantity }} {{ $item->unit }}</td>
                                             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 {{ $this->getDataColumnWidth() }}">
-                                                {{ round($item->price, 2) }} {{ $item->currency }}</td>
+                                                {{ $item->price }} {{ $item->currency }}</td>
                                             <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-center text-sm font-medium sm:pr-6">
                                                 @livewire('detail-modal', ['item' => $item], key('item-detail-' . $item->id))
                                             </td>
