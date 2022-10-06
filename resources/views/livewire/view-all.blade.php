@@ -67,7 +67,13 @@
                                             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 {{ $this->getDataColumnWidth() }}">
                                                 {{ $item->model }}</td>
                                             <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-500 {{ $this->getDataColumnWidth() }}">
-                                                {{ $item->quantity }} {{ $item->unit }}</td>
+                                                <div class="inline-flex min-w-[75%]">
+                                                    {{ $item->quantity }} {{ $item->unit }}
+                                                </div>
+                                                <div class="align-middle inline-flex min-w-[25%]">
+                                                    @livewire('quantity-update-form', ['itemToUpdate' => $item], key('quantity-update-form-'. $item->id))
+                                                </div>
+                                            </td>
                                             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 {{ $this->getDataColumnWidth() }}">
                                                 {{ $item->price }} {{ $item->currency }}</td>
                                             <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-center text-sm font-medium sm:pr-6">
