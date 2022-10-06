@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\displayController;
-use App\Http\Controllers\ItemController;
+use App\Http\Controllers\LoginController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,7 +19,11 @@ Route::get('/', function () {
     return redirect('/stock');
 });
 
-/*----- Ajouter des nouveaux objet dans la BD -----*/
-Route::post('/createItem', [ItemController::class, 'createOrUpdateItem']);
+Route::get('login', [LoginController::class, "displayLogin"])->name('login');
+Route::get('logout', [LoginController::class, "logout"])->name('logout');
 
-Route::get('/stock', [displayController::class, 'displayStock']);
+Route::middleware("auth")->group(function () {
+
+    Route::get('/stock', [displayController::class, 'displayStock']);
+
+});
