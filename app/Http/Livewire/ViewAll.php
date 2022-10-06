@@ -31,6 +31,12 @@ class ViewAll extends Component
 
     protected $nbCol = 5;//le nombre de colonne sans compter les icones
 
+    public function mount()
+    {
+        $this->categoriesF = array();
+        $this->brandsF = array();
+    }
+
     public function deleteItem($itemId)
     {
         $item = Item::findOrFail($itemId);
