@@ -27,7 +27,7 @@
                                                     isOptional='true' :options="$categories"></x-select-field>
 
                                                 <x-select-field name='brand' label='Marque' model='brand_id'
-                                                    :options="$brands"></x-select-field>
+                                                    isOptional='true' :options="$brands"></x-select-field>
 
                                                 <x-input-field type='text' name='model' label='Modèle'
                                                     model='model' placeholder='Modèle'></x-input-field>

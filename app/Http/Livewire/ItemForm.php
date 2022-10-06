@@ -19,8 +19,8 @@ class ItemForm extends Component
     protected $rules = [
         'category_id' => ['nullable', 'integer'],
         'brand_id' => ['nullable', 'integer'],
-        'model' => ['required', 'alpha_dash'],
-        'quantity' => ['required', 'numeric'],
+        'model' => ['required'],
+        'quantity' => ['required', 'numeric', 'min:0'],
         'unit' => ['nullable'],
         'price' => ['required', 'numeric'],
         'comment' => ['nullable']
@@ -29,9 +29,11 @@ class ItemForm extends Component
     protected $messages = [
         'category_id.integer' => 'l\'élément saisie est incorrecte',
         'brand_id.integer' => 'l\'élément saisie est incorrecte',
+        'brand_id.unique' => 'Cette marque a déjà ce model dans le stock',
+        'model.unique' => 'ce model existe déjà dans la stock pour cette marque',
         'model.required' => 'Le model ou la référence de l\'objet doit être rensigné.',
-        'model.required' => 'Des caractères spéciaux nom autorisé sont utilisés.',
         'quantity.numeric' => 'la quantité doit être un nombre',
+        'quantity.min' => 'la quantité doit être supérieur ou égale à 0',
         'quantity.required' => 'la quantité en stock doit être ajouté.',
         'price.required' => 'la quantité en stock doit être ajouté.',
         'price.numeric' => 'le prix doit être un nombre'
@@ -58,11 +60,17 @@ class ItemForm extends Component
 
     public function updated($property)
     {
+        $this->addDynamicRules();
         $this->validateOnly($property);
+        if($property == 'brand_id' && isset($this->model))
+        {
+            $this->validateOnly('model');
+        }
     }
 
     public function saveItem()
     {
+        $this->addDynamicRules();
         $validatedData = $this->validate();
 
         if (isset($this->itemToUpdate)) {
@@ -89,4 +97,8 @@ class ItemForm extends Component
         $this->emit('stockUpdated');
     }
 
+    public function addDynamicRules()
+    {
+        array_push($this->rules['model'],'unique:items,model,NULL,id,brand_id,'.$this->brand_id);//vérifie si le model n'existe pas déjà pour la marque sélectionner
+    }
 }

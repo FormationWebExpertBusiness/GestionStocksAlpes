@@ -27,6 +27,8 @@ return new class extends Migration
 
             $table->foreign('category_id')->references('id')->on('categories')->onUpdate('restrict')->onDelete('cascade');
             $table->foreign('brand_id')->references('id')->on('brands')->onUpdate('restrict')->onDelete('cascade');
+
+            $table->unique(['model', 'brand_id']);
         });
     }
 
