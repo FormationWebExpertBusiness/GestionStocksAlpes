@@ -60,7 +60,7 @@ class ItemForm extends Component
 
     public function updated($property)
     {
-        array_push($this->rules['model'],'unique:items,model,NULL,id,brand_id,'.$this->brand_id);//vérifie si le model n'existe pas déjà pour la marque sélectionner
+        $this->addDynamicRules();
         $this->validateOnly($property);
         if($property == 'brand_id' && isset($this->model))
         {
@@ -95,5 +95,10 @@ class ItemForm extends Component
         $this->isFormOpen = false;
 
         $this->emit('stockUpdated');
+    }
+
+    public function addDynamicRules()
+    {
+        array_push($this->rules['model'],'unique:items,model,NULL,id,brand_id,'.$this->brand_id);//vérifie si le model n'existe pas déjà pour la marque sélectionner
     }
 }
