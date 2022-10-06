@@ -160,5 +160,41 @@ class DatabaseSeeder extends Seeder
             'model' => 'L1084-1',
             'comment' => 'Fibre optique',
         ]);
+
+        \App\Models\Item::create([
+            'quantity' => 36,
+            'category_id' => 2,
+            'price' => 360,
+            'brand_id' => 8,
+            'currency' => 'EUR',
+            'model' => 'DNCD-Y8D',
+        ]);
+
+        \App\Models\Item::create([
+            'quantity' => 13,
+            'category_id' => 6,
+            'price' => 180,
+            'brand_id' => 7,
+            'currency' => 'EUR',
+            'model' => 'VIDCAM-6',
+        ]);
+
+        \App\Models\Item::create([
+            'quantity' => 36,
+            'category_id' => 6,
+            'price' => 360,
+            'brand_id' => 8,
+            'currency' => 'EUR',
+            'model' => 'DNCD-E9H',
+        ]);
+
+        \App\Models\Item::create([
+            'quantity' => 36,
+            'category_id' => 6,
+            'price' => 360,
+            'brand_id' => 1,
+            'currency' => 'EUR',
+            'model' => '3789743',
+        ]);
     }
 }

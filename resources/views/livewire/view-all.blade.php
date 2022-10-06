@@ -100,4 +100,10 @@
         </div>
     </div>
     <br>
+    @if ($displayChoregraphie)
+    <button wire:click="redirectChoregraphie()"
+        class="text-indigo-600 hover:text-indigo-900">
+        <img alt="Fichier:Synchronized swimming pictogram.svg" src="//upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Synchronized_swimming_pictogram.svg/300px-Synchronized_swimming_pictogram.svg.png" decoding="async" width="300" height="300" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Synchronized_swimming_pictogram.svg/450px-Synchronized_swimming_pictogram.svg.png 1.5x, //upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Synchronized_swimming_pictogram.svg/600px-Synchronized_swimming_pictogram.svg.png 2x" data-file-width="300" data-file-height="300" />
+    </button>
+    @endif
 </div>

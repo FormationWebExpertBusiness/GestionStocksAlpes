@@ -9,7 +9,8 @@ use App\Models\Brand;
 
 class ViewAll extends Component
 {
-    public $isCreatingNewItem = false;
+    //egg
+    public $displayChoregraphie = false;
 
 
     public $champ = 'id';
@@ -111,14 +112,16 @@ class ViewAll extends Component
             if(in_array($value->category->id, $catF) && in_array($value->brand->id, $brandF)) return $value;
         });
 
+        $this->displayChoregraphie = $this->searchValue == 'chorégraphie';
+
         return view('livewire.view-all', [
             'items' => $items
         ]);
     }
 
-    public function toggleAddForm()
+    public function redirectChoregraphie()
     {
-        $this->isCreatingNewItem = !$this->isCreatingNewItem;
+        return redirect('https://youtu.be/2ZNklVhqi7I?t=16');
     }
 
     public function reloadView()
