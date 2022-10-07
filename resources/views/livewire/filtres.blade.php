@@ -9,15 +9,21 @@
                             <input id="search" name="search"
                                 class="w-full rounded-md border border-gray-300 bg-white py-2 pl-2.5 pr-3 text-sm placeholder-gray-500 focus:border-indigo-500 focus:text-gray-900 focus:placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm"
                                 placeholder="Recherche" type="search" wire:model="search">
-                                <div wire:click="resetSearchBar" class="absolute right-1 top-1.5 hover:bg-red-200 p-0.5 rounded-full  text-red-600 inline-flex">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-                                    </svg>
-                                </div>    
+                            <div wire:click="resetSearchBar"
+                                class="absolute right-1 top-1.5 hover:bg-red-200 p-0.5 rounded-full  text-red-600 inline-flex">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                    stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                                </svg>
+                            </div>
                         </div>
-                        <button wire:click="getSearchInput" type="button" class="ml-5 inline-flex items-center rounded-full border border-transparent bg-indigo-600 px-2.5 py-1.5 text-xs font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">                                
-                            <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                <path fill-rule="evenodd" d="M9 3.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM2 9a7 7 0 1112.452 4.391l3.328 3.329a.75.75 0 11-1.06 1.06l-3.329-3.328A7 7 0 012 9z" clip-rule="evenodd" />
+                        <button wire:click="getSearchInput" type="button"
+                            class="ml-5 inline-flex items-center rounded-full border border-transparent bg-indigo-600 px-2.5 py-1.5 text-xs font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+                            <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                                fill="currentColor" aria-hidden="true">
+                                <path fill-rule="evenodd"
+                                    d="M9 3.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM2 9a7 7 0 1112.452 4.391l3.328 3.329a.75.75 0 11-1.06 1.06l-3.329-3.328A7 7 0 012 9z"
+                                    clip-rule="evenodd" />
                             </svg>
                         </button>
                     </div>
@@ -25,6 +31,18 @@
             </div>
             <nav class="hidden min-w-full content-center justify-items-center justify-center lg:flex items-center lg:py-2"
                 aria-label="Global">
+                <div class="relative mx-8 min-w-[10%] inline-block text-left">
+                    <div class="inline-flex">
+                        <div class="mt-1">
+                          <input type="email" name="email" id="email" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" placeholder="you@example.com">
+                        </div>
+                      </div>
+                      <div class="inline-flex">
+                        <div class="mt-1">
+                          <input type="email" name="email" id="email" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" placeholder="you@example.com">
+                        </div>
+                      </div>
+                </div>
                 <div class="relative mx-8 inline-block text-left">
                     <div>
                         <button wire:click="toggleCatDropdown" type="button"
@@ -53,14 +71,20 @@
                             role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
                             <div name="categories" class="py-1 content-center" role="none">
                                 @foreach ($categories as $category)
-                                    <div class="flex items-center" wire:click='appendCat({{$category->id}})'>
+                                    <div class="flex items-center" wire:click='appendCat({{ $category->id }})'>
                                         {{-- value="{{"cat".$category->id}}" --}}
-                                        @if(in_array($category->id, $catsFilter))
-                                            <input id="{{"cat".$category->id}}" name="{{"cat".$category->id}}" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500" checked>
-                                        @else 
-                                            <input id="{{"cat".$category->id}}" name="{{"cat".$category->id}}" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+                                        @if (in_array($category->id, $catsFilter))
+                                            <input id="{{ 'cat' . $category->id }}" name="{{ 'cat' . $category->id }}"
+                                                type="checkbox"
+                                                class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                                                checked>
+                                        @else
+                                            <input id="{{ 'cat' . $category->id }}" name="{{ 'cat' . $category->id }}"
+                                                type="checkbox"
+                                                class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
                                         @endif
-                                        <label wire:click='appendCat({{$category->id}})' for="{{"cat".$category->id}}"
+                                        <label wire:click='appendCat({{ $category->id }})'
+                                            for="{{ 'cat' . $category->id }}"
                                             class="ml-3 text-sm text-gray-500">{{ $category->name }}</label>
                                     </div>
                                 @endforeach
@@ -75,15 +99,15 @@
                             id="menu-button" aria-expanded="true" aria-haspopup="true">
                             Marques
                             @if (!$isVisibleBrand)
-                                <svg class="-mr-1 ml-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
-                                    fill="currentColor" aria-hidden="true">
+                                <svg class="-mr-1 ml-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                                     <path fill-rule="evenodd"
                                         d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
                                         clip-rule="evenodd" />
                                 </svg>
                             @else
-                                <svg class="-mr-1 ml-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
-                                    fill="currentColor" class="w-5 h-5">
+                                <svg class="-mr-1 ml-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
                                     <path fill-rule="evenodd"
                                         d="M14.77 12.79a.75.75 0 01-1.06-.02L10 8.832 6.29 12.77a.75.75 0 11-1.08-1.04l4.25-4.5a.75.75 0 011.08 0l4.25 4.5a.75.75 0 01-.02 1.06z"
                                         clip-rule="evenodd" />
@@ -97,13 +121,19 @@
                             <div name="brands" class="py-1" role="none">
                                 {{-- <select id="categories" name="categories" onchange="this.form.submit()"></select> --}}
                                 @foreach ($brands as $brand)
-                                    <div class="flex items-center" wire:click='appendBrand({{$brand->id}})'>
-                                        @if(in_array($brand->id, $brandsFilter))
-                                            <input id="{{"brand".$brand->id}}" name="{{"brand".$brand->id}}" value="{{"brand".$brand->id}}" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500" checked>
-                                        @else 
-                                            <input id="{{"brand".$brand->id}}" name="{{"brand".$brand->id}}" value="{{"brand".$brand->id}}" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+                                    <div class="flex items-center" wire:click='appendBrand({{ $brand->id }})'>
+                                        @if (in_array($brand->id, $brandsFilter))
+                                            <input id="{{ 'brand' . $brand->id }}" name="{{ 'brand' . $brand->id }}"
+                                                value="{{ 'brand' . $brand->id }}" type="checkbox"
+                                                class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                                                checked>
+                                        @else
+                                            <input id="{{ 'brand' . $brand->id }}" name="{{ 'brand' . $brand->id }}"
+                                                value="{{ 'brand' . $brand->id }}" type="checkbox"
+                                                class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
                                         @endif
-                                        <label wire:click='appendBrand({{$brand->id}})' for="{{"brand".$brand->id}}"
+                                        <label wire:click='appendBrand({{ $brand->id }})'
+                                            for="{{ 'brand' . $brand->id }}"
                                             class="ml-3 text-sm text-gray-500">{{ $brand->name }}</label>
                                     </div>
                                 @endforeach

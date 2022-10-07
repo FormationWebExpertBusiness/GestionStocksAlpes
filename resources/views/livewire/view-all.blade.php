@@ -20,27 +20,27 @@
                             <thead class="bg-gray-100 block">
                                 <tr class="table w-full table-fixed">
                                     <th wire:click="reOrder('category')" scope="col"
-                                        class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 {{ $this->getDataColumnWidth() }}">
+                                        class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
                                         Categorie
                                         <x-ordering-arrows champ='category' champF={{$champ}} modeF={{$mode}}></x-ordering-arrows>
                                     </th>
                                     <th wire:click="reOrder('brand')" scope="col"
-                                        class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 {{ $this->getDataColumnWidth() }}">
+                                        class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
                                         Marque
                                         <x-ordering-arrows champ='brand' champF={{$champ}} modeF={{$mode}}></x-ordering-arrows>
                                     </th>
                                     <th wire:click="reOrder('model')" scope="col"
-                                        class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 {{ $this->getDataColumnWidth() }}">
+                                        class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
                                         Modele
                                         <x-ordering-arrows champ='model' champF={{$champ}} modeF={{$mode}}></x-ordering-arrows>
                                     </th>
                                     <th wire:click="reOrder('quantity')" scope="col"
-                                        class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6  {{ $this->getDataColumnWidth() }}">
+                                        class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 ">
                                         Quantité
                                         <x-ordering-arrows champ='quantity' champF={{$champ}} modeF={{$mode}}></x-ordering-arrows>
                                     </th>
                                     <th wire:click="reOrder('price')" scope="col"
-                                        class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900  {{ $this->getDataColumnWidth() }}">
+                                        class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 ">
                                         Prix Total
                                         <x-ordering-arrows champ='price' champF={{$champ}} modeF={{$mode}}></x-ordering-arrows>
                                     </th>
@@ -59,14 +59,14 @@
                                 @foreach ($items as $item)
                                     <div wire:key="item-{{ $item->id }}">
                                         <tr
-                                            class="{{ $loop->index % 2 === 0 ? 'bg-white' : 'bg-gray-50' }} divide-x divide-gray-200 table w-full">
-                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 {{ $this->getDataColumnWidth() }}">
+                                            class="{{ $loop->index % 2 === 0 ? 'bg-white' : 'bg-gray-50' }} divide-x divide-gray-200 table w-full table-fixed">
+                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                                                 {{$item->category->name}}</td>
-                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 {{ $this->getDataColumnWidth() }}">
+                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                                                 {{ $item->brand->name }}</td>
-                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 {{ $this->getDataColumnWidth() }}">
+                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                                                 {{ $item->model }}</td>
-                                            <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-500 {{ $this->getDataColumnWidth() }}">
+                                            <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-500">
                                                 <div class="inline-flex min-w-[75%]">
                                                     {{ $item->quantity }} {{ $item->unit }}
                                                 </div>
@@ -74,7 +74,7 @@
                                                     @livewire('quantity-update-form', ['itemToUpdate' => $item], key('quantity-update-form-'. $item->id))
                                                 </div>
                                             </td>
-                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 {{ $this->getDataColumnWidth() }}">
+                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                                                 {{ $item->price }} {{ $item->currency }}</td>
                                             <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-center text-sm font-medium sm:pr-6">
                                                 @livewire('detail-modal', ['item' => $item], key('item-detail-' . $item->id))
