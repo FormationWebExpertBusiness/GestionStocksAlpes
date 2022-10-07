@@ -757,16 +757,16 @@ select {
   margin-left: 1.25rem;
 }
 
-.mt-2 {
-  margin-top: 0.5rem;
-}
-
 .-mr-1 {
   margin-right: -0.25rem;
 }
 
 .ml-2 {
   margin-left: 0.5rem;
+}
+
+.mt-2 {
+  margin-top: 0.5rem;
 }
 
 .ml-3 {
@@ -853,16 +853,12 @@ select {
   height: 1.25rem;
 }
 
-.h-20 {
-  height: 5rem;
+.h-4 {
+  height: 1rem;
 }
 
 .h-6 {
   height: 1.5rem;
-}
-
-.h-4 {
-  height: 1rem;
 }
 
 .h-10 {
@@ -871,6 +867,14 @@ select {
 
 .h-8 {
   height: 2rem;
+}
+
+.h-20 {
+  height: 5rem;
+}
+
+.max-h-\[65vh\] {
+  max-height: 65vh;
 }
 
 .max-h-\[62vh\] {
@@ -897,14 +901,6 @@ select {
   width: 1.25rem;
 }
 
-.w-10 {
-  width: 2.5rem;
-}
-
-.w-1\/2 {
-  width: 50%;
-}
-
 .w-56 {
   width: 14rem;
 }
@@ -929,16 +925,20 @@ select {
   width: 2rem;
 }
 
-.min-w-\[100\%\] {
+.w-10 {
+  width: 2.5rem;
+}
+
+.w-1\/2 {
+  width: 50%;
+}
+
+.min-w-full {
   min-width: 100%;
 }
 
 .min-w-0 {
   min-width: 0px;
-}
-
-.min-w-full {
-  min-width: 100%;
 }
 
 .min-w-\[75\%\] {
@@ -954,12 +954,12 @@ select {
   min-width: fit-content;
 }
 
-.max-w-7xl {
-  max-width: 80rem;
+.min-w-\[100\%\] {
+  min-width: 100%;
 }
 
-.max-w-\[20\%\] {
-  max-width: 20%;
+.max-w-7xl {
+  max-width: 80rem;
 }
 
 .max-w-5xl {
@@ -972,6 +972,10 @@ select {
 
 .max-w-6xl {
   max-width: 72rem;
+}
+
+.max-w-\[20\%\] {
+  max-width: 20%;
 }
 
 .flex-1 {
@@ -1124,16 +1128,16 @@ select {
   border-radius: 9999px;
 }
 
-.rounded-none {
-  border-radius: 0px;
-}
-
 .rounded {
   border-radius: 0.25rem;
 }
 
 .rounded-lg {
   border-radius: 0.5rem;
+}
+
+.rounded-none {
+  border-radius: 0px;
 }
 
 .rounded-l-md {
@@ -1150,16 +1154,16 @@ select {
   border-width: 1px;
 }
 
-.border-r-0 {
-  border-right-width: 0px;
-}
-
 .border-t {
   border-top-width: 1px;
 }
 
 .border-r {
   border-right-width: 1px;
+}
+
+.border-r-0 {
+  border-right-width: 0px;
 }
 
 .border-gray-300 {
@@ -1196,10 +1200,6 @@ select {
   background-color: rgb(249 250 251 / var(--tw-bg-opacity));
 }
 
-.bg-transparent {
-  background-color: transparent;
-}
-
 .bg-gray-500 {
   --tw-bg-opacity: 1;
   background-color: rgb(107 114 128 / var(--tw-bg-opacity));
@@ -1223,6 +1223,10 @@ select {
 .bg-gray-100 {
   --tw-bg-opacity: 1;
   background-color: rgb(243 244 246 / var(--tw-bg-opacity));
+}
+
+.bg-transparent {
+  background-color: transparent;
 }
 
 .bg-opacity-50 {
@@ -1278,11 +1282,6 @@ select {
   padding-bottom: 0.25rem;
 }
 
-.px-3 {
-  padding-left: 0.75rem;
-  padding-right: 0.75rem;
-}
-
 .px-4 {
   padding-left: 1rem;
   padding-right: 1rem;
@@ -1296,6 +1295,11 @@ select {
 .py-3 {
   padding-top: 0.75rem;
   padding-bottom: 0.75rem;
+}
+
+.px-3 {
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
 }
 
 .py-3\.5 {
