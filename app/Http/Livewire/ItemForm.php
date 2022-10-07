@@ -35,7 +35,7 @@ class ItemForm extends Component
         'quantity.numeric' => 'la quantité doit être un nombre',
         'quantity.min' => 'la quantité doit être supérieur ou égale à 0',
         'quantity.required' => 'la quantité en stock doit être ajouté.',
-        'price.required' => 'la quantité en stock doit être ajouté.',
+        'price.required' => 'la valeur du stock doit être ajouté.',
         'price.numeric' => 'le prix doit être un nombre'
     ];
 
