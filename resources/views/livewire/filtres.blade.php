@@ -29,19 +29,65 @@
                     </div>
                 </div>
             </div>
-            <nav class="hidden min-w-full content-center justify-items-center justify-center lg:flex items-center lg:py-2"
+            <nav class="hidden min-w-[100%] h-20 content-center justify-items-center justify-center lg:flex lg:py-2"
                 aria-label="Global">
-                <div class="relative mx-8 min-w-[10%] inline-block text-left">
-                    <div class="inline-flex">
-                        <div class="mt-1">
-                          <input type="email" name="email" id="email" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" placeholder="you@example.com">
+                <div class="mx-8 inline-block text-left max-w-[20%]">
+                    <div class="rounded-md bg-white">
+                        <div class="flex">
+                            <span class="inline-flex items-center rounded-l-md border border-r-0 border-gray-300 bg-gray-50 px-3 text-gray-500 sm:text-sm">
+                                Prix: 
+                            </span>
+                            <div class="w-1/2 min-w-0 flex-1">
+                                <label for="card-expiration-date" class="sr-only">Prix minimal</label>
+                                <input wire:model="priceMin" type="text" name="card-expiration-date" id="card-expiration-date"
+                                class="relative block w-full  rounded-none border-gray-300 bg-transparent focus:z-10 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                placeholder="Min">
+                            </div>
+                            <div class="min-w-0 flex-1">
+                                <label for="card-cvc" class="sr-only">Prix maximal</label>
+                                <input wire:model="priceMax" type="text" name="card-cvc" id="card-cvc"
+                                class="relative block w-full rounded-r-md border-gray-300 bg-transparent focus:z-10 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                placeholder="Max">
+                            </div>
                         </div>
-                      </div>
-                      <div class="inline-flex">
-                        <div class="mt-1">
-                          <input type="email" name="email" id="email" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" placeholder="you@example.com">
+                        <div class="h-6">
+                            @error('priceMin')
+                                <p class="mt-2 whitespace-nowrap text-sm text-red-600" id="email-error">{{ $message }}</p>
+                            @enderror
+                            @error('priceMax')
+                                <p class="mt-2 whitespace-nowrap text-sm text-red-600" id="email-error">{{ $message }}</p>
+                            @enderror
                         </div>
-                      </div>
+                    </div>
+                </div>
+                <div class="mx-8 inline-block text-left max-w-[20%]">
+                    <div class="rounded-md bg-white">
+                        <div class="flex">
+                            <span class="inline-flex items-center rounded-l-md border border-r-0 border-gray-300 bg-gray-50 px-3 text-gray-500 sm:text-sm">
+                                Quantité: 
+                            </span>
+                            <div class="w-1/2 min-w-0 flex-1">
+                                <label for="card-expiration-date" class="sr-only">Quantité minimal</label>
+                                <input wire:model="quantityMin" type="text" name="card-expiration-date" id="card-expiration-date"
+                                class="relative block w-full  rounded-none border-gray-300 bg-transparent focus:z-10 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                placeholder="Min">
+                            </div>
+                            <div class="min-w-0 flex-1">
+                                <label for="card-cvc" class="sr-only">Quantité maximal</label>
+                                <input wire:model="quantityMax" type="text" name="card-cvc" id="card-cvc"
+                                class="relative block w-full rounded-r-md border-gray-300 bg-transparent focus:z-10 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                placeholder="Max">
+                            </div>
+                        </div>
+                        <div class="h-6">
+                            @error('quantityMin')
+                                <p class="mt-2 text-sm whitespace-nowrap text-red-600" id="email-error">{{ $message }}</p>
+                            @enderror
+                            @error('quantityMax')
+                                <p class="mt-2 text-sm whitespace-nowrap text-red-600" id="email-error">{{ $message }}</p>
+                            @enderror
+                        </div>
+                    </div>
                 </div>
                 <div class="relative mx-8 inline-block text-left">
                     <div>
@@ -143,7 +189,7 @@
                 </div>
                 <div class="relative mx-8 inline-block text-left">
                     <button wire:click="resetFilters" type="button"
-                        class="inline-flex w-full justify-center rounded-md border bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                        class="inline-flex w-full whitespace-nowrap justify-center rounded-md border bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                         id="menu-button" aria-expanded="true" aria-haspopup="true">
                         Supprimer les filtres
                     </button>

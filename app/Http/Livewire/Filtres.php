@@ -5,8 +5,7 @@ use App\Models\Category;
 use App\Models\Brand;
 use Livewire\Component;
 use Illuminate\Http\Request;
-use PhpParser\Node\Expr\Cast\Object_;
-
+use Illuminate\Support\Str;
 class Filtres extends Component
 {
     public $isVisibleCat = false;
@@ -15,6 +14,11 @@ class Filtres extends Component
     public $categories;
     public $brands;
 
+    public $priceMin;
+    public $priceMax;
+    public $quantityMin;
+    public $quantityMax;
+
     public $catsFilter = array();
     public $brandsFilter = array();
 
@@ -22,10 +26,38 @@ class Filtres extends Component
 
     protected $listeners = ['catsFilter' => 'getCatF', 'brandsFilter' => 'getBrandF'];
 
+    protected $messages = [
+        'priceMin.integer' => 'Le prix doit être un entier',
+        'priceMax.integer' => 'Le prix doit être un entier',
+        'priceMax.min' => 'Le prix max doit être supérieur au prix min',
+        'quantityMin.integer' => 'La quantité doit être un entier',
+        'quantityMax.integer' => 'La quantité doit être un entier',
+        'quantityMax.min' => 'La quantité max doit être supérieur à la quantité min',
+    ];
+
     public function mount()
     {
         $this->categories = Category::all();
         $this->brands = Brand::all();
+    }  
+
+    public function updated($propertyName)
+    {
+        $rules = [
+            'priceMin' => 'nullable|integer|min:0',
+            'priceMax' => 'nullable|integer|min:'.$this->priceMin,
+            'quantityMin' => 'nullable|integer|min:0',
+            'quantityMax' => 'nullable|integer|min:'.$this->quantityMin
+        ];
+        if($propertyName == 'quantityMin' || $propertyName == 'quantityMax' || $propertyName == 'priceMin' || $propertyName == 'priceMax')
+        {
+            $propertyName = Str::remove('Min', $propertyName);
+            $propertyName = Str::remove('Max', $propertyName);
+            $this->resetErrorBag();
+            // $this->validateOnly($propertyName.'Max', ['priceMin' => 'nullable']);
+            $this->validateOnly($propertyName.'Min', $rules);
+            $this->validateOnly($propertyName.'Max', $rules);
+        }
     }
 
     public function getBrandF($brand)
@@ -80,7 +112,6 @@ class Filtres extends Component
 
     public function render(Request $request)
     {
-        // if($this->catsFilter != null) dd($this->catsFilter);
         return view('livewire.filtres');
     }
 }
