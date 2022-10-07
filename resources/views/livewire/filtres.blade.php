@@ -40,7 +40,7 @@
                             <div class="w-1/2 min-w-0 flex-1">
                                 <label for="card-expiration-date" class="sr-only">Prix minimal</label>
                                 <input wire:model="priceMin" type="text" name="card-expiration-date" id="card-expiration-date"
-                                class="relative block w-full  rounded-none border-gray-300 bg-transparent focus:z-10 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                class="relative block w-full rounded-none border-gray-300 bg-transparent focus:z-10 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                 placeholder="Min">
                             </div>
                             <div class="min-w-0 flex-1">

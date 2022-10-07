@@ -51,16 +51,14 @@ class Filtres extends Component
         ];
         if($propertyName == 'quantityMin' || $propertyName == 'quantityMax' || $propertyName == 'priceMin' || $propertyName == 'priceMax')
         {
+            $propertyTrueName = $propertyName;
             $propertyName = Str::remove('Min', $propertyName);
             $propertyName = Str::remove('Max', $propertyName);
             $this->resetErrorBag();
-            // $this->validateOnly($propertyName.'Max', ['priceMin' => 'nullable']);
             $this->validateOnly($propertyName.'Min', $rules);
             $this->validateOnly($propertyName.'Max', $rules);
 
-            $this->emit($propertyName.'Min', $this->$propertyName.'Min');
-            $this->emit($propertyName.'Max', $this->$propertyName.'Max');
-
+            $this->emit($propertyTrueName, $this->$propertyTrueName);
         }
     }
 
@@ -100,6 +98,11 @@ class Filtres extends Component
     {
         $this->catsFilter = array();
         $this->brandsFilter = array();
+        $this->priceMin = null;
+        $this->priceMax = null;
+        $this->quantityMin = null;
+        $this->quantityMax = null;
+
         $this->emit("resetFilters");
     }
 
