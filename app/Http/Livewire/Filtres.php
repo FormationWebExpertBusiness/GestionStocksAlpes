@@ -29,9 +29,11 @@ class Filtres extends Component
     protected $messages = [
         'priceMin.integer' => 'Le prix doit être un entier',
         'priceMax.integer' => 'Le prix doit être un entier',
+        'priceMin.min' => 'Le prix min doit être supérieur à 0',
         'priceMax.min' => 'Le prix max doit être supérieur au prix min',
         'quantityMin.integer' => 'La quantité doit être un entier',
         'quantityMax.integer' => 'La quantité doit être un entier',
+        'quantityMin.min' => 'La quantité min doit être supérieur à 0',
         'quantityMax.min' => 'La quantité max doit être supérieur à la quantité min',
     ];
 

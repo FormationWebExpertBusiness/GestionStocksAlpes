@@ -198,9 +198,4 @@ class ViewAll extends Component
     {
         return redirect();
     }
-
-    public function getDataColumnWidth()
-    {
-        return 'w-['.((1 / ($this->nbCol + 2)) * 100).'%]';
-    }
 }
