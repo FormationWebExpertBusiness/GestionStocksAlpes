@@ -12,6 +12,11 @@ class ViewAll extends Component
     public $champ = 'id';
     public $mode = 'asc';
 
+    public $priceMin;
+    public $priceMax;
+    public $quantityMin;
+    public $quantityMax;
+
     public $searchValue = "";
 
     public $categoriesF = array();
@@ -24,14 +29,51 @@ class ViewAll extends Component
         'brandsF' => ['as' => 'bra']
     ];
 
-    protected $listeners = ['stockUpdated' => 'reloadView', 'catFilter' => 'updateCatF', 'brandFilter' => 'updateBrandF', 'resetFilters' => 'resetAllFilters', 'searchF' => 'search', 'resetSearchBar' => 'resetValueSearchBar'];
+    protected $listeners = [
+        'stockUpdated' => 'reloadView',
+        'catFilter' => 'updateCatF',
+        'brandFilter' => 'updateBrandF',
+        'resetFilters' => 'resetAllFilters',
+        'searchF' => 'search',
+        'resetSearchBar' => 'resetValueSearchBar',
+        'priceMin' => 'getPriceMin',
+        'priceMax' => 'getPriceMax',
+        'quantityMin' => 'getQuantityMin',
+        'quantityMax' => 'getQuantityMax'
+    ];
 
-    protected $nbCol = 5;//le nombre de colonne sans compter les icones
+    protected $nbCol = 5; //le nombre de colonne sans compter les icones
 
     public function mount()
     {
+        $this->priceMin = Item::min('price');
+        $this->priceMax = Item::max('price');
+
+        $this->quantityMin = Item::min('quantity');
+        $this->quantityMax = Item::max('quantity');
+
         $this->categoriesF = array();
         $this->brandsF = array();
+    }
+
+    public function getPriceMin($priceMin)
+    {
+        $this->priceMin = $priceMin;
+    }
+
+    public function getPriceMax($priceMax)
+    {
+        $this->priceMax = $priceMax;
+    }
+
+    public function getQuantityMin($quantityMin)
+    {
+        $this->quantityMin = $quantityMin;
+    }
+
+    public function getQuantityMax($quantityMax)
+    {
+        $this->quantityMax = $quantityMax;
     }
 
     public function deleteItem($itemId)
@@ -89,13 +131,19 @@ class ViewAll extends Component
     {
         $this->categoriesF = array();
         $this->brandsF = array();
+
+        $this->priceMin = Item::min('price');
+        $this->priceMax = Item::max('price');
+
+        $this->quantityMin = Item::min('quantity');
+        $this->quantityMax = Item::max('quantity');
     }
 
     public function search($searchV)
     {
         $this->searchValue = $searchV;
     }
-
+    
     public function render()
     {
         $items = Item::where('items.id', '>', 0)
@@ -106,12 +154,28 @@ class ViewAll extends Component
         ->orWhere('items.comment','LIKE','%'.$this->searchValue.'%')
         ->orWhere('category.name','LIKE','%'.$this->searchValue.'%')
         ->orWhere('brand.name','LIKE','%'.$this->searchValue.'%')
+        ->where([
+            ['items.price', '<=', $this->priceMax],
+            ['items.price', '>=', $this->priceMin],
+            ['items.quantity', '<=', $this->quantityMax],
+            ['items.quantity', '>=', $this->quantityMin]
+        ])
         ->orderBy(($this->champ == 'category' || $this->champ == 'brand') ? $this->champ.'.name' : 'items.'.$this->champ, $this->mode) // if champ is category or brand order on champ.name instead of champ
         ->get()
         ->filter(function ($value) {
             $catF = empty($this->categoriesF) ? Category::where('id' ,'>' ,0)->pluck('id')->toArray() : $this->categoriesF;
             $brandF = empty($this->brandsF) ? Brand::where('id' ,'>' ,0)->pluck('id')->toArray() : $this->brandsF;
-            if(in_array($value->category->id, $catF) && in_array($value->brand->id, $brandF)) return $value;
+
+            if(in_array($value->category->id, $catF) && in_array($value->brand->id, $brandF))
+            {
+                if($value->price >= $this->priceMin && $value->price <= $this->priceMax)
+                {
+                    if($value->quantity >= $this->quantityMin && $value->quantity <= $this->quantityMax)
+                    {
+                        return $value;
+                    }
+                }
+            }
         });
 
         return view('livewire.view-all', [
@@ -122,10 +186,5 @@ class ViewAll extends Component
     public function reloadView()
     {
         return redirect();
-    }
-
-    public function getDataColumnWidth()
-    {
-        return 'w-['.((1 / ($this->nbCol + 2)) * 100).'%]';
     }
 }
