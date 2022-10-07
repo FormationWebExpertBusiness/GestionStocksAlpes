@@ -893,6 +893,14 @@ select {
   max-height: 65vh;
 }
 
+.max-h-\[63vh\] {
+  max-height: 63vh;
+}
+
+.max-h-\[62vh\] {
+  max-height: 62vh;
+}
+
 .min-h-full {
   min-height: 100%;
 }
@@ -944,6 +952,18 @@ select {
 .w-fit {
   width: -moz-fit-content;
   width: fit-content;
+}
+
+.w-10 {
+  width: 2.5rem;
+}
+
+.w-11 {
+  width: 2.75rem;
+}
+
+.w-9 {
+  width: 2.25rem;
 }
 
 .min-w-full {

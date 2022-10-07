@@ -57,6 +57,10 @@ class Filtres extends Component
             // $this->validateOnly($propertyName.'Max', ['priceMin' => 'nullable']);
             $this->validateOnly($propertyName.'Min', $rules);
             $this->validateOnly($propertyName.'Max', $rules);
+
+            $this->emit($propertyName.'Min', $this->$propertyName.'Min');
+            $this->emit($propertyName.'Max', $this->$propertyName.'Max');
+
         }
     }
 

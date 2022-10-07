@@ -55,7 +55,7 @@
                                     </th>
                                 </tr>
                             </thead>
-                            <tbody class="bg-white block max-h-[65vh] overflow-y-scroll">
+                            <tbody class="bg-white block max-h-[62vh] overflow-y-scroll">
                                 @foreach ($items as $item)
                                     <div wire:key="item-{{ $item->id }}">
                                         <tr
