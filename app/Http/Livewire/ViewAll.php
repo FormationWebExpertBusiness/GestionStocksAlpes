@@ -30,6 +30,8 @@ class ViewAll extends Component
 
     public function mount()
     {
+        dd(Category::all());
+
         $this->categoriesF = array();
         $this->brandsF = array();
     }
