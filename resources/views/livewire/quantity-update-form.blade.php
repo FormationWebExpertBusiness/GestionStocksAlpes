@@ -27,12 +27,27 @@
                                         <div class="shadow sm:overflow-hidden sm:rounded-md">
                                             <div class="space-y-6 bg-white px-4 py-5 sm:p-6">
 
-                                                <x-input-field type='number' name='quantity'
-                                                    label='Quantité à ajouter' model='quantityIncrease' placeholder='Quantité'>
-                                                </x-input-field>
+                                                {{-- quantityIncrease number field --}}
+                                                <div>
+                                                    <div class="flex justify-between">
+                                                        <label for="username" class="block text-sm font-medium text-gray-700">Utilisateur</label>
+                                                    </div>
+                                                    <div class="mt-1">
+                                                        <input type="number" name="quantity" id="quantity" wire:model="quantityIncrease" placeholder="Quantité" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                                                        @error('quantityIncrease') <span class="error text-red-600">{{ $message }}</span> @enderror
+                                                    </div>
+                                                </div>
 
-                                                <x-input-field type='text' name='price' label='Prix total'
-                                                    model='priceIncrease' placeholder='Prix total'></x-input-field>
+                                                {{-- priceIncrease text field --}}
+                                                <div>
+                                                    <div class="flex justify-between">
+                                                        <label for="price" class="block text-sm font-medium text-gray-700">Prix total</label>
+                                                    </div>
+                                                    <div class="mt-1">
+                                                        <input type="number" name="price" id="price" wire:model="priceIncrease" placeholder="Prix total" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                                                        @error('priceIncrease') <span class="error text-red-600">{{ $message }}</span> @enderror
+                                                    </div>
+                                                </div>
 
                                             </div>
                                             <div class="bg-gray-50 px-4 py-3 text-right sm:px-6">
@@ -71,9 +86,16 @@
                                         <div class="shadow sm:overflow-hidden sm:rounded-md">
                                             <div class="space-y-6 bg-white px-4 py-5 sm:p-6">
 
-                                                <x-input-field type='number' name='quantity'
-                                                    label='Quantité' model='quantityDecrease' placeholder='Quantité'>
-                                                </x-input-field>
+                                                {{-- quantityDecrease number field --}}
+                                                <div>
+                                                    <div class="flex justify-between">
+                                                        <label for="quantity" class="block text-sm font-medium text-gray-700">Quantité</label>
+                                                    </div>
+                                                    <div class="mt-1">
+                                                        <input type="number" name="quantity" id="quantity" wire:model="quantityDecrease" placeholder="Quantité" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                                                        @error('quantityDecrease') <span class="error text-red-600">{{ $message }}</span> @enderror
+                                                    </div>
+                                                </div>
 
                                             </div>
                                             <div class="bg-gray-50 px-4 py-3 text-right sm:px-6">

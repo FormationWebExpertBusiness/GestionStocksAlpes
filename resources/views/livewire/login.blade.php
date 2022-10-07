@@ -19,11 +19,27 @@
                             <div class="shadow-md sm:overflow-hidden sm:rounded-md">
                                 <div class="space-y-6 bg-white px-4 py-5 sm:p-6">
 
-                                    <x-input-field type='text' name='username' label='Utilisateur' model='username'
-                                        placeholder='Utilisateur'></x-input-field>
+                                    {{-- username text field --}}
+                                    <div>
+                                        <div class="flex justify-between">
+                                            <label for="username" class="block text-sm font-medium text-gray-700">Utilisateur</label>
+                                        </div>
+                                        <div class="mt-1">
+                                            <input type="text" name="username" id="username" wire:model="username" placeholder="Utilisateur" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                                            @error('username') <span class="error text-red-600">{{ $message }}</span> @enderror
+                                        </div>
+                                    </div>
 
-                                    <x-input-field type='password' name='password' label='Mot de passe' model='password'
-                                        placeholder='Mot de passe'></x-input-field>
+                                    {{-- password password field --}}
+                                    <div>
+                                        <div class="flex justify-between">
+                                            <label for="password" class="block text-sm font-medium text-gray-700">Mot de passe</label>
+                                        </div>
+                                        <div class="mt-1">
+                                            <input type="text" name="password" id="password" wire:model="password" placeholder="Mot de passe" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                                            @error('password') <span class="error text-red-600">{{ $message }}</span> @enderror
+                                        </div>
+                                    </div>
 
                                 </div>
                                 <div class="bg-gray-50 px-4 py-3 text-right sm:px-6">

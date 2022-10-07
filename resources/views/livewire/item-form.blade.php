@@ -23,28 +23,93 @@
                                         <div class="shadow sm:overflow-hidden sm:rounded-md">
                                             <div class="space-y-6 bg-white px-4 py-5 sm:p-6">
 
-                                                <x-select-field name='category' label='Catégorie' model='category_id'
-                                                    isOptional='true' :options="$categories"></x-select-field>
+                                                {{-- categories select field --}}
+                                                <div>
+                                                    <div class="flex justify-between">
+                                                        <label for="category" class="block text-sm font-medium text-gray-700">Catégorie</label>
+                                                        <span class="text-sm text-gray-500">Optionnel</span>
+                                                    </div>
+                                                    <select id="category" name="category" wire:model="category_id" class="mt-1 block w-full rounded-md border-gray-300 py-2 pl-3 pr-10 text-base focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
+                                                        @foreach($categories as $option)
+                                                            <option value="{{ $option->id }}">{{ $option->name }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                    @error('category_id') <span class="error text-red-600">{{ $message }}</span> @enderror
+                                                </div>
 
-                                                <x-select-field name='brand' label='Marque' model='brand_id'
-                                                    isOptional='true' :options="$brands"></x-select-field>
+                                                {{-- brands select field --}}
+                                                <div>
+                                                    <div class="flex justify-between">
+                                                        <label for="brand" class="block text-sm font-medium text-gray-700">Marque</label>
+                                                        <span class="text-sm text-gray-500">Optionnel</span>
+                                                    </div>
+                                                    <select id="brand" name="brand" wire:model="brand_id" class="mt-1 block w-full rounded-md border-gray-300 py-2 pl-3 pr-10 text-base focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
+                                                        @foreach($brands as $option)
+                                                            <option value="{{ $option->id }}">{{ $option->name }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                    @error('brand_id') <span class="error text-red-600">{{ $message }}</span> @enderror
+                                                </div>
 
-                                                <x-input-field type='text' name='model' label='Modèle'
-                                                    model='model' placeholder='Modèle'></x-input-field>
+                                                {{-- model text field --}}
+                                                <div>
+                                                    <div class="flex justify-between">
+                                                        <label for="model" class="block text-sm font-medium text-gray-700">Modèle</label>
+                                                    </div>
+                                                    <div class="mt-1">
+                                                        <input type="text" name="model" id="model" wire:model="model" placeholder="Modèle" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                                                        @error('model') <span class="error text-red-600">{{ $message }}</span> @enderror
+                                                    </div>
+                                                </div>
 
-                                                <x-input-field class='inline-block' type='number' name='quantity'
-                                                    label='Quantité' model='quantity' placeholder='Quantité'>
-                                                </x-input-field>
+                                                {{-- quantity number field --}}
+                                                <div class="inline-block">
+                                                    <div class="flex justify-between">
+                                                        <label for="quantity" class="block text-sm font-medium text-gray-700">Quantité</label>
+                                                    </div>
+                                                    <div class="mt-1">
+                                                        <input type="number" name="quantity" id="quantity" wire:model="quantity" placeholder="Quantité" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                                                        @error('quantity') <span class="error text-red-600">{{ $message }}</span> @enderror
+                                                    </div>
+                                                </div>
 
-                                                <x-input-field class='inline-block' type='text' name='unit'
-                                                    label='Unité' model='unit' placeholder='Unité' isOptional="true">
-                                                </x-input-field>
+                                                {{-- unit text field --}}
+                                                <div class="inline-block">
+                                                    <div class="flex justify-between">
+                                                        <label for="unit" class="block text-sm font-medium text-gray-700">Unité</label>
+                                                        <span class="text-sm text-gray-500">Optionnel</span>
+                                                    </div>
+                                                    <div class="mt-1">
+                                                        <input type="text" name="unit" id="unit" wire:model="unit" placeholder="Unité" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                                                        @error('unit') <span class="error text-red-600">{{ $message }}</span> @enderror
+                                                    </div>
+                                                </div>
 
-                                                <x-input-field type='number' name='price' label='Prix total'
-                                                    model='price' placeholder='Prix total'></x-input-field>
+                                                {{-- price number field --}}
+                                                <div>
+                                                    <div class="flex justify-between">
+                                                        <label for="price" class="block text-sm font-medium text-gray-700">Prix total</label>
+                                                    </div>
+                                                    <div class="mt-1">
+                                                        <input type="number" name="price" id="price" wire:model="price" placeholder="Prix total" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                                                        @error('price') <span class="error text-red-600">{{ $message }}</span> @enderror
+                                                    </div>
+                                                </div>
 
-                                                <x-textarea-field name='comment' label='Commentaire'
-                                                    model='comment' placeholder='Commentaire' isOptional="true"></x-textarea-field>
+                                                {{-- comment textarea field --}}
+                                                <div>
+                                                    <div class="flex justify-between">
+                                                        <label for="comment" class="block text-sm font-medium text-gray-700">Commentaire</label>
+                                                        <span class="text-sm text-gray-500">Optionnel</span>
+                                                    </div>
+                                                    <div class="mt-1 flex rounded-md shadow">
+                                                        <textarea name="comment" id="comment" wire:model="comment"
+                                                            placeholder="Commentaire" rows="10"
+                                                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                                                        </textarea>
+                                                    </div>
+                                                    @error('comment') <span class="error text-red-600">{{ $message }}</span> @enderror
+                                                </div>
 
                                             </div>
                                             <div class="bg-gray-50 px-4 py-3 text-right sm:px-6">
