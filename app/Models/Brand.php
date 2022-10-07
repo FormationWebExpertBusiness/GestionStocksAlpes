@@ -19,17 +19,7 @@ class Brand extends Model
     ];
 
     protected $with = [
-        'items',
-        'categories'
+        
     ];
 
-    public function items()
-    {
-        return $this->hasMany(Item::class, 'brand_id', 'id');
-    }
-
-    public function categories()
-    {
-        return $this->belongsToMany(Category::class, 'brands_categories', 'brand_id', 'category_id');
-    }
 }

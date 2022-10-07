@@ -19,14 +19,8 @@ class Category extends Model
     ];
 
     protected $with = [
-        'items',
         'brands'
     ];
-
-    public function items()
-    {
-        return $this->hasMany(Item::class, 'category_id', 'id');
-    }
 
     public function brands()
     {

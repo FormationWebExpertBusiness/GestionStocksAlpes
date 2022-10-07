@@ -22,44 +22,47 @@ class DatabaseSeeder extends Seeder
         ]);
 
         // BRAND
+        $brands = [];
         
-        \App\Models\Brand::create([
+        $brands[] = \App\Models\Brand::create([
             'name' => 'Non défini',
         ]);
 
-        \App\Models\Brand::create([
+        $brands[] = \App\Models\Brand::create([
             'name' => 'HP',
         ]);
 
-        \App\Models\Brand::create([
+        $brands[] = \App\Models\Brand::create([
             'name' => 'tp-link',
         ]);
 
-        \App\Models\Brand::create([
+        $brands[] = \App\Models\Brand::create([
             'name' => 'Alpes Network',
         ]);
 
-        \App\Models\Brand::create([
+        $brands[] = \App\Models\Brand::create([
             'name' => 'Makita',
         ]);
 
-        \App\Models\Brand::create([
+        $brands[] = \App\Models\Brand::create([
             'name' => 'LinkSys',
         ]);
 
-        \App\Models\Brand::create([
+        $brands[] = \App\Models\Brand::create([
             'name' => 'Asus',
         ]);
 
-        \App\Models\Brand::create([
+        $brands[] = \App\Models\Brand::create([
             'name' => 'Prysmian Group',
         ]);
 
         // CATEGORY
 
-        \App\Models\Category::create([
+        $categories = [];
+
+        $categories[] = \App\Models\Category::create([
             'name' => 'Non défini',
-        ]);
+        ])->brands()->saveMany($brands);
 
         \App\Models\Category::create([
             'name' => 'Switch',
