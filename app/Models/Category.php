@@ -9,8 +9,27 @@ class Category extends Model
 {
     use HasFactory;
 
+    protected $table = 'categories';
+    protected $primaryKey = 'id';
+    public $timestamps = true;
+
+    protected $fillable = [
+        'id',
+        'name'
+    ];
+
+    protected $with = [
+        'items',
+        'brands'
+    ];
+
     public function items()
     {
-        return $this->hasMany('App\Models\Item');
+        return $this->hasMany(Item::class, 'category_id', 'id');
+    }
+
+    public function brands()
+    {
+        return $this->belongsToMany(Brand::class, 'brands_categories', 'category_id', 'brand_id');
     }
 }
