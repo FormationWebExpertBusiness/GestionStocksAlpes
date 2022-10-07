@@ -18,6 +18,8 @@ return new class extends Migration
             $table->unsignedBigInteger('category_id');
             $table->timestamps();
 
+            $table->primary(['brand_id', 'category_id']);
+
             $table->foreign('brand_id')->references('id')->on('brands')->onUpdate('restrict')->onDelete('cascade');
             $table->foreign('category_id')->references('id')->on('categories')->onUpdate('restrict')->onDelete('cascade');
 
