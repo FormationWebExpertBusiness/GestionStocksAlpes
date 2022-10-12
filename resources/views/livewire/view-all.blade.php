@@ -8,7 +8,11 @@
                 </div>
                 <p class="mt-2 text-sm text-gray-700">Liste de tout les produits du stock</p>
             </div>
-            <div class="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
+            <div class="mt-4 sm:mt-0 sm:ml-10 sm:flex-none">
+                @livewire('category-form')
+            </div>
+
+            <div class="mt-4 sm:mt-0 sm:ml-10 sm:flex-none">
                 @livewire('item-form')
             </div>
         </div>

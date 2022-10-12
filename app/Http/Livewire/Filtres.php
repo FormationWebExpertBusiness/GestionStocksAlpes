@@ -37,12 +37,6 @@ class Filtres extends Component
         'quantityMax.min' => 'La quantité max doit être supérieur à la quantité min',
     ];
 
-    public function mount()
-    {
-        $this->categories = Category::all();
-        $this->brands = Brand::all();
-    }  
-
     public function updated($propertyName)
     {
         $rules = [
@@ -121,6 +115,9 @@ class Filtres extends Component
 
     public function render(Request $request)
     {
+        $this->categories = Category::all();
+        $this->brands = Brand::all();
+        
         return view('livewire.filtres');
     }
 }
