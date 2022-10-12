@@ -9,8 +9,17 @@ class Brand extends Model
 {
     use HasFactory;
 
-    public function items()
-    {
-        return $this->hasMany('App\Models\Item');
-    }
+    protected $table = 'brands';
+    protected $primaryKey = 'id';
+    public $timestamps = true;
+
+    protected $fillable = [
+        'id',
+        'name'
+    ];
+
+    protected $with = [
+        
+    ];
+
 }

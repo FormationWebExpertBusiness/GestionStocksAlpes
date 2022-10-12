@@ -9,11 +9,10 @@ class Item extends Model
 {
     use HasFactory;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
+    protected $table = 'items';
+    protected $primaryKey = 'id';
+    public $timestamps = true;
+    
     protected $fillable = 
     [
         'quantity',
@@ -24,6 +23,11 @@ class Item extends Model
         'brand_id',
         'model',
         'comment'
+    ];
+
+    protected $with = [
+        'brand',
+        'category'
     ];
 
     public function brand()
