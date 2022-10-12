@@ -17,7 +17,7 @@
                                             formulaire pour créer un nouveau produit qui n'a jamais été dans le stock
                                         </p>
                                     </div>
-                                </div>
+                                </div> 
                                 <div class="mt-5 md:col-span-2 md:mt-0">
                                     <form>
                                         <div class="shadow sm:overflow-hidden sm:rounded-md">

@@ -14,14 +14,19 @@
                         </div>
                         <div class="bg-white rounded-r-lg py-16 px-4 sm:px-6 lg:col-span-3 lg:py-24 lg:px-8 xl:pl-12">
                             <div>
-                                <label for="full-name" class="text-sm font-medium text-gray-700">Nom de la
-                                    catégorie
-                                </label>
+                                <div class="text-left">
+                                    <label for="full-name" class="text-sm font-medium text-gray-700">Nom de la
+                                        catégorie :
+                                    </label>
+                                </div>
                                 <div class="mt-1">
-                                    <input type="text" name="full-name" id="full-name" autocomplete="name"
+                                    <input wire:model="name" type="text" name="full-name" id="full-name" autocomplete="name"
                                         class="block w-full rounded-md border-gray-300 py-3 px-4 placeholder-gray-500 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
                                         placeholder="Ex: Firewall">
                                 </div>
+                                @error('name')
+                                 <p class="mt-2 whitespace-nowrap text-sm text-red-600" id="email-error">{{ $message }}</p>
+                                @enderror
                             </div>
                             <div class="absolute bottom-5 right-2 text-right sm:px-6">
                                 <button wire:click="saveItem" type="button"
