@@ -16,10 +16,9 @@ class ItemFactory extends Factory
      */
     public function definition()
     {
-        // $faker = Faker\Factory::create();
         return [
-            'quantity' => fake()->numberBetween(0,100),
-            'price' => fake()->numberBetween(1,10000),
+            'quantity' => fake()->numberBetween(0,50),
+            'price' => fake()->numberBetween(1,1000),
             'model' => fake()->unique()->bothify('????-####'),
             'comment' => fake()->sentence()
         ];
