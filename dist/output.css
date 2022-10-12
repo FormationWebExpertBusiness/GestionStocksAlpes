@@ -933,6 +933,22 @@ select {
   width: 50%;
 }
 
+.w-9 {
+  width: 2.25rem;
+}
+
+.w-\[50\%\] {
+  width: 50%;
+}
+
+.w-\[100\%\] {
+  width: 100%;
+}
+
+.w-\[120\%\] {
+  width: 120%;
+}
+
 .min-w-full {
   min-width: 100%;
 }
