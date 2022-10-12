@@ -60,7 +60,10 @@ class ItemForm extends Component
 
     public function updated($property)
     {
-        $this->addDynamicRules();
+        if (empty($this->itemToUpdate) || in_array($property, ['model', 'brand_id']))
+        {
+            $this->addDynamicRules();
+        }
         $this->validateOnly($property);
         if($property == 'brand_id' && isset($this->model))
         {
@@ -70,7 +73,10 @@ class ItemForm extends Component
 
     public function saveItem()
     {
-        $this->addDynamicRules();
+        if (empty($this->itemToUpdate) || ( $this->brand_id != $this->itemToUpdate->brand_id || $this->model != $this->itemToUpdate->model) )
+        {
+            $this->addDynamicRules();
+        }
         $validatedData = $this->validate();
 
         if (isset($this->itemToUpdate)) {
