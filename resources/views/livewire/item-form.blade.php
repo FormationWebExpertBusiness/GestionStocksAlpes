@@ -10,12 +10,21 @@
                             <div class="md:grid md:grid-cols-3 md:gap-6">
                                 <div class="md:col-span-1">
                                     <div class="px-4 sm:px-0">
-                                        <h3 class="text-lg font-medium leading-6 text-gray-900">
-                                            Ajouter un produit
-                                        </h3>
-                                        <p class="mt-1 text-sm text-gray-600">
-                                            formulaire pour créer un nouveau produit qui n'a jamais été dans le stock
-                                        </p>
+                                        @if(isset($itemToUpdate))
+                                            <h3 class="text-lg font-medium leading-6 text-gray-900">
+                                                Modifier un produit
+                                            </h3>
+                                            <p class="mt-1 text-sm text-gray-600">
+                                                formulaire pour modifier un produit qui existe dans le stock
+                                            </p>
+                                        @else
+                                            <h3 class="text-lg font-medium leading-6 text-gray-900">
+                                                Ajouter un produit
+                                            </h3>
+                                            <p class="mt-1 text-sm text-gray-600">
+                                                formulaire pour créer un nouveau produit qui n'a jamais été dans le stock
+                                            </p>
+                                        @endif
                                     </div>
                                 </div>
                                 <div class="mt-5 md:col-span-2 md:mt-0">
