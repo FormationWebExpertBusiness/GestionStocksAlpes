@@ -26,4 +26,9 @@ class Category extends Model
     {
         return $this->belongsToMany(Brand::class, 'brands_categories', 'category_id', 'brand_id');
     }
+
+    public function hasBrand($brand)
+    {
+        return $this->brands->contains($brand);
+    }
 }
