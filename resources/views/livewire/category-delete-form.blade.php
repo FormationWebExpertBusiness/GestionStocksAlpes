@@ -26,9 +26,9 @@
                         <div class="bg-white rounded-r-lg py-16 px-4 sm:px-6 lg:col-span-3 lg:py-24 lg:px-8 xl:pl-12">
                             <div>
                                 <div class="text-left">
-                                    <label for="location" class="block text-sm font-medium text-gray-700">Catégorie à supprimer</label>
+                                    <label for="location" class="block text-sm font-medium text-gray-700">Catégorie à supprimer : </label>
                                 </div>
-                                <select wire:model="selectedCategory" id="location" name="location" class="mt-1 block w-full rounded-md border-gray-300 py-2 pl-3 pr-10 text-base focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
+                                <select wire:model="selectedCategory" id="location" name="location" class="mt-1 block w-full rounded-md border-gray-300 py-3 pl-3 pr-10 text-base focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
                                     <option selected>---</option>
                                     @foreach ($categories as $categorie)
                                         @if($categorie->name != "Non défini")
@@ -36,7 +36,7 @@
                                         @endif
                                     @endforeach
                                 </select>
-                              </div>
+                            </div>
                             <div class="absolute bottom-5 right-2 text-right sm:px-6">
                                 <button wire:click="deleteCategory" type="button"
                                     class="inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">

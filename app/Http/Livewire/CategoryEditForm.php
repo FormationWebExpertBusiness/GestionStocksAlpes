@@ -3,10 +3,35 @@
 namespace App\Http\Livewire;
 
 use Livewire\Component;
+use App\Models\Category;
 
 class CategoryEditForm extends Component
 {
     public $show = false;
+    public $categories;
+    public $showDropdown = false;
+    public $selectedCategory;
+    public $newName;
+
+    protected $rules = [
+        'newName' => ['alpha_dash', 'unique:App\Models\Category,name'],
+    ];
+    protected $messages = [
+        'newName.alpha_dash' => 'Le nom de la catégorie ne doit contenir que des lettres, des chiffres',
+        'newName.unique' => 'Le nom de la catégorie doit être unique'
+    ];
+    
+    public function updated($property)
+    {
+        $this->validateOnly($property);
+    }
+
+    public function updateCategory()
+    {
+        $this->validate();
+        Category::find($this->selectedCategory)->update(['name' => $this->newName]);
+        $this->toggleEditForm();
+    }
 
     public function toggleEditForm()
     {
@@ -15,6 +40,7 @@ class CategoryEditForm extends Component
 
     public function render()
     {
+        $this->categories = Category::all();
         return view('livewire.category-edit-form');
     }
 }

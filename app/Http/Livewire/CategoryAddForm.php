@@ -17,6 +17,7 @@ class CategoryAddForm extends Component
         'name.alpha_dash' => 'Le nom de la catégorie ne doit contenir que des lettres, des chiffres',
         'name.unique' => 'Le nom de la catégorie doit être unique'
     ];
+    
     public function updated($property)
     {
         $this->validateOnly($property);

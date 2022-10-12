@@ -25,26 +25,42 @@
                             </p>
                         </div>
                         <div class="bg-white rounded-r-lg py-16 px-4 sm:px-6 lg:col-span-3 lg:py-24 lg:px-8 xl:pl-12">
+                            <div class="mt-[-10%] mb-9">
+                                <div class="text-left">
+                                    <label for="location" class="block text-sm font-medium text-gray-700">Catégorie à modifier : </label>
+                                </div>
+                                <select wire:model="selectedCategory" id="location" name="location" class="mt-1 block w-full rounded-md border-gray-300 py-3 pl-3 pr-10 text-base focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
+                                    <option selected>---</option>
+                                    @foreach ($categories as $categorie)
+                                        @if($categorie->name != "Non défini")
+                                            <option value="{{$categorie->id}}">{{$categorie->name}}</option>
+                                        @endif
+                                    @endforeach
+                                </select>
+                            </div>
                             <div>
                                 <div class="text-left">
-                                    <label for="full-name" class="text-sm font-medium text-gray-700">Nom de la
+                                    <label for="full-name" class="text-sm font-medium text-gray-700">Nouveau nom de la
                                         catégorie :
                                     </label>
                                 </div>
-                                <div class="mt-1">
-                                    <input type="text" name="full-name" id="full-name" autocomplete="name"
+                                <div class="mt-1 mb-2">
+                                    <input wire:model="newName" type="text" name="full-name" id="full-name" autocomplete="name"
                                         class="block w-full rounded-md border-gray-300 py-3 px-4 placeholder-gray-500 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
                                         placeholder="Ex: Firewall">
                                 </div>
-                                @error('name')
-                                    <p class="mt-2 whitespace-nowrap text-sm text-red-600" id="email-error">
-                                        {{ $message }}</p>
-                                @enderror
+                                <div class="min-h-[20px]">
+                                    @error('newName')
+                                        <p class="whitespace-nowrap text-sm text-red-600" id="email-error">
+                                            {{ $message }}
+                                        </p>
+                                    @enderror
+                                </div>
                             </div>
                             <div class="absolute bottom-5 right-2 text-right sm:px-6">
-                                <button type="button"
+                                <button wire:click="updateCategory" type="button"
                                     class="inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
-                                    Enregistrer
+                                    Modifier
                                 </button>
                                 <button wire:click="toggleEditForm" type="button"
                                     class="inline-flex items-center rounded-md border border-transparent bg-red-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2">
