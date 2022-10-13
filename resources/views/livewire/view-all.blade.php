@@ -1,4 +1,60 @@
 <div>
+    @if (session('status'))
+        @if ($showToast)
+            <div class="absolute min-w-[10%] pb-2 pt-2 top-0 right-0 rounded-lg bg-green-50 p-4">
+                <div class="flex">
+                    <div class="flex-shrink-0">
+                        <svg class="h-5 w-5 text-green-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                            fill="currentColor" aria-hidden="true">
+                            <path fill-rule="evenodd"
+                                d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z"
+                                clip-rule="evenodd" />
+                        </svg>
+                    </div>
+                    <div class="ml-3">
+                        <p class="text-sm font-medium text-green-800">{{ session('status') }}</p>
+                    </div>
+                    <div class="ml-auto pl-3">
+                        <div class="-mx-1.5 -my-1.5">
+                            <button wire:click="closeToast" type="button" id="btn-close-toast"
+                                class="inline-flex rounded-md bg-green-50 p-1.5 text-green-500 hover:bg-green-100 focus:outline-none focus:ring-2 focus:ring-green-600 focus:ring-offset-2 focus:ring-offset-green-50">
+                                <span class="sr-only">Dismiss</span>
+                                <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                                    fill="currentColor" aria-hidden="true">
+                                    <path
+                                        d="M6.28 5.22a.75.75 0 00-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 101.06 1.06L10 11.06l3.72 3.72a.75.75 0 101.06-1.06L11.06 10l3.72-3.72a.75.75 0 00-1.06-1.06L10 8.94 6.28 5.22z" />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div id="progress_bg" class="w-full mt-2 mb-0 bg-gray-200 rounded-full h-1.5 dark:bg-gray-700">
+                    <div id="progress_bar" class="bg-green-400 h-1.5 rounded-full" style="width: 1%"></div>
+                </div>
+            </div>
+            <script>
+                function fillProgressBar() {
+                    var progressBar = document.getElementById("progress_bar");
+                    var progressBg = document.getElementById("progress_bg");
+                    var width = 1;
+                    var id = setInterval(frame, 30);
+
+                    function frame() {
+                        if (width >= 100) {
+                            clearInterval(id);
+                        } else {
+                            width++;
+                            progressBar.style.width = width + '%';
+                        }
+                    }
+                }
+                fillProgressBar();
+                setTimeout(function() {
+                    document.querySelector('#btn-close-toast').click();
+                }, 3000);
+            </script>
+        @endif
+    @endif
     <div class="px-4 sm:px-6 lg:px-8">
         <div class="sm:flex sm:items-center">
             <div class="sm:flex-auto">
@@ -26,27 +82,32 @@
                                     <th wire:click="reOrder('category')" scope="col"
                                         class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
                                         Categorie
-                                        <x-ordering-arrows champ='category' champF={{$champ}} modeF={{$mode}}></x-ordering-arrows>
+                                        <x-ordering-arrows champ='category' champF={{$champ}}
+                                            modeF={{$mode}}></x-ordering-arrows>
                                     </th>
                                     <th wire:click="reOrder('brand')" scope="col"
                                         class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
                                         Marque
-                                        <x-ordering-arrows champ='brand' champF={{$champ}} modeF={{$mode}}></x-ordering-arrows>
+                                        <x-ordering-arrows champ='brand' champF={{$champ}}
+                                            modeF={{$mode}}></x-ordering-arrows>
                                     </th>
                                     <th wire:click="reOrder('model')" scope="col"
                                         class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
                                         Modele
-                                        <x-ordering-arrows champ='model' champF={{$champ}} modeF={{$mode}}></x-ordering-arrows>
+                                        <x-ordering-arrows champ='model' champF={{$champ}}
+                                            modeF={{$mode}}></x-ordering-arrows>
                                     </th>
                                     <th wire:click="reOrder('quantity')" scope="col"
                                         class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 w-[14%]">
                                         Quantité
-                                        <x-ordering-arrows champ='quantity' champF={{$champ}} modeF={{$mode}}></x-ordering-arrows>
+                                        <x-ordering-arrows champ='quantity' champF={{$champ}}
+                                            modeF={{$mode}}></x-ordering-arrows>
                                     </th>
                                     <th wire:click="reOrder('price')" scope="col"
                                         class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 w-[14%]">
                                         Prix Total
-                                        <x-ordering-arrows champ='price' champF={{$champ}} modeF={{$mode}}></x-ordering-arrows>
+                                        <x-ordering-arrows champ='price' champF={{$champ}}
+                                            modeF={{$mode}}></x-ordering-arrows>
                                     </th>
                                     <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-6 w-1/5">
                                         <span class="sr-only">Actions</span>
@@ -59,7 +120,7 @@
                                         <tr
                                             class="{{ $loop->index % 2 === 0 ? 'bg-white' : 'bg-gray-50' }} divide-x divide-gray-200 table w-full table-fixed">
                                             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                                {{$item->category->name}}</td>
+                                                {{ $item->category->name }}</td>
                                             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                                                 {{ $item->brand->name }}</td>
                                             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
@@ -69,7 +130,7 @@
                                                     {{ $item->quantity }} {{ $item->unit }}
                                                 </div>
                                                 <div class="align-middle inline-flex min-w-[25%]">
-                                                    @livewire('quantity-update-form', ['itemToUpdate' => $item], key('quantity-update-form-'. $item->id))
+                                                    @livewire('quantity-update-form', ['itemToUpdate' => $item], key('quantity-update-form-' . $item->id))
                                                 </div>
                                             </td>
                                             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 w-[14%]">

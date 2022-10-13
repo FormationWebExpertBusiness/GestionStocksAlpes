@@ -26,8 +26,7 @@ class CategoryDeleteForm extends Component
     {
         Category::where('name', $this->selectedCategory)->delete();
         $this->toggleDeleteForm();
-        // return back()->with('success','Item created successfully!');
-        // return redirect()->back()->with('message', 'La catégorie '.$this->selectedCategory.' à bien été supprimer !');
+        return redirect('stock')->with('status', 'La categorie '.$this->selectedCategory.' a bien été supprimé !');
     }
 
     public function render()

@@ -22,6 +22,8 @@ class ViewAll extends Component
     public $categoriesF = array();
     public $brandsF = array();
 
+    public $showToast = true;
+
     protected $queryString = [
         'champ' => ['except' => 'id', 'as' => 'cha'],
         'mode' => ['as' => 'mod'],
@@ -83,6 +85,11 @@ class ViewAll extends Component
         return redirect();
     }
 
+    public function closeToast()
+    {
+        $this->showToast = false;
+    }
+
     public function resetValueSearchBar()
     {
         $this->searchValue = "";
@@ -132,11 +139,11 @@ class ViewAll extends Component
         $this->categoriesF = array();
         $this->brandsF = array();
 
-        $this->priceMin = Item::min('price');
-        $this->priceMax = Item::max('price');
+        $this->priceMin = Item::min('price') ?? 0;
+        $this->priceMax = Item::max('price') ?? 0;
 
-        $this->quantityMin = Item::min('quantity');
-        $this->quantityMax = Item::max('quantity');
+        $this->quantityMin = Item::min('quantity') ?? 0;
+        $this->quantityMax = Item::max('quantity') ?? 0;
     }
 
     public function search($searchV)
@@ -177,6 +184,8 @@ class ViewAll extends Component
                 }
             }
         });
+
+        $this->showToast = true;
 
         return view('livewire.view-all', [
             'items' => $items

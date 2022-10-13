@@ -82,10 +82,15 @@ class ItemForm extends Component
         if (isset($this->itemToUpdate)) {
             $this->itemToUpdate->update($validatedData);
         } else {
-            Item::create($validatedData);
+            $item = Item::create($validatedData);
         }
 
         $this->closeForm();
+        if(isset($this->itemToUpdate)){
+            return redirect('stock')->with('status', 'L\'objet '.$this->model.' a bien été modifié !');
+        }else{
+            return redirect('stock')->with('status', 'L\'objet '.$item->model.' a bien été créé !');
+        }
     }
 
     public function closeForm()
