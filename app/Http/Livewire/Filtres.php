@@ -115,8 +115,20 @@ class Filtres extends Component
 
     public function render(Request $request)
     {
+        if ($this->catsFilter)
+        {
+            $this->brands = collect();
+            foreach ($this->catsFilter as $categoryKey => $categoryName) {
+                $cat = Category::find($categoryName);
+                $this->brands = $this->brands->merge($cat->brands)->unique('id');
+            }
+            $this->brands->sortBy('id');
+
+        }
+        else{
+            $this->brands = Brand::all();
+        }
         $this->categories = Category::all();
-        $this->brands = Brand::all();
         
         return view('livewire.filtres');
     }
