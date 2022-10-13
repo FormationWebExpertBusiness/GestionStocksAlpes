@@ -39,7 +39,7 @@ class ItemObserver
                 Category::find($item->getOriginal('category_id'))->brands()->detach($item->getOriginal('brand_id'));
             }
 
-            $cat = Category::find($item->category_id)->brands()->attach($item->brand_id);
+            $cat = Category::find($item->category_id)->brands()->syncWithoutDetaching([$item->brand_id]);
         }
     }
 
