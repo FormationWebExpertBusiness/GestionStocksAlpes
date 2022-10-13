@@ -4,8 +4,6 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 use App\Models\Category;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Session;
 
 class CategoryDeleteForm extends Component
 {
@@ -24,7 +22,7 @@ class CategoryDeleteForm extends Component
         $this->show = !$this->show;
     }
 
-    public function deleteCategory(Request $request)
+    public function deleteCategory()
     {
         Category::where('name', $this->selectedCategory)->delete();
         $this->toggleDeleteForm();
