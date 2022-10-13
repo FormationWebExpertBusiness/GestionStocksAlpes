@@ -54,23 +54,29 @@ class QuantityUpdateForm extends Component
     {
 
         $validatedData = $this->validate($this->rulesIncrease);
+        $oldQuantity = $this->itemToUpdate->quantity;
+        $newQuantity = $oldQuantity + $validatedData['quantityIncrease'];
 
         $this->itemToUpdate->quantity += $validatedData['quantityIncrease'];
         $this->itemToUpdate->price += $validatedData['priceIncrease'];
         $this->itemToUpdate->save();
-
+        
         $this->closeForm();
+        return redirect('stock')->with('status', 'La quantité de l\'objet '.$this->itemToUpdate->model.' est bien passé de '.$oldQuantity.' à '.$newQuantity.' !');
     }
 
     public function decreaseItem()
     {
         $validatedData = $this->validate($this->rulesDecrease);
+        $oldQuantity = $this->itemToUpdate->quantity;
+        $newQuantity = $oldQuantity - $validatedData['quantityDecrease'];
 
         $this->itemToUpdate->price -= ($this->itemToUpdate->price / $this->itemToUpdate->quantity)*$validatedData['quantityDecrease'];
         $this->itemToUpdate->quantity -= $validatedData['quantityDecrease'];
         $this->itemToUpdate->save();
 
         $this->closeForm();
+        return redirect('stock')->with('status', 'La quantité de l\'objet '.$this->itemToUpdate->model.' est bien passé de '.$oldQuantity.' à '.$newQuantity.' !');
     }
 
     public function closeForm()

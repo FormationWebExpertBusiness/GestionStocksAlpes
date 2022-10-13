@@ -33,7 +33,7 @@
                                     <option selected>---</option>
                                     @foreach ($categories as $categorie)
                                         @if($categorie->name != "Non défini")
-                                            <option value="{{$categorie->id}}">{{$categorie->name}}</option>
+                                            <option value="{{$categorie->name}}">{{$categorie->name}}</option>
                                         @endif
                                     @endforeach
                                 </select>

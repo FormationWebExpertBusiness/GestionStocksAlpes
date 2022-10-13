@@ -29,8 +29,9 @@ class CategoryEditForm extends Component
     public function updateCategory()
     {
         $this->validate();
-        Category::find($this->selectedCategory)->update(['name' => $this->newName]);
+        Category::where('name', $this->selectedCategory)->update(['name' => $this->newName]);
         $this->toggleEditForm();
+        return redirect('stock')->with('status', 'Le nom de la categorie '.$this->selectedCategory.' a bien été changé en '.$this->newName.' !');
     }
 
     public function toggleEditForm()
