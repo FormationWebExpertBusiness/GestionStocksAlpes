@@ -48,11 +48,11 @@ class ViewAll extends Component
 
     public function mount()
     {
-        $this->priceMin = Item::min('price');
-        $this->priceMax = Item::max('price');
+        $this->priceMin = Item::min('price') ?? 0;
+        $this->priceMax = Item::max('price') ?? 0;
 
-        $this->quantityMin = Item::min('quantity');
-        $this->quantityMax = Item::max('quantity');
+        $this->quantityMin = Item::min('quantity') ?? 0;
+        $this->quantityMax = Item::max('quantity') ?? 0;
 
         $this->categoriesF = array();
         $this->brandsF = array();
