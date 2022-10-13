@@ -22,12 +22,14 @@ class Item extends Model
         'category_id',
         'brand_id',
         'model',
-        'comment'
+        'comment',
+        'rack_level'
     ];
 
     protected $with = [
         'brand',
-        'category'
+        'category',
+        'rack'
     ];
 
     public function brand()
@@ -38,5 +40,10 @@ class Item extends Model
     public function category()
     {
         return $this->belongsTo(Category::class);
+    }
+
+    public function rack()
+    {
+        return $this->belongsTo(Rack::class);
     }
 }
