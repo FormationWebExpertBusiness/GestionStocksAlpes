@@ -33,7 +33,14 @@ class ItemObserver
      */
     public function updated(Item $item)
     {
-        
+        if ($item->getOriginal('category') != $item->category || $item->getOriginal('brand') != $item->brand) {
+            
+            if(Item::where('category_id', $item->getOriginal('category_id'))->where('brand_id', $item->getOriginal('brand_id'))->get()->count() == 0){
+                Category::find($item->getOriginal('category_id'))->brands()->detach($item->getOriginal('brand_id'));
+            }
+
+            $cat = Category::find($item->category_id)->brands()->attach($item->brand_id);
+        }
     }
 
     /**
