@@ -145,7 +145,14 @@ class ItemForm extends Component
         $this->selectedCategoryFilter = $categories;
         if(empty($itemToUpdate))
         {
-            $this->category_id = count($this->selectedCategoryFilter) == 1 ? array_values($this->selectedCategoryFilter)[0] : $this->itemToUpdate?->category_id ?? 1;
+            if (count($this->selectedCategoryFilter) == 1) 
+            {
+                $this->category_id = array_values($this->selectedCategoryFilter)[0];
+            } 
+            else 
+            {
+                $this->category_id = $this->itemToUpdate?->category_id ?? 1;
+            }
         }
     }
     public function updateBrandF($brands)
@@ -153,7 +160,14 @@ class ItemForm extends Component
         $this->selectedBrandFilter = $brands;
         if(empty($itemToUpdate))
         {
-            $this->brand_id = count($this->selectedBrandFilter) == 1 ? array_values($this->selectedBrandFilter)[0] : $this->itemToUpdate?->category_id ?? 1;
+            if (count($this->selectedBrandFilter) == 1) 
+            {
+                $this->brand_id = array_values($this->selectedBrandFilter)[0];
+            } 
+            else 
+            {
+                $this->brand_id = $this->itemToUpdate?->category_id ?? 1;
+            }
         }
     }
     public function resetAllFilters()
