@@ -12,6 +12,12 @@ class CategoryDeleteForm extends Component
     public $showDropdown = false;
     public $selectedCategory;
 
+    public $warningDeleteCategorySignal = 'deleteCategory';
+
+    protected $listeners = [
+        'deleteCategory' => 'deleteCategory'
+    ];
+
     public function toggleDropdown()
     {
         $this->showDropdown = !$this->showDropdown;
@@ -22,9 +28,15 @@ class CategoryDeleteForm extends Component
         $this->show = !$this->show;
     }
 
-    public function deleteCategory()
+    public function openWarningDelete()
     {
-        Category::where('name', $this->selectedCategory)->delete();
+        $category = Category::where('name', $this->selectedCategory);
+        $this->emit('deleteWarning', $category->first()->id, $this->warningDeleteCategorySignal, 'Category', 'name');
+    }
+
+    public function deleteCategory($categoryId)
+    {
+        Category::find($categoryId)->delete();
         $this->toggleDeleteForm();
         return redirect('stock')->with('status', 'La categorie '.$this->selectedCategory.' a bien été supprimé !');
     }

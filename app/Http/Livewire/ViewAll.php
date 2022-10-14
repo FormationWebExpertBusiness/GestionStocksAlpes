@@ -19,6 +19,8 @@ class ViewAll extends Component
 
     public $searchValue = "";
 
+    public $warningDeleteItemSignal = 'deleteItem';
+
     public $categoriesF = array();
     public $brandsF = array();
 
@@ -41,7 +43,8 @@ class ViewAll extends Component
         'priceMin' => 'getPriceMin',
         'priceMax' => 'getPriceMax',
         'quantityMin' => 'getQuantityMin',
-        'quantityMax' => 'getQuantityMax'
+        'quantityMax' => 'getQuantityMax',
+        'deleteItem' => 'deleteItem'
     ];
 
     protected $nbCol = 5; //le nombre de colonne sans compter les icones
@@ -68,6 +71,11 @@ class ViewAll extends Component
         $this->priceMax = $priceMax;
     }
 
+    public function openWarningDelete($itemId)
+    {
+        $this->emit('deleteWarning', $itemId, $this->warningDeleteItemSignal, 'Item', 'model');
+    }
+
     public function getQuantityMin($quantityMin)
     {
         $this->quantityMin = $quantityMin;
@@ -82,7 +90,7 @@ class ViewAll extends Component
     {
         $item = Item::findOrFail($itemId);
         $item->delete();
-        return redirect();
+        return redirect()->with('status', 'Le produit '.$item->model.' a bien été supprimé !');
     }
 
     public function closeToast()
