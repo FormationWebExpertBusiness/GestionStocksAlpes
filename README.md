@@ -63,7 +63,7 @@ Change the DB_HOST line in your .env to "mysql"
 <br />
 
 ## Documentation 📚
-* [Laravel](https://laravel.com/docs/9.x)
+* [Laravel](https://laravel.com/docs/9.x) ![alt text]([http://url/to/img.png](https://cdn4.iconfinder.com/data/icons/logos-and-brands/512/194_Laravel_logo_logos-64.png))
 * [Livewire](https://laravel-livewire.com/docs/2.x/quickstart)
 * [Tailwindui](https://tailwindui.com/documentation)
 * [Tailwindcss](https://tailwindcss.com/docs/utility-first)
