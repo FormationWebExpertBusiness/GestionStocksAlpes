@@ -5,7 +5,7 @@
             <div class="fixed inset-0 bg-gray-500 bg-opacity-50 transition-opacity"></div>
             <div class="fixed inset-0 z-10 overflow-y-auto">
                 <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
-                    <div class="relative transform overflow-hidden rounded-lg bg-white px-4 pt-5 pb-4 text-left shadow-xl transition-all sm:my-8 sm:w-full max-w-5xl sm:p-6">
+                    <div class="relative transform overflow-hidden rounded-lg bg-white px-4 pt-5 pb-4 text-left shadow-xl transition-all sm:my-8 sm:w-full max-w-5xl sm:p-6" @click.outside="$wire.isFormOpen = false">
                         <div>
                             <div class="md:grid md:grid-cols-3 md:gap-6">
                                 <div class="md:col-span-1">
@@ -72,7 +72,7 @@
                                                 </div>
 
                                                 {{-- quantity number field --}}
-                                                <div class="inline-block">
+                                                <div class="inline-block w-6/12">
                                                     <div class="flex justify-between">
                                                         <label for="quantity" class="block text-sm font-medium text-gray-700">Quantité</label>
                                                     </div>
@@ -83,7 +83,7 @@
                                                 </div>
 
                                                 {{-- unit text field --}}
-                                                <div class="inline-block">
+                                                <div class="inline-block w-5/12">
                                                     <div class="flex justify-between">
                                                         <label for="unit" class="block text-sm font-medium text-gray-700">Unité</label>
                                                         <span class="text-sm text-gray-500">Optionnel</span>
@@ -105,6 +105,40 @@
                                                     </div>
                                                 </div>
 
+                                                {{-- rack select field --}}
+                                                <div class="inline-block w-6/12">
+                                                    <div class="flex justify-between">
+                                                        <label for="rack" class="block text-sm font-medium text-gray-700">Etagère</label>
+                                                    </div>
+                                                    <select id="rack" name="rack" wire:model="rack_id" class="mt-1 block w-full rounded-md border-gray-300 py-2 pl-3 pr-10 text-base focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
+                                                        <option value="">---</option>
+                                                        @foreach($racks as $option)
+                                                            <option value="{{ $option->id }}">Etagère {{ $option->id }} - {{$option->nb_level}} niveau(x)</option>
+                                                        @endforeach
+                                                    </select>
+                                                    @error('rack_id') <span class="error text-red-600">{{ $message }}</span> @enderror
+                                                </div>
+
+                                                {{-- rack_level select field --}}
+                                                <div class="inline-block w-5/12">
+                                                    <div class="flex justify-between">
+                                                        <label for="rack_level" class="block text-sm font-medium text-gray-700">Niveau</label>
+                                                    </div>
+                                                    @if ($this->rack_id)
+                                                    <select id="rack_level" name="rack_level" wire:model="rack_level" class="mt-1 block w-full rounded-md border-gray-300 py-2 pl-3 pr-10 text-base focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
+                                                        <option value="">---</option>
+                                                            @for ($i = 1; $i <= $this->getSelectedRack()->nb_level; $i++)
+                                                                <option value="{{ $i }}">Niveau {{ $i }}</option>
+                                                            @endfor
+                                                        </select>
+                                                    @else
+                                                        <select id="rack_level" name="rack_level" wire:model="rack_level" class="mt-1 block w-full rounded-md border-gray-300 py-2 pl-3 pr-10 text-base focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm" disabled>
+                                                            <option value="" selected>---</option>
+                                                        </select>
+                                                    @endif
+                                                    @error('rack_level') <span class="error text-red-600">{{ $message }}</span> @enderror
+                                                </div>
+
                                                 {{-- comment textarea field --}}
                                                 <div>
                                                     <div class="flex justify-between">
@@ -113,7 +147,7 @@
                                                     </div>
                                                     <div class="mt-1 flex rounded-md shadow">
                                                         <textarea name="comment" id="comment" wire:model="comment"
-                                                            placeholder="Commentaire" rows="10"
+                                                            placeholder="Commentaire" rows="8"
                                                             class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
                                                         </textarea>
                                                     </div>
