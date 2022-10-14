@@ -91,6 +91,7 @@ class ViewAll extends Component
         $item = Item::findOrFail($itemId);
         $item->delete();
         return redirect()->with('status', 'Le produit '.$item->model.' a bien été supprimé !');
+
     }
 
     public function closeToast()

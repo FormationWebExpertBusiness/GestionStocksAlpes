@@ -23,10 +23,12 @@ return new class extends Migration
             $table->unsignedBigInteger('brand_id')->default(1);
             $table->string('model');
             $table->string('comment')->nullable();
+            $table->integer('rack_level');
             $table->timestamps();
 
             $table->foreign('category_id')->references('id')->on('categories')->onUpdate('restrict')->onDelete('cascade');
             $table->foreign('brand_id')->references('id')->on('brands')->onUpdate('restrict')->onDelete('cascade');
+            $table->foreignId('rack_id')->constrained('racks')->onUpdate('restrict')->onDelete('cascade');
 
             $table->unique(['model', 'brand_id']);
         });
