@@ -67,3 +67,4 @@ Change the DB_HOST line in your .env to "mysql"
 * [Livewire](https://laravel-livewire.com/docs/2.x/quickstart)
 * [Tailwindui](https://tailwindui.com/documentation)
 * [Tailwindcss](https://tailwindcss.com/docs/utility-first)
+* [Flowbite](https://flowbite.com/docs/getting-started/introduction)
