@@ -31,20 +31,20 @@ class ItemForm extends Component
     ];
 
     protected $messages = [
-        'category_id.integer' => 'l\'élément saisi est incorrect',
-        'brand_id.integer' => 'l\'élément saisi est incorrect',
+        'category_id.integer' => 'L\'élément saisi est incorrect',
+        'brand_id.integer' => 'L\'élément saisi est incorrect',
         'brand_id.unique' => 'Cette marque a déjà ce model dans le stock',
-        'model.unique' => 'ce model existe déjà dans la stock pour cette marque',
+        'model.unique' => 'Ce model existe déjà dans la stock pour cette marque',
         'model.required' => 'Le model ou la référence de l\'objet doit être rensigné.',
-        'quantity.numeric' => 'la quantité doit être un nombre',
-        'quantity.min' => 'la quantité doit être supérieur ou égale à 0',
-        'quantity.required' => 'la quantité en stock doit être ajouté.',
-        'price.required' => 'la valeur du stock doit être ajouté.',
-        'price.numeric' => 'le prix doit être un nombre',
-        'rack_id.integer' => 'l\'élément saisi est incorrect',
-        'rack_id.required' => 'L\'emplacement de stockage dois être saisi',
-        'rack_level.interger' => 'le niveau de l\'étagère dois être saisie',
-        'rack_level.required' => 'L\'emplacement de stockage dois être saisi'
+        'quantity.numeric' => 'La quantité doit être un nombre',
+        'quantity.min' => 'La quantité doit être supérieur ou égale à 0',
+        'quantity.required' => 'La quantité en stock doit être ajouté.',
+        'price.required' => 'La valeur du stock doit être ajouté.',
+        'price.numeric' => 'Le prix doit être un nombre',
+        'rack_id.integer' => 'L\'élément saisi est incorrect',
+        'rack_id.required' => 'L\'emplacement de stockage doit être saisi',
+        'rack_level.interger' => 'le niveau de l\'étagère doit être saisie',
+        'rack_level.required' => 'L\'emplacement de stockage doit être saisi'
     ];
 
     public function mount()
