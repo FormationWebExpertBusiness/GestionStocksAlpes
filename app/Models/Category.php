@@ -8,18 +8,18 @@ use Illuminate\Database\Eloquent\Model;
 class Category extends Model
 {
     use HasFactory;
+    public $timestamps = true;
 
     protected $table = 'categories';
     protected $primaryKey = 'id';
-    public $timestamps = true;
 
     protected $fillable = [
         'id',
-        'name'
+        'name',
     ];
 
     protected $with = [
-        'brands'
+        'brands',
     ];
 
     public function brands()

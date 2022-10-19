@@ -2,8 +2,8 @@
 
 namespace App\Http\Livewire;
 
-use Livewire\Component;
 use App\Models\Category;
+use Livewire\Component;
 
 class CategoryAddForm extends Component
 {
@@ -15,9 +15,9 @@ class CategoryAddForm extends Component
     ];
     protected $messages = [
         'name.alpha_dash' => 'Le nom de la catégorie ne doit contenir que des lettres, des chiffres',
-        'name.unique' => 'Le nom de la catégorie doit être unique'
+        'name.unique' => 'Le nom de la catégorie doit être unique',
     ];
-    
+
     public function updated($property)
     {
         $this->validateOnly($property);
@@ -29,15 +29,15 @@ class CategoryAddForm extends Component
         $this->validate();
         Category::create([
             'name' => $this->name,
-            ]);
+        ]);
         $this->toggleAddForm();
         return redirect('stock')->with('status', 'La categorie '.$nom.' a bien été ajouté !');
     }
 
     public function toggleAddForm()
     {
-        $this->show = !$this->show;
-        $this->name = "";
+        $this->show = ! $this->show;
+        $this->name = '';
     }
 
     public function render()

@@ -11,7 +11,7 @@ class DetailModalContent extends Component
     public function render()
     {
         return view('livewire.detail-modal-content', [
-            'item' => $this->item
+            'item' => $this->item,
         ]);
     }
 }

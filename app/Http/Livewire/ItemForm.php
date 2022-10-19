@@ -2,20 +2,30 @@
 
 namespace App\Http\Livewire;
 
-use Livewire\Component;
-use App\Models\Item;
 use App\Models\Brand;
 use App\Models\Category;
+use App\Models\Item;
 use App\Models\Rack;
+use Livewire\Component;
 
 class ItemForm extends Component
 {
-    public $categories, $brands, $racks;
+    public $categories;
+    public $brands;
+    public $racks;
 
     public $itemToUpdate = null;
-    
-    public $category_id, $brand_id, $model, $quantity, $unit, $price, $comment, $rack_id, $rack_level;
-    
+
+    public $category_id;
+    public $brand_id;
+    public $model;
+    public $quantity;
+    public $unit;
+    public $price;
+    public $comment;
+    public $rack_id;
+    public $rack_level;
+
     public $isFormOpen = false;
 
     protected $rules = [
@@ -27,7 +37,7 @@ class ItemForm extends Component
         'price' => ['required', 'numeric'],
         'comment' => ['nullable'],
         'rack_id' => ['required', 'integer'],
-        'rack_level' => ['required', 'integer', 'min:1']
+        'rack_level' => ['required', 'integer', 'min:1'],
     ];
 
     protected $messages = [
@@ -44,7 +54,7 @@ class ItemForm extends Component
         'rack_id.integer' => 'L\'élément saisi est incorrect',
         'rack_id.required' => 'L\'emplacement de stockage doit être saisi',
         'rack_level.interger' => 'le niveau de l\'étagère doit être saisie',
-        'rack_level.required' => 'L\'emplacement de stockage doit être saisi'
+        'rack_level.required' => 'L\'emplacement de stockage doit être saisi',
     ];
 
     public function mount()
@@ -71,14 +81,12 @@ class ItemForm extends Component
 
     public function updated($property)
     {
-        if (empty($this->itemToUpdate) || in_array($property, ['model', 'brand_id']))
-        {
+        if (empty($this->itemToUpdate) || in_array($property, ['model', 'brand_id'])) {
             $this->addDynamicRules();
         }
 
         $this->validateOnly($property);
-        if($property == 'brand_id' && isset($this->model))
-        {
+        if ($property === 'brand_id' && isset($this->model)) {
             $this->validateOnly('model');
         }
 
@@ -89,8 +97,7 @@ class ItemForm extends Component
 
     public function saveItem()
     {
-        if (empty($this->itemToUpdate) || ( $this->brand_id != $this->itemToUpdate->brand_id || $this->model != $this->itemToUpdate->model) )
-        {
+        if (empty($this->itemToUpdate) || ($this->brand_id !== $this->itemToUpdate->brand_id || $this->model !== $this->itemToUpdate->model)) {
             $this->addDynamicRules();
         }
         $validatedData = $this->validate();
@@ -102,11 +109,10 @@ class ItemForm extends Component
         }
 
         $this->closeForm();
-        if(isset($this->itemToUpdate)){
+        if (isset($this->itemToUpdate)) {
             return redirect('stock')->with('status', 'L\'objet '.$this->model.' a bien été modifié !');
-        }else{
-            return redirect('stock')->with('status', 'L\'objet '.$item->model.' a bien été créé !');
         }
+        return redirect('stock')->with('status', 'L\'objet '.$item->model.' a bien été créé !');
     }
 
     public function closeForm()
@@ -118,7 +124,7 @@ class ItemForm extends Component
 
     public function addDynamicRules()
     {
-        array_push($this->rules['model'],'unique:items,model,NULL,id,brand_id,'.$this->brand_id);//vérifie si le model n'existe pas déjà pour la marque sélectionner
+        array_push($this->rules['model'], 'unique:items,model,NULL,id,brand_id,'.$this->brand_id);//vérifie si le model n'existe pas déjà pour la marque sélectionner
     }
 
     public function getSelectedRack()

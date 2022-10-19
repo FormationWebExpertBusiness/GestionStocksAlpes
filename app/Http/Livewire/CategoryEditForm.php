@@ -2,8 +2,8 @@
 
 namespace App\Http\Livewire;
 
-use Livewire\Component;
 use App\Models\Category;
+use Livewire\Component;
 
 class CategoryEditForm extends Component
 {
@@ -18,9 +18,9 @@ class CategoryEditForm extends Component
     ];
     protected $messages = [
         'newName.alpha_dash' => 'Le nom de la catégorie ne doit contenir que des lettres, des chiffres',
-        'newName.unique' => 'Le nom de la catégorie doit être unique'
+        'newName.unique' => 'Le nom de la catégorie doit être unique',
     ];
-    
+
     public function updated($property)
     {
         $this->validateOnly($property);
@@ -28,8 +28,7 @@ class CategoryEditForm extends Component
 
     public function updateCategory()
     {
-        if($this->selectedCategory != null)
-        {
+        if ($this->selectedCategory !== null) {
             $this->validate();
             Category::where('name', $this->selectedCategory)->update(['name' => $this->newName]);
             $this->toggleEditForm();
@@ -39,7 +38,7 @@ class CategoryEditForm extends Component
 
     public function toggleEditForm()
     {
-        $this->show = !$this->show;
+        $this->show = ! $this->show;
     }
 
     public function render()

@@ -2,8 +2,8 @@
 
 namespace App\Http\Livewire;
 
-use Livewire\Component;
 use App\Models\Category;
+use Livewire\Component;
 
 class CategoryDeleteForm extends Component
 {
@@ -15,24 +15,23 @@ class CategoryDeleteForm extends Component
     public $warningDeleteCategorySignal = 'deleteCategory';
 
     protected $listeners = [
-        'deleteCategory' => 'deleteCategory'
+        'deleteCategory' => 'deleteCategory',
     ];
 
     public function toggleDropdown()
     {
-        $this->showDropdown = !$this->showDropdown;
+        $this->showDropdown = ! $this->showDropdown;
     }
 
     public function toggleDeleteForm()
     {
-        $this->show = !$this->show;
+        $this->show = ! $this->show;
     }
 
     public function openWarningDelete()
     {
         // dd($this->selectedCategory);
-        if($this->selectedCategory != null)
-        {
+        if ($this->selectedCategory !== null) {
             $category = Category::where('name', $this->selectedCategory);
             $this->emit('deleteWarning', $category->first()->id, $this->warningDeleteCategorySignal, 'Category', 'name');
         }
