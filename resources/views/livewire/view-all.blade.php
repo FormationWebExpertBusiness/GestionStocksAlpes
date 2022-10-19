@@ -124,16 +124,14 @@
                             <tbody class="bg-white block max-h-[62vh] overflow-y-scroll">
                                 @forelse ($items as $item)
                                     <div wire:key="item-{{ $item->id }}">
-                                        <tr
-                                            class="{{ $loop->index % 2 === 0 ? 'bg-white' : 'bg-gray-50' }} divide-x divide-gray-200 table w-full table-fixed">
+                                        <tr class="odd:bg-white even:bg-gray-50 divide-x divide-gray-200 table w-full table-fixed">
                                             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                                                 {{ $item->category->name }}</td>
                                             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                                                 {{ $item->brand->name }}</td>
                                             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                                                 {{ $item->model }}</td>
-                                            <td
-                                                class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-500 w-[14%]">
+                                            <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-500 w-[14%]">
                                                 <div class="inline-flex min-w-[75%]">
                                                     {{ $item->quantity }} {{ $item->unit }}
                                                 </div>
