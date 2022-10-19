@@ -64,14 +64,14 @@ npm run dev
  php artisan test
  ```
  
- ## To continuously update Phpinsights *only in linux*
+ ## To continuously update Phpinsights 🔁 (*only in linux*)
   ```bash
 watch -cbn 0.5 php artisan insights --summary
  ```
  
- ## Tests :test_tube:
+ ## Tests 👨‍🔬
  
- ### To run test :test_tube:
+ ### To run tests :test_tube:
  ```bash
  php artisan test
  ```
