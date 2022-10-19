@@ -12,5 +12,5 @@ jobs:
             - uses: shivammathur/setup-php@v2
               with:
                   php-version: 8.0
-            - run: composer install --prefer-dist --no-progress --no-suggest
+            - run: composer install --prefer-dist --no-progress --no-suggest –ignore-platform-reqs
             - run: vendor/bin/phpinsights -n --ansi --format=github-action
