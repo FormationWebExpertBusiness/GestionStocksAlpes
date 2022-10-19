@@ -13,8 +13,5 @@ jobs:
     - name: run composer dump-autoload
       run: composer dump-autoload
 
-    - name: Add app key
-      run: php artisan key:generate
-
     - name: run PEST Tests
       run: php artisan test
