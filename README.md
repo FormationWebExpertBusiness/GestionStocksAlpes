@@ -77,6 +77,7 @@ watch -cbn 0.5 php artisan insights --summary
  php artisan test
  ```
  <br>
+ 
 ## Errors :rage:
 
 > If database related cmd don't run 
