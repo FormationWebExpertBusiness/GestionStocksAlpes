@@ -61,7 +61,7 @@ npm run dev
  
  ## To run Phpinsights
   ```bash
- php artisan test
+ php artisan insights
  ```
  
  ## To continuously update Phpinsights 🔁 (*only in linux*)
