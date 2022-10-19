@@ -1,11 +1,13 @@
 <?php
 
 namespace App\Http\Livewire;
-use App\Models\Category;
+
 use App\Models\Brand;
-use Livewire\Component;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Livewire\Component;
+
 class Filtres extends Component
 {
     public $isVisibleCat = false;
@@ -19,8 +21,8 @@ class Filtres extends Component
     public $quantityMin;
     public $quantityMax;
 
-    public $catsFilter = array();
-    public $brandsFilter = array();
+    public $catsFilter = [];
+    public $brandsFilter = [];
 
     public $search;
 
@@ -43,10 +45,9 @@ class Filtres extends Component
             'priceMin' => 'nullable|integer|min:0',
             'priceMax' => 'nullable|integer|min:'.$this->priceMin,
             'quantityMin' => 'nullable|integer|min:0',
-            'quantityMax' => 'nullable|integer|min:'.$this->quantityMin
+            'quantityMax' => 'nullable|integer|min:'.$this->quantityMin,
         ];
-        if($propertyName == 'quantityMin' || $propertyName == 'quantityMax' || $propertyName == 'priceMin' || $propertyName == 'priceMax')
-        {
+        if ($propertyName === 'quantityMin' || $propertyName === 'quantityMax' || $propertyName === 'priceMin' || $propertyName === 'priceMax') {
             $propertyTrueName = $propertyName;
             $propertyName = Str::remove('Min', $propertyName);
             $propertyName = Str::remove('Max', $propertyName);
@@ -70,66 +71,67 @@ class Filtres extends Component
 
     public function toggleCatDropdown()
     {
-        $this->isVisibleCat = !$this->isVisibleCat;
-        if($this->isVisibleBrand == true) $this->isVisibleBrand = !$this->isVisibleBrand;
+        $this->isVisibleCat = ! $this->isVisibleCat;
+        if ($this->isVisibleBrand === true) {
+            $this->isVisibleBrand = ! $this->isVisibleBrand;
+        }
     }
 
     public function toggleBrandDropdown()
     {
-        $this->isVisibleBrand = !$this->isVisibleBrand;
-        if($this->isVisibleCat == true) $this->isVisibleCat = !$this->isVisibleCat;
+        $this->isVisibleBrand = ! $this->isVisibleBrand;
+        if ($this->isVisibleCat === true) {
+            $this->isVisibleCat = ! $this->isVisibleCat;
+        }
     }
 
     public function appendCat($cat)
     {
-        $this->emit("catFilter", $cat);
+        $this->emit('catFilter', $cat);
     }
 
     public function appendBrand($brand)
     {
-        $this->emit("brandFilter", $brand);
+        $this->emit('brandFilter', $brand);
     }
 
     public function resetFilters()
     {
-        $this->catsFilter = array();
-        $this->brandsFilter = array();
+        $this->catsFilter = [];
+        $this->brandsFilter = [];
         $this->priceMin = null;
         $this->priceMax = null;
         $this->quantityMin = null;
         $this->quantityMax = null;
 
-        $this->emit("resetFilters");
+        $this->emit('resetFilters');
     }
 
     public function resetSearchBar()
     {
-        $this->search = "";
-        $this->emit("resetSearchBar");
+        $this->search = '';
+        $this->emit('resetSearchBar');
     }
 
     public function getSearchInput()
     {
-        $this->emit("searchF", $this->search);
+        $this->emit('searchF', $this->search);
     }
 
     public function render(Request $request)
     {
-        if ($this->catsFilter)
-        {
+        if ($this->catsFilter) {
             $this->brands = collect();
             foreach ($this->catsFilter as $categoryKey => $categoryName) {
                 $cat = Category::find($categoryName);
                 $this->brands = $this->brands->merge($cat->brands)->unique('id');
             }
             $this->brands->sortBy('id');
-
-        }
-        else{
+        } else {
             $this->brands = Brand::all();
         }
         $this->categories = Category::all();
-        
+
         return view('livewire.filtres');
     }
 }

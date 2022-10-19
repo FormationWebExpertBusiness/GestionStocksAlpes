@@ -19,7 +19,7 @@ class WarningBeforeDelete extends Component
     public $name;
 
     protected $listeners = [
-        'deleteWarning' => 'openModal'
+        'deleteWarning' => 'openModal',
     ];
 
     // $this->emit('deleteWarning', $itemId, $this->warningDeleteItemSignal, 'Item', 'model');

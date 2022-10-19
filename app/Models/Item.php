@@ -8,12 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Item extends Model
 {
     use HasFactory;
+    public $timestamps = true;
 
     protected $table = 'items';
     protected $primaryKey = 'id';
-    public $timestamps = true;
-    
-    protected $fillable = 
+
+    protected $fillable =
     [
         'quantity',
         'price',
@@ -23,13 +23,13 @@ class Item extends Model
         'brand_id',
         'model',
         'comment',
-        'rack_level'
+        'rack_level',
     ];
 
     protected $with = [
         'brand',
         'category',
-        'rack'
+        'rack',
     ];
 
     public function brand()

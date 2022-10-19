@@ -7,17 +7,19 @@ use Livewire\Component;
 
 class Login extends Component
 {
-    public $username, $password, $password_confirmation;
+    public $username;
+    public $password;
+    public $password_confirmation;
 
     protected $rules = [
         'username' => ['required', 'alpha'],
-        'password' => ['required']
+        'password' => ['required'],
     ];
 
     protected $messages = [
         'username.required' => 'l\'utilisateur doit être renseigné',
         'username.alpha' => 'l\'utilisateur ne contient que des lettres',
-        'password.required' => 'le mot de passe doit être renseigné'
+        'password.required' => 'le mot de passe doit être renseigné',
     ];
 
     public function render()
@@ -31,9 +33,8 @@ class Login extends Component
 
         if (Auth::attempt($credentials)) {
             return redirect('/stock');
-        }else{
-            $this->adderror('password', 'Le mot de passe est incorrect pour cet utilisateur');
-            $this->password = '';
         }
+        $this->adderror('password', 'Le mot de passe est incorrect pour cet utilisateur');
+        $this->password = '';
     }
 }

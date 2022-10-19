@@ -2,10 +2,10 @@
 
 namespace App\Http\Livewire;
 
-use Livewire\Component;
-use App\Models\Item;
-use App\Models\Category;
 use App\Models\Brand;
+use App\Models\Category;
+use App\Models\Item;
+use Livewire\Component;
 
 class ViewAll extends Component
 {
@@ -17,12 +17,12 @@ class ViewAll extends Component
     public $quantityMin;
     public $quantityMax;
 
-    public $searchValue = "";
+    public $searchValue = '';
 
     public $warningDeleteItemSignal = 'deleteItem';
 
-    public $categoriesF = array();
-    public $brandsF = array();
+    public $categoriesF = [];
+    public $brandsF = [];
 
     public $showToast = true;
 
@@ -30,7 +30,7 @@ class ViewAll extends Component
         'champ' => ['except' => 'id', 'as' => 'cha'],
         'mode' => ['as' => 'mod'],
         'categoriesF' => ['as' => 'cat'],
-        'brandsF' => ['as' => 'bra']
+        'brandsF' => ['as' => 'bra'],
     ];
 
     protected $listeners = [
@@ -44,7 +44,7 @@ class ViewAll extends Component
         'priceMax' => 'getPriceMax',
         'quantityMin' => 'getQuantityMin',
         'quantityMax' => 'getQuantityMax',
-        'deleteItem' => 'deleteItem'
+        'deleteItem' => 'deleteItem',
     ];
 
     protected $nbCol = 5; //le nombre de colonne sans compter les icones
@@ -57,8 +57,8 @@ class ViewAll extends Component
         $this->quantityMin = Item::min('quantity') ?? 0;
         $this->quantityMax = Item::max('quantity') ?? 0;
 
-        $this->categoriesF = array();
-        $this->brandsF = array();
+        $this->categoriesF = [];
+        $this->brandsF = [];
     }
 
     public function getPriceMin($priceMin)
@@ -91,7 +91,6 @@ class ViewAll extends Component
         $item = Item::findOrFail($itemId);
         $item->delete();
         return redirect()->with('status', 'Le produit '.$item->model.' a bien été supprimé !');
-
     }
 
     public function closeToast()
@@ -101,36 +100,34 @@ class ViewAll extends Component
 
     public function resetValueSearchBar()
     {
-        $this->searchValue = "";
+        $this->searchValue = '';
     }
 
     public function updateCatF($cat)
     {
-        if(in_array($cat, $this->categoriesF))
-        {
+        if (in_array($cat, $this->categoriesF)) {
             unset($this->categoriesF[array_search($cat, $this->categoriesF)]);
-        }else{
+        } else {
             array_push($this->categoriesF, $cat);
         }
 
-        $this->emit("catsFilter", $this->categoriesF);
+        $this->emit('catsFilter', $this->categoriesF);
     }
 
     public function updateBrandF($brand)
     {
-        if(in_array($brand, $this->brandsF))
-        {
+        if (in_array($brand, $this->brandsF)) {
             unset($this->brandsF[array_search($brand, $this->brandsF)]);
-        }else{
+        } else {
             array_push($this->brandsF, $brand);
         }
 
-        $this->emit("brandsFilter", $this->brandsF);
+        $this->emit('brandsFilter', $this->brandsF);
     }
 
     public function toggleMode()
     {
-        if ($this->mode == 'asc') {
+        if ($this->mode === 'asc') {
             $this->mode = 'desc';
         } else {
             $this->mode = 'asc';
@@ -145,8 +142,8 @@ class ViewAll extends Component
 
     public function resetAllFilters()
     {
-        $this->categoriesF = array();
-        $this->brandsF = array();
+        $this->categoriesF = [];
+        $this->brandsF = [];
 
         $this->priceMin = Item::min('price') ?? 0;
         $this->priceMax = Item::max('price') ?? 0;
@@ -159,45 +156,42 @@ class ViewAll extends Component
     {
         $this->searchValue = $searchV;
     }
-    
+
     public function render()
     {
         $items = Item::where('items.id', '>', 0)
-        ->join('brands as brand', 'brand.id', '=', 'items.brand_id')
-        ->join('categories as category', 'category.id', '=', 'items.category_id')
-        ->join('items as ite', 'ite.id', '=', 'items.id') // I joined items on items because else eloquent erase the items id to replace it with the last joined table id 
-        ->where('items.model','LIKE','%'.$this->searchValue.'%')
-        ->orWhere('items.comment','LIKE','%'.$this->searchValue.'%')
-        ->orWhere('category.name','LIKE','%'.$this->searchValue.'%')
-        ->orWhere('brand.name','LIKE','%'.$this->searchValue.'%')
-        ->where([
-            ['items.price', '<=', $this->priceMax],
-            ['items.price', '>=', $this->priceMin],
-            ['items.quantity', '<=', $this->quantityMax],
-            ['items.quantity', '>=', $this->quantityMin]
-        ])
-        ->orderBy(($this->champ == 'category' || $this->champ == 'brand') ? $this->champ.'.name' : 'items.'.$this->champ, $this->mode) // if champ is category or brand order on champ.name instead of champ
-        ->get()
-        ->filter(function ($value) {
-            $catF = empty($this->categoriesF) ? Category::where('id' ,'>' ,0)->pluck('id')->toArray() : $this->categoriesF;
-            $brandF = empty($this->brandsF) ? Brand::where('id' ,'>' ,0)->pluck('id')->toArray() : $this->brandsF;
+            ->join('brands as brand', 'brand.id', '=', 'items.brand_id')
+            ->join('categories as category', 'category.id', '=', 'items.category_id')
+            ->join('items as ite', 'ite.id', '=', 'items.id') // I joined items on items because else eloquent erase the items id to replace it with the last joined table id
+            ->where('items.model', 'LIKE', '%'.$this->searchValue.'%')
+            ->orWhere('items.comment', 'LIKE', '%'.$this->searchValue.'%')
+            ->orWhere('category.name', 'LIKE', '%'.$this->searchValue.'%')
+            ->orWhere('brand.name', 'LIKE', '%'.$this->searchValue.'%')
+            ->where([
+                ['items.price', '<=', $this->priceMax],
+                ['items.price', '>=', $this->priceMin],
+                ['items.quantity', '<=', $this->quantityMax],
+                ['items.quantity', '>=', $this->quantityMin],
+            ])
+            ->orderBy($this->champ === 'category' || $this->champ === 'brand' ? $this->champ.'.name' : 'items.'.$this->champ, $this->mode) // if champ is category or brand order on champ.name instead of champ
+            ->get()
+            ->filter(function ($value) {
+                $catF = empty($this->categoriesF) ? Category::where('id', '>', 0)->pluck('id')->toArray() : $this->categoriesF;
+                $brandF = empty($this->brandsF) ? Brand::where('id', '>', 0)->pluck('id')->toArray() : $this->brandsF;
 
-            if(in_array($value->category->id, $catF) && in_array($value->brand->id, $brandF))
-            {
-                if($value->price >= $this->priceMin && $value->price <= $this->priceMax)
-                {
-                    if($value->quantity >= $this->quantityMin && $value->quantity <= $this->quantityMax)
-                    {
-                        return $value;
+                if (in_array($value->category->id, $catF) && in_array($value->brand->id, $brandF)) {
+                    if ($value->price >= $this->priceMin && $value->price <= $this->priceMax) {
+                        if ($value->quantity >= $this->quantityMin && $value->quantity <= $this->quantityMax) {
+                            return $value;
+                        }
                     }
                 }
-            }
-        });
+            });
 
         $this->showToast = true;
 
         return view('livewire.view-all', [
-            'items' => $items
+            'items' => $items,
         ]);
     }
 

@@ -5,15 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-use App\Models\Item;
-
 class Rack extends Model
 {
     use HasFactory;
+    public $timestamps = true;
 
     protected $table = 'racks';
     protected $primaryKey = 'id';
-    public $timestamps = true;
 
     protected $fillable = [
         'id',
@@ -21,7 +19,7 @@ class Rack extends Model
     ];
 
     protected $with = [
-        
+
     ];
 
     protected $appends = [
@@ -37,5 +35,4 @@ class Rack extends Model
     {
         return Item::where('rack_id', $this->id);
     }
-
 }
