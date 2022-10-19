@@ -10,12 +10,18 @@ use App\Models\Rack;
 
 class ItemForm extends Component
 {
+    //use in dropdown
     public $categories, $brands, $racks;
 
+    //props
     public $itemToUpdate = null;
+    public $selectedCategoryFilter = array();
+    public $selectedBrandFilter = array();
     
+    //model in form
     public $category_id, $brand_id, $model, $quantity, $unit, $price, $comment, $rack_id, $rack_level;
     
+    //misc
     public $isFormOpen = false;
 
     protected $rules = [
@@ -28,6 +34,12 @@ class ItemForm extends Component
         'comment' => ['nullable'],
         'rack_id' => ['required', 'integer'],
         'rack_level' => ['required', 'integer', 'min:1']
+    ];
+
+    protected $listeners = [
+        'catsFilter' => 'updateCatF',
+        'brandsFilter' => 'updateBrandF',
+        'resetFilters' => 'resetAllFilters'
     ];
 
     protected $messages = [
@@ -66,6 +78,8 @@ class ItemForm extends Component
 
     public function render()
     {
+        //bloque l'édition
+
         return view('livewire.item-form');
     }
 
@@ -124,5 +138,48 @@ class ItemForm extends Component
     public function getSelectedRack()
     {
         return Rack::find($this->rack_id);
+    }
+
+    public function updateCatF($categories)
+    {
+        $this->selectedCategoryFilter = $categories;
+        if(empty($itemToUpdate))
+        {
+            if (count($this->selectedCategoryFilter) == 1) 
+            {
+                $this->category_id = array_values($this->selectedCategoryFilter)[0];
+            } 
+            else 
+            {
+                $this->category_id = $this->itemToUpdate?->category_id ?? 1;
+            }
+        }
+    }
+    public function updateBrandF($brands)
+    {
+        $this->selectedBrandFilter = $brands;
+        if(empty($itemToUpdate))
+        {
+            if (count($this->selectedBrandFilter) == 1) 
+            {
+                $this->brand_id = array_values($this->selectedBrandFilter)[0];
+            } 
+            else 
+            {
+                $this->brand_id = $this->itemToUpdate?->category_id ?? 1;
+            }
+        }
+    }
+    public function resetAllFilters()
+    {
+        $this->selectedCategoryFilter = array();
+        $this->selectedBrandFilter = array();
+
+        if(empty($itemToUpdate))
+        {
+            $this->category_id = $this->itemToUpdate?->category_id ?? 1;
+
+            $this->brand_id = $this->itemToUpdate?->brand_id ?? 1;
+        }
     }
 }
