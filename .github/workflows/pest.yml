@@ -12,7 +12,7 @@ jobs:
       run: composer install
 
     - name: Add app key
-      run: laravel add encrption key
+      run: php artisan key:generate
 
     - name: run PEST Tests
       run: php artisan test
