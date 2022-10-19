@@ -1,16 +1,17 @@
-#.github/workflows/pr.yml
-name: CI
-on:
-    - pull_request
+name: PHP Insights
+
+on: push
 
 jobs:
-    phpinsights:
-        runs-on: ubuntu-latest
-        name: PHP Insights checks
-        steps:
-            - uses: actions/checkout@v2
-            - uses: shivammathur/setup-php@v2
-              with:
-                  php-version: 8.0
-            - run: composer install --prefer-dist --no-progress --no-suggest --ignore-platform-req=php+
-            - run: vendor/bin/phpinsights -n --ansi --format=github-action
+  phpinsights:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+
+    - uses: MilesChou/composer-action@master
+      with:
+        args: install -q --no-ansi --no-interaction --no-scripts --no-suggest --no-progress --prefer-dist
+
+    - uses: stefanzweifel/laravel-phpinsights-action@v1.1.1
+      with:
+        args: -v --min-quality=80 --min-complexity=80 --min-architecture=75 --min-style=80 --disable-security-check
