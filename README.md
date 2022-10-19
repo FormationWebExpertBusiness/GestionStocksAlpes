@@ -69,7 +69,7 @@ npm run dev
 watch -cbn 0.5 php artisan insights --summary
  ```
  
- ## Tests 👨‍🔬
+ ## Tests ⚗️
  
  ### To run tests :test_tube:
  ```bash
