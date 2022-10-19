@@ -70,8 +70,9 @@ return [
 
     'add' => [
         Classes::class => [
+       
             ForbiddenFinalClasses::class,
-        ],
+    ],
     ],
 
     'remove' => [
@@ -88,6 +89,12 @@ return [
     ],
 
     'config' => [
+        \PhpCsFixer\Fixer\LanguageConstruct\DeclareEqualNormalizeFixer::class => [
+            'space' => 'single', // possible values ['none', 'single']
+        ],
+    \PhpCsFixer\Fixer\Basic\BracesFixer::class => [
+            'allow_single_line_closure' => true,   
+    ],  
         ForbiddenPrivateMethods::class => [
             'title' => 'The usage of private methods is not idiomatic in Laravel.',
         ],
