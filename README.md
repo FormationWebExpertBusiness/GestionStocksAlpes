@@ -59,12 +59,12 @@ npm run dev
  
  ## Code Sniffer 👃
  
- ## To run Phpinsights
+ ## To run PhpInsights
   ```bash
  php artisan insights
  ```
  
- ## To continuously update Phpinsights 🔁 (*only in linux*)
+ ## To continuously update PhpInsights 🔁 (*only in linux*)
   ```bash
 watch -cbn 0.5 php artisan insights --summary
  ```
@@ -86,8 +86,10 @@ Change the DB_HOST line in your .env to "mysql"
 <br />
 
 ## Documentation 📚
-* [Laravel](https://laravel.com/docs/9.x) ![alt text](https://cdn4.iconfinder.com/data/icons/logos-and-brands/512/194_Laravel_logo_logos-64.png))
+* [Laravel](https://laravel.com/docs/9.x)
 * [Livewire](https://laravel-livewire.com/docs/2.x/quickstart)
 * [Tailwindui](https://tailwindui.com/documentation)
 * [Tailwindcss](https://tailwindcss.com/docs/utility-first)
 * [Flowbite](https://flowbite.com/docs/getting-started/introduction)
+* [PhpInsights](https://phpinsights.com/get-started.html#within-laravel)
+* [Pest](https://pestphp.com/docs/installation)
