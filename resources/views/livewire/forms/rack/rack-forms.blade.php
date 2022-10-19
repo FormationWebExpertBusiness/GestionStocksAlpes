@@ -26,9 +26,9 @@
             <div class="absolute right-0 z-10 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
                 role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1" @click.outside="$wire.showDropdown = false">
                 <div class="py-1" role="none">
-                    @livewire('rack.rack-add-form')
-                    @livewire('rack.rack-edit-form')
-                    @livewire('rack.rack-delete-form')
+                    @livewire('forms.rack.rack-add-form')
+                    @livewire('forms.rack.rack-edit-form')
+                    @livewire('forms.rack.rack-delete-form')
                 </div>
             </div>
         @endif

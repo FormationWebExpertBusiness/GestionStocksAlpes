@@ -26,9 +26,9 @@
             <div class="absolute right-0 z-10 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
                 role="menu" aria-orientation="vertical" @click.outside="$wire.showDropdown = false" aria-labelledby="menu-button" tabindex="-1">
                 <div class="py-1" role="none">
-                    @livewire('category-add-form')
-                    @livewire('category-edit-form')
-                    @livewire('category-delete-form')
+                    @livewire('forms.category.category-add-form')
+                    @livewire('forms.category.category-edit-form')
+                    @livewire('forms.category.category-delete-form')
                 </div>
             </div>
         @endif
