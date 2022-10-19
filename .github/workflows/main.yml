@@ -10,7 +10,7 @@ jobs:
 
     - uses: MilesChou/composer-action@master
       with:
-        args: install -q --no-ansi --no-interaction --no-scripts --no-suggest --no-progress --prefer-dist
+        args: install -q --no-ansi --no-interaction --no-scripts --no-suggest --no-progress --prefer-dist --ignore-platform-req
 
     - uses: stefanzweifel/laravel-phpinsights-action@v1.1.1
       with:
