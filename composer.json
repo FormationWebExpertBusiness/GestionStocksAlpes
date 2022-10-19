@@ -3,7 +3,6 @@
     "type": "project",
     "description": "The Laravel Framework.",
     "keywords": ["framework", "laravel"],
-    "platform-check": false,
     "license": "MIT",
     "require": {
         "php": "^8.0.2",
@@ -58,6 +57,7 @@
     "config": {
         "optimize-autoloader": true,
         "preferred-install": "dist",
+        "platform-check": false,
         "sort-packages": true,
         "allow-plugins": {
             "pestphp/pest-plugin": true,
