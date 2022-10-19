@@ -11,6 +11,8 @@ jobs:
     - name: run composer install
       run: composer install
 
+    - name: Add app key
+      run: laravel add encrption key
 
     - name: run PEST Tests
       run: php artisan test
