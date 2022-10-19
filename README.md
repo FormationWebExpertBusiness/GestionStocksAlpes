@@ -7,11 +7,14 @@
 ## Configuration ⚙️
 
 ```
- MYSQL    8.0.30
- PHP      8.0.2 
- LARAVEL  9.36.2
- LIVEWIRE 2.10 
- TAILWIND 3.1.8
+ MYSQL       8.0.30
+ PHP         8.0.2 
+ LARAVEL     9.36.2
+ LIVEWIRE    2.10 
+ TAILWIND    3.1.8
+ PHPINSIGHTS 2.6.0
+ PEST        1.22.1
+ PHPUNIT     9.5.25
  ```
  <br />
         
@@ -53,6 +56,25 @@ npm run dev
   
 ### Access the project on your localhost 🌐
  <br />
+ 
+ ## Code Sniffer 👃
+ 
+ ## To run Phpinsights
+  ```bash
+ php artisan test
+ ```
+ 
+ ## To continuously update Phpinsights *only in linux*
+  ```bash
+watch -cbn 0.5 php artisan insights --summary
+ ```
+ 
+ ## Tests :test_tube:
+ 
+ ### To run test :test_tube:
+ ```bash
+ php artisan test
+ ```
   
 ## Errors :rage:
 
