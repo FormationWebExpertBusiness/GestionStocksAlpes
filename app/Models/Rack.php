@@ -16,12 +16,22 @@ class Rack extends Model
     public $timestamps = true;
 
     protected $fillable = [
-        'id'
+        'id',
+        'nb_level'
     ];
 
     protected $with = [
         
     ];
+
+    protected $appends = [
+        'name'
+    ];
+
+    public function getNameAttribute()
+    {
+        return 'étagère ' . $this->id;
+    }
 
     public function ItemsOn()
     {
