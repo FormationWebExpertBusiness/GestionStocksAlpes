@@ -11,9 +11,10 @@ class CategoryAddForm extends Component
     public $show = false;
 
     protected $rules = [
-        'name' => ['alpha_dash', 'unique:App\Models\Category,name'],
+        'name' => ['required', 'alpha_dash', 'unique:App\Models\Category,name'],
     ];
     protected $messages = [
+        'name.required' => 'le nom dois être renseigné',
         'name.alpha_dash' => 'Le nom de la catégorie ne doit contenir que des lettres, des chiffres',
         'name.unique' => 'Le nom de la catégorie doit être unique',
     ];

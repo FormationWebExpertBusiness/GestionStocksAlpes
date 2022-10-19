@@ -65,6 +65,12 @@
                 <p class="mt-2 text-sm text-gray-700">Liste de tout les produits du stock</p>
             </div>
             <div class="mt-4 sm:mt-0 sm:ml-10 sm:flex-none">
+                @livewire('rack.rack-forms')
+            </div>
+            {{-- <div class="mt-4 sm:mt-0 sm:ml-10 sm:flex-none">
+                @livewire('brand-form')
+            </div> --}}
+            <div class="mt-4 sm:mt-0 sm:ml-10 sm:flex-none">
                 @livewire('category-form')
             </div>
 

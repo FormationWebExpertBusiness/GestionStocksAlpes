@@ -36,7 +36,7 @@
                                             <label for="password" class="block text-sm font-medium text-gray-700">Mot de passe</label>
                                         </div>
                                         <div class="mt-1">
-                                            <input type="text" name="password" id="password" wire:model="password" placeholder="Mot de passe" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                                            <input type="password" name="password" id="password" wire:model="password" placeholder="Mot de passe" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
                                             @error('password') <span class="error text-red-600">{{ $message }}</span> @enderror
                                         </div>
                                     </div>
