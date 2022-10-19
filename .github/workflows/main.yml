@@ -9,7 +9,7 @@ jobs:
     - uses: actions/checkout@v1
     
     - name: run composer install
-      run: composer install --no-ansi --no-interaction --no-scripts --no-suggest --no-progress --ignore-platform-reqs
+      run: composer install
 
     - uses: stefanzweifel/laravel-phpinsights-action@v1.1.1
       with:
