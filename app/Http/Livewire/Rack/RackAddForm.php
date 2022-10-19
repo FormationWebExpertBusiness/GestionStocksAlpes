@@ -2,8 +2,8 @@
 
 namespace App\Http\Livewire\Rack;
 
-use Livewire\Component;
 use App\Models\Rack;
+use Livewire\Component;
 
 class RackAddForm extends Component
 {
@@ -15,7 +15,7 @@ class RackAddForm extends Component
     ];
     protected $messages = [
         'nb_level.required' => 'Le nombre d\'étage dois être renseigné',
-        'nb_level.min' => 'Il doit y avoir au moins un étage'
+        'nb_level.min' => 'Il doit y avoir au moins un étage',
     ];
 
     public function mount()
@@ -38,7 +38,7 @@ class RackAddForm extends Component
 
     public function toggleAddForm()
     {
-        $this->show = !$this->show;
+        $this->show = ! $this->show;
     }
 
     public function render()

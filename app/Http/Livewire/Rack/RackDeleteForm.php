@@ -2,8 +2,8 @@
 
 namespace App\Http\Livewire\Rack;
 
-use Livewire\Component;
 use App\Models\Rack;
+use Livewire\Component;
 
 class RackDeleteForm extends Component
 {
@@ -15,15 +15,15 @@ class RackDeleteForm extends Component
     public $warningDeleteRackSignal = 'deleteRack';
 
     protected $listeners = [
-        'deleteRack' => 'deleteRack'
+        'deleteRack' => 'deleteRack',
     ];
 
     protected $rules = [
-        'selectedRack' => ['required']
+        'selectedRack' => ['required'],
     ];
 
     protected $messages = [
-        'selectedRack.required' => 'L\'étagère à supprimer dois être selectionnée'
+        'selectedRack.required' => 'L\'étagère à supprimer dois être selectionnée',
     ];
 
     public function mount()
@@ -38,12 +38,12 @@ class RackDeleteForm extends Component
 
     public function toggleDropdown()
     {
-        $this->showDropdown = !$this->showDropdown;
+        $this->showDropdown = ! $this->showDropdown;
     }
 
     public function toggleDeleteForm()
     {
-        $this->show = !$this->show;
+        $this->show = ! $this->show;
     }
 
     public function openWarningDelete()
