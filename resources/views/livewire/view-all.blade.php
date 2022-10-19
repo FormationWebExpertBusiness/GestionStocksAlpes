@@ -12,7 +12,7 @@
                         </svg>
                     </div>
                     <div class="ml-3">
-                        <p class="text-sm font-medium text-green-800">{{ session('status') }}</p>
+                        <p class="text-sm font-medium text-green-800">{{session('status')}}</p>
                     </div>
                     <div class="ml-auto pl-3">
                         <div class="-mx-1.5 -my-1.5">
@@ -21,15 +21,15 @@
                                 <span class="sr-only">Dismiss</span>
                                 <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
                                     fill="currentColor" aria-hidden="true">
-                                    <path
-                                        d="M6.28 5.22a.75.75 0 00-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 101.06 1.06L10 11.06l3.72 3.72a.75.75 0 101.06-1.06L11.06 10l3.72-3.72a.75.75 0 00-1.06-1.06L10 8.94 6.28 5.22z" />
+                                    <path d="M6.28 5.22a.75.75 0 00-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 101.06 1.06L10 11.06l3.72 3.72a.75.75 0 101.06-1.06L11.06 10l3.72-3.72a.75.75 0 00-1.06-1.06L10 8.94 6.28 5.22z" />
                                 </svg>
                             </button>
                         </div>
                     </div>
                 </div>
                 <div id="progress_bg" class="w-full mt-2 mb-0 bg-gray-200 rounded-full h-1.5 dark:bg-gray-700">
-                    <div id="progress_bar" class="bg-green-400 h-1.5 rounded-full" style="width: 1%"></div>
+                    <div id="progress_bar" class="bg-green-400 h-1.5 rounded-full" style="width: 1%">
+                    </div>
                 </div>
             </div>
             <script>
@@ -53,7 +53,7 @@
                     document.querySelector('#btn-close-toast').click();
                 }, 3000);
             </script>
-        @endif
+        @endif  
     @endif
     <div class="px-4 sm:px-6 lg:px-8">
         <div class="sm:flex sm:items-center">
