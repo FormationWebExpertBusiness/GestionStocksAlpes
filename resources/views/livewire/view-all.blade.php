@@ -29,7 +29,8 @@
                     </div>
                 </div>
                 <div id="progress_bg" class="w-full mt-2 mb-0 bg-gray-200 rounded-full h-1.5 dark:bg-gray-700">
-                    <div id="progress_bar" class="bg-green-400 h-1.5 rounded-full" style="width: 1%"></div>
+                    <div id="progress_bar" class="bg-green-400 h-1.5 rounded-full" style="width: 1%">
+                    </div>
                 </div>
             </div>
             <script>
