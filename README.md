@@ -9,7 +9,7 @@
 ```
  MYSQL    8.0.30
  PHP      8.0.2 
- LARAVEL  6
+ LARAVEL  9.36.2
  LIVEWIRE 2.10 
  TAILWIND 3.1.8
  ```
