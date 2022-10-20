@@ -15,7 +15,7 @@ class Rack extends Model
 
     protected $fillable = [
         'id',
-        'nb_level'
+        'nb_level',
     ];
 
     protected $with = [
@@ -23,7 +23,7 @@ class Rack extends Model
     ];
 
     protected $appends = [
-        'name'
+        'name',
     ];
 
     public function getNameAttribute()

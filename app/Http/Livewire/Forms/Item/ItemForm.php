@@ -26,9 +26,9 @@ class ItemForm extends Component
     public $rack_id;
     public $rack_level;
 
-    public $selectedCategoryFilter = array();
-    public $selectedBrandFilter = array();
-    
+    public $selectedCategoryFilter = [];
+    public $selectedBrandFilter = [];
+
     public $isFormOpen = false;
 
     protected $rules = [
@@ -46,7 +46,7 @@ class ItemForm extends Component
     protected $listeners = [
         'catsFilter' => 'updateCatF',
         'brandsFilter' => 'updateBrandF',
-        'resetFilters' => 'resetAllFilters'
+        'resetFilters' => 'resetAllFilters',
     ];
 
     protected $messages = [
@@ -144,14 +144,10 @@ class ItemForm extends Component
     public function updateCatF($categories)
     {
         $this->selectedCategoryFilter = $categories;
-        if(empty($itemToUpdate))
-        {
-            if (count($this->selectedCategoryFilter) == 1) 
-            {
+        if (empty($itemToUpdate)) {
+            if (count($this->selectedCategoryFilter) === 1) {
                 $this->category_id = array_values($this->selectedCategoryFilter)[0];
-            } 
-            else 
-            {
+            } else {
                 $this->category_id = $this->itemToUpdate?->category_id ?? 1;
             }
         }
@@ -159,25 +155,20 @@ class ItemForm extends Component
     public function updateBrandF($brands)
     {
         $this->selectedBrandFilter = $brands;
-        if(empty($itemToUpdate))
-        {
-            if (count($this->selectedBrandFilter) == 1) 
-            {
+        if (empty($itemToUpdate)) {
+            if (count($this->selectedBrandFilter) === 1) {
                 $this->brand_id = array_values($this->selectedBrandFilter)[0];
-            } 
-            else 
-            {
+            } else {
                 $this->brand_id = $this->itemToUpdate?->category_id ?? 1;
             }
         }
     }
     public function resetAllFilters()
     {
-        $this->selectedCategoryFilter = array();
-        $this->selectedBrandFilter = array();
+        $this->selectedCategoryFilter = [];
+        $this->selectedBrandFilter = [];
 
-        if(empty($itemToUpdate))
-        {
+        if (empty($itemToUpdate)) {
             $this->category_id = $this->itemToUpdate?->category_id ?? 1;
 
             $this->brand_id = $this->itemToUpdate?->brand_id ?? 1;

@@ -2,8 +2,8 @@
 
 namespace App\Http\Livewire\Forms\Rack;
 
-use Livewire\Component;
 use App\Models\Rack;
+use Livewire\Component;
 
 class RackEditForm extends Component
 {
@@ -20,7 +20,7 @@ class RackEditForm extends Component
     protected $messages = [
         'selectedRack.required' => 'l\'étagère à modifier doit être selectionnée',
         'nb_level.required' => 'Le nombre d\'étage dois être renseigné',
-        'nb_level.min' => 'Il doit y avoir au moins un étage'
+        'nb_level.min' => 'Il doit y avoir au moins un étage',
     ];
 
     public function mount()
@@ -45,7 +45,7 @@ class RackEditForm extends Component
 
     public function toggleEditForm()
     {
-        $this->show = !$this->show;
+        $this->show = ! $this->show;
     }
 
     public function render()
