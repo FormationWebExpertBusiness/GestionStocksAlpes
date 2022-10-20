@@ -25,10 +25,10 @@ In ssh
 ```bash
 git clone git@github.com:FormationWebExpertBusiness/GestionStocksAlpes.git
 ```
-In http
+In https
 ```bash
-git clone
-
+git clone https://github.com/FormationWebExpertBusiness/GestionStocksAlpes.git
+```
 
 ### Go the project folder 📂
 ```bash
