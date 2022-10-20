@@ -36,7 +36,7 @@ cd gestionStockAlpes
 ```
 ### Create a .env file :page_facing_up:
 ```sh
-cp .env.exemple .env
+cp .env.example .env
 ```
 ### Build images 🐳
 ```bash
