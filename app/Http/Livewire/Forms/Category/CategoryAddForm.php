@@ -14,7 +14,7 @@ class CategoryAddForm extends Component
         'name' => ['required', 'alpha_dash', 'unique:App\Models\Category,name'],
     ];
     protected $messages = [
-        'name.required' => 'le nom dois être renseigné',
+        'name.required' => 'Le nom dois être renseigné',
         'name.alpha_dash' => 'Le nom de la catégorie ne doit contenir que des lettres, des chiffres',
         'name.unique' => 'Le nom de la catégorie doit être unique',
     ];

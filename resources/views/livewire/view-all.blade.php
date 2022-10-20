@@ -27,7 +27,7 @@
                         </div>
                     </div>
                 </div>
-                <div id="progress_bg" class="w-full mt-2 mb-0 bg-gray-200 rounded-full h-1.5 dark:bg-gray-700">
+                <div id="progress_bg" class="w-full mt-2  bg-gray-200 rounded-full h-1.5 dark:bg-gray-700">
                     <div id="progress_bar" class="bg-green-400 h-1.5 rounded-full" style="width: 1%">
                     </div>
                 </div>
@@ -88,7 +88,7 @@
                                 <tr class="table w-full table-fixed">
                                     <th wire:click="reOrder('category')" scope="col"
                                         class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-                                        Categorie
+                                        Catégorie
                                         <x-ordering-arrows champ='category' champF={{$champ}}
                                             modeF={{$mode}}></x-ordering-arrows>
                                     </th>
@@ -100,7 +100,7 @@
                                     </th>
                                     <th wire:click="reOrder('model')" scope="col"
                                         class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-                                        Modele
+                                        Modèle
                                         <x-ordering-arrows champ='model' champF={{$champ}}
                                             modeF={{$mode}}></x-ordering-arrows>
                                     </th>
@@ -173,7 +173,7 @@
                                         <h3 class="mt-2 text-sm font-medium text-gray-900">Aucun produit</h3>
                                         <p class="mt-1 text-sm text-gray-500">Vous pouvez en ajouter un nouveau</p>
                                         <div class="mt-3">
-                                            @livewire('common-item-form')
+                                            @livewire('forms.common-item.common-item-form')
                                         </div>
                                       </div>
                                     </td>

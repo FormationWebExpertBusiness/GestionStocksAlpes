@@ -2,8 +2,8 @@
 
 namespace App\Http\Livewire\Forms\Rack;
 
-use Livewire\Component;
 use App\Models\Rack;
+use Livewire\Component;
 
 class RackEditForm extends Component
 {
@@ -18,19 +18,20 @@ class RackEditForm extends Component
         'nb_level' => ['required', 'min:1'],
     ];
     protected $messages = [
-        'selectedRack.required' => 'l\'étagère à modifier doit être selectionnée',
+        'selectedRack.required' => 'L\'étagère à modifier doit être selectionnée',
         'nb_level.required' => 'Le nombre d\'étage dois être renseigné',
-        'nb_level.min' => 'Il doit y avoir au moins un étage'
+        'nb_level.min' => 'Il doit y avoir au moins un étage',
     ];
 
     public function mount()
     {
-        $this->selectedRack = null;
+        $this->selectedRack = "";
         $this->nb_level = 1;
     }
 
     public function updated($property)
     {
+        if($this->$property === "---") $this->$property = null;
         $this->validateOnly($property);
     }
 
@@ -45,7 +46,7 @@ class RackEditForm extends Component
 
     public function toggleEditForm()
     {
-        $this->show = !$this->show;
+        $this->show = ! $this->show;
     }
 
     public function render()

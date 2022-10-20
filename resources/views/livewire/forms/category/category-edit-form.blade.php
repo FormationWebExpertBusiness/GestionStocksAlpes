@@ -44,17 +44,34 @@
                                         catégorie :
                                     </label>
                                 </div>
-                                <div class="mt-1 mb-2">
-                                    <input wire:model="newName" type="text" name="full-name" id="full-name" autocomplete="name"
-                                        class="block w-full rounded-md border-gray-300 py-3 px-4 placeholder-gray-500 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
-                                        placeholder="Ex: Firewall">
-                                </div>
-                                <div class="min-h-[20px]">
-                                    @error('newName')
-                                        <p class="whitespace-nowrap text-sm text-red-600" id="email-error">
-                                            {{ $message }}
-                                        </p>
-                                    @enderror
+                                <div class="mt-1">
+                                    @if ($errors->has('newName'))
+                                    <div class="relative">
+                                        <input wire:model="newName" type="text" name="full-name" id="full-name"
+                                            autocomplete="newName" placeholder="Ex: Firewall"
+                                            class="block w-full py-3 px-4 rounded-md border-red-300 pr-10 text-red-900 placeholder-red-300 focus:border-red-500 focus:outline-none focus:ring-red-500"
+                                            aria-invalid="true" aria-describedby="email-error">
+                                        <div
+                                            class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+                                            <svg class="h-5 w-5 text-red-500" xmlns="http://www.w3.org/2000/svg"
+                                                viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                                <path fill-rule="evenodd"
+                                                    d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-5a.75.75 0 01.75.75v4.5a.75.75 0 01-1.5 0v-4.5A.75.75 0 0110 5zm0 10a1 1 0 100-2 1 1 0 000 2z"
+                                                    clip-rule="evenodd" />
+                                            </svg>
+                                        </div>
+                                    </div>
+
+                                        @error('newName')
+                                            <p class="mt-2 h-4 text-sm text-red-600" id="email-error">{{ $message }}</p>
+                                        @enderror
+                                    @else
+                                        <input wire:model="newName" type="text" name="full-name" id="full-name"
+                                            autocomplete="newName"
+                                            class="block w-full rounded-md border-gray-300 py-3 px-4 placeholder-gray-500 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                            placeholder="Ex: Firewall">
+                                        <p class="mt-2 text-sm h-4 text-red-600" id="email-error" />
+                                    @endif
                                 </div>
                             </div>
                             <div class="absolute bottom-5 right-2 text-right sm:px-6">
@@ -63,7 +80,7 @@
                                     Modifier
                                 </button>
                                 <button wire:click="toggleEditForm" type="button"
-                                    class="inline-flex items-center rounded-md border border-transparent bg-red-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2">
+                                    class="mt-3 inline-flex w-full justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-base font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:mt-0 sm:w-auto sm:text-sm">
                                     Annuler
                                 </button>
                             </div>
