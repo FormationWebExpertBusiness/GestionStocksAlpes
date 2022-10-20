@@ -23,8 +23,12 @@
 ### Clone the project 📋
 In ssh
 ```bash
-git clone 
+git clone git@github.com:FormationWebExpertBusiness/GestionStocksAlpes.git
 ```
+In http
+```bash
+git clone
+
 
 ### Go the project folder 📂
 ```bash
