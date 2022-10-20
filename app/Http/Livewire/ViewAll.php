@@ -222,7 +222,9 @@ class ViewAll extends Component
             ->filter(function ($value) {
                 $catF = empty($this->categoriesF) ? Category::where('id', '>', 0)->pluck('id')->toArray() : $this->categoriesF;
                 $brandF = empty($this->brandsF) ? Brand::where('id', '>', 0)->pluck('id')->toArray() : $this->brandsF;
-                $rackF = empty($this->racksF) ? Rack::where('id', '>', 0)->pluck('id')->toArray() : $this->racksF;
+                
+                //not use
+                /*$rackF = empty($this->racksF) ? Rack::where('id', '>', 0)->pluck('id')->toArray() : $this->racksF;
                 $rackLevelF = [];
                 if (empty($this->rackLevelsF)) {
                     for ($i=1; $i <= Rack::all()->max('nb_level'); $i++) { 
@@ -232,8 +234,10 @@ class ViewAll extends Component
                 else {
                     $rackLevelF = $this->rackLevelsF; 
                 }
-                
                 if (in_array($value->category->id, $catF) && in_array($value->brand->id, $brandF) && in_array($value->rack->id, $rackF) && in_array($value->rack_level, $rackLevelF)) {
+                */
+                
+                if (in_array($value->category->id, $catF) && in_array($value->brand->id, $brandF)) {
                     if ($value->totalPrice >= $this->priceMin && $value->totalPrice <= $this->priceMax) {
                         if ($value->quantity >= $this->quantityMin && $value->quantity <= $this->quantityMax) {
                             return $value;
@@ -246,7 +250,7 @@ class ViewAll extends Component
         $this->showToast = true;
 
         return view('livewire.view-all', [
-            'items' => $items,
+            'commonItems' => $items,
         ]);
     }
 

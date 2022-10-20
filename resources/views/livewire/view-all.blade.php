@@ -75,7 +75,7 @@
             </div>
 
             <div class="mt-4 sm:mt-0 sm:ml-10 sm:flex-none">
-                @livewire('forms.item.common-item-form')
+                @livewire('forms.common-item.common-item-form')
             </div>
         </div>
         @livewire('warning-before-delete')
@@ -146,7 +146,7 @@
                                                     @livewire('details.item.detail-modal', ['CommonItem' => $commonItem], key('item-detail-' . $commonItem->id))
                                                 </div>
                                                 <div class="inline-block px-6">
-                                                    @livewire('forms.item.common-item-form', ['CommonItemToUpdate' => $commonItem], key('common-item-form-' . $commonItem->id))
+                                                    @livewire('forms.common-item.common-item-form', ['CommonItemToUpdate' => $commonItem], key('common-item-form-' . $commonItem->id))
                                                 </div>
                                                 <div class="inline-block px-6">
                                                     <button wire:click="openWarningDelete({{ $commonItem->id }})"
@@ -162,7 +162,7 @@
                                             </td>
                                         </tr>
                                     </div>
-                                    @empty
+                                @empty
                                     <tr class="bg-white divide-x divide-gray-200 table w-full table-fixed">
                                         <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                                     <div class="text-center">

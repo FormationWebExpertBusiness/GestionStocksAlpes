@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\Forms\Item;
+namespace App\Http\Livewire\Forms\CommonItem;
 
 use App\Models\Brand;
 use App\Models\Category;
@@ -8,7 +8,7 @@ use App\Models\Item;
 use App\Models\Rack;
 use Livewire\Component;
 
-class ItemForm extends Component
+class CommonItemForm extends Component
 {
     public $categories;
     public $brands;
@@ -85,7 +85,7 @@ class ItemForm extends Component
 
     public function render()
     {
-        return view('livewire.forms.item.item-form');
+        return view('livewire.forms.common-item.common-item-form');
     }
 
     public function updated($property)
