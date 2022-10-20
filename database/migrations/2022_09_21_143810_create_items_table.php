@@ -16,7 +16,6 @@ return new class extends Migration
         Schema::create('items', function (Blueprint $table) {
             $table->id();
             $table->float('price', 8, 2)->default(0);
-            $table->string('currency')->default("EUR");
             $table->string('comment')->nullable();
             $table->integer('rack_level');
             $table->string('serial_number');
