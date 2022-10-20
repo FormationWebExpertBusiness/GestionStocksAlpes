@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire;
+namespace App\Http\Livewire\Forms\Item;
 
 use Livewire\Component;
 
@@ -41,7 +41,7 @@ class QuantityUpdateForm extends Component
 
     public function render()
     {
-        return view('livewire.quantity-update-form');
+        return view('livewire.forms.item.quantity-update-form');
     }
 
     public function updated($propertyName)

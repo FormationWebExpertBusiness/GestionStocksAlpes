@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire;
+namespace App\Http\Livewire\Details\Item;
 
 use Livewire\Component;
 
@@ -10,7 +10,7 @@ class DetailModalContent extends Component
 
     public function render()
     {
-        return view('livewire.detail-modal-content', [
+        return view('livewire.details.item.detail-modal-content', [
             'item' => $this->item,
         ]);
     }

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire;
+namespace App\Http\Livewire\Forms\Category;
 
 use App\Models\Category;
 use Livewire\Component;
@@ -44,6 +44,6 @@ class CategoryEditForm extends Component
     public function render()
     {
         $this->categories = Category::all();
-        return view('livewire.category-edit-form');
+        return view('livewire.forms.category.category-edit-form');
     }
 }
