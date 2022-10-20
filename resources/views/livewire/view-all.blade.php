@@ -65,17 +65,17 @@
                 <p class="mt-2 text-sm text-gray-700">Liste de tout les produits du stock</p>
             </div>
             <div class="mt-4 sm:mt-0 sm:ml-10 sm:flex-none">
-                @livewire('rack.rack-forms')
+                @livewire('forms.rack.rack-forms')
             </div>
             {{-- <div class="mt-4 sm:mt-0 sm:ml-10 sm:flex-none">
                 @livewire('brand-form')
             </div> --}}
             <div class="mt-4 sm:mt-0 sm:ml-10 sm:flex-none">
-                @livewire('category-form')
+                @livewire('forms.category.category-form')
             </div>
 
             <div class="mt-4 sm:mt-0 sm:ml-10 sm:flex-none">
-                @livewire('common-item-form')
+                @livewire('forms.item.common-item-form')
             </div>
         </div>
         @livewire('warning-before-delete')
@@ -136,17 +136,17 @@
                                                     {{ $commonItem->quantity }} {{ $commonItem->unit }}
                                                 </div>
                                                 <div class="align-middle inline-flex min-w-[25%]">
-                                                    @livewire('quantity-update-form', ['CommonItemToUpdate' => $commonItem], key('quantity-update-form-' . $commonItem->id))
+                                                    @livewire('forms.item.quantity-update-form', ['CommonItemToUpdate' => $commonItem], key('quantity-update-form-' . $commonItem->id))
                                                 </div>
                                             </td>
                                             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 w-[14%]">
                                                 {{ $commonItem->totalPrice }} €</td>
                                             <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-center text-sm font-medium sm:pr-6 w-1/5">
                                                 <div class="inline-block px-6">
-                                                    @livewire('detail-modal', ['CommonItem' => $commonItem], key('item-detail-' . $commonItem->id))
+                                                    @livewire('details.item.detail-modal', ['CommonItem' => $commonItem], key('item-detail-' . $commonItem->id))
                                                 </div>
                                                 <div class="inline-block px-6">
-                                                    @livewire('common-item-form', ['CommonItemToUpdate' => $commonItem], key('common-item-form-' . $commonItem->id))
+                                                    @livewire('forms.item.common-item-form', ['CommonItemToUpdate' => $commonItem], key('common-item-form-' . $commonItem->id))
                                                 </div>
                                                 <div class="inline-block px-6">
                                                     <button wire:click="openWarningDelete({{ $commonItem->id }})"

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire;
+namespace App\Http\Livewire\Forms\Category;
 
 use App\Models\Category;
 use Livewire\Component;
@@ -47,6 +47,6 @@ class CategoryDeleteForm extends Component
     public function render()
     {
         $this->categories = Category::all();
-        return view('livewire.category-delete-form');
+        return view('livewire.forms.category.category-delete-form');
     }
 }

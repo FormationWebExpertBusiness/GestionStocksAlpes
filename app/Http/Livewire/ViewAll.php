@@ -5,6 +5,7 @@ namespace App\Http\Livewire;
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\CommonItem;
+use App\Models\Rack;
 use Livewire\Component;
 
 class ViewAll extends Component
@@ -23,6 +24,8 @@ class ViewAll extends Component
 
     public $categoriesF = [];
     public $brandsF = [];
+    public $racksF = [];
+    public $rackLevelsF = [];
 
     public $showToast = true;
 
@@ -31,12 +34,16 @@ class ViewAll extends Component
         'mode' => ['as' => 'mod'],
         'categoriesF' => ['as' => 'cat'],
         'brandsF' => ['as' => 'bra'],
+        'racksF' => ['as' => 'rac'],
+        'rackLevelsF' => ['as' => 'rlv'],
     ];
 
     protected $listeners = [
         'stockUpdated' => 'reloadView',
         'catFilter' => 'updateCatF',
         'brandFilter' => 'updateBrandF',
+        'rackFilter' => 'updateRackF',
+        'rackLevelFilter' => 'updateRackLevelF',
         'resetFilters' => 'resetAllFilters',
         'searchF' => 'search',
         'resetSearchBar' => 'resetValueSearchBar',
@@ -57,6 +64,8 @@ class ViewAll extends Component
 
         $this->categoriesF = [];
         $this->brandsF = [];
+        $this->racksF = [];
+        $this->rackLevelsF = [];
     }
 
     public function getPriceMin($priceMin)
@@ -129,6 +138,28 @@ class ViewAll extends Component
         $this->emit('brandsFilter', $this->brandsF);
     }
 
+    public function updateRackF($rack)
+    {
+        if (in_array($rack, $this->racksF)) {
+            unset($this->racksF[array_search($rack, $this->racksF)]);
+        } else {
+            array_push($this->racksF, $rack);
+        }
+
+        $this->emit('racksFilter', $this->racksF);
+    }
+
+    public function updateRackLevelF($rackLevel)
+    {
+        if (in_array($rackLevel, $this->rackLevelsF)) {
+            unset($this->rackLevelsF[array_search($rackLevel, $this->rackLevelsF)]);
+        } else {
+            array_push($this->rackLevelsF, $rackLevel);
+        }
+
+        $this->emit('rackLevelsFilter', $this->rackLevelsF);
+    }
+
     public function toggleMode()
     {
         if ($this->mode === 'asc') {
@@ -148,6 +179,8 @@ class ViewAll extends Component
     {
         $this->categoriesF = [];
         $this->brandsF = [];
+        $this->racksF = [];
+        $this->rackLevelsF = [];
 
         $this->priceMin = CommonItem::all()->min('totalPrice') ?? 0;
         $this->priceMax = CommonItem::all()->max('totalPrice') ?? 0;
@@ -189,8 +222,18 @@ class ViewAll extends Component
             ->filter(function ($value) {
                 $catF = empty($this->categoriesF) ? Category::where('id', '>', 0)->pluck('id')->toArray() : $this->categoriesF;
                 $brandF = empty($this->brandsF) ? Brand::where('id', '>', 0)->pluck('id')->toArray() : $this->brandsF;
+                $rackF = empty($this->racksF) ? Rack::where('id', '>', 0)->pluck('id')->toArray() : $this->racksF;
+                $rackLevelF = [];
+                if (empty($this->rackLevelsF)) {
+                    for ($i=1; $i <= Rack::all()->max('nb_level'); $i++) { 
+                        $rackLevelF[] = $i;
+                    }
+                }
+                else {
+                    $rackLevelF = $this->rackLevelsF; 
+                }
                 
-                if (in_array($value->category->id, $catF) && in_array($value->brand->id, $brandF)) {
+                if (in_array($value->category->id, $catF) && in_array($value->brand->id, $brandF) && in_array($value->rack->id, $rackF) && in_array($value->rack_level, $rackLevelF)) {
                     if ($value->totalPrice >= $this->priceMin && $value->totalPrice <= $this->priceMax) {
                         if ($value->quantity >= $this->quantityMin && $value->quantity <= $this->quantityMax) {
                             return $value;

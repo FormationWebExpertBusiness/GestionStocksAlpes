@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\Rack;
+namespace App\Http\Livewire\Forms\Rack;
 
 use Livewire\Component;
 use App\Models\Rack;
@@ -63,6 +63,6 @@ class RackDeleteForm extends Component
     public function render()
     {
         $this->racks = Rack::all();
-        return view('livewire.rack.rack-delete-form');
+        return view('livewire.forms.rack.rack-delete-form');
     }
 }
