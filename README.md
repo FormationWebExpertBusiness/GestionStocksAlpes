@@ -74,7 +74,7 @@ npm run dev
  php artisan insights
  ```
  
- ## To continuously update PhpInsights 🔁 (*only in linux*)
+ ## To continuously update PhpInsights 🔁 (*only in linux maybe on mac*)
   ```bash
 watch -cbn 0.5 php artisan insights --summary
  ```
