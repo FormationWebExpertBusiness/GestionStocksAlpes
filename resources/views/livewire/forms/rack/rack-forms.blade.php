@@ -4,7 +4,7 @@
             <button type="button" wire:click="toggleDropdown"
                 class="inline-flex w-full justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-100"
                 id="menu-button" aria-expanded="true" aria-haspopup="true">
-                Gestion Categories
+                Gestion Etagères
                 @if ($showDropdown)
                     <svg class="-mr-1 ml-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
                         fill="currentColor" class="w-5 h-5">
@@ -24,11 +24,11 @@
         </div>
         @if ($showDropdown)
             <div class="absolute right-0 z-10 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
-                role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
+                role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1" @click.outside="$wire.showDropdown = false">
                 <div class="py-1" role="none">
-                    @livewire('category-add-form')
-                    @livewire('category-edit-form')
-                    @livewire('category-delete-form')
+                    @livewire('forms.rack.rack-add-form')
+                    @livewire('forms.rack.rack-edit-form')
+                    @livewire('forms.rack.rack-delete-form')
                 </div>
             </div>
         @endif

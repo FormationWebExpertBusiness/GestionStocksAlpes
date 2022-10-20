@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\Rack;
+namespace App\Http\Livewire\Forms\Rack;
 
 use App\Models\Rack;
 use Livewire\Component;
@@ -43,6 +43,6 @@ class RackAddForm extends Component
 
     public function render()
     {
-        return view('livewire.rack.rack-add-form');
+        return view('livewire.forms.rack.rack-add-form');
     }
 }

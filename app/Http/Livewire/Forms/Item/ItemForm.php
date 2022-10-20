@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire;
+namespace App\Http\Livewire\Forms\Item;
 
 use App\Models\Brand;
 use App\Models\Category;
@@ -85,9 +85,7 @@ class ItemForm extends Component
 
     public function render()
     {
-        //bloque l'édition
-
-        return view('livewire.item-form');
+        return view('livewire.forms.item.item-form');
     }
 
     public function updated($property)

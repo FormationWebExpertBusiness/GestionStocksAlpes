@@ -65,17 +65,17 @@
                 <p class="mt-2 text-sm text-gray-700">Liste de tout les produits du stock</p>
             </div>
             <div class="mt-4 sm:mt-0 sm:ml-10 sm:flex-none">
-                @livewire('rack.rack-forms')
+                @livewire('forms.rack.rack-forms')
             </div>
             {{-- <div class="mt-4 sm:mt-0 sm:ml-10 sm:flex-none">
                 @livewire('brand-form')
             </div> --}}
             <div class="mt-4 sm:mt-0 sm:ml-10 sm:flex-none">
-                @livewire('category-form')
+                @livewire('forms.category.category-form')
             </div>
 
             <div class="mt-4 sm:mt-0 sm:ml-10 sm:flex-none">
-                @livewire('item-form')
+                @livewire('forms.item.item-form')
             </div>
         </div>
         @livewire('warning-before-delete')
@@ -124,21 +124,19 @@
                             <tbody class="bg-white block max-h-[62vh] overflow-y-scroll">
                                 @forelse ($items as $item)
                                     <div wire:key="item-{{ $item->id }}">
-                                        <tr
-                                            class="{{ $loop->index % 2 === 0 ? 'bg-white' : 'bg-gray-50' }} divide-x divide-gray-200 table w-full table-fixed">
+                                        <tr class="odd:bg-white even:bg-gray-50 divide-x divide-gray-200 table w-full table-fixed">
                                             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                                                 {{ $item->category->name }}</td>
                                             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                                                 {{ $item->brand->name }}</td>
                                             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                                                 {{ $item->model }}</td>
-                                            <td
-                                                class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-500 w-[14%]">
+                                            <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-500 w-[14%]">
                                                 <div class="inline-flex min-w-[75%]">
                                                     {{ $item->quantity }} {{ $item->unit }}
                                                 </div>
                                                 <div class="align-middle inline-flex min-w-[25%]">
-                                                    @livewire('quantity-update-form', ['itemToUpdate' => $item], key('quantity-update-form-' . $item->id))
+                                                    @livewire('forms.item.quantity-update-form', ['itemToUpdate' => $item], key('quantity-update-form-' . $item->id))
                                                 </div>
                                             </td>
                                             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 w-[14%]">
@@ -146,10 +144,10 @@
                                             <td
                                                 class="relative whitespace-nowrap py-4 pl-3 pr-4 text-center text-sm font-medium sm:pr-6 w-1/5">
                                                 <div class="inline-block px-6">
-                                                    @livewire('detail-modal', ['item' => $item], key('item-detail-' . $item->id))
+                                                    @livewire('details.item.detail-modal', ['item' => $item], key('item-detail-' . $item->id))
                                                 </div>
                                                 <div class="inline-block px-6">
-                                                    @livewire('item-form', ['itemToUpdate' => $item], key('item-form-' . $item->id))
+                                                    @livewire('forms.item.item-form', ['itemToUpdate' => $item], key('item-form-' . $item->id))
                                                 </div>
                                                 <div class="inline-block px-6">
                                                     <button wire:click="openWarningDelete({{ $item->id }})"
