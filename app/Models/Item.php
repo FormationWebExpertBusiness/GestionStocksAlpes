@@ -13,34 +13,17 @@ class Item extends Model
     protected $table = 'items';
     protected $primaryKey = 'id';
 
-    protected $fillable =
-    [
-        'quantity',
+    protected $fillable = [
         'price',
         'currency',
-        'unit',
-        'category_id',
-        'brand_id',
-        'model',
         'comment',
         'rack_level',
+        'common_id',
     ];
 
     protected $with = [
-        'brand',
-        'category',
         'rack',
     ];
-
-    public function brand()
-    {
-        return $this->belongsTo(Brand::class);
-    }
-
-    public function category()
-    {
-        return $this->belongsTo(Category::class);
-    }
 
     public function rack()
     {
