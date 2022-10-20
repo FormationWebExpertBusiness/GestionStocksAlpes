@@ -7,7 +7,7 @@
                 <div class="flex min-h-full p-4 text-center sm:items-center sm:p-0">
                     <div class="relative mx-auto content-center ml-[30%] max-w-5xl lg:grid lg:grid-cols-5">
                         <div class="bg-gray-50 rounded-l-lg py-16 px-4 sm:px-6 lg:col-span-2 lg:px-8 lg:py-24 xl:pr-12">
-                            @if (isset($itemToUpdate))
+                            @if (isset($commonItemToUpdate))
                                 <h2 class="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">
                                     Modifier un produit
                                 </h2>
@@ -25,6 +25,7 @@
                         </div>
                         <div class="bg-white flex-col justify-between rounded-r-lg sm:px-6 col-span-3 py-4 px-8">
 
+                            {{-- categories select field --}}
                             <div class=" mt-10">
                                 <div class="flex justify-between">
                                     <label for="category"
@@ -148,7 +149,7 @@
 
                             <div class="w-full inline-flex justify-between py-4 ">
                                 {{-- quantity number field --}}
-                                <div class="w-[48%]">
+                                {{-- <div class="w-[48%]">
                                     <div class="flex justify-between">
                                         <label for="quantity"
                                             class="block text-sm font-medium text-gray-700">Quantité</label>
@@ -184,7 +185,7 @@
                                             <p class="mt-2 h-4" />
                                         @endif
                                     </div>
-                                </div>
+                                </div> --}}
 
                                 {{-- unit text field --}}
                                 <div class="w-[48%]">
@@ -203,7 +204,7 @@
                             </div>
 
                             {{-- price number field --}}
-                            <div class="">
+                            {{-- <div class="">
                                 <div class="flex justify-between">
                                     <label for="price" class="block text-sm font-medium text-gray-700">Prix
                                         total</label>
@@ -238,11 +239,11 @@
                                         <p class="mt-2 h-4" />
                                     @endif
                                 </div>
-                            </div>
+                            </div> --}}
 
-                            <div class="w-full inline-flex justify-between py-4 ">
+                            {{-- <div class="w-full inline-flex justify-between py-4 "> --}}
                                 {{-- rack select field --}}
-                                <div class="w-[48%]">
+                                {{-- <div class="w-[48%]">
                                     <div class="flex justify-between">
                                         <label for="rack"
                                             class="block text-sm font-medium text-gray-700">Etagère</label>
@@ -286,10 +287,10 @@
                                             <p class="mt-2 h-4" />
                                         @endif
                                     </div>
-                                </div>
+                                </div> --}}
 
                                 {{-- rack_level select field --}}
-                                <div class="w-[48%]">
+                                {{-- <div class="w-[48%]">
                                     <div class="flex justify-between">
                                         <label for="rack_level"
                                             class="block text-sm font-medium text-gray-700">Niveau</label>
@@ -349,10 +350,10 @@
                                             <p class="mt-2 h-4" />
                                         @endif
                                     </div>
-                                </div>
-                            </div>
+                                </div> --}}
+                            {{-- </div> --}}
                                 {{-- comment textarea field --}}
-                                <div class="mb-20">
+                                {{-- <div class="mb-20">
                                     <div class="flex justify-between">
                                         <label for="comment"
                                             class="block text-sm font-medium text-gray-700">Commentaire</label>
@@ -366,11 +367,12 @@
                                     @error('comment')
                                         <span class="error text-red-600">{{ $message }}</span>
                                     @enderror
-                                </div>
-
+                                </div> --}}
+                            <div class="mb-20"></div>
+                                {{-- buttons --}}
                                 <div
                                     class="bg-gray-100 absolute rounded-br-md max-w-[60%] left-[40%] bottom-0 pr-4 py-4 w-full text-right">
-                                    <button wire:click="saveItem" type="button"
+                                    <button wire:click="saveCommonItem" type="button"
                                         class="inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
                                         Enregistrer
                                     </button>
@@ -381,13 +383,13 @@
                                 </div>
                             </div>
                         </div>
-                        </form>
-                    </div>
+                    {{-- </form> --}}
                 </div>
             </div>
+        </div>
     @endif
     {{-- bouton pour afficher le formulaire --}}
-    @if (isset($itemToUpdate))
+    @if (isset($commonItemToUpdate))
         <button class="text-indigo-600 hover:text-indigo-900" wire:click.prevent="$toggle('isFormOpen')">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                 stroke="currentColor" class="w-6 h-6">
