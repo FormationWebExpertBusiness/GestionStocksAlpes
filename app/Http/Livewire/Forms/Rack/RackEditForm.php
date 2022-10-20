@@ -38,7 +38,6 @@ class RackEditForm extends Component
     public function updateRack()
     {
         $validatedData = $this->validate();
-        dd($this->selectedRack);
         $rack = Rack::find($this->selectedRack);
         $rack->update($validatedData);
         $this->toggleEditForm();

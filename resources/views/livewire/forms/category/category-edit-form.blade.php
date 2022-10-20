@@ -73,18 +73,6 @@
                                         <p class="mt-2 text-sm h-4 text-red-600" id="email-error" />
                                     @endif
                                 </div>
-                                {{-- <div class="mt-1 mb-2">
-                                    <input wire:model="newName" type="text" name="full-name" id="full-name" autocomplete="name"
-                                        class="block w-full rounded-md border-gray-300 py-3 px-4 placeholder-gray-500 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
-                                        placeholder="Ex: Firewall">
-                                </div>
-                                <div class="min-h-[20px]">
-                                    @error('newName')
-                                        <p class="whitespace-nowrap text-sm text-red-600" id="email-error">
-                                            {{ $message }}
-                                        </p>
-                                    @enderror
-                                </div> --}}
                             </div>
                             <div class="absolute bottom-5 right-2 text-right sm:px-6">
                                 <button wire:click="updateCategory" type="button"
