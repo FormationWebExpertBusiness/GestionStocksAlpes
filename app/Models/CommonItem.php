@@ -30,12 +30,18 @@ class CommonItem extends Model
     ];
 
     protected $appends = [
-        'quantity'
+        'quantity',
+        'totalPrice',
     ];
 
     public function getQuantityAttribute()
     {
         return $this->items()->count();
+    }
+
+    public function getTotalPriceAttribute()
+    {
+        return $this->items()->sum('price');
     }
 
     public function brand()
