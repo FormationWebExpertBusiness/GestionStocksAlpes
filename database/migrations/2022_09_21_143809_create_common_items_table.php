@@ -19,6 +19,7 @@ return new class extends Migration
             $table->unsignedBigInteger('category_id')->default(1);
             $table->unsignedBigInteger('brand_id')->default(1);
             $table->string('model');
+            $table->boolean('favorite');
             //$table->integer('quantity')->default(0);
 
             $table->foreign('category_id')->references('id')->on('categories')->onUpdate('restrict')->onDelete('cascade');

@@ -18,6 +18,7 @@ class CommonItemFactory extends Factory
     {
         return [
             'model' => fake()->unique()->bothify('????-####'),
+            'favorite' => fake()->boolean(),
         ];
     }
 }
