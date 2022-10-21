@@ -1,7 +1,7 @@
 <div>
     {{-- modal qui s'ouvre pour ajouter un produit  --}}
     @if ($isFormOpen)
-        <div class="relative z-10" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+        <div class="relative z-10@" aria-labelledby="modal-title" role="dialog" aria-modal="true">
             <div class="fixed inset-0 bg-gray-500 bg-opacity-50 transition-opacity"></div>
             <div class="fixed inset-0 z-10 overflow-y-auto">
                 <div class="flex min-h-full p-4 text-center sm:items-center sm:p-0">
@@ -15,6 +15,17 @@
                                     Formulaire pour modifier un produit qui existant
                                 </p>
                             @else
+                            <div class="hidden sm:block absolute top-0 right-0 pt-4 pr-4">
+                                <button wire:click="closeForm" type="button"
+                                    class="bg-white rounded-md text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                    <span class="sr-only">Close</span>
+                                    <!-- Heroicon name: outline/x -->
+                                    <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                        stroke-width="2" stroke="currentColor" aria-hidden="true">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                                    </svg>
+                                </button>
+                            </div>
                                 <h2 class="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">
                                     Ajouter un produit
                                 </h2>
