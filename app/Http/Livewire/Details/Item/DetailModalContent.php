@@ -12,4 +12,10 @@ class DetailModalContent extends Component
     {
         return view('livewire.details.item.detail-modal-content');
     }
+
+    public $warningDeleteItemSignal = 'deleteItem';
+    public function openWarningDelete($itemId)
+    {
+        $this->emit('deleteWarning', $itemId, $this->warningDeleteItemSignal, 'Item', 'serial_number');
+    }
 }

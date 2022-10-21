@@ -1,5 +1,5 @@
 <div>
-    {{-- modal qui s'ouvre pour ajouter un produit  --}}
+    {{-- modal qui s'ouvre pour ajouter un type de produit  --}}
     @if ($isFormOpen)
         <div class="relative z-10" aria-labelledby="modal-title" role="dialog" aria-modal="true">
             <div class="fixed inset-0 bg-gray-500 bg-opacity-50 transition-opacity"></div>
@@ -9,17 +9,17 @@
                         <div class="bg-gray-50 rounded-l-lg py-16 px-4 sm:px-6 lg:col-span-2 lg:px-8 lg:py-24 xl:pr-12">
                             @if (isset($commonItemToUpdate))
                                 <h2 class="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">
-                                    Modifier un produit
+                                    Modifier un type de produit
                                 </h2>
                                 <p class="mt-3 text-md leading-6 text-gray-500">
-                                    Formulaire pour modifier un produit qui existant
+                                    Formulaire pour modifier un type de produit qui existant
                                 </p>
                             @else
                                 <h2 class="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">
-                                    Ajouter un produit
+                                    Ajouter un type de produit
                                 </h2>
                                 <p class="mt-3 text-md leading-6 text-gray-500">
-                                    Formulaire pour créer un nouveau produit
+                                    Formulaire pour créer un nouveau type de produit
                                 </p>
                             @endif
                         </div>
@@ -401,7 +401,7 @@
         <button
             class="inline-flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:w-auto"
             wire:click.prevent="$toggle('isFormOpen')">
-            Ajouter un produit
+            Ajouter un type de produit
         </button>
     @endif
 </div>

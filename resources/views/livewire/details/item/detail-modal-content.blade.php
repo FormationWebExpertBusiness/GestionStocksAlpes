@@ -8,12 +8,12 @@
                 <dt class="truncate text-sm font-medium text-gray-500">Catégorie</dt>
                 <dd class="mt-1 text-xl font-semibold tracking-tight text-gray-900">{{$commonItem->category->name}}</dd>
             </div>
-        
+
             <div class="overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6">
                 <dt class="truncate text-sm font-medium text-gray-500">Marque</dt>
                 <dd class="mt-1 text-xl font-semibold tracking-tight text-gray-900">{{$commonItem->brand->name}}</dd>
             </div>
-        
+
             <div class="overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6">
                 <dt class="truncate text-sm font-medium text-gray-500">Modèle</dt>
                 <dd class="mt-1 text-xl font-semibold tracking-tight text-gray-900">{{$commonItem->model}}</dd>
@@ -30,7 +30,7 @@
                 <div class="break-all inline rounded-lg bg-white px-4 py-5 shadow sm:p-6">
                     <dt class="truncate text-sm font-medium text-gray-500">Prix Moyen Unitaire
                         @if($commonItem->unit != null)
-                        (par {{$commonItem->unit}})
+                        (par {{ $commonItem->unit }})
                         @endif
                     </dt>
                     <dd class="mt-1 text-2xl font-semibold tracking-tight text-gray-900">{{ number_format($commonItem->totalPrice / $commonItem->quantity, 2, ',', ' '); }} €</dd>
@@ -38,7 +38,7 @@
             @endif
             <div class="overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6">
                 <dt class="truncate text-sm font-medium text-gray-500">Quantité</dt>
-                <dd class="mt-1 text-2xl font-semibold tracking-tight text-gray-900">{{$commonItem->quantity}} {{$commonItem->unit}}</dd>
+                <dd class="mt-1 text-2xl font-semibold tracking-tight text-gray-900">{{ $commonItem->quantity }} {{ $commonItem->unit }}</dd>
             </div>
 
             {{-- <div class="overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6">
@@ -51,8 +51,7 @@
             </div> --}}
         </dl>
     </div>
-</div>
-    {{-- @if($item->comment != null)
+    {{-- @if ($item->comment != null)
         <br>
         <div class="overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6 ">
             <dt class="truncate text-sm font-medium text-gray-500">Commentaire</dt>
@@ -72,7 +71,7 @@
                                     Entrée en stock
                                 </th>
                                 <th wire:click="reOrder('brand')" scope="col"
-                                class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                                    class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
                                     Numéro de série
                                 </th>
                                 <th wire:click="reOrder('model')" scope="col"
@@ -80,11 +79,11 @@
                                     Prix
                                 </th>
                                 <th wire:click="reOrder('quantity')" scope="col"
-                                    class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">
-                                    Position dans le stock
+                                    class="py-3.5 pl-4 text-left text-sm font-semibold text-gray-900">
+                                    Emplacement
                                 </th>
                                 <th wire:click="reOrder('price')" scope="col"
-                                class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                                    class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
                                     Commentaire
                                 </th>
                                 <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-6 w-1/6">
@@ -94,24 +93,27 @@
                         </thead>
                         <tbody class="bg-white block max-h-[40vh] overflow-y-scroll">
                             @forelse ($commonItem->items as $item)
-                                <div wire:key="Item-{{ $item->id }}">
-                                    <tr class="odd:bg-white even:bg-gray-50 divide-x divide-gray-200 table w-full table-fixed">
+                                <div wire:key="Item-{{ $commonItem->id }}-{{ $item->id }}">
+                                    <tr
+                                        class="odd:bg-white even:bg-gray-50 divide-x divide-gray-200 table w-full table-fixed">
                                         <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                                             {{ $item->created_at->format('d/m/y') }}</td>
                                         <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                                             {{ $item->serial_number }}</td>
                                         <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                            {{ number_format($item->price, 2, ',', ' '); }} €</td>
+                                            {{ number_format($item->price, 2, ',', ' ') }} €</td>
                                         <td class="whitespace-nowrap py-4 pl-4 text-sm text-gray-500">
-                                            <p>{{ $item->rack->name }}</p> <p>étage {{ $item->rack_level }}</p></td>
+                                            <p>{{ $item->rack->name }}</p>
+                                            <p>étage {{ $item->rack_level }}</p>
+                                        </td>
                                         <td class="whitespace-normal px-3 py-4 text-sm text-gray-500">
                                             {{ $item->comment }}</td>
                                         <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-center text-sm font-medium sm:pr-6 w-1/6">
                                             {{-- <div class="inline-block px-6">
-                                                @livewire('forms.common-item.common-item-form', ['commonItemToUpdate' => $commonItem], key('common-item-form-' . $commonItem->id))
+                                                @livewire('forms.item.quantity-update-form', ['CommonItemToUpdate' => $commonItem], key('quantity-update-form-' . $commonItem->id))
                                             </div> --}}
                                             <div class="inline-block px-6">
-                                                <button wire:click="openWarningDelete({{ $commonItem->id }})"
+                                                <button wire:click="openWarningDelete({{ $item->id }})"
                                                     class="text-indigo-600 hover:text-indigo-900">
                                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none"
                                                         viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
@@ -127,18 +129,18 @@
                             @empty
                                 <tr class="bg-white divide-x divide-gray-200 table w-full table-fixed">
                                     <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                <div class="text-center">
+                                        <div class="text-center">
                                     <svg class="mx-auto h-12 w-12 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                    </svg>
-                                      
-                                    <h3 class="mt-2 text-sm font-medium text-gray-900">Aucun produit</h3>
-                                    <p class="mt-1 text-sm text-gray-500">Vous pouvez en ajouter un nouveau</p>
-                                    <div class="mt-3">
-                                        @livewire('forms.common-item.common-item-form')
-                                    </div>
-                                  </div>
-                                </td>
+                                            </svg>
+
+                                            <h3 class="mt-2 text-sm font-medium text-gray-900">Aucun produit</h3>
+                                            <p class="mt-1 text-sm text-gray-500">Vous pouvez en ajouter un nouveau</p>
+                                            <div class="mt-3">
+                                                {{-- @livewire('forms.common-item.common-item-form') --}}
+                                            </div>
+                                        </div>
+                                    </td>
                                 </tr>
                             @endforelse
                         </tbody>

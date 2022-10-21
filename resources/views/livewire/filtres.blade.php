@@ -92,7 +92,7 @@
                     </div>
                 </div>
                 {{-- Rack Dropdown --}}
-                <div class="relative mx-8 inline-block text-left">
+                {{-- <div class="relative mx-8 inline-block text-left">
                     <div>
                         <button wire:click="toggleRackDropdown" type="button"
                             class="inline-flex w-full justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-100"
@@ -139,9 +139,9 @@
                             </div>
                         </div>
                     @endif
-                </div>
+                </div> --}}
                 {{-- RackLevel Dropdown --}}
-                <div class="relative mx-8 inline-block text-left">
+                {{-- <div class="relative mx-8 inline-block text-left">
                     <div>
                         <button wire:click="toggleRackLevelDropdown" type="button"
                             class="inline-flex whitespace-nowrap w-full justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-100"
@@ -188,7 +188,7 @@
                             </div>
                         </div>
                     @endif
-                </div>
+                </div> --}}
                 {{-- Category DropDown --}}
                 <div class="relative mx-8 inline-block text-left">
                     <div>

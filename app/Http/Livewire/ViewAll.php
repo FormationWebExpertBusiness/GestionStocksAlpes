@@ -5,6 +5,7 @@ namespace App\Http\Livewire;
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\CommonItem;
+use App\Models\Item;
 use App\Models\Rack;
 use Livewire\Component;
 
@@ -101,7 +102,7 @@ class ViewAll extends Component
 
     public function deleteItem($itemId)
     {
-        $item = CommonItem::findOrFail($itemId);
+        $item = Item::findOrFail($itemId);
         $item->delete();
         return redirect()->with('status', 'Le produit '.$item->model.' a bien été supprimé !');
     }
