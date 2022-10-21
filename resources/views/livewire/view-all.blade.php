@@ -143,7 +143,7 @@
                                                 {{ number_format($commonItem->totalPrice, 2, ',', ' '); }} €</td>
                                             <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-center text-sm font-medium sm:pr-6 w-1/5">
                                                 <div class="inline-block px-6">
-                                                    @livewire('details.item.detail-modal', ['CommonItem' => $commonItem], key('item-detail-' . $commonItem->id))
+                                                    @livewire('details.item.detail-modal', ['commonItem' => $commonItem], key('item-detail-' . $commonItem->id))
                                                 </div>
                                                 <div class="inline-block px-6">
                                                     @livewire('forms.common-item.common-item-form', ['commonItemToUpdate' => $commonItem], key('common-item-form-' . $commonItem->id))

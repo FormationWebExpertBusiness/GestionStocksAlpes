@@ -19,7 +19,7 @@ class ItemFactory extends Factory
         return [
             'price' => fake()->randomFloat(2, 1, 100),
             'comment' => fake()->sentence(),
-            'serial_number' => fake()->regexify('^[0-9]{8,12}$'),
+            'serial_number' => fake()->regexify('^[0-9A-Za-z]{8,12}$'),
         ];
     }
 }

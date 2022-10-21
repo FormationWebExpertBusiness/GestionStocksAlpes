@@ -14,7 +14,8 @@ class CategorySeeder extends Seeder
      */
     public function run()
     {
-        $this->createRand();
+        // $this->createRand();
+        $this->createCustom();
     }
 
     private function createRand()

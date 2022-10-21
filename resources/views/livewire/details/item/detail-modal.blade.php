@@ -8,11 +8,11 @@
     <div class="relative z-10" aria-labelledby="modal-title" role="dialog" aria-modal="true">
       <div class="fixed inset-0 bg-gray-500 bg-opacity-50 transition-opacity"></div>
       <div class="fixed inset-0 z-10 overflow-y-auto">
-        <div  wire:click="toggleModal" class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
-          <div class="relative transform overflow-hidden rounded-lg bg-white px-4 pt-5 pb-4 text-left shadow-xl transition-all sm:my-8 sm:w-full max-w-5xl sm:p-6">
+        <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+          <div @click.outside="$wire.toggleModal" class="relative transform overflow-hidden rounded-lg bg-white px-4 pt-5 pb-4 text-left shadow-xl transition-all sm:my-8 sm:w-full max-w-5xl sm:p-6">
             <div>
               @livewire('details.item.detail-modal-content',[
-                'item' => $item
+                'commonItem' => $commonItem
               ])
             </div>
           </div>
