@@ -8,8 +8,59 @@ use Livewire\Component;
 class CategoryEditForm extends Component
 {
     public $show = false;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     public $categories;
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     public $showDropdown = false;
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     public $selectedCategory;
     public $newName;
 

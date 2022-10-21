@@ -1,18 +1,18 @@
 <?php
 
-namespace App\Http\Livewire\Forms\Category;
 
-use App\Models\Category;
+namespace App\Http\Livewire\Forms\Category;
 use Livewire\Component;
 
+use App\Models\Category;
 class CategoryAddForm extends Component
 {
-    public $name;
     public $show = false;
-
+    
     protected $rules = [
         'name' => ['required', 'alpha_dash', 'unique:App\Models\Category,name'],
     ];
+    public $name;
     protected $messages = [
         'name.required' => 'Le nom dois être renseigné',
         'name.alpha_dash' => 'Le nom de la catégorie ne doit contenir que des lettres, des chiffres',
@@ -21,7 +21,7 @@ class CategoryAddForm extends Component
 
     public function updated($property)
     {
-        $this->validateOnly($property);
+        $this->validateOnly($property )     ;
     }
 
     public function saveCategory()

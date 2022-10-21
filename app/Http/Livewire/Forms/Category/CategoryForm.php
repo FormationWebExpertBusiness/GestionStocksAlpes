@@ -9,6 +9,20 @@ class CategoryForm extends Component
     public $showDropdown = false;
 
     public function toggleDropdown()
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
     {
         $this->showDropdown = ! $this->showDropdown;
     }

@@ -18,13 +18,69 @@ class RackEditForm extends Component
         'nb_level' => ['required', 'min:1'],
     ];
     protected $messages = [
-        'selectedRack.required' => 'L\'étagère à modifier doit être selectionnée',
+        'selectedRack.required' =>                                       'L\'étagère à modifier doit être selectionnée',
+
+
+
+
+
+
+
+
+
+
         'nb_level.required' => 'Le nombre d\'étage dois être renseigné',
+
+
+
+
+
+
+
+
+
         'nb_level.min' => 'Il doit y avoir au moins un étage',
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     ];
 
     public function mount()
     {
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         $this->selectedRack = "";
         $this->nb_level = 1;
     }
