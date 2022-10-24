@@ -118,7 +118,7 @@
                                     @if ($errors->has('model'))
                                         <div class="relative">
                                             <input wire:model="model" type="text" name="model" id="model"
-                                                autocomplete="model" placeholder="Ex: 250"
+                                                autocomplete="model" placeholder="Ex: AX6000"
                                                 class="block w-full py-3 px-4 rounded-md border-red-300 pr-10 text-red-900 placeholder-red-300 focus:border-red-500 focus:outline-none focus:ring-red-500"
                                                 aria-invalid="true" aria-describedby="email-error">
                                             <div
@@ -140,7 +140,7 @@
                                         <input wire:model="model" type="text" name="model" id="model"
                                             autocomplete="model"
                                             class="block w-full rounded-md border-gray-300 py-3 px-4 placeholder-gray-500 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
-                                            placeholder="Ex: 250">
+                                            placeholder="Ex: AX6000">
                                         <p class="mt-2 h-4" />
                                     @endif
                                 </div>

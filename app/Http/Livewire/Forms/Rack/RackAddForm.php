@@ -11,7 +11,7 @@ class RackAddForm extends Component
     public $show = false;
 
     protected $rules = [
-        'nb_level' => ['required', 'min:1'],
+        'nb_level' => ['min:1', 'numeric', 'required'],
     ];
     protected $messages = [
         'nb_level.required' => 'Le nombre d\'étage dois être renseigné',

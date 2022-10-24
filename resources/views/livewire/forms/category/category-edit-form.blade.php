@@ -30,11 +30,8 @@
                                     <label for="location" class="block text-sm font-medium text-gray-700">Catégorie à modifier : </label>
                                 </div>
                                 <select wire:model="selectedCategory" id="location" name="location" class="mt-1 block w-full rounded-md border-gray-300 py-3 pl-3 pr-10 text-base focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
-                                    <option selected>---</option>
                                     @foreach ($categories as $categorie)
-                                        @if($categorie->name != "Non défini")
                                             <option value="{{$categorie->name}}">{{$categorie->name}}</option>
-                                        @endif
                                     @endforeach
                                 </select>
                             </div>

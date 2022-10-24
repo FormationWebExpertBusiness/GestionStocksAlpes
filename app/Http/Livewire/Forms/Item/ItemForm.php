@@ -35,11 +35,11 @@ class ItemForm extends Component
         'category_id' => ['nullable', 'integer'],
         'brand_id' => ['nullable', 'integer'],
         'model' => ['required'],
-        'quantity' => ['required', 'numeric', 'min:0'],
+        'quantity' => ['numeric', 'required', 'min:0'],
         'unit' => ['nullable'],
-        'price' => ['required', 'numeric'],
+        'price' => ['numeric', 'required', 'min:0'],
         'comment' => ['nullable'],
-        'rack_id' => ['required', 'integer'],
+        'rack_id' => ['integer', 'required'],
         'rack_level' => ['required', 'integer', 'min:1'],
     ];
 
@@ -60,6 +60,7 @@ class ItemForm extends Component
         'quantity.required' => 'La quantité en stock doit être ajouté.',
         'price.required' => 'La valeur du stock doit être ajouté.',
         'price.numeric' => 'Le prix doit être un nombre',
+        'price.min' => 'Le prix doit être supérieur ou égale à 0',
         'rack_id.integer' => 'L\'élément saisi est incorrect',
         'rack_id.required' => 'L\'emplacement de stockage doit être saisi',
         'rack_level.interger' => 'le niveau de l\'étagère doit être saisie',
