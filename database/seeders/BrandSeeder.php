@@ -14,17 +14,17 @@ class BrandSeeder extends Seeder
      */
     public function run()
     {
+        \App\Models\Brand::create([
+            'name' => 'Non défini',
+        ]);
+
         // $this->createRand();
         $this->createCustom();
     }
 
     private function createRand()
     {
-        $NDbrand = \App\Models\Brand::create([
-            'name' => 'Non défini',
-        ]);
-
-        \App\Models\Brand::factory()->count(10)->create();//->merge([$NDbrand]);
+        \App\Models\Brand::factory()->count(10)->create();
     }
 
     private function createCustom()

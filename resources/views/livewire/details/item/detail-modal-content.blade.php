@@ -130,16 +130,11 @@
                                 <tr class="bg-white divide-x divide-gray-200 table w-full table-fixed">
                                     <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                                         <div class="text-center">
-                                    <svg class="mx-auto h-12 w-12 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                            <svg class="mx-auto h-12 w-12 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
                                             </svg>
-
                                             <h3 class="mt-2 text-sm font-medium text-gray-900">Aucun produit</h3>
                                             <p class="mt-1 text-sm text-gray-500">Vous pouvez en ajouter un nouveau</p>
-                                            <div class="mt-3">
-                                                {{-- TODO remettre le formulaire --}}
-                                                {{-- @livewire('forms.common-item.common-item-form') --}}
-                                            </div>
                                         </div>
                                     </td>
                                 </tr>

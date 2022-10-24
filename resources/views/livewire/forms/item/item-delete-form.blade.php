@@ -20,63 +20,66 @@
                         </div>
                         <div class="bg-white rounded-r-lg py-16 px-4 sm:px-6 lg:col-span-5 lg:py-24 lg:px-8 xl:pl-12">
                             <form wire:submit.prevent='deleteItem'>
+                                <div class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg">
+                                    <table class="min-w-full divide-y divide-gray-300">
+                                        <thead class="bg-gray-100 block">
+                                            <tr class="table w-full table-fixed">
+                                                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                                                    Supprimer
+                                                </th>
+                                                <th wire:click="reOrder('category')" scope="col"
+                                                    class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                                                    Entrée en stock
+                                                </th>
+                                                <th wire:click="reOrder('model')" scope="col"
+                                                    class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                                                    Prix
+                                                </th>
+                                                <th wire:click="reOrder('quantity')" scope="col"
+                                                    class="py-3.5 pl-4 text-left text-sm font-semibold text-gray-900">
+                                                    Emplacement
+                                                </th>
+                                                <th wire:click="reOrder('price')" scope="col"
+                                                    class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 w-1/3">
+                                                    Commentaire
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="bg-white block max-h-[40vh] overflow-y-scroll">
 
-                                <table class="min-w-full divide-y divide-gray-300">
-                                    <thead class="bg-gray-100 block">
-                                        <tr class="table w-full table-fixed">
-                                            <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-                                                Supprimer
-                                            </th>
-                                            <th wire:click="reOrder('category')" scope="col"
-                                                class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-                                                Entrée en stock
-                                            </th>
-                                            <th wire:click="reOrder('model')" scope="col"
-                                                class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-                                                Prix
-                                            </th>
-                                            <th wire:click="reOrder('quantity')" scope="col"
-                                                class="py-3.5 pl-4 text-left text-sm font-semibold text-gray-900">
-                                                Emplacement
-                                            </th>
-                                            <th wire:click="reOrder('price')" scope="col"
-                                                class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 w-1/3">
-                                                Commentaire
-                                            </th>
-                                        </tr>
-                                    </thead>
-                                    <tbody class="bg-white block max-h-[40vh] overflow-y-scroll">
-
-                                @forelse ($items as $item)
-                                    <div wire:key="Item-{{ $commonItem->id }}-{{ $item->id }}">
-                                        <tr
-                                            class="odd:bg-white even:bg-gray-50 divide-x divide-gray-200 table w-full table-fixed">
-                                            <td class="whitespace-nowrap py-4 pl-4 text-sm text-gray-500 text-left">
-                                                <input wire:model="itemsToDelete" type="checkbox" name="item-{{$item->id}}" value="{{ $item->id }}">
-                                                <label for="item-{{$item->id}}">{{ $item->serial_number }}</label>
-                                            </td>
-                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                                {{ $item->created_at->format('d/m/y') }}</td>
-                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                                {{ number_format($item->price, 2, ',', ' ') }} €</td>
-                                            <td class="whitespace-nowrap py-4 pl-4 text-sm text-gray-500">
-                                                <p>{{ $item->rack->name }}</p>
-                                                <p>étage {{ $item->rack_level }}</p>
-                                            </td>
-                                            <td class="whitespace-normal px-3 py-4 text-sm text-gray-500 w-1/3">
-                                                {{ $item->comment }}</td>
-                                        </tr>
-                                    </div>
-                                @empty
-                                    <tr class="bg-white divide-x divide-gray-200 table w-full table-fixed">
-                                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                            <div class="text-center">
-                                                <h3 class="mt-2 text-sm font-medium text-gray-900">Aucun produit</h3>
-                                                <p class="mt-1 text-sm text-gray-500"> Il n'y a aucun item en stock </p> 
-                                            </div>
-                                        </td>
-                                    </tr>
-                                @endforelse
+                                            @forelse ($items as $item)
+                                                <div wire:key="Item-{{ $commonItem->id }}-{{ $item->id }}">
+                                                    <tr
+                                                        class="odd:bg-white even:bg-gray-50 divide-x divide-gray-200 table w-full table-fixed">
+                                                        <td class="whitespace-nowrap py-4 pl-4 text-sm text-gray-500 text-left">
+                                                            <input wire:model="itemsToDelete" type="checkbox" name="item-{{$item->id}}" value="{{ $item->id }}">
+                                                            <label for="item-{{$item->id}}">{{ $item->serial_number }}</label>
+                                                        </td>
+                                                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                                            {{ $item->created_at->format('d/m/y') }}</td>
+                                                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                                            {{ number_format($item->price, 2, ',', ' ') }} €</td>
+                                                        <td class="whitespace-nowrap py-4 pl-4 text-sm text-gray-500">
+                                                            <p>{{ $item->rack->name }}</p>
+                                                            <p>étage {{ $item->rack_level }}</p>
+                                                        </td>
+                                                        <td class="whitespace-normal px-3 py-4 text-sm text-gray-500 w-1/3">
+                                                            {{ $item->comment }}</td>
+                                                    </tr>
+                                                </div>
+                                            @empty
+                                                <tr class="bg-white divide-x divide-gray-200 table w-full table-fixed">
+                                                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                                        <div class="text-center">
+                                                            <h3 class="mt-2 text-sm font-medium text-gray-900">Aucun produit</h3>
+                                                            <p class="mt-1 text-sm text-gray-500"> Il n'y a aucun item en stock </p> 
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            @endforelse
+                                        </tbody>
+                                    </table>
+                                </div>
 
                                 @error('itemsToDelete')
                                     <span class="error text-red-600">{{ $message }}</span>

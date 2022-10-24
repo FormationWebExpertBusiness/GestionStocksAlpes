@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use App\Models\CommonItem;
 use App\Models\Item;
+use App\Observers\CommonItemObserver;
 use App\Observers\ItemObserver;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
@@ -23,6 +25,7 @@ class EventServiceProvider extends ServiceProvider
 
     protected $observers = [
         Item::class => [ItemObserver::class],
+        CommonItem::class => [CommonItemObserver::class],
     ];
 
     /**

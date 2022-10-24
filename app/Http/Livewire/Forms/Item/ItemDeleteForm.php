@@ -27,7 +27,6 @@ class ItemDeleteForm extends Component
 
     public function deleteItem()
     {
-        //dd($this->itemsToDelete);
         $noms = "";
         $this->validate();
         foreach ($this->itemsToDelete as $item_id) {
