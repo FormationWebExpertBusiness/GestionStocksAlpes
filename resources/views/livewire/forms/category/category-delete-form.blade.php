@@ -36,31 +36,36 @@
                             </p>
                         </div>
                         <div class="bg-white rounded-r-lg py-16 px-4 sm:px-6 lg:col-span-3 lg:py-24 lg:px-8 xl:pl-12">
-                            <div>
-                                <div class="text-left">
-                                    <label for="location" class="block text-sm font-medium text-gray-700">Catégorie à supprimer : </label>
+                            <form wire:submit.prevent='openWarningDelete'>
+                                {{-- category dropdown --}}
+                                <div>
+                                    <div class="text-left">
+                                        <label for="location" class="block text-sm font-medium text-gray-700">Catégorie à supprimer : </label>
+                                    </div>
+                                    <select wire:model="selectedCategory" id="location" name="location" class="mt-1 block w-full rounded-md border-gray-300 py-3 pl-3 pr-10 text-base focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
+                                        <option value="---" selected>---</option>
+                                        @foreach ($categories as $categorie)
+                                            @if($categorie->name != "Non défini")
+                                                <option value="{{$categorie->name}}">{{$categorie->name}}</option>
+                                            @endif
+                                        @endforeach
+                                    </select>
                                 </div>
-                                <select wire:model="selectedCategory" id="location" name="location" class="mt-1 block w-full rounded-md border-gray-300 py-3 pl-3 pr-10 text-base focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
-                                    <option value="---" selected>---</option>
-                                    @foreach ($categories as $categorie)
-                                        @if($categorie->name != "Non défini")
-                                            <option value="{{$categorie->name}}">{{$categorie->name}}</option>
-                                        @endif
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="absolute bottom-5 right-2 text-right sm:px-6">
-                                <button wire:click="openWarningDelete" type="button" class="inline-flex mr-3 w-full justify-center rounded-md border border-transparent bg-red-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 sm:ml-3 sm:w-auto sm:text-sm">
-                                    Supprimer
-                                </button>
-                                <button wire:click="toggleDeleteForm" type="button"
-                                    class="mt-3 inline-flex w-full justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-base font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:mt-0 sm:w-auto sm:text-sm">
-                                    Annuler
-                                </button>
-                            </div>
+                                <div class="absolute bottom-5 right-2 text-right sm:px-6">
+                                    <button type="submit" class="inline-flex mr-3 w-full justify-center rounded-md border border-transparent bg-red-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 sm:ml-3 sm:w-auto sm:text-sm">
+                                        Supprimer
+                                    </button>
+                                    <button wire:click="toggleDeleteForm" type="button"
+                                        class="mt-3 inline-flex w-full justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-base font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:mt-0 sm:w-auto sm:text-sm">
+                                        Annuler
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     @endif
 </div>
+
