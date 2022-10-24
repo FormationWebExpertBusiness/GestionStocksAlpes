@@ -1,7 +1,7 @@
 <div>
     {{-- modal qui s'ouvre pour ajouter un produit  --}}
     @if ($isFormOpen)
-        <div class="relative z-10@" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+        <div class="relative z-10" aria-labelledby="modal-title" role="dialog" aria-modal="true">
             <div class="fixed inset-0 bg-gray-500 bg-opacity-50 transition-opacity"></div>
             <div class="fixed inset-0 z-10 overflow-y-auto">
                 <div class="flex min-h-full p-4 text-center sm:items-center sm:p-0">
