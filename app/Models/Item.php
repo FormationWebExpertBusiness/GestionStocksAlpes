@@ -14,9 +14,11 @@ class Item extends Model
     protected $primaryKey = 'id';
 
     protected $fillable = [
+        'serial_number',
         'price',
         'currency',
         'comment',
+        'rack_id',
         'rack_level',
         'common_id',
     ];

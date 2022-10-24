@@ -132,11 +132,14 @@
                                             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                                                 {{ $commonItem->model }}</td>
                                             <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-500 w-[14%]">
-                                                <div class="inline-flex min-w-[75%]">
+                                                <div class="inline-flex min-w-[70%]">
                                                     {{ $commonItem->quantity }} {{ $commonItem->unit }}
                                                 </div>
-                                                <div class="align-middle inline-flex min-w-[25%]">
-                                                    {{-- @livewire('forms.item.quantity-update-form', ['CommonItemToUpdate' => $commonItem], key('quantity-update-form-' . $commonItem->id)) --}}
+                                                <div class="align-middle inline-flex min-w-[15%]">
+                                                    @livewire('forms.item.item-add-form', ['common_id' => $commonItem->id], key('item-add-form-' . $commonItem->id))
+                                                </div>
+                                                <div class="align-middle inline-flex min-w-[15%]">
+                                                    @livewire('forms.item.item-delete-form', ['commonItem' => $commonItem], key('item-delete-form-' . $commonItem->id))
                                                 </div>
                                             </td>
                                             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 w-[14%]">

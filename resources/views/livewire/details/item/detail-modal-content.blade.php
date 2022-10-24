@@ -137,6 +137,7 @@
                                             <h3 class="mt-2 text-sm font-medium text-gray-900">Aucun produit</h3>
                                             <p class="mt-1 text-sm text-gray-500">Vous pouvez en ajouter un nouveau</p>
                                             <div class="mt-3">
+                                                {{-- TODO remettre le formulaire --}}
                                                 {{-- @livewire('forms.common-item.common-item-form') --}}
                                             </div>
                                         </div>
