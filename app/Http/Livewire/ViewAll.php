@@ -200,44 +200,14 @@ class ViewAll extends Component
         $items = CommonItem::where('common_items.id', '>', 0)
             ->join('brands as brand', 'brand.id', '=', 'common_items.brand_id')
             ->join('categories as category', 'category.id', '=', 'common_items.category_id')
-            //->join('items as ite', 'ite.common_id', '=', 'common_items.id')
             ->join('common_items as comi', 'comi.id', '=', 'common_items.id') // I joined items on items because else eloquent erase the items id to replace it with the last joined table id
             ->where('common_items.model', 'LIKE', '%'.$this->searchValue.'%')
             ->orWhere('category.name', 'LIKE', '%'.$this->searchValue.'%')
             ->orWhere('brand.name', 'LIKE', '%'.$this->searchValue.'%')
-            // ->where([
-            //     ['items.price', '<=', $this->priceMax],
-            //     ['items.price', '>=', $this->priceMin],
-            //     ['items.quantity', '<=', $this->quantityMax],
-            //     ['items.quantity', '>=', $this->quantityMin],
-            // ])
-            // ->groupBy('common_items.id')
-            // ->groupBy('ite.price')
-            // ->groupBy('ite.id')
-            // ->havingRaw('SUM(ite.price) <= ?', [$this->priceMax])
-            // ->havingRaw('SUM(ite.price) >= ?', [$this->priceMin])
-            // ->havingRaw('COUNT(ite.id) <= ?', [$this->quantityMax])
-            // ->havingRaw('COUNT(ite.id) >= ?', [$this->quantityMin])
-            //->orderBy($this->champ === 'category' || $this->champ === 'brand' ? $this->champ.'.name' : 'common_items.'.$this->champ, $this->mode) // if champ is category or brand order on champ.name instead of champ
             ->get()
             ->filter(function ($value) {
                 $catF = empty($this->categoriesF) ? Category::where('id', '>', 0)->pluck('id')->toArray() : $this->categoriesF;
                 $brandF = empty($this->brandsF) ? Brand::where('id', '>', 0)->pluck('id')->toArray() : $this->brandsF;
-                
-                //not use
-                /*$rackF = empty($this->racksF) ? Rack::where('id', '>', 0)->pluck('id')->toArray() : $this->racksF;
-                $rackLevelF = [];
-                if (empty($this->rackLevelsF)) {
-                    for ($i=1; $i <= Rack::all()->max('nb_level'); $i++) { 
-                        $rackLevelF[] = $i;
-                    }
-                }
-                else {
-                    $rackLevelF = $this->rackLevelsF; 
-                }
-                if (in_array($value->category->id, $catF) && in_array($value->brand->id, $brandF) && in_array($value->rack->id, $rackF) && in_array($value->rack_level, $rackLevelF)) {
-                */
-                
                 if (in_array($value->category->id, $catF) && in_array($value->brand->id, $brandF)) {
                     if ($value->totalPrice >= $this->priceMin && $value->totalPrice <= $this->priceMax) {
                         if ($value->quantity >= $this->quantityMin && $value->quantity <= $this->quantityMax) {

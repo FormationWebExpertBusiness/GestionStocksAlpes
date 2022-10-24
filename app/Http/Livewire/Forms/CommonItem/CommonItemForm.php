@@ -13,19 +13,13 @@ class CommonItemForm extends Component
 {
     public $categories;
     public $brands;
-    // public $racks;
 
     public $commonItemToUpdate = null;
 
     public $category_id;
     public $brand_id;
     public $model;
-    // public $quantity;
     public $unit;
-    // public $price;
-    // public $comment;
-    // public $rack_id;
-    // public $rack_level;
 
     public $selectedCategoryFilter = [];
     public $selectedBrandFilter = [];
@@ -36,12 +30,7 @@ class CommonItemForm extends Component
         'category_id' => ['nullable', 'integer'],
         'brand_id' => ['nullable', 'integer'],
         'model' => ['required'],
-        // 'quantity' => ['required', 'numeric', 'min:0'],
         'unit' => ['nullable'],
-        // 'price' => ['required', 'numeric'],
-        // 'comment' => ['nullable'],
-        // 'rack_id' => ['required', 'integer'],
-        // 'rack_level' => ['required', 'integer', 'min:1'],
     ];
 
     protected $listeners = [
@@ -56,15 +45,6 @@ class CommonItemForm extends Component
         'brand_id.unique' => 'Cette marque a déjà ce model dans le stock',
         'model.unique' => 'Ce model existe déjà dans la stock pour cette marque',
         'model.required' => 'Le model ou la référence de l\'objet doit être rensigné.',
-        // 'quantity.numeric' => 'La quantité doit être un nombre',
-        // 'quantity.min' => 'La quantité doit être supérieur ou égale à 0',
-        // 'quantity.required' => 'La quantité en stock doit être ajouté.',
-        // 'price.required' => 'La valeur du stock doit être ajouté.',
-        // 'price.numeric' => 'Le prix doit être un nombre',
-        // 'rack_id.integer' => 'L\'élément saisi est incorrect',
-        // 'rack_id.required' => 'L\'emplacement de stockage doit être saisi',
-        // 'rack_level.interger' => 'le niveau de l\'étagère doit être saisie',
-        // 'rack_level.required' => 'L\'emplacement de stockage doit être saisi',
     ];
 
     public function mount()
@@ -72,16 +52,10 @@ class CommonItemForm extends Component
         $this->category_id = $this->commonItemToUpdate?->category_id ?? 1;
         $this->brand_id = $this->commonItemToUpdate?->brand_id ?? 1;
         $this->model = $this->commonItemToUpdate?->model;
-        // $this->quantity = $this->itemToUpdate?->quantity;
         $this->unit = $this->commonItemToUpdate?->unit;
-        // $this->price = $this->itemToUpdate?->price;
-        // $this->comment = $this->itemToUpdate?->comment;
-        // $this->rack_id = $this->itemToUpdate?->rack_id;
-        // $this->rack_level = $this->itemToUpdate?->rack_level;
 
         $this->brands = Brand::all();
         $this->categories = Category::all();
-        // $this->racks = Rack::all();
     }
 
     public function render()
@@ -99,10 +73,6 @@ class CommonItemForm extends Component
         if ($property === 'brand_id' && isset($this->model)) {
             $this->validateOnly('model');
         }
-
-        // if ($property = 'rack_id' && $this->rack_level > $this->getSelectedRack()?->nb_level) {
-        //     $this->rack_level = null;
-        // }
     }
 
     public function saveCommonItem()
@@ -136,11 +106,6 @@ class CommonItemForm extends Component
     {
         array_push($this->rules['model'], 'unique:common_items,model,NULL,id,brand_id,'.$this->brand_id);//vérifie si le model n'existe pas déjà pour la marque sélectionner
     }
-
-    // public function getSelectedRack()
-    // {
-    //     return Rack::find($this->rack_id);
-    // }
 
     public function updateCatF($categories)
     {
