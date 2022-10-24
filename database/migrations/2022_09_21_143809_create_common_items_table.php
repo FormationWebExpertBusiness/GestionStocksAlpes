@@ -20,7 +20,6 @@ return new class extends Migration
             $table->unsignedBigInteger('brand_id')->default(1);
             $table->string('model');
             $table->boolean('favorite')->default(false);
-            //$table->integer('quantity')->default(0);
 
             $table->foreign('category_id')->references('id')->on('categories')->onUpdate('restrict')->onDelete('cascade');
             $table->foreign('brand_id')->references('id')->on('brands')->onUpdate('restrict')->onDelete('cascade');
