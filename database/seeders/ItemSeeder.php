@@ -5,8 +5,6 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-use App\Models\Category;
-use App\Models\Brand;
 use App\Models\Rack;
 
 class ItemSeeder extends Seeder
@@ -23,13 +21,12 @@ class ItemSeeder extends Seeder
 
     private function createRand()
     {
-        for ($i=0; $i < 20; $i++) { 
+        for ($i=0; $i < 800; $i++) { 
             $rack = Rack::inRandomOrder()->first();
             \App\Models\Item::factory()->create([
-                'category_id' => fake()->numberBetween(1,Category::all()->count()),
-                'brand_id' => fake()->numberBetween(1, Brand::all()->count()),
                 'rack_id' => $rack->id,
-                'rack_level' => fake()->numberBetween(1,$rack->nb_level)
+                'rack_level' => fake()->numberBetween(1,$rack->nb_level),
+                'common_id' => fake()->numberBetween(1, 20),
             ]);
         }
     }

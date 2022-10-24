@@ -75,7 +75,7 @@
             </div>
 
             <div class="mt-4 sm:mt-0 sm:ml-10 sm:flex-none">
-                @livewire('forms.item.item-form')
+                @livewire('forms.common-item.common-item-form')
             </div>
         </div>
         @livewire('warning-before-delete')
@@ -122,35 +122,37 @@
                                 </tr>
                             </thead>
                             <tbody class="bg-white block max-h-[62vh] overflow-y-scroll">
-                                @forelse ($items as $item)
-                                    <div wire:key="item-{{ $item->id }}">
+                                @forelse ($commonItems as $commonItem)
+                                    <div wire:key="Common-item-{{ $commonItem->id }}">
                                         <tr class="odd:bg-white even:bg-gray-50 divide-x divide-gray-200 table w-full table-fixed">
                                             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                                {{ $item->category->name }}</td>
+                                                {{ $commonItem->category->name }}</td>
                                             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                                {{ $item->brand->name }}</td>
+                                                {{ $commonItem->brand->name }}</td>
                                             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                                {{ $item->model }}</td>
+                                                {{ $commonItem->model }}</td>
                                             <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-500 w-[14%]">
-                                                <div class="inline-flex min-w-[75%]">
-                                                    {{ $item->quantity }} {{ $item->unit }}
+                                                <div class="inline-flex min-w-[70%]">
+                                                    {{ $commonItem->quantity }} {{ $commonItem->unit }}
                                                 </div>
-                                                <div class="align-middle inline-flex min-w-[25%]">
-                                                    @livewire('forms.item.quantity-update-form', ['itemToUpdate' => $item], key('quantity-update-form-' . $item->id))
+                                                <div class="align-middle inline-flex min-w-[15%]">
+                                                    @livewire('forms.item.item-add-form', ['common_id' => $commonItem->id], key('item-add-form-' . $commonItem->id))
+                                                </div>
+                                                <div class="align-middle inline-flex min-w-[15%]">
+                                                    @livewire('forms.item.item-delete-form', ['commonItem' => $commonItem], key('item-delete-form-' . $commonItem->id))
                                                 </div>
                                             </td>
                                             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 w-[14%]">
-                                                {{ $item->price }} {{ $item->currency }}</td>
-                                            <td
-                                                class="relative whitespace-nowrap py-4 pl-3 pr-4 text-center text-sm font-medium sm:pr-6 w-1/5">
+                                                {{ number_format($commonItem->totalPrice, 2, ',', ' '); }} €</td>
+                                            <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-center text-sm font-medium sm:pr-6 w-1/5">
                                                 <div class="inline-block px-6">
-                                                    @livewire('details.item.detail-modal', ['item' => $item], key('item-detail-' . $item->id))
+                                                    @livewire('details.item.detail-modal', ['commonItem' => $commonItem], key('item-detail-' . $commonItem->id))
                                                 </div>
                                                 <div class="inline-block px-6">
-                                                    @livewire('forms.item.item-form', ['itemToUpdate' => $item], key('item-form-' . $item->id))
+                                                    @livewire('forms.common-item.common-item-form', ['commonItemToUpdate' => $commonItem], key('common-item-form-' . $commonItem->id))
                                                 </div>
                                                 <div class="inline-block px-6">
-                                                    <button wire:click="openWarningDelete({{ $item->id }})"
+                                                    <button wire:click="openWarningDelete({{ $commonItem->id }})"
                                                         class="text-indigo-600 hover:text-indigo-900">
                                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none"
                                                             viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
@@ -163,7 +165,7 @@
                                             </td>
                                         </tr>
                                     </div>
-                                    @empty
+                                @empty
                                     <tr class="bg-white divide-x divide-gray-200 table w-full table-fixed">
                                         <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                                     <div class="text-center">
@@ -174,7 +176,7 @@
                                         <h3 class="mt-2 text-sm font-medium text-gray-900">Aucun produit</h3>
                                         <p class="mt-1 text-sm text-gray-500">Vous pouvez en ajouter un nouveau</p>
                                         <div class="mt-3">
-                                            @livewire('forms.item.item-form')
+                                            @livewire('forms.common-item.common-item-form')
                                         </div>
                                       </div>
                                     </td>

@@ -13,23 +13,18 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('items', function (Blueprint $table) {
+        Schema::create('common_items', function (Blueprint $table) {
             $table->id();
-            $table->integer('quantity')->default(0);
-            $table->float('price', 8, 2)->default(0);
-            $table->string('currency')->default("EUR");
             $table->string('unit')->nullable();
             $table->unsignedBigInteger('category_id')->default(1);
             $table->unsignedBigInteger('brand_id')->default(1);
             $table->string('model');
-            $table->string('comment')->nullable();
-            $table->integer('rack_level');
-            $table->timestamps();
+            $table->boolean('favorite')->default(false);
 
             $table->foreign('category_id')->references('id')->on('categories')->onUpdate('restrict')->onDelete('cascade');
             $table->foreign('brand_id')->references('id')->on('brands')->onUpdate('restrict')->onDelete('cascade');
-            $table->foreignId('rack_id')->constrained('racks')->onUpdate('restrict')->onDelete('cascade');
-
+        
+            $table->timestamps();
             $table->unique(['model', 'brand_id']);
         });
     }
@@ -41,6 +36,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('items');
+        Schema::dropIfExists('common_items');
     }
 };

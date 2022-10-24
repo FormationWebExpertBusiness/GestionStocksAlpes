@@ -30,7 +30,6 @@ class CategoryDeleteForm extends Component
 
     public function openWarningDelete()
     {
-        // dd($this->selectedCategory);
         if ($this->selectedCategory !== null) {
             $category = Category::where('name', $this->selectedCategory);
             $this->emit('deleteWarning', $category->first()->id, $this->warningDeleteCategorySignal, 'Category', 'name');

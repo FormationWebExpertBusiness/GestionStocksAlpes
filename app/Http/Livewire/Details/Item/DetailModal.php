@@ -7,7 +7,7 @@ use Livewire\Component;
 class DetailModal extends Component
 {
     public $show = false;
-    public $item;
+    public $commonItem;
 
     public function toggleModal()
     {
@@ -18,7 +18,7 @@ class DetailModal extends Component
     {
         return view('livewire.details.item.detail-modal', [
             'show' => $this->show,
-            'item' => $this->item,
+            'commonItem' => $this->commonItem,
         ]);
     }
 }
