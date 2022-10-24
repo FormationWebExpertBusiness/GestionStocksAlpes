@@ -40,24 +40,8 @@
                 <dt class="truncate text-sm font-medium text-gray-500">Quantité</dt>
                 <dd class="mt-1 text-2xl font-semibold tracking-tight text-gray-900">{{ $commonItem->quantity }} {{ $commonItem->unit }}</dd>
             </div>
-
-            {{-- <div class="overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6">
-                <dt class="truncate text-sm font-medium text-gray-500">Étagère</dt>
-                <dd class="mt-1 text-xl font-semibold tracking-tight text-gray-900">{{$item->rack_id}}</dd>
-            </div>
-            <div class="overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6">
-                <dt class="truncate text-sm font-medium text-gray-500">Niveau sur l'étagère</dt>
-                <dd class="mt-1 text-xl font-semibold tracking-tight text-gray-900">{{$item->rack_level}}</dd>
-            </div> --}}
         </dl>
     </div>
-    {{-- @if ($item->comment != null)
-        <br>
-        <div class="overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6 ">
-            <dt class="truncate text-sm font-medium text-gray-500">Commentaire</dt>
-            <dd class="mt-1 text-xl font-medium tracking-tight text-gray-900">{{$item->comment}}</dd>
-        </div>
-    @endif --}}
 
     <div class="mt-8 flex flex-col">
         <div class="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -109,9 +93,6 @@
                                         <td class="whitespace-normal px-3 py-4 text-sm text-gray-500">
                                             {{ $item->comment }}</td>
                                         <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-center text-sm font-medium sm:pr-6 w-1/6">
-                                            {{-- <div class="inline-block px-6">
-                                                @livewire('forms.item.quantity-update-form', ['CommonItemToUpdate' => $commonItem], key('quantity-update-form-' . $commonItem->id))
-                                            </div> --}}
                                             <div class="inline-block px-6">
                                                 <button wire:click="openWarningDelete({{ $item->id }})"
                                                     class="text-indigo-600 hover:text-indigo-900">
