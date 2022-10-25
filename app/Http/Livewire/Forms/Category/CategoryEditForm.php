@@ -20,7 +20,6 @@ class CategoryEditForm extends Component
     ];
     protected $messages = [
         'selectedCategory.required' => 'La catégorie à modifier doit être selectionnée',
-        'selectedCategory.different' => 'La catégorie selectionnée doit être définie',
         'newName.required' => 'Le nouveau nom de la catégorie séléctionnée doit être renseigné',
         'newName.alpha_dash' => 'Le nom de la catégorie ne doit contenir que des lettres, des chiffres',
         'newName.unique' => 'Le nom de la catégorie doit être unique',
