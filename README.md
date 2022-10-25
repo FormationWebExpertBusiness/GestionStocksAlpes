@@ -56,3 +56,4 @@ npm run dev
 Change the DB_HOST line in your .env to "mysql"
 ```
 
+![TailwindCSS](https://img.shields.io/badge/tailwindui-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white)
