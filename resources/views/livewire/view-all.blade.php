@@ -86,6 +86,10 @@
                         <table class="min-w-full divide-y divide-gray-300">
                             <thead class="bg-gray-100 block">
                                 <tr class="table w-full table-fixed">
+                                    <th scope="col"
+                                        class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 w-[5%]">
+                                        Favoris
+                                    </th>
                                     <th wire:click="reOrder('category')" scope="col"
                                         class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
                                         Catégorie
@@ -105,7 +109,7 @@
                                             modeF={{$mode}}></x-ordering-arrows>
                                     </th>
                                     <th wire:click="reOrder('quantity')" scope="col"
-                                        class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 w-[14%]">
+                                        class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 w-[14%]">
                                         Quantité
                                         <x-ordering-arrows champ='quantity' champF={{$champ}}
                                             modeF={{$mode}}></x-ordering-arrows>
@@ -125,6 +129,9 @@
                                 @forelse ($commonItems as $commonItem)
                                     <div wire:key="Common-item-{{ $commonItem->id }}">
                                         <tr class="odd:bg-white even:bg-gray-50 divide-x divide-gray-200 table w-full table-fixed">
+                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 w-[5%]">
+                                                @livewire('forms.common-item.common-item-toggle-favorite', ['commonItem' => $commonItem], key('common-item-favorite-' . $commonItem->id))
+                                            </td>
                                             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                                                 {{ $commonItem->category->name }}</td>
                                             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
