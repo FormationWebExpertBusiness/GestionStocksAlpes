@@ -1,4 +1,5 @@
 <div>
+    @livewire('filtres')
     @if (session('status'))
         @if ($showToast)
             <div class="absolute min-w-[10%] pb-2 pt-2 top-0 right-0 rounded-lg bg-green-50 p-4">
