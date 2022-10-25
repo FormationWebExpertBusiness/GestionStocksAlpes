@@ -15,12 +15,12 @@ class RackEditForm extends Component
 
     protected $rules = [
         'selectedRack' => ['required'],
-        'nb_level' => ['required', 'min:1'],
+        'nb_level' => ['min:1', 'numeric', 'required'],
     ];
     protected $messages = [
         'selectedRack.required' => 'L\'étagère à modifier doit être selectionnée',
-        'nb_level.required' => 'Le nombre d\'étage dois être renseigné',
         'nb_level.min' => 'Il doit y avoir au moins un étage',
+        'nb_level.required' => 'Le nombre d\'étage dois être renseigné',
     ];
 
     public function mount()
@@ -41,7 +41,7 @@ class RackEditForm extends Component
         $rack = Rack::find($this->selectedRack);
         $rack->update($validatedData);
         $this->toggleEditForm();
-        return redirect('stock')->with('status', 'L\'étagère '.$rack->id.' a désormais '.$rack->nb_level.'étage(s) !');
+        return redirect('stock')->with('status', 'L\'étagère '.$rack->id.' a désormais '.$rack->nb_level.' étage(s) !');
     }
 
     public function toggleEditForm()

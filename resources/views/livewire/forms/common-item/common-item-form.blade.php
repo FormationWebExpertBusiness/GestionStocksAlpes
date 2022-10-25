@@ -36,6 +36,7 @@
                         </div>
                         <div class="bg-white flex-col justify-between rounded-r-lg sm:px-6 col-span-3 py-4 px-8">
                             <form wire:submit.prevent='saveCommonItem'>
+                                
                                 {{-- categories select field --}}
                                 <div class=" mt-10">
                                     <div class="flex justify-between">
@@ -83,8 +84,9 @@
                                 {{-- brands select field --}}
                                 <div class="">
                                     <div class="flex justify-between">
-                                        <label for="brand"
-                                            class="block text-sm font-medium text-gray-700">Marque</label>
+                                        <label for="brand" class="block text-sm font-medium text-gray-700">
+                                            Marque
+                                        </label>
                                         <span class="text-sm text-gray-500">Optionnel</span>
                                     </div>
                                     <div class="mt-1">
@@ -135,7 +137,7 @@
                                             <div class="relative">
                                                 <input wire:model="model" type="text" name="model" id="model"
                                                     autocomplete="model"
-                                                    placeholder="Ex: HP - J9280A - HP Procurve Switch 2510-48G"
+                                                    placeholder="Ex: AX6000"
                                                     class="block w-full py-3 px-4 rounded-md border-red-300 pr-10 text-red-900 placeholder-red-300 focus:border-red-500 focus:outline-none focus:ring-red-500"
                                                     aria-invalid="true" aria-describedby="email-error">
                                                 <div
@@ -159,7 +161,7 @@
                                             <input wire:model="model" type="text" name="model" id="model"
                                                 autocomplete="model"
                                                 class="block w-full rounded-md border-gray-300 py-3 px-4 placeholder-gray-500 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
-                                                placeholder="Ex: HP - J9280A - HP Procurve Switch 2510-48G">
+                                                placeholder="Ex: AX6000">
                                             <p class="mt-2 h-4" />
                                         @endif
                                     </div>

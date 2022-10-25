@@ -22,9 +22,9 @@ class ItemAddForm extends Component
     protected $rules = [
         'common_id' => ['required'],
         'serial_number' => ['required', 'alpha_num'],
-        'price' => ['required', 'numeric'],
+        'price' => ['numeric', 'required', 'min:0'],
         'comment' => ['nullable'],
-        'rack_id' => ['required', 'integer'],
+        'rack_id' => ['integer', 'required'],
         'rack_level' => ['required', 'integer', 'min:1'],
     ];
     protected $messages = [
@@ -32,6 +32,7 @@ class ItemAddForm extends Component
         'serial_number.alpha_num' => 'Le numéro de série ne peut contenir que des chiffres et des lettres',
         'price.required' => 'La valeur du stock doit être ajouté.',
         'price.numeric' => 'Le prix doit être un nombre',
+        'price.min' => 'Le prix doit être supérieur ou égale à 0',
         'rack_id.integer' => 'L\'élément saisi est incorrect',
         'rack_id.required' => 'L\'emplacement de stockage doit être saisi',
         'rack_level.interger' => 'le niveau de l\'étagère doit être saisie',
