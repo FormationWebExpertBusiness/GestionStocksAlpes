@@ -55,4 +55,4 @@ npm run dev
 ```
 Change the DB_HOST line in your .env to "mysql"
 ```
-![alt text](https://img.shields.io/badge/Laravel-FF2D20?style=for-the-badge&logo=laravel&logoColor=white)
+
