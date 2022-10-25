@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use App\Models\Brand;
 use App\Models\Category;
+use App\Models\CommonItem;
 use App\Models\Item;
 use App\Models\Rack;
 use Livewire\Component;
@@ -56,11 +57,11 @@ class ViewAll extends Component
 
     public function mount()
     {
-        $this->priceMin = Item::min('price') ?? 0;
-        $this->priceMax = Item::max('price') ?? 0;
+        $this->priceMin = CommonItem::all()->min('totalPrice') ?? 0;
+        $this->priceMax = CommonItem::all()->max('totalPrice') ?? 0;
 
-        $this->quantityMin = Item::min('quantity') ?? 0;
-        $this->quantityMax = Item::max('quantity') ?? 0;
+        $this->quantityMin = CommonItem::all()->min('quantity') ?? 0;
+        $this->quantityMax = CommonItem::all()->max('quantity') ?? 0;
 
         $this->categoriesF = [];
         $this->brandsF = [];
@@ -75,6 +76,9 @@ class ViewAll extends Component
 
     public function getPriceMax($priceMax)
     {
+        if ($priceMax === "") {
+            $priceMax = CommonItem::all()->max('totalPrice');
+        }
         $this->priceMax = $priceMax;
     }
 
@@ -90,6 +94,9 @@ class ViewAll extends Component
 
     public function getQuantityMax($quantityMax)
     {
+        if ($quantityMax === "") {
+            $quantityMax = CommonItem::all()->max('quantity');
+        }
         $this->quantityMax = $quantityMax;
     }
 
@@ -176,11 +183,11 @@ class ViewAll extends Component
         $this->racksF = [];
         $this->rackLevelsF = [];
 
-        $this->priceMin = Item::min('price') ?? 0;
-        $this->priceMax = Item::max('price') ?? 0;
+        $this->priceMin = CommonItem::all()->min('totalPrice') ?? 0;
+        $this->priceMax = CommonItem::all()->max('totalPrice') ?? 0;
 
-        $this->quantityMin = Item::min('quantity') ?? 0;
-        $this->quantityMax = Item::max('quantity') ?? 0;
+        $this->quantityMin = CommonItem::all()->min('quantity') ?? 0;
+        $this->quantityMax = CommonItem::all()->max('quantity') ?? 0;
     }
 
     public function search($searchV)
@@ -190,49 +197,31 @@ class ViewAll extends Component
 
     public function render()
     {
-        $items = Item::where('items.id', '>', 0)
-            ->join('brands as brand', 'brand.id', '=', 'items.brand_id')
-            ->join('categories as category', 'category.id', '=', 'items.category_id')
-            ->join('items as ite', 'ite.id', '=', 'items.id') // I joined items on items because else eloquent erase the items id to replace it with the last joined table id
-            ->where('items.model', 'LIKE', '%'.$this->searchValue.'%')
-            ->orWhere('items.comment', 'LIKE', '%'.$this->searchValue.'%')
+        $items = CommonItem::where('common_items.id', '>', 0)
+            ->join('brands as brand', 'brand.id', '=', 'common_items.brand_id')
+            ->join('categories as category', 'category.id', '=', 'common_items.category_id')
+            ->join('common_items as comi', 'comi.id', '=', 'common_items.id') // I joined items on items because else eloquent erase the items id to replace it with the last joined table id
+            ->where('common_items.model', 'LIKE', '%'.$this->searchValue.'%')
             ->orWhere('category.name', 'LIKE', '%'.$this->searchValue.'%')
             ->orWhere('brand.name', 'LIKE', '%'.$this->searchValue.'%')
-            ->where([
-                ['items.price', '<=', $this->priceMax],
-                ['items.price', '>=', $this->priceMin],
-                ['items.quantity', '<=', $this->quantityMax],
-                ['items.quantity', '>=', $this->quantityMin],
-            ])
-            ->orderBy($this->champ === 'category' || $this->champ === 'brand' ? $this->champ.'.name' : 'items.'.$this->champ, $this->mode) // if champ is category or brand order on champ.name instead of champ
             ->get()
             ->filter(function ($value) {
                 $catF = empty($this->categoriesF) ? Category::where('id', '>', 0)->pluck('id')->toArray() : $this->categoriesF;
                 $brandF = empty($this->brandsF) ? Brand::where('id', '>', 0)->pluck('id')->toArray() : $this->brandsF;
-                $rackF = empty($this->racksF) ? Rack::where('id', '>', 0)->pluck('id')->toArray() : $this->racksF;
-                $rackLevelF = [];
-                if (empty($this->rackLevelsF)) {
-                    for ($i=1; $i <= Rack::all()->max('nb_level'); $i++) { 
-                        $rackLevelF[] = $i;
-                    }
-                }
-                else {
-                    $rackLevelF = $this->rackLevelsF; 
-                }
-
-                if (in_array($value->category->id, $catF) && in_array($value->brand->id, $brandF) && in_array($value->rack->id, $rackF) && in_array($value->rack_level, $rackLevelF)) {
-                    if ($value->price >= $this->priceMin && $value->price <= $this->priceMax) {
+                if (in_array($value->category->id, $catF) && in_array($value->brand->id, $brandF)) {
+                    if ($value->totalPrice >= $this->priceMin && $value->totalPrice <= $this->priceMax) {
                         if ($value->quantity >= $this->quantityMin && $value->quantity <= $this->quantityMax) {
                             return $value;
                         }
                     }
                 }
-            });
-
+            })
+            ->sortBy([[$this->champ === 'category' || $this->champ === 'brand' ? $this->champ.'.name' : $this->champ, $this->mode]]);
+            
         $this->showToast = true;
 
         return view('livewire.view-all', [
-            'items' => $items,
+            'commonItems' => $items,
         ]);
     }
 
