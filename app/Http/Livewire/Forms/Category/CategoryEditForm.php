@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Forms\Category;
 
 use App\Models\Category;
+use App\Rules\DifferentThanNonDefini;
 use Livewire\Component;
 
 class CategoryEditForm extends Component
@@ -12,14 +13,14 @@ class CategoryEditForm extends Component
     public $showDropdown = false;
     public $selectedCategory;
     public $newName;
-    private $nonDefiniName;
 
     protected $rules = [
-        'selectedCategory' => ['required', 'different:nonDefiniName'],
+        'selectedCategory' => ['required'],
         'newName' => ['required', 'alpha_dash', 'unique:App\Models\Category,name'],
     ];
     protected $messages = [
         'selectedCategory.required' => 'La catégorie à modifier doit être selectionnée',
+        'selectedCategory.different' => 'La catégorie selectionnée doit être définie',
         'newName.required' => 'Le nouveau nom de la catégorie séléctionnée doit être renseigné',
         'newName.alpha_dash' => 'Le nom de la catégorie ne doit contenir que des lettres, des chiffres',
         'newName.unique' => 'Le nom de la catégorie doit être unique',
@@ -32,7 +33,9 @@ class CategoryEditForm extends Component
 
     public function updateCategory()
     {
-        $this->validate();
+        $this->validate([
+            'selectedCategory' => [new DifferentThanNonDefini]
+        ]);
         Category::where('name', $this->selectedCategory)->update(['name' => $this->newName]);
         $this->toggleEditForm();
         return redirect('stock')->with('status', 'Le nom de la categorie '.$this->selectedCategory.' a bien été changé en '.$this->newName.' !');
