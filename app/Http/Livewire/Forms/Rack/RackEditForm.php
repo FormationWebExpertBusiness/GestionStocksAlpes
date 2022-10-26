@@ -39,9 +39,10 @@ class RackEditForm extends Component
     {
         $validatedData = $this->validate();
         $rack = Rack::find($this->selectedRack);
+        $oldNbLevel = $rack->nb_level;
         $rack->update($validatedData);
         $this->toggleEditForm();
-        return redirect('stock')->with('status', 'L\'étagère '.$rack->id.' a désormais '.$rack->nb_level.' étage(s) !');
+        return redirect('stock')->with('status', 'L\'étagère '.$rack->id.' est passé de '.$oldNbLevel.' à '.$rack->nb_level.' étage(s) !');
     }
 
     public function toggleEditForm()

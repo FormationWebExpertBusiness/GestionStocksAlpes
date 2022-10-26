@@ -44,7 +44,7 @@
                                     <select wire:model="selectedRack" id="location" name="location" class="mt-1 block w-full rounded-md border-gray-300 py-3 pl-3 pr-10 text-base focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
                                         <option value="" selected>---</option>
                                         @foreach ($racks as $rack)
-                                            <option value="{{$rack->id}}">Étagère {{$rack->id}}</option>
+                                            <option value="{{$rack->id}}">Étagère {{$rack->id}} <p> - {{$rack->nb_level}} étage(s)</p></option>
                                         @endforeach
                                     </select>
                                     <div class="min-h-[20px]">

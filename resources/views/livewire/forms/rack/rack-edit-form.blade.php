@@ -29,7 +29,7 @@
                                 </button>
                             </div>
                             <h2 class="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">Modifiez une
-                                étagère
+                               étagère
                             </h2>
                             <p class="mt-3 text-md leading-6 text-gray-500">
                                 Sélectionnez une étagère pour la modifier
@@ -48,7 +48,7 @@
                                             <select wire:model="selectedRack" id="location" name="location" class="mt-1 block text-red-900 placeholder-red-300 w-full rounded-md border-red-300 py-3 pl-3 pr-10 text-base focus:border-red-500 focus:outline-none focus:ring-red-500 sm:text-sm">
                                                 <option value="null" selected>---</option>
                                                 @foreach ($racks as $rack)
-                                                    <option value="{{$rack->id}}">Étagère {{$rack->id}}</option>
+                                                    <option value="{{$rack->id}}">Étagère {{$rack->id}} <p> - {{$rack->nb_level}} étage(s)</p></option>
                                                 @endforeach
                                             </select>
                                             <div
@@ -69,7 +69,7 @@
                                             <select wire:model="selectedRack" id="location" name="location" class="mt-1 block w-full rounded-md border-gray-300 py-3 pl-3 pr-10 text-base focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
                                                 <option selected>---</option>
                                                 @foreach ($racks as $rack)
-                                                    <option value="{{$rack->id}}">Étagère {{$rack->id}}</option>
+                                                <option value="{{$rack->id}}">Étagère {{$rack->id}} <p> - {{$rack->nb_level}} étage(s)</p></option>
                                                 @endforeach
                                             </select>
                                             <p class="mt-2 h-4"/>
