@@ -57,10 +57,10 @@ class ViewAll extends Component
 
     public function mount()
     {
-        $this->priceMin = CommonItem::all()->min('totalPrice') ?? 0;
+        $this->priceMin = 0;
         $this->priceMax = CommonItem::all()->max('totalPrice') ?? 0;
 
-        $this->quantityMin = CommonItem::all()->min('quantity') ?? 0;
+        $this->quantityMin = 0;
         $this->quantityMax = CommonItem::all()->max('quantity') ?? 0;
 
         $this->categoriesF = [];
@@ -148,6 +148,7 @@ class ViewAll extends Component
         }
 
         $this->emit('racksFilter', $this->racksF);
+        // $this->emitTo('details.item.detail-modal', 'racksFilter', $this->racksF);
     }
 
     public function updateRackLevelF($rackLevel)
@@ -159,6 +160,7 @@ class ViewAll extends Component
         }
 
         $this->emit('rackLevelsFilter', $this->rackLevelsF);
+        // $this->emitTo('details.item.detail-modal', 'rackLevelsFilter', $this->rackLevelsF);
     }
 
     public function toggleMode()
@@ -183,10 +185,10 @@ class ViewAll extends Component
         $this->racksF = [];
         $this->rackLevelsF = [];
 
-        $this->priceMin = CommonItem::all()->min('totalPrice') ?? 0;
+        $this->priceMin = 0;
         $this->priceMax = CommonItem::all()->max('totalPrice') ?? 0;
 
-        $this->quantityMin = CommonItem::all()->min('quantity') ?? 0;
+        $this->quantityMin = 0;
         $this->quantityMax = CommonItem::all()->max('quantity') ?? 0;
     }
 
@@ -197,7 +199,7 @@ class ViewAll extends Component
 
     public function render()
     {
-        $items = CommonItem::where('common_items.id', '>', 0)
+        $commonItems = CommonItem::where('common_items.id', '>', 0)
             ->join('brands as brand', 'brand.id', '=', 'common_items.brand_id')
             ->join('categories as category', 'category.id', '=', 'common_items.category_id')
             ->join('common_items as comi', 'comi.id', '=', 'common_items.id') // I joined items on items because else eloquent erase the items id to replace it with the last joined table id
@@ -208,20 +210,40 @@ class ViewAll extends Component
             ->filter(function ($value) {
                 $catF = empty($this->categoriesF) ? Category::where('id', '>', 0)->pluck('id')->toArray() : $this->categoriesF;
                 $brandF = empty($this->brandsF) ? Brand::where('id', '>', 0)->pluck('id')->toArray() : $this->brandsF;
-                if (in_array($value->category->id, $catF) && in_array($value->brand->id, $brandF)) {
-                    if ($value->totalPrice >= $this->priceMin && $value->totalPrice <= $this->priceMax) {
-                        if ($value->quantity >= $this->quantityMin && $value->quantity <= $this->quantityMax) {
-                            return $value;
+                
+                // not use
+                // $rackF = empty($this->racksF) ? Rack::where('id', '>', 0)->pluck('id')->toArray() : $this->racksF;
+                // $rackLevelF = [];
+                // if (empty($this->rackLevelsF)) {
+                //     for ($i=1; $i <= Rack::all()->max('nb_level'); $i++) { 
+                //         $rackLevelF[] = $i;
+                //     }
+                // }
+                // else {
+                //     $rackLevelF = $this->rackLevelsF; 
+                // }
+                
+                // if (in_array($value->rack->id, $rackF) && in_array($value->rack_level, $rackLevelF)) {
+                    if (in_array($value->category->id, $catF) && in_array($value->brand->id, $brandF)) {
+                        if ($value->TotalPriceOnRack($this->racksF, $this->rackLevelsF) >= $this->priceMin 
+                            && $value->TotalPriceOnRack($this->racksF, $this->rackLevelsF) <= $this->priceMax) {
+                            if ($value->QuantityOnRack($this->racksF, $this->rackLevelsF) >= $this->quantityMin 
+                                && $value->QuantityOnRack($this->racksF, $this->rackLevelsF) <= $this->quantityMax) {
+                                return $value;
+                            }
                         }
                     }
-                }
+                // }
+            
             })
             ->sortBy([[$this->champ === 'category' || $this->champ === 'brand' ? $this->champ.'.name' : $this->champ, $this->mode]]);
             
         $this->showToast = true;
 
+        //$_ = $commonItems->first()->ItemsOnRack([1], [1,2]);
+        
         return view('livewire.view-all', [
-            'commonItems' => $items,
+            'commonItems' => $commonItems,
         ]);
     }
 
