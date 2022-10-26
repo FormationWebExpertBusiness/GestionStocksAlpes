@@ -72,7 +72,7 @@ class ItemAddForm extends Component
     {
         return Rack::find($this->rack_id);
     }
-    
+
     public function resetInput()
     {
         $this->serial_number = null;

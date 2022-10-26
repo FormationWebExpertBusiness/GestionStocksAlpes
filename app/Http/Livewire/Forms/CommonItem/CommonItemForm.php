@@ -4,9 +4,7 @@ namespace App\Http\Livewire\Forms\CommonItem;
 
 use App\Models\Brand;
 use App\Models\Category;
-use App\Models\Item;
 use App\Models\CommonItem;
-use App\Models\Rack;
 use Livewire\Component;
 
 class CommonItemForm extends Component

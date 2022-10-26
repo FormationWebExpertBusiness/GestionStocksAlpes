@@ -26,19 +26,21 @@ class RackEditForm extends Component
 
     public function mount()
     {
-        $this->selectedRack = "";
+        $this->selectedRack = '';
         $this->nb_level = 1;
     }
 
     public function updated($property)
     {
-        if($this->$property === "---") $this->$property = null;
+        if ($this->$property === '---') {
+            $this->$property = null;
+        }
         $this->validateOnly($property);
     }
 
     public function updateRack()
     {
-        array_push($this->rules['nb_level'], new NotEmptyRackLevel);
+        array_push($this->rules['nb_level'], new NotEmptyRackLevel());
         $validatedData = $this->validate();
         $rack = Rack::find($this->selectedRack);
         $rack->update($validatedData);

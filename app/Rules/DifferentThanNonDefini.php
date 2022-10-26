@@ -12,12 +12,13 @@ class DifferentThanNonDefini implements InvokableRule
      * @param  string  $attribute
      * @param  mixed  $value
      * @param  \Closure(string): \Illuminate\Translation\PotentiallyTranslatedString  $fail
+     *
      * @return void
      */
     public function __invoke($attribute, $value, $fail)
     {
         // dd('test');
-        if (($value) === 'Non défini' || ($value) === null || ($value) === "1") {
+        if ($value === 'Non défini' || $value === null || $value === '1') {
             $fail('L\'attribut doit être défini.');
         }
     }
