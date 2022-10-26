@@ -18,9 +18,23 @@ class BrandDeleteForm extends Component
         'deleteBrand' => 'deleteBrand',
     ];
 
+    protected $rules = [
+        'selectedBrand' => ['required'],
+    ];
+
+    protected $messages = [
+        'selectedBrand.required' => 'La marque à supprimer dois être selectionnée',
+    ];
+
     public function toggleDropdown()
     {
         $this->showDropdown = ! $this->showDropdown;
+    }
+
+    public function updated($property)
+    {
+        if($this->$property === "Non défini") $this->$property = null;
+        $this->validateOnly($property);
     }
 
     public function toggleDeleteForm()
@@ -30,17 +44,16 @@ class BrandDeleteForm extends Component
 
     public function openWarningDelete()
     {
-        if ($this->selectedBrand !== null) {
-            $brand = Brand::where('name', $this->selectedBrand);
-            $this->emit('deleteWarning', $brand->first()->id, $this->warningDeleteBrandSignal, 'Brand', 'name');
-        }
+        $validatedData = $this->validate();
+        $brand = Brand::where('name', $this->selectedBrand);
+        $this->emit('deleteWarning', $brand->first()->id, $this->warningDeleteBrandSignal, 'Brand', 'name');
     }
 
     public function deleteBrand($brandId)
     {
         Brand::find($brandId)->delete();
         $this->toggleDeleteForm();
-        return redirect('stock')->with('status', 'La brand '.$this->selectedBrand.' a bien été supprimé !');
+        return redirect('stock')->with('status', 'La marque '.$this->selectedBrand.' a bien été supprimé !');
     }
 
     public function render()

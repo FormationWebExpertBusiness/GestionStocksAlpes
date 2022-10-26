@@ -46,7 +46,7 @@
                                         @if ($errors->has('selectedRack'))
                                         <div class="relative">
                                             <select wire:model="selectedRack" id="location" name="location" class="mt-1 block text-red-900 placeholder-red-300 w-full rounded-md border-red-300 py-3 pl-3 pr-10 text-base focus:border-red-500 focus:outline-none focus:ring-red-500 sm:text-sm">
-                                                <option value="null" selected>---</option>
+                                                <option selected>Non défini</option>
                                                 @foreach ($racks as $rack)
                                                     <option value="{{$rack->id}}">Étagère {{$rack->id}} <p> - {{$rack->nb_level}} étage(s)</p></option>
                                                 @endforeach
@@ -67,7 +67,7 @@
                                             @enderror
                                         @else
                                             <select wire:model="selectedRack" id="location" name="location" class="mt-1 block w-full rounded-md border-gray-300 py-3 pl-3 pr-10 text-base focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
-                                                <option selected>---</option>
+                                                <option selected>Non défini</option>
                                                 @foreach ($racks as $rack)
                                                 <option value="{{$rack->id}}">Étagère {{$rack->id}} <p> - {{$rack->nb_level}} étage(s)</p></option>
                                                 @endforeach
