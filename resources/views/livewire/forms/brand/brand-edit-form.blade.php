@@ -8,7 +8,7 @@
             <path
                 d="M3.5 5.75c0-.69.56-1.25 1.25-1.25H10A.75.75 0 0010 3H4.75A2.75 2.75 0 002 5.75v9.5A2.75 2.75 0 004.75 18h9.5A2.75 2.75 0 0017 15.25V10a.75.75 0 00-1.5 0v5.25c0 .69-.56 1.25-1.25 1.25h-9.5c-.69 0-1.25-.56-1.25-1.25v-9.5z" />
         </svg>
-        <button>Modifier </button>
+        <button>Modifier</button>
     </a>
     @if ($show)
         <div class="relative z-10" aria-labelledby="modal-title" role="dialog" aria-modal="true">
@@ -29,26 +29,26 @@
                                 </button>
                             </div>
                             <h2 class="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">Modifiez une
-                               étagère
+                                marque
                             </h2>
                             <p class="mt-3 text-md leading-6 text-gray-500">
-                                Sélectionnez une étagère pour la modifier
+                                Sélectionnez une marque pour la modifier
                             </p>
                         </div>
-                        <div class="bg-white rounded-r-lg py-16 px-4 sm:px-6 lg:col-span-3 lg:py-24 lg:px-8 xl:pl-12">
-                            <form wire:submit.prevent='updateRack'>
-                                {{-- rack dropdown --}}
+                        <div class="bg-white rounded-r-lg py-16 px-4 sm:px-6 lg:col-span-3 lg:py-24 lg:px-8 xl:pl-12">             
+                            <form wire:submit.prevent='updateBrand'>
+                                
+                                {{-- category dropdown --}}
                                 <div class="mt-[-10%] mb-9">
                                     <div class="text-left">
-                                        <label for="location" class="block text-sm font-medium text-gray-700">Étagère à modifier : </label>
+                                        <label for="location" class="block text-sm font-medium text-gray-700">Marque à modifier : </label>
                                     </div>
-                                    <div class="mt-1">
-                                        @if ($errors->has('selectedRack'))
+                                    @if ($errors->has('selectedBrand'))
                                         <div class="relative">
-                                            <select wire:model="selectedRack" id="location" name="location" class="mt-1 block text-red-900 placeholder-red-300 w-full rounded-md border-red-300 py-3 pl-3 pr-10 text-base focus:border-red-500 focus:outline-none focus:ring-red-500 sm:text-sm">
-                                                <option selected>Non défini</option>
-                                                @foreach ($racks as $rack)
-                                                    <option value="{{$rack->id}}">Étagère {{$rack->id}} <p> - {{$rack->nb_level}} étage(s)</p></option>
+                                            <select wire:model="selectedBrand" id="selectedBrand" name="selectedBrand"
+                                                class="mt-1 block text-red-900 placeholder-red-300 w-full rounded-md border-red-300 py-3 pl-3 pr-10 text-base focus:border-red-500 focus:outline-none focus:ring-red-500 sm:text-sm">
+                                                @foreach ($brands as $option)
+                                                    <option value="{{ $option->id }}">{{ $option->name }}</option>
                                                 @endforeach
                                             </select>
                                             <div
@@ -62,54 +62,55 @@
                                             </div>
                                         </div>
 
-                                            @error('selectedRack')
-                                                <p class="mt-2 h-4 text-sm text-red-600" id="email-error">{{ $message }}</p>
-                                            @enderror
-                                        @else
-                                            <select wire:model="selectedRack" id="location" name="location" class="mt-1 block w-full rounded-md border-gray-300 py-3 pl-3 pr-10 text-base focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
-                                                <option selected>Non défini</option>
-                                                @foreach ($racks as $rack)
-                                                <option value="{{$rack->id}}">Étagère {{$rack->id}} <p> - {{$rack->nb_level}} étage(s)</p></option>
-                                                @endforeach
-                                            </select>
-                                            <p class="mt-2 h-4"/>
-                                        @endif
-                                    </div>
+                                        @error('selectedBrand')
+                                            <p class="mt-2 h-4 text-sm text-red-600" id="selectedBrand">{{ $message }}
+                                            </p>
+                                        @enderror
+                                    @else
+                                        <select wire:model="selectedBrand" id="selectedBrand" name="selectedBrand"
+                                            class="mt-1 block w-full rounded-md border-gray-300 py-3 pl-3 pr-10 text-base focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
+                                            @foreach ($brands as $option)
+                                                <option value="{{ $option->id }}">{{ $option->name }}</option>
+                                            @endforeach
+                                        </select>
+                                        <p class="mt-2 h-4" ></p>
+                                    @endif
                                 </div>
-                                {{-- nb_level number --}}
+                                
+                                {{-- name text field --}}
                                 <div>
                                     <div class="text-left">
-                                        <label for="nb_level" class="text-sm font-medium text-gray-700">
-                                            Nouveau nombre d'étage sur l'étagère :
+                                        <label for="full-name" class="text-sm font-medium text-gray-700">Nouveau nom de la
+                                            marque :
                                         </label>
                                     </div>
                                     <div class="mt-1">
-                                        @if ($errors->has('nb_level'))
-                                        <div class="relative">
-                                            <input wire:model="nb_level" type="number" name="full-name" id="full-name"
-                                                autocomplete="nb_level" placeholder="Ex: 4"
-                                                class="block w-full py-3 px-4 rounded-md border-red-300 pr-10 text-red-900 placeholder-red-300 focus:border-red-500 focus:outline-none focus:ring-red-500"
-                                                aria-invalid="true" aria-describedby="email-error">
-                                            <div
-                                                class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
-                                                <svg class="h-5 w-5 text-red-500" xmlns="http://www.w3.org/2000/svg"
-                                                    viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                                    <path fill-rule="evenodd"
-                                                        d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-5a.75.75 0 01.75.75v4.5a.75.75 0 01-1.5 0v-4.5A.75.75 0 0110 5zm0 10a1 1 0 100-2 1 1 0 000 2z"
-                                                        clip-rule="evenodd" />
-                                                </svg>
+                                        @if ($errors->has('newName'))
+                                            <div class="relative">
+                                                <input wire:model="newName" type="text" name="full-name" id="full-name"
+                                                    autocomplete="newName" placeholder="Ex: HP"
+                                                    class="block w-full py-3 px-4 rounded-md border-red-300 pr-10 text-red-900 placeholder-red-300 focus:border-red-500 focus:outline-none focus:ring-red-500"
+                                                    aria-invalid="true" aria-describedby="email-error">
+                                                <div
+                                                    class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+                                                    <svg class="h-5 w-5 text-red-500" xmlns="http://www.w3.org/2000/svg"
+                                                        viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                                        <path fill-rule="evenodd"
+                                                            d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-5a.75.75 0 01.75.75v4.5a.75.75 0 01-1.5 0v-4.5A.75.75 0 0110 5zm0 10a1 1 0 100-2 1 1 0 000 2z"
+                                                            clip-rule="evenodd" />
+                                                    </svg>
+                                                </div>
                                             </div>
-                                        </div>
 
-                                            @error('nb_level')
-                                                <p class="mt-2 h-4 text-sm text-red-600" id="email-error">{{ $message }}</p>
+                                            @error('newName')
+                                                <p class="mt-2 h-4 text-sm text-red-600" id="newName">{{ $message }}</p>
                                             @enderror
                                         @else
-                                            <input wire:model="nb_level" type="number" name="full-name" id="full-name"
-                                                autocomplete="nb_level"
+                                            <input wire:model="newName" type="text" name="full-name" id="full-name"
+                                                autocomplete="newName"
                                                 class="block w-full rounded-md border-gray-300 py-3 px-4 placeholder-gray-500 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
-                                                placeholder="Ex: 4">
-                                            <p class="mt-2 h-4"/>
+                                                placeholder="Ex: HP">
+                                            <p class="mt-2 text-sm h-4 text-red-600" id="email-error" />
                                         @endif
                                     </div>
                                 </div>
@@ -123,6 +124,7 @@
                                         Annuler
                                     </button>
                                 </div>
+                                
                             </form>
                         </div>
                     </div>

@@ -7,7 +7,8 @@
                 d="M8.75 1A2.75 2.75 0 006 3.75v.443c-.795.077-1.584.176-2.365.298a.75.75 0 10.23 1.482l.149-.022.841 10.518A2.75 2.75 0 007.596 19h4.807a2.75 2.75 0 002.742-2.53l.841-10.52.149.023a.75.75 0 00.23-1.482A41.03 41.03 0 0014 4.193V3.75A2.75 2.75 0 0011.25 1h-2.5zM10 4c.84 0 1.673.025 2.5.075V3.75c0-.69-.56-1.25-1.25-1.25h-2.5c-.69 0-1.25.56-1.25 1.25v.325C8.327 4.025 9.16 4 10 4zM8.58 7.72a.75.75 0 00-1.5.06l.3 7.5a.75.75 0 101.5-.06l-.3-7.5zm4.34.06a.75.75 0 10-1.5-.06l-.3 7.5a.75.75 0 101.5.06l.3-7.5z"
                 clip-rule="evenodd" />
         </svg>
-       <button> Supprimer </button>
+                 <button>Supprimer </button>
+
     </a>
     @if ($show)
         <div class="relative z-10" aria-labelledby="modal-title" role="dialog" aria-modal="true">
@@ -28,26 +29,25 @@
                                 </button>
                             </div>
                             <h2 class="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">Supprimez une
-                                étagère
+                                marque
                             </h2>
                             <p class="mt-3 text-md leading-6 text-gray-500">
-                                Sélectionnez une étagère pour la supprimer
+                                Sélectionnez une marque pour la supprimer
                             </p>
                         </div>
                         <div class="bg-white rounded-r-lg py-16 px-4 sm:px-6 lg:col-span-3 lg:py-24 lg:px-8 xl:pl-12">
                             <form wire:submit.prevent='openWarningDelete'>
-                                {{-- rack dropdown --}}
+                                {{-- brand dropdown --}}
                                 <div>
                                     <div class="text-left">
-                                        <label for="location" class="block text-sm font-medium text-gray-700">Étagère à supprimer : </label>
+                                        <label for="location" class="block text-sm font-medium text-gray-700">Marque à supprimer : </label>
                                     </div>
                                     <div class="mt-1">
-                                        @if ($errors->has('selectedRack'))
+                                        @if ($errors->has('selectedBrand'))
                                         <div class="relative">
-                                            <select wire:model="selectedRack" id="location" name="location" class="mt-1 block text-red-900 placeholder-red-300 w-full rounded-md border-red-300 py-3 pl-3 pr-10 text-base focus:border-red-500 focus:outline-none focus:ring-red-500 sm:text-sm">
-                                                <option selected>Non défini</option>
-                                                @foreach ($racks as $rack)
-                                                    <option value="{{$rack->id}}">Étagère {{$rack->id}} <p> - {{$rack->nb_level}} étage(s)</p></option>
+                                            <select wire:model="selectedBrand" id="location" name="location" class="mt-1 block text-red-900 placeholder-red-300 w-full rounded-md border-red-300 py-3 pl-3 pr-10 text-base focus:border-red-500 focus:outline-none focus:ring-red-500 sm:text-sm">
+                                                @foreach ($brands as $brand)
+                                                    <option value="{{$brand->name}}">{{$brand->name}}</option>
                                                 @endforeach
                                             </select>
                                             <div
@@ -61,14 +61,13 @@
                                             </div>
                                         </div>
 
-                                            @error('selectedRack')
+                                            @error('selectedBrand')
                                                 <p class="mt-2 h-4 text-sm text-red-600" id="email-error">{{ $message }}</p>
                                             @enderror
                                         @else
-                                            <select wire:model="selectedRack" id="location" name="location" class="mt-1 block w-full rounded-md border-gray-300 py-3 pl-3 pr-10 text-base focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
-                                                <option selected>Non défini</option>
-                                                @foreach ($racks as $rack)
-                                                <option value="{{$rack->id}}">Étagère {{$rack->id}} <p> - {{$rack->nb_level}} étage(s)</p></option>
+                                            <select wire:model="selectedBrand" id="location" name="location" class="mt-1 block w-full rounded-md border-gray-300 py-3 pl-3 pr-10 text-base focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
+                                                @foreach ($brands as $brand)
+                                                    <option value="{{$brand->name}}">{{$brand->name}}</option>
                                                 @endforeach
                                             </select>
                                             <p class="mt-2 h-4"/>
@@ -92,3 +91,4 @@
         </div>
     @endif
 </div>
+
