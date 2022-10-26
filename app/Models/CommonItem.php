@@ -2,15 +2,13 @@
 
 namespace App\Models;
 
-use App\Models\Item;
-
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class CommonItem extends Model
 {
     use HasFactory;
-    public $timestamps= true;
+    public $timestamps = true;
 
     protected $table = 'common_items';
     protected $primaryKey = 'id';
@@ -44,6 +42,11 @@ class CommonItem extends Model
         return $this->items()->sum('price');
     }
 
+    public function UnitPrice()
+    {
+        return $this->totalPrice / $this->quantity;
+    }
+
     public function brand()
     {
         return $this->belongsTo(Brand::class);
@@ -57,5 +60,39 @@ class CommonItem extends Model
     public function items()
     {
         return $this->hasMany(Item::class, 'common_id', 'id');
+    }
+
+    public function ItemsOnRack(?array $rack = [], ?array $rack_level = [])
+    {
+        if (empty($rack) || $rack === null) {
+            $rack = Rack::pluck('id')->toArray();
+        }
+
+        if (empty($rack_level) || $rack_level === null) {
+            for ($i = 1; $i <= Rack::all()->max('nb_level'); $i++) {
+                $rack_level[] = $i;
+            }
+        }
+
+        return $this->items->filter(function ($value) use ($rack, $rack_level) {
+            if (in_array($value->rack_id, $rack) && in_array($value->rack_level, $rack_level)) {
+                return $value;
+            }
+        });
+    }
+
+    public function QuantityOnRack(?array $rack = [], ?array $rack_level = [])
+    {
+        return $this->ItemsOnRack($rack, $rack_level)->count();
+    }
+
+    public function TotalPriceOnRack(?array $rack = [], ?array $rack_level = [])
+    {
+        return $this->ItemsOnRack($rack, $rack_level)->sum('price');
+    }
+
+    public function UnitPriceOnRack(?array $rack = [], ?array $rack_level = [])
+    {
+        return $this->TotalPriceOnRack($rack, $rack_level) / $this->QuantityOnRack($rack, $rack_level);
     }
 }

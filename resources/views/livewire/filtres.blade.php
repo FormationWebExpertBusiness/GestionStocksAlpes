@@ -92,6 +92,104 @@
                         </div>
                     </div>
                 </div>
+                {{-- Rack Dropdown --}}
+                <div class="relative mx-8 inline-block text-left">
+                    <div>
+                        <button wire:click="toggleRackDropdown" type="button"
+                            class="inline-flex w-full justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-100"
+                            id="menu-button" aria-expanded="true" aria-haspopup="true">
+                            Étagère
+                            @if (!$isVisibleRack)
+                                <svg class="-mr-1 ml-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                                    fill="currentColor" aria-hidden="true">
+                                    <path fill-rule="evenodd"
+                                        d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
+                                        clip-rule="evenodd" />
+                                </svg>
+                            @else
+                                <svg class="-mr-1 ml-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                                    fill="currentColor" class="w-5 h-5">
+                                    <path fill-rule="evenodd"
+                                        d="M14.77 12.79a.75.75 0 01-1.06-.02L10 8.832 6.29 12.77a.75.75 0 11-1.08-1.04l4.25-4.5a.75.75 0 011.08 0l4.25 4.5a.75.75 0 01-.02 1.06z"
+                                        clip-rule="evenodd" />
+                                </svg>
+                            @endif
+                        </button>
+                    </div>
+                    @if ($isVisibleRack)
+                        <div class="absolute transform -translate-x-[25%] p-4 z-10 mt-2 w-56 origin-top divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+                            role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1" @click.outside="$wire.isVisibleRack = false">
+                            <div name="racks" class="py-1 content-center" role="none">
+                                @foreach ($racks as $rack)
+                                    <div class="flex items-center" wire:click='appendRack({{ $rack->id }})'>
+                                        @if (in_array($rack->id, $racksFilter))
+                                            <input id="{{ 'rack' . $rack->id }}" name="{{ 'rack' . $rack->id }}"
+                                                type="checkbox"
+                                                class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                                                checked>
+                                        @else
+                                            <input id="{{ 'rack' . $rack->id }}" name="{{ 'rack' . $rack->id }}"
+                                                type="checkbox"
+                                                class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+                                        @endif
+                                        <label wire:click='appendRack({{ $rack->id }})'
+                                            for="{{ 'rack' . $rack->id }}"
+                                            class="ml-3 text-sm text-gray-500">{{ $rack->name }}</label>
+                                    </div>
+                                @endforeach
+                            </div>
+                        </div>
+                    @endif
+                </div>
+                {{-- RackLevel Dropdown --}}
+                <div class="relative mx-8 inline-block text-left">
+                    <div>
+                        <button wire:click="toggleRackLevelDropdown" type="button"
+                            class="inline-flex whitespace-nowrap w-full justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-100"
+                            id="menu-button" aria-expanded="true" aria-haspopup="true">
+                            Étage sur l'étagère
+                            @if (!$isVisibleRackLevel)
+                                <svg class="-mr-1 ml-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                                    fill="currentColor" aria-hidden="true">
+                                    <path fill-rule="evenodd"
+                                        d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
+                                        clip-rule="evenodd" />
+                                </svg>
+                            @else
+                                <svg class="-mr-1 ml-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                                    fill="currentColor" class="w-5 h-5">
+                                    <path fill-rule="evenodd"
+                                        d="M14.77 12.79a.75.75 0 01-1.06-.02L10 8.832 6.29 12.77a.75.75 0 11-1.08-1.04l4.25-4.5a.75.75 0 011.08 0l4.25 4.5a.75.75 0 01-.02 1.06z"
+                                        clip-rule="evenodd" />
+                                </svg>
+                            @endif
+                        </button>
+                    </div>
+                    @if ($isVisibleRackLevel)
+                        <div class="absolute transform -translate-x-[25%] p-4 z-10 mt-2 w-56 origin-top divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+                            role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1" @click.outside="$wire.isVisibleRackLevel = false">
+                            <div name="rackLevels" class="py-1 content-center" role="none">
+                                @foreach ($rackLevels as $rackLevel)
+                                    <div class="flex items-center" wire:click='appendRackLevel({{ $rackLevel }})'>
+                                        @if (in_array($rackLevel, $rackLevelsFilter))
+                                            <input id="{{ 'rackLevel' . $rackLevel }}" name="{{ 'rackLevel' . $rackLevel }}"
+                                                type="checkbox"
+                                                class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                                                checked>
+                                        @else
+                                            <input id="{{ 'rackLevel' . $rackLevel }}" name="{{ 'rackLevel' . $rackLevel }}"
+                                                type="checkbox"
+                                                class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+                                        @endif
+                                        <label wire:click='appendRackLevel({{ $rackLevel }})'
+                                            for="{{ 'rackLevel' . $rackLevel }}"
+                                            class="ml-3 text-sm text-gray-500">Étage {{ $rackLevel }}</label>
+                                    </div>
+                                @endforeach
+                            </div>
+                        </div>
+                    @endif
+                </div>
                 {{-- Category DropDown --}}
                 <div class="relative mx-8 inline-block text-left">
                     <div>

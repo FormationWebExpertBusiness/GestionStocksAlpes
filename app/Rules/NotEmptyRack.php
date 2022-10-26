@@ -2,9 +2,10 @@
 
 namespace App\Rules;
 
+use App\Models\Rack;
 use Illuminate\Contracts\Validation\InvokableRule;
 
-class DifferentThanNonDefini implements InvokableRule
+class NotEmptyRack implements InvokableRule
 {
     /**
      * Run the validation rule.
@@ -17,9 +18,9 @@ class DifferentThanNonDefini implements InvokableRule
      */
     public function __invoke($attribute, $value, $fail)
     {
-        // dd('test');
-        if ($value === 'Non défini' || $value === null || $value === '1') {
-            $fail('L\'attribut doit être défini.');
+        $rack = Rack::find($value);
+        if ($rack->ItemsOn()->count()) {
+            $fail('L\'étagère ne peut pas être supprimée car elle contient des produits');
         }
     }
 }

@@ -142,7 +142,7 @@
                                                 {{ $commonItem->model }}</td>
                                             <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-500 w-[14%]">
                                                 <div class="inline-flex min-w-[70%]">
-                                                    {{ $commonItem->quantity }} {{ $commonItem->unit }}
+                                                    {{ $commonItem->QuantityOnRack($racksF, $rackLevelsF) }} {{ $commonItem->unit }}
                                                 </div>
                                                 <div class="align-middle inline-flex min-w-[15%]">
                                                     @livewire('forms.item.item-add-form', ['common_id' => $commonItem->id], key('item-add-form-' . $commonItem->id))
@@ -152,7 +152,7 @@
                                                 </div>
                                             </td>
                                             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 w-[14%]">
-                                                {{ number_format($commonItem->totalPrice, 2, ',', ' '); }} €</td>
+                                                {{ number_format($commonItem->TotalPriceOnRack($racksF, $rackLevelsF), 2, ',', ' '); }} €</td>
                                             <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-center text-sm font-medium sm:pr-6 w-1/5">
                                                 <div class="inline-block px-6">
                                                     @livewire('details.item.detail-modal', ['commonItem' => $commonItem], key('item-detail-' . $commonItem->id))

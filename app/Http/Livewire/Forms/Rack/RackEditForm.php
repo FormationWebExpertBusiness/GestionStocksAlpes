@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Forms\Rack;
 
 use App\Models\Rack;
+use App\Rules\NotEmptyRackLevel;
 use Livewire\Component;
 
 class RackEditForm extends Component
@@ -25,7 +26,7 @@ class RackEditForm extends Component
 
     public function mount()
     {
-        $this->selectedRack = "";
+        $this->selectedRack = '';
         $this->nb_level = 1;
     }
 
@@ -37,6 +38,7 @@ class RackEditForm extends Component
 
     public function updateRack()
     {
+        array_push($this->rules['nb_level'], new NotEmptyRackLevel());
         $validatedData = $this->validate();
         $rack = Rack::find($this->selectedRack);
         $oldNbLevel = $rack->nb_level;

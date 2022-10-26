@@ -33,6 +33,11 @@ class Rack extends Model
 
     public function ItemsOn()
     {
-        return Item::where('rack_id', $this->id);
+        return Item::where('rack_id', $this->id)->get();
+    }
+
+    public function ItemsOnLevel($level)
+    {
+        return Item::where('rack_id', $this->id)->where('rack_level', $level)->get();
     }
 }
