@@ -18,9 +18,23 @@ class CategoryDeleteForm extends Component
         'deleteCategory' => 'deleteCategory',
     ];
 
+    protected $rules = [
+        'selectedCategory' => ['required'],
+    ];
+
+    protected $messages = [
+        'selectedCategory.required' => 'La catégorie à supprimer dois être selectionnée',
+    ];
+
     public function toggleDropdown()
     {
         $this->showDropdown = ! $this->showDropdown;
+    }
+
+    public function updated($property)
+    {
+        if($this->$property === "Non défini") $this->$property = null;
+        $this->validateOnly($property);
     }
 
     public function toggleDeleteForm()
@@ -30,10 +44,9 @@ class CategoryDeleteForm extends Component
 
     public function openWarningDelete()
     {
-        if ($this->selectedCategory !== null) {
-            $category = Category::where('name', $this->selectedCategory);
-            $this->emit('deleteWarning', $category->first()->id, $this->warningDeleteCategorySignal, 'Category', 'name');
-        }
+        $validatedData = $this->validate();
+        $category = Category::where('name', $this->selectedCategory);
+        $this->emit('deleteWarning', $category->first()->id, $this->warningDeleteCategorySignal, 'Category', 'name');
     }
 
     public function deleteCategory($categoryId)
