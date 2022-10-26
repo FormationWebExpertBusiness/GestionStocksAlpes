@@ -37,7 +37,7 @@
                         </div>
                         <div class="bg-white rounded-r-lg py-16 px-4 sm:px-6 lg:col-span-3 lg:py-24 lg:px-8 xl:pl-12">
                             <form wire:submit.prevent='openWarningDelete'>
-                                {{-- category dropdown --}}
+                                {{-- brand dropdown --}}
                                 <div>
                                     <div class="text-left">
                                         <label for="location" class="block text-sm font-medium text-gray-700">Marque à supprimer : </label>
