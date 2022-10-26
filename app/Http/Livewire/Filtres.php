@@ -166,21 +166,20 @@ class Filtres extends Component
         $this->categories = Category::all();
 
         $this->racks = Rack::all();
-        if ($this->racksFilter){
+        if ($this->racksFilter) {
             $selectedRacks = collect();
             foreach ($this->racks as $rack) {
-                if (in_array($rack->id, $this->racksFilter)){
+                if (in_array($rack->id, $this->racksFilter)) {
                     $selectedRacks->push($rack);
                 }
             }
             $levelMax = $selectedRacks->max('nb_level');
-        }
-        else{
+        } else {
             $levelMax = $this->racks->max('nb_level');
         }
 
-        $this->rackLevels = collect(); 
-        for ($i=1; $i <= $levelMax; $i++) { 
+        $this->rackLevels = collect();
+        for ($i = 1; $i <= $levelMax; $i++) {
             $this->rackLevels->push($i);
         }
 

@@ -2,15 +2,13 @@
 
 namespace App\Models;
 
-use App\Models\Item;
-
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class CommonItem extends Model
 {
     use HasFactory;
-    public $timestamps= true;
+    public $timestamps = true;
 
     protected $table = 'common_items';
     protected $primaryKey = 'id';

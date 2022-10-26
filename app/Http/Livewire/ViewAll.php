@@ -6,7 +6,6 @@ use App\Models\Brand;
 use App\Models\Category;
 use App\Models\CommonItem;
 use App\Models\Item;
-use App\Models\Rack;
 use Livewire\Component;
 
 class ViewAll extends Component
@@ -76,7 +75,7 @@ class ViewAll extends Component
 
     public function getPriceMax($priceMax)
     {
-        if ($priceMax === "") {
+        if ($priceMax === '') {
             $priceMax = CommonItem::all()->max('totalPrice');
         }
         $this->priceMax = $priceMax;
@@ -94,7 +93,7 @@ class ViewAll extends Component
 
     public function getQuantityMax($quantityMax)
     {
-        if ($quantityMax === "") {
+        if ($quantityMax === '') {
             $quantityMax = CommonItem::all()->max('quantity');
         }
         $this->quantityMax = $quantityMax;
@@ -217,7 +216,7 @@ class ViewAll extends Component
                 }
             })
             ->sortBy([[$this->champ === 'category' || $this->champ === 'brand' ? $this->champ.'.name' : $this->champ, $this->mode]]);
-            
+
         $this->showToast = true;
 
         return view('livewire.view-all', [

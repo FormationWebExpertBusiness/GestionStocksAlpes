@@ -27,15 +27,15 @@ class ItemDeleteForm extends Component
 
     public function deleteItem()
     {
-        $noms = "";
+        $noms = '';
         $this->validate();
         foreach ($this->itemsToDelete as $item_id) {
             $item = Item::find($item_id);
-            $noms .= $item->serial_number . ", ";
+            $noms .= $item->serial_number . ', ';
             $item->delete();
         }
-        substr($noms, 0, strlen($noms)-2);
-        
+        substr($noms, 0, strlen($noms) - 2);
+
         $this->toggleDeleteForm();
         return redirect('stock')->with('status', 'Le produit '.$noms.' a bien été ajouté !');
     }
