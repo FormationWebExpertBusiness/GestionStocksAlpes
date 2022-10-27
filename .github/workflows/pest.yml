@@ -1,34 +1,44 @@
 name: PEST Tests
 on: push
+
 jobs:
-  phpunit:
+  pesttests:
     runs-on: ubuntu-latest
-    container:
-      image: kirschbaumdevelopment/laravel-test-runner:8.1
- 
-    services:
-      mysql:
-        image: mysql:8.0
-        env:
-          MYSQL_ROOT_PASSWORD: root
-          MYSQL_DATABASE: testing
-        ports:
-          - 33306:3306
-        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
- 
+    
     steps:
-    - uses: actions/checkout@v1
-      with:
-        fetch-depth: 1
- 
-    - name: Install composer dependencies
-      run: |
-        composer install --no-scripts
- 
-    - name: Prepare Laravel Application
-      run: |
-        cp .env.testingCI .env
-        php artisan key:generate
- 
-    - name: Run Testsuite
-      run: vendor/bin/pest
+      - uses: actions/checkout@v3
+    
+      - name: run composer install
+        run: composer install
+
+      - name: run composer dump-autoload
+        run: composer dump-autoload
+
+      - name: get .env file
+        run: cp .env.testingCI .env
+        
+      - name: Start containers
+        run: docker-compose up --build --scale cypress=3 --force-recreate
+
+      - name: fix prob
+        run: | 
+          php artisan key:generate
+          php artisan cache:clear
+          php artisan route:clear
+          php artisan config:clear 
+          php artisan view:clear 
+
+      - name: migrate
+        run: php artisan migrate
+
+      - name: run PEST Tests
+        run: ./vendor/bin/pest   
+            
+    env:
+      APP_URL: "http://localhost"
+      DB_HOST: 127.0.0.1
+      DB_CONNECTION: mysql
+      DB_DATABASE: testing
+      DB_PORT: 33306
+      DB_USER: root
+    
