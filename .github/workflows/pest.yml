@@ -37,13 +37,7 @@ jobs:
         run: php artisan migrate
 
       - name: run PEST Tests
-        run: ./vendor/bin/pest   
-            
-    env:
-      APP_URL: "http://localhost"
-      DB_HOST: 127.0.0.1
-      DB_CONNECTION: mysql
-      DB_DATABASE: testing
-      DB_PORT: 3306
-      DB_USER: root
+        env:
+          DB_PORT: 3306
+        run: ./vendor/bin/pest  
     
