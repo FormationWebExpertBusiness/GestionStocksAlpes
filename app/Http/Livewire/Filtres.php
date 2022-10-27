@@ -151,32 +151,15 @@ class Filtres extends Component
         $this->emit('searchF', $this->search);
     }
 
-    public function render(Request $request)
+    public function render()
     {
-        if ($this->catsFilter) {
-            $this->brands = collect();
-            foreach ($this->catsFilter as $categoryName) {
-                $cat = Category::find($categoryName);
-                $this->brands = $this->brands->merge($cat->brands)->unique('id');
-            }
-            $this->brands->sortBy('id');
-        } else {
-            $this->brands = Brand::all();
-        }
+        $this->brands = Category::getLinkedBrands($this->catsFilter);
+
         $this->categories = Category::all();
 
         $this->racks = Rack::all();
-        if ($this->racksFilter) {
-            $selectedRacks = collect();
-            foreach ($this->racks as $rack) {
-                if (in_array($rack->id, $this->racksFilter)) {
-                    $selectedRacks->push($rack);
-                }
-            }
-            $levelMax = $selectedRacks->max('nb_level');
-        } else {
-            $levelMax = $this->racks->max('nb_level');
-        }
+
+        $levelMax = Rack::getRackLevelMax($this->racksFilter);
 
         $this->rackLevels = collect();
         for ($i = 1; $i <= $levelMax; $i++) {
