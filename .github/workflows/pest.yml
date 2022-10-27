@@ -1,17 +1,12 @@
 name: PEST Tests
 on: push
 jobs:     
+  name: PEST Tests
+on: push
+
+jobs:
   pesttests:
     runs-on: ubuntu-latest
-    services:
-      mysql:
-        image: mysql:8.0
-        env:
-            MYSQL_ALLOW_EMPTY_PASSWORD: yes
-            MYSQL_DATABASE: laravel_tags
-        ports:
-            - 3306
-        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
     
     steps:
       - uses: actions/checkout@v3
@@ -22,16 +17,31 @@ jobs:
       - name: run composer dump-autoload
         run: composer dump-autoload
 
+      - name: get .env file
+        run: cp .env.testingCI .env
+
+      - name: fix prob
+        run: | 
+          php artisan key:generate
+          php artisan cache:clear
+          php artisan route:clear
+          php artisan config:clear 
+          php artisan view:clear 
+          
+      - name: start sail 
+        run: ./vendor/bin/sail up -d
 
       - name: migrate
-        env:
-          DB_PORT: 3306
-          DB_USER: sail
-          DB_PASSWORD: password
-        run: php artisan migrate --force
+        run: ./vendor/bin/sail artisan migrate
 
       - name: run PEST Tests
-        env:
-          DB_PORT: 3306
-        run: ./vendor/bin/pest  
+        run: ./vendor/bin/pest   
+            
+    env:
+      APP_URL: "http://localhost"
+      DB_HOST: 127.0.0.1
+      DB_CONNECTION: mysql
+      DB_DATABASE: testing
+      DB_PORT: 33306
+      DB_USER: root
     
