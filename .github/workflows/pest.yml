@@ -15,7 +15,7 @@ jobs:
       run: composer dump-autoload
       
     - name: get .env file
-      run: cp .env.testingCI .env
+      run: cp .env.example .env
       
     - name: fix prob
       run: | 
