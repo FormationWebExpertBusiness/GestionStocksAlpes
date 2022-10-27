@@ -22,7 +22,7 @@ jobs:
 
       - name: Prepare Laravel Application
         run: |
-          cp .env.example .env
+          cp .env.testingCI .env
           php artisan key:generate
 
       - name: Run tests
