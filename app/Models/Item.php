@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Item extends Model
 {
@@ -46,4 +47,21 @@ class Item extends Model
     {
         return $this->belongsTo(Rack::class);
     }
+
+    public static function total()
+    {
+        return Item::all()->count('id');
+    }
+
+    public static function quantity()
+    {
+        return Item::all()->sum('quantity');
+    }
+
+    public static function price()
+    {
+        return Item::orderby('price','desc')->first();
+    }
+
+
 }

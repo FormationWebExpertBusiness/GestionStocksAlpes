@@ -2,6 +2,9 @@
 
 use App\Http\Controllers\displayController;
 use App\Http\Controllers\LoginController;
+use App\Http\Livewire\Dashboard;
+
+use App\Models\Item;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,11 +27,14 @@ Route::get('logout', [LoginController::class, 'logout'])->name('logout');
 
 Route::middleware('auth')->group(function () {
     Route::get('/stock', [displayController::class, 'displayStock']);
-    Route::get('/', function () {
-        return view('livewire.dashboard');
+    // Route::get('/', function () {
+    //     return view('livewire.dashboard');
 
-});
-
-
+        Route::get('/', Dashboard::class);
+        // function () {
+        //     $items = Item::limit(10)->orderBy('id', 'DESC')->get();
+        //     return view('livewire.dashboard', ['items' => $items]);
+        // });
+    
 
 });

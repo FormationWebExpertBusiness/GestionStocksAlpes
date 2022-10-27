@@ -3,113 +3,290 @@
 @section('content')
     <div class="min-w-0 ml-64">
         <div class="bg-white">
-            {{-- <div class="mx-auto max-w-7xl py-12 px-4 sm:px-6 lg:px-8 lg:py-24">
-                <div class="grid grid-cols-1 gap-12 lg:grid-cols-3 lg:gap-8">
-                    <div class="space-y-5 sm:space-y-4">
-                        <h2 class="text-3xl font-bold tracking-tight sm:text-4xl">Tableau de bord</h2>
-                        <p class="text-xl text-gray-500">Libero fames augue nisl porttitor nisi, quis. Id ac elit odio vitae
-                            elementum enim vitae ullamcorper suspendisse. Vivamus fringilla.</p>
-                    </div>
-                    <div class="lg:col-span-2">
-                        <ul role="list" class="space-y-12 sm:grid sm:grid-cols-2 sm:gap-12 sm:space-y-0 lg:gap-x-8">
-                            <li>
-                                <div class="flex items-center space-x-4 lg:space-x-6">
-                                    <img class="h-16 w-16 rounded-full lg:h-20 lg:w-20"
-                                        src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                                        alt="">
-                                    <div class="space-y-1 text-lg font-medium leading-6">
-                                        <h3>Leslie Alexander</h3>
-                                        <p class="text-indigo-600">Co-Founder / CEO</p>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="flex items-center space-x-4 lg:space-x-6">
-                                    <img class="h-16 w-16 rounded-full lg:h-20 lg:w-20"
-                                        src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                                        alt="">
-                                    <div class="space-y-1 text-lg font-medium leading-6">
-                                        <h3>Leslie Alexander</h3>
-                                        <p class="text-indigo-600">Co-Founder / CEO</p>
-                                    </div>
-                                </div>
-                            </li>
-
-                            <!-- More people... -->
-                        </ul>
-                    </div>
-                </div>
-            </div> --}}
             <div class="mx-auto max-w-7xl py-12 px-4 sm:px-6 lg:px-8 lg:py-24">
-                
-                    <div>
-                        <h3 class="text-lg font-medium leading-6 text-gray-900">Last 30 days</h3>
-                        <dl class="mt-5 grid grid-cols-1 divide-y divide-gray-200 overflow-hidden rounded-lg bg-white shadow md:grid-cols-3 md:divide-y-0 md:divide-x">
-                          <div class="px-4 py-5 sm:p-6">
-                            <dt class="text-base font-normal text-gray-900">Total Subscribers</dt>
-                            <dd class="mt-1 flex items-baseline justify-between md:block lg:flex">
-                              <div class="flex items-baseline text-2xl font-semibold text-indigo-600">
-                                71,897
-                                <span class="ml-2 text-sm font-medium text-gray-500">from 70,946</span>
-                              </div>
-                      
-                              <div class="inline-flex items-baseline px-2.5 py-0.5 rounded-full text-sm font-medium bg-green-100 text-green-800 md:mt-2 lg:mt-0">
-                                <!-- Heroicon name: mini/arrow-up -->
-                                <svg class="-ml-1 mr-0.5 h-5 w-5 flex-shrink-0 self-center text-green-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                  <path fill-rule="evenodd" d="M10 17a.75.75 0 01-.75-.75V5.612L5.29 9.77a.75.75 0 01-1.08-1.04l5.25-5.5a.75.75 0 011.08 0l5.25 5.5a.75.75 0 11-1.08 1.04l-3.96-4.158V16.25A.75.75 0 0110 17z" clip-rule="evenodd" />
-                                </svg>
-                                <span class="sr-only"> Increased by </span>
-                                12%
-                              </div>
-                            </dd>
-                          </div>
-                      
-                          <div class="px-4 py-5 sm:p-6">
-                            <dt class="text-base font-normal text-gray-900">Avg. Open Rate</dt>
-                            <dd class="mt-1 flex items-baseline justify-between md:block lg:flex">
-                              <div class="flex items-baseline text-2xl font-semibold text-indigo-600">
-                                58.16%
-                                <span class="ml-2 text-sm font-medium text-gray-500">from 56.14%</span>
-                              </div>
-                      
-                              <div class="inline-flex items-baseline px-2.5 py-0.5 rounded-full text-sm font-medium bg-green-100 text-green-800 md:mt-2 lg:mt-0">
-                                <!-- Heroicon name: mini/arrow-up -->
-                                <svg class="-ml-1 mr-0.5 h-5 w-5 flex-shrink-0 self-center text-green-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                  <path fill-rule="evenodd" d="M10 17a.75.75 0 01-.75-.75V5.612L5.29 9.77a.75.75 0 01-1.08-1.04l5.25-5.5a.75.75 0 011.08 0l5.25 5.5a.75.75 0 11-1.08 1.04l-3.96-4.158V16.25A.75.75 0 0110 17z" clip-rule="evenodd" />
-                                </svg>
-                                <span class="sr-only"> Increased by </span>
-                                2.02%
-                              </div>
-                            </dd>
-                          </div>
-                      
-                          <div class="px-4 py-5 sm:p-6">
-                            <dt class="text-base font-normal text-gray-900">Avg. Click Rate</dt>
-                            <dd class="mt-1 flex items-baseline justify-between md:block lg:flex">
-                              <div class="flex items-baseline text-2xl font-semibold text-indigo-600">
-                                24.57%
-                                <span class="ml-2 text-sm font-medium text-gray-500">from 28.62%</span>
-                              </div>
-                      
-                              <div class="inline-flex items-baseline px-2.5 py-0.5 rounded-full text-sm font-medium bg-red-100 text-red-800 md:mt-2 lg:mt-0">
-                                <!-- Heroicon name: mini/arrow-down -->
-                                <svg class="-ml-1 mr-0.5 h-5 w-5 flex-shrink-0 self-center text-red-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                  <path fill-rule="evenodd" d="M10 3a.75.75 0 01.75.75v10.638l3.96-4.158a.75.75 0 111.08 1.04l-5.25 5.5a.75.75 0 01-1.08 0l-5.25-5.5a.75.75 0 111.08-1.04l3.96 4.158V3.75A.75.75 0 0110 3z" clip-rule="evenodd" />
-                                </svg>
-                                <span class="sr-only"> Decreased by </span>
-                                4.05%
-                              </div>
-                            </dd>
-                          </div>
-                        </dl>
-                      </div>
-                      
+                <div class="grid grid-cols-1 gap-12 lg:grid-cols-3 lg:gap-8">
+                    <div class="space-y-2 sm:space-y-2">
+                        <h2 class="text-3xl font-bold tracking-tight sm:text-4xl">Tableau de bord</h2>
+                    </div>
                 </div>
-                
-            </div>
+                <div>
+                    <h3 class="text-lg font-medium leading-6 text-gray-900 mt-10">Stock de Alpes Networks</h3>
 
-        </div>  
-        
-            <livewire:scripts />
+                    <dl class="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+                        <div class="relative overflow-hidden rounded-lg bg-white px-4 pt-5 pb-12 shadow sm:px-6 sm:pt-6">
+                            <dt>
+                                <div class="absolute rounded-md bg-indigo-500 p-3">
+
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                        stroke-width="1.5" stroke="currentColor" class="h-6 w-6 text-white">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="M21 7.5l-9-5.25L3 7.5m18 0l-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9" />
+                                    </svg>
+                                </div>
+                                <p class="ml-16 truncate text-sm font-medium text-gray-500">Stock total des produits</p>
+                            </dt>
+                            <dd class="ml-16 flex items-baseline pb-6 sm:pb-7">
+                                <p class="text-2xl font-semibold text-gray-900">{{ App\Models\Item::total() }}</p>
+                                <p class="ml-2 flex items-baseline text-sm font-semibold text-green-600">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                        stroke-width="1.5" stroke="currentColor"
+                                        class="h-5 w-5 flex-shrink-0 self-center text-green-500">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z" />
+                                    </svg>
+                                    <span class="px-2"> Quantité total : {{ App\Models\Item::quantity() }} </span>
+
+                                </p>
+                                <div class="absolute inset-x-0 bottom-0 bg-gray-50 px-4 py-4 sm:px-6">
+                                    <div class="text-sm">
+                                        <a href="/stock" class="font-medium text-indigo-600 hover:text-indigo-500"> View
+                                            all<span class="sr-only"> Total du stock</span></a>
+                                    </div>
+                                </div>
+                            </dd>
+
+                        </div>
+
+                        <div class="relative overflow-hidden rounded-lg bg-white px-4 pt-5 pb-12 shadow sm:px-6 sm:pt-6">
+                            <dt>
+                                <div class="absolute rounded-md bg-indigo-500 p-3">
+                                    <!-- Heroicon name: outline/envelope-open -->
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                        stroke-width="1.5" stroke="currentColor" class="h-6 w-6 text-white">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="M14.25 7.756a4.5 4.5 0 100 8.488M7.5 10.5h5.25m-5.25 3h5.25M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                    </svg>
+
+                                </div>
+                                <p class="ml-16 truncate text-sm font-medium text-gray-500">Le prix le plus élevé</p>
+                            </dt>
+                            <dd class="ml-16 flex items-baseline pb-6 sm:pb-7">
+                                <p class="text-2xl font-semibold text-gray-900">{{ App\Models\Item::price()->price }} €</p>
+                                <p class="ml-2 flex items-baseline text-sm font-semibold text-green-600">
+                                    <!-- Heroicon name: mini/arrow-up -->
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                        stroke-width="1.5" stroke="currentColor"
+                                        class="h-5 w-5 flex-shrink-0 self-center text-green-500">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z" />
+                                    </svg>
+                                    <span class=""> {{ App\Models\Item::price()->model }} </span>
+                                </p>
+                                <div class="absolute inset-x-0 bottom-0 bg-gray-50 px-4 py-4 sm:px-6">
+                                    <div class="text-sm">
+                                        <a class="font-medium text-indigo-600 hover:text-indigo-500">
+                                            <p class="text-gray-50">View
+                                                all</p><span class="sr-only"> Avg. Open Rate stats</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </dd>
+                        </div>
+
+                        <div class="relative overflow-hidden rounded-lg bg-white px-4 pt-5 pb-12 shadow sm:px-6 sm:pt-6">
+                            <dt>
+                                <div class="absolute rounded-md bg-indigo-500 p-3">
+                                    <!-- Heroicon name: outline/cursor-arrow-rays -->
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                        stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-white">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="M16.5 6v.75m0 3v.75m0 3v.75m0 3V18m-9-5.25h5.25M7.5 15h3M3.375 5.25c-.621 0-1.125.504-1.125 1.125v3.026a2.999 2.999 0 010 5.198v3.026c0 .621.504 1.125 1.125 1.125h17.25c.621 0 1.125-.504 1.125-1.125v-3.026a2.999 2.999 0 010-5.198V6.375c0-.621-.504-1.125-1.125-1.125H3.375z" />
+                                    </svg>
+
+                                </div>
+                                <p class="ml-16 truncate text-sm font-medium text-gray-500">Valeur du stock</p>
+                            </dt>
+                            <dd class="ml-16 flex items-baseline pb-6 sm:pb-7">
+                                <p class="text-2xl font-semibold text-gray-900">{{ App\Models\Item::all()->sum('price') }} €
+                                </p>
+                                <div class="absolute inset-x-0 bottom-0 bg-gray-50 px-4 py-4 sm:px-6">
+                                    <div class="text-sm">
+                                        <a class="font-medium text-indigo-600 hover:text-indigo-500">
+                                            <p class="text-gray-50">View
+                                                all</p>
+                                            <span class="sr-only"> Avg. Open Rate stats</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </dd>
+                        </div>
+                    </dl>
+
+
+
+
+                    <dl class="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+                        <div class="relative overflow-hidden rounded-lg bg-white px-4 pt-5 pb-12 shadow sm:px-6 sm:pt-6">
+                            <dt>
+                                <div class="absolute rounded-md bg-indigo-500 p-3">
+
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                        stroke-width="1.5" stroke="currentColor" class="h-6 w-6 text-white">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="M21 7.5l-9-5.25L3 7.5m18 0l-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9" />
+                                    </svg>
+                                </div>
+                                <p class="ml-16 truncate text-sm font-medium text-gray-500">Stock total des produits</p>
+                            </dt>
+                            <dd class="ml-16 flex items-baseline pb-6 sm:pb-7">
+                                <p class="text-2xl font-semibold text-gray-900">{{ App\Models\Item::total() }}</p>
+                                <p class="ml-2 flex items-baseline text-sm font-semibold text-green-600">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                        stroke-width="1.5" stroke="currentColor"
+                                        class="h-5 w-5 flex-shrink-0 self-center text-green-500">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z" />
+                                    </svg>
+                                    <span class="px-2"> Quantité total : {{ App\Models\Item::quantity() }} </span>
+
+                                </p>
+                                <div class="absolute inset-x-0 bottom-0 bg-gray-50 px-4 py-4 sm:px-6">
+                                    <div class="text-sm">
+                                        <a href="/stock" class="font-medium text-indigo-600 hover:text-indigo-500"> View
+                                            all<span class="sr-only"> Total du stock</span></a>
+                                    </div>
+                                </div>
+                            </dd>
+
+                        </div>
+
+                        <div class="relative overflow-hidden rounded-lg bg-white px-4 pt-5 pb-12 shadow sm:px-6 sm:pt-6">
+                            <dt>
+                                <div class="absolute rounded-md bg-indigo-500 p-3">
+                                    <!-- Heroicon name: outline/envelope-open -->
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                        stroke-width="1.5" stroke="currentColor" class="h-6 w-6 text-white">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="M14.25 7.756a4.5 4.5 0 100 8.488M7.5 10.5h5.25m-5.25 3h5.25M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                    </svg>
+
+                                </div>
+                                <p class="ml-16 truncate text-sm font-medium text-gray-500">Le prix le plus élevé</p>
+                            </dt>
+                            <dd class="ml-16 flex items-baseline pb-6 sm:pb-7">
+                                <p class="text-2xl font-semibold text-gray-900">{{ App\Models\Item::price()->price }} €</p>
+                                <p class="ml-2 flex items-baseline text-sm font-semibold text-green-600">
+                                    <!-- Heroicon name: mini/arrow-up -->
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                        stroke-width="1.5" stroke="currentColor"
+                                        class="h-5 w-5 flex-shrink-0 self-center text-green-500">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z" />
+                                    </svg>
+                                    <span class=""> {{ App\Models\Item::price()->model }} </span>
+                                </p>
+                                <div class="absolute inset-x-0 bottom-0 bg-gray-50 px-4 py-4 sm:px-6">
+                                    <div class="text-sm">
+                                        <a class="font-medium text-indigo-600 hover:text-indigo-500">
+                                            <p class="text-gray-50">View
+                                                all</p><span class="sr-only"> Avg. Open Rate stats</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </dd>
+                        </div>
+
+                        <div class="relative overflow-hidden rounded-lg bg-white px-4 pt-5 pb-12 shadow sm:px-6 sm:pt-6">
+                            <dt>
+                                <div class="absolute rounded-md bg-indigo-500 p-3">
+                                    <!-- Heroicon name: outline/cursor-arrow-rays -->
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                        stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-white">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="M16.5 6v.75m0 3v.75m0 3v.75m0 3V18m-9-5.25h5.25M7.5 15h3M3.375 5.25c-.621 0-1.125.504-1.125 1.125v3.026a2.999 2.999 0 010 5.198v3.026c0 .621.504 1.125 1.125 1.125h17.25c.621 0 1.125-.504 1.125-1.125v-3.026a2.999 2.999 0 010-5.198V6.375c0-.621-.504-1.125-1.125-1.125H3.375z" />
+                                    </svg>
+
+                                </div>
+                                <p class="ml-16 truncate text-sm font-medium text-gray-500">Valeur du stock</p>
+                            </dt>
+                            <dd class="ml-16 flex items-baseline pb-6 sm:pb-7">
+                                <p class="text-2xl font-semibold text-gray-900">{{ App\Models\Item::all()->sum('price') }} €
+                                </p>
+                                <div class="absolute inset-x-0 bottom-0 bg-gray-50 px-4 py-4 sm:px-6">
+                                    <div class="text-sm">
+                                        <a class="font-medium text-indigo-600 hover:text-indigo-500">
+                                            <p class="text-gray-50">View
+                                                all</p>
+                                            <span class="sr-only"> Avg. Open Rate stats</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </dd>
+                        </div>
+                    </dl>
+                </div>
+            </div>
         </div>
-    @endsection
+        <div class="px-4 sm:px-6 lg:px-8">
+            <div class="sm:flex sm:items-center">
+                <div class="sm:flex-auto">
+                    <h1 class="text-xl font-semibold text-gray-900">Stocks</h1>
+                    <p class="mt-2 text-sm text-gray-700">La liste detaillé des derniers produits ajoutées.</p>
+                </div>
+            </div>
+            <div class="mt-8 flex flex-col">
+                <div class="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
+                    <div class="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
+                        <div class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg">
+                            <table class="min-w-full divide-y divide-gray-300">
+                                <thead class="bg-gray-50">
+                                    <tr class="divide-x divide-gray-200">
+                                        <th scope="col"
+                                            class="py-3.5 pl-4 pr-4 text-left text-sm font-semibold text-gray-900 sm:pl-6">
+                                            Modéle</th>
+                                        <th scope="col"
+                                            class="px-4 py-3.5 text-left text-sm font-semibold text-gray-900">Catégorie
+                                        </th>
+                                        <th scope="col"
+                                            class="px-4 py-3.5 text-left text-sm font-semibold text-gray-900">Prix</th>
+
+                                        <th scope="col"
+                                            class="px-4 py-3.5 text-left text-sm font-semibold text-gray-900">Quantité</th>
+                                        <th scope="col"
+                                            class="py-3.5 pl-4 pr-4 text-left text-sm font-semibold text-gray-900 sm:pr-6">
+                                            Status</th>
+                                        <th scope="col"
+                                            class="py-3.5 pl-4 pr-4 text-left text-sm font-semibold text-gray-900 sm:pr-6">
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-gray-200 bg-white">
+                                    @foreach ($items as $item)
+                                        <tr class="divide-x divide-gray-200">
+                                            <td
+                                                class="whitespace-nowrap py-4 pl-4 pr-4 text-sm font-medium text-gray-900 sm:pl-6">
+                                                {{ $item->model }}</td>
+                                            <td class="whitespace-nowrap p-4 text-sm text-gray-500">
+                                                {{ $item->category->name }}
+                                            </td>
+                                            <td class="whitespace-nowrap p-4 text-sm text-gray-500">{{ $item->price }}
+                                            </td>
+                                            <td class="whitespace-nowrap p-4 text-sm text-gray-500">{{ $item->quantity }}
+                                            </td>
+                                            <td class="whitespace-nowrap py-4 pl-4 pr-4 text-sm text-gray-500 sm:pr-6">
+                                                @if ($item->quantity < 30)
+                                                    <p class="text-red-500">Pas de stock
+                                                    </p>
+                                                @else
+                                                    <p class="text-green-500">En stock
+                                                    </p>
+                                                @endif
+
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                    <!-- More people... -->
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{-- @livewire:scripts --}}
+    @livewireScripts
+    </div>
+@endsection
