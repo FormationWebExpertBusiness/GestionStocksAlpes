@@ -31,4 +31,9 @@ class Category extends Model
     {
         return $this->brands->contains($brand);
     }
+
+    public function hasCommonItem()
+    {
+        return CommonItem::where('category_id', $this->id)->get()->count() > 0;
+    }
 }

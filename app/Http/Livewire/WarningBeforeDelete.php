@@ -17,6 +17,7 @@ class WarningBeforeDelete extends Component
     public $deleteEmit;
     public $tId;
     public $name;
+    public $massage;
 
     protected $listeners = [
         'deleteWarning' => 'openModal',
@@ -24,7 +25,7 @@ class WarningBeforeDelete extends Component
 
     // $this->emit('deleteWarning', $itemId, $this->warningDeleteItemSignal, 'Item', 'model');
 
-    public function openModal($tId, $emitSignal, $type, $champ)
+    public function openModal($tId, $emitSignal, $type, $champ, $message = '')
     {
         $this->isOpen = true;
         $this->tId = $tId;
@@ -32,7 +33,7 @@ class WarningBeforeDelete extends Component
         $useClass = "App\Models\\".$type;
         $this->name = $useClass::find($tId)->$champ;
         $obj = $useClass::find($tId);
-        $champ;
+        $this->message = $message;
     }
 
     public function delete()

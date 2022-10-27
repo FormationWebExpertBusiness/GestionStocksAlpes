@@ -19,11 +19,13 @@
                             <h3 class="text-lg font-medium leading-6 text-gray-900" id="modal-title">Êtes-vous sûr de vouloir
                                 supprimer l'élément {{$name}} ?
                             </h3>
-                            {{-- <div class="mt-2">
-                                <p class="text-sm text-gray-500">Are you sure you want to deactivate your account? All
-                                    of your data will be permanently removed from our servers forever. This action
-                                    cannot be undone.</p>
-                            </div> --}}
+                            @isset($message)
+                                <div class="mt-2">
+                                    <p class="text-sm text-gray-500">
+                                        {{ $message }}
+                                    </p>
+                                </div>
+                            @endisset
                         </div>
                     </div>
                     <div class="mt-5 sm:mt-4 sm:flex sm:flex-row-reverse">
