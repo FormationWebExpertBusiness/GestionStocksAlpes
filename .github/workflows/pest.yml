@@ -22,13 +22,6 @@ jobs:
       - name: run composer dump-autoload
         run: composer dump-autoload
 
-      - name: fix prob
-        run: | 
-          php artisan key:generate
-          php artisan cache:clear
-          php artisan route:clear
-          php artisan config:clear 
-          php artisan view:clear 
 
       - name: migrate
         env:
