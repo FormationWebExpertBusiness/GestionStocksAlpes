@@ -35,6 +35,6 @@ jobs:
       APP_URL: "http://localhost"
       DB_HOST: 127.0.0.1
       DB_CONNECTION: mysql
-      DB_DATABASE: gestionstockalpes
+      DB_DATABASE: testing
       DB_PORT: 33306
       DB_USER: root
