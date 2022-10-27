@@ -1,44 +1,38 @@
-name: PEST Tests
-on: push
+name: Tests (PHP)
+
+on: [push]
 
 jobs:
-  pesttests:
+  tests:
+    name: Run tests
     runs-on: ubuntu-latest
-    
     steps:
-      - uses: actions/checkout@v3
-    
-      - name: run composer install
-        run: composer install
+      - uses: actions/checkout@v1
 
-      - name: run composer dump-autoload
-        run: composer dump-autoload
+      - name: Cache composer dependencies
+        uses: actions/cache@v1
+        with:
+          path: vendor
+          key: composer-${{ hashFiles('composer.lock') }}
 
-      - name: get .env file
-        run: cp .env.testingCI .env
-        
-      - name: Start containers
-        run: docker-compose up -d --build --scale cypress=3 --force-recreate
-      
-      - name: fix prob
-        run: | 
+      - name: Run composer install
+        run: composer install -n --prefer-dist
+        env:
+          APP_ENV: testing
+
+      - name: Prepare Laravel Application
+        run: |
+          cp .env.example .env
           php artisan key:generate
-          php artisan cache:clear
-          php artisan route:clear
-          php artisan config:clear 
-          php artisan view:clear 
 
-      - name: migrate
-        run: php artisan migrate
+      - name: Run tests
+        run: ./vendor/bin/pest
+        env:
+          APP_ENV: testing
 
-      - name: run PEST Tests
-        run: ./vendor/bin/pest   
-            
-    env:
-      APP_URL: "http://localhost"
-      DB_HOST: 127.0.0.1
-      DB_CONNECTION: mysql
-      DB_DATABASE: testing
-      DB_PORT: 33306
-      DB_USER: root
-    
+      - name: Upload artifacts
+        uses: actions/upload-artifact@master
+        if: failure()
+        with:
+          name: Logs
+          path: ./storage/logs
