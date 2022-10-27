@@ -16,13 +16,17 @@ jobs:
       
     - name: get .env file
       run: cp .env.testingCI .env
+      
+    - name: change permission
+      run: chmod -R 777 .
+      
 
     - name: run PEST Tests
       run: ./vendor/bin/pest   
             
     env:
       APP_URL: "http://localhost"
-      DB_HOST: localhost
+      DB_HOST: 127.0.0.1
       DB_CONNECTION: mysql
       DB_DATABASE: testing
       DB_PORT: 33306
