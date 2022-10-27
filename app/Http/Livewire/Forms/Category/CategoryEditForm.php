@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Forms\Category;
 
 use App\Models\Category;
+use App\Rules\DifferentThanNonDefini;
 use Livewire\Component;
 
 class CategoryEditForm extends Component
@@ -14,26 +15,31 @@ class CategoryEditForm extends Component
     public $newName;
 
     protected $rules = [
-        'newName' => ['alpha_dash', 'unique:App\Models\Category,name'],
+        'selectedCategory' => ['required'],
+        'newName' => ['required', 'alpha_dash', 'unique:App\Models\Category,name'],
     ];
     protected $messages = [
+        'selectedCategory.required' => 'La catégorie à modifier doit être selectionnée',
+        'newName.required' => 'Le nouveau nom de la catégorie séléctionnée doit être renseigné',
         'newName.alpha_dash' => 'Le nom de la catégorie ne doit contenir que des lettres, des chiffres',
         'newName.unique' => 'Le nom de la catégorie doit être unique',
     ];
 
     public function updated($property)
     {
+        array_push($this->rules['selectedCategory'], new DifferentThanNonDefini());
         $this->validateOnly($property);
     }
 
     public function updateCategory()
     {
-        if ($this->selectedCategory !== null) {
-            $this->validate();
-            Category::where('name', $this->selectedCategory)->update(['name' => $this->newName]);
-            $this->toggleEditForm();
-            return redirect('stock')->with('status', 'Le nom de la categorie '.$this->selectedCategory.' a bien été changé en '.$this->newName.' !');
-        }
+        array_push($this->rules['selectedCategory'], new DifferentThanNonDefini());
+        $this->validate();
+        $categorie = Category::find($this->selectedCategory);
+        $oldName = $categorie->name;
+        $categorie->update(['name' => $this->newName]);
+        $this->toggleEditForm();
+        return redirect('stock')->with('status', 'Le nom de la categorie '.$oldName.' a bien été changé en '.$this->newName.' !');
     }
 
     public function toggleEditForm()

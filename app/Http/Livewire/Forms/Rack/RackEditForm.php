@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Forms\Rack;
 
 use App\Models\Rack;
+use App\Rules\NotEmptyRackLevel;
 use Livewire\Component;
 
 class RackEditForm extends Component
@@ -15,33 +16,35 @@ class RackEditForm extends Component
 
     protected $rules = [
         'selectedRack' => ['required'],
-        'nb_level' => ['required', 'min:1'],
+        'nb_level' => ['min:1', 'numeric', 'required'],
     ];
     protected $messages = [
         'selectedRack.required' => 'L\'étagère à modifier doit être selectionnée',
-        'nb_level.required' => 'Le nombre d\'étage dois être renseigné',
         'nb_level.min' => 'Il doit y avoir au moins un étage',
+        'nb_level.required' => 'Le nombre d\'étage dois être renseigné',
     ];
 
     public function mount()
     {
-        $this->selectedRack = "";
+        $this->selectedRack = '';
         $this->nb_level = 1;
     }
 
     public function updated($property)
     {
-        if($this->$property === "---") $this->$property = null;
+        if($this->$property === "Non défini") $this->$property = null;
         $this->validateOnly($property);
     }
 
     public function updateRack()
     {
+        array_push($this->rules['nb_level'], new NotEmptyRackLevel());
         $validatedData = $this->validate();
         $rack = Rack::find($this->selectedRack);
+        $oldNbLevel = $rack->nb_level;
         $rack->update($validatedData);
         $this->toggleEditForm();
-        return redirect('stock')->with('status', 'L\'étagère '.$rack->id.' a désormais '.$rack->nb_level.'étage(s) !');
+        return redirect('stock')->with('status', 'L\'étagère '.$rack->id.' est passé de '.$oldNbLevel.' à '.$rack->nb_level.' étage(s) !');
     }
 
     public function toggleEditForm()
