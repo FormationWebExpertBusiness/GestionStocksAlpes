@@ -34,5 +34,5 @@ jobs:
       DB_CONNECTION: mysql
       DB_DATABASE: testing
       DB_PORT: 33306
-      DB_USER: sail
-      DB_PASSWORD: password
+      DB_USER: root
+      DB_PASSWORD: root
