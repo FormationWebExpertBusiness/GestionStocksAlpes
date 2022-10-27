@@ -2,7 +2,8 @@
 
 namespace Tests\Unit;
 
-use PHPUnit\Framework\TestCase;
+use tests\TestCase;
+use function Pest\Livewire\livewire;
 
 class ExampleTest extends TestCase
 {
@@ -15,4 +16,5 @@ class ExampleTest extends TestCase
     {
         $this->assertTrue(true);
     }
+
 }
