@@ -16,6 +16,14 @@ jobs:
       
     - name: get .env file
       run: cp .env.testingCI .env
+      
+    - name: fix prob
+      run: | 
+        php artisan key:generate
+        php artisan cache:clear
+        php artisan route:clear
+        php artisan config:clear 
+        php artisan view:clear 
 
     - name: run PEST Tests
       run: ./vendor/bin/pest   
