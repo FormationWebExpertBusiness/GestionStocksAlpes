@@ -210,35 +210,25 @@ class ViewAll extends Component
                 $catF = empty($this->categoriesF) ? Category::where('id', '>', 0)->pluck('id')->toArray() : $this->categoriesF;
                 $brandF = empty($this->brandsF) ? Brand::where('id', '>', 0)->pluck('id')->toArray() : $this->brandsF;
 
-                // not use
-                // $rackF = empty($this->racksF) ? Rack::where('id', '>', 0)->pluck('id')->toArray() : $this->racksF;
-                // $rackLevelF = [];
-                // if (empty($this->rackLevelsF)) {
-                //     for ($i=1; $i <= Rack::all()->max('nb_level'); $i++) {
-                //         $rackLevelF[] = $i;
-                //     }
-                // }
-                // else {
-                //     $rackLevelF = $this->rackLevelsF;
-                // }
-
-                // if (in_array($value->rack->id, $rackF) && in_array($value->rack_level, $rackLevelF)) {
                 if (in_array($value->category->id, $catF) && in_array($value->brand->id, $brandF)) {
                     if ($value->TotalPriceOnRack($this->racksF, $this->rackLevelsF) >= $this->priceMin
                         && $value->TotalPriceOnRack($this->racksF, $this->rackLevelsF) <= $this->priceMax) {
                         if ($value->QuantityOnRack($this->racksF, $this->rackLevelsF) >= $this->quantityMin
                             && $value->QuantityOnRack($this->racksF, $this->rackLevelsF) <= $this->quantityMax) {
-                            return $value;
+                            if (! $this->racksF && ! $this->rackLevelsF) {
+                                return $value;
+                            } else {
+                                if ($value->QuantityOnRack($this->racksF, $this->rackLevelsF) > 0) {
+                                    return $value;
+                                }
+                            }
                         }
                     }
                 }
-                // }
             })
             ->sortBy([[$this->champ === 'category' || $this->champ === 'brand' ? $this->champ.'.name' : $this->champ, $this->mode]]);
 
         $this->showToast = true;
-
-        //$_ = $commonItems->first()->ItemsOnRack([1], [1,2]);
 
         return view('livewire.view-all', [
             'commonItems' => $commonItems,
