@@ -18,7 +18,7 @@ jobs:
         run: cp .env.testingCI .env
         
       - name: Start containers
-        run: docker-compose -f "docker-compose.yml" up -d --build
+        run: docker-compose up --build --scale cypress=3 --force-recreate
 
       - name: fix prob
         run: | 
