@@ -16,10 +16,6 @@ jobs:
       
     - name: get .env file
       run: cp .env.testingCI .env
-      
-    - name: change permission
-      run: chmod -R 777 .
-      
 
     - name: run PEST Tests
       run: ./vendor/bin/pest   
