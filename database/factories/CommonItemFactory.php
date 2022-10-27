@@ -2,6 +2,9 @@
 
 namespace Database\Factories;
 
+use App\Models\Brand;
+use App\Models\Category;
+
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -19,6 +22,8 @@ class CommonItemFactory extends Factory
         return [
             'model' => fake()->unique()->bothify('????-####'),
             'favorite' => fake()->boolean(),
+            'category_id' => fake()->numberBetween(1,Category::all()->count()),
+            'brand_id' => fake()->numberBetween(1, Brand::all()->count()),
         ];
     }
 }
