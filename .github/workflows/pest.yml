@@ -25,8 +25,8 @@ jobs:
           php artisan config:clear 
           php artisan view:clear 
           
-      - name: start sail    
-        run: ./vendor/bin/sail up
+      - name: start docker 
+        run: docker compose up -d
 
       - name: migrate
         run: ./vendor/bin/sail artisan migrate
