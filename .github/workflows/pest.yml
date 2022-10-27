@@ -20,6 +20,9 @@ jobs:
       - name: Start containers
         run: docker-compose up -d --build --scale cypress=3 --force-recreate
 
+      - name: go in container
+        run: docker exec -it gestionstocksalpes-laravel.test-1 bash
+      
       - name: fix prob
         run: | 
           php artisan key:generate
