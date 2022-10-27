@@ -6,7 +6,36 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-      - uses: actions/checkout@v2.3.4
-      - uses: php-actions/composer@v5
-      - uses: NWBY/pest-action@v1.2.0
+      - uses: actions/checkout@v3
+    
+      - name: run composer install
+        run: composer install
+
+      - name: run composer dump-autoload
+        run: composer dump-autoload
+
+      - name: get .env file
+        run: cp .env.testingCI .env
+
+      - name: fix prob
+        run: | 
+          php artisan key:generate
+          php artisan cache:clear
+          php artisan route:clear
+          php artisan config:clear 
+          php artisan view:clear 
+
+      - name: migrate
+        run: ./vendor/bin/sail artisan migrate
+
+      - name: run PEST Tests
+        run: ./vendor/bin/pest   
+            
+    env:
+      APP_URL: "http://localhost"
+      DB_HOST: 127.0.0.1
+      DB_CONNECTION: mysql
+      DB_DATABASE: testing
+      DB_PORT: 33306
+      DB_USER: root
     
