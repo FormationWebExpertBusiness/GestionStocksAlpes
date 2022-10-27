@@ -14,16 +14,17 @@ class CategorySeeder extends Seeder
      */
     public function run()
     {
-        $this->createRand();
+        \App\Models\Category::create([
+            'name' => 'Non défini',
+        ]);
+
+        // $this->createRand();
+        $this->createCustom();
     }
 
     private function createRand()
     {
-        $NDcategory = \App\Models\Category::create([
-            'name' => 'Non défini',
-        ]);
-        
-        \App\Models\Category::factory()->count(8)->create()->merge([$NDcategory]);
+        \App\Models\Category::factory()->count(8)->create();
     }
 
     private function createCustom()

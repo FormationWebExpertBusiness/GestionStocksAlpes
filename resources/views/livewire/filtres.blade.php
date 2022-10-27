@@ -29,6 +29,7 @@
                     </div>
                 </div>
             </div>
+
             <nav class="hidden min-w-[100%] h-20 content-center justify-items-center justify-center lg:flex lg:py-2"
                 aria-label="Global">
                 {{-- Price Min Max --}}
@@ -219,7 +220,6 @@
                             <div name="categories" class="py-1 content-center" role="none">
                                 @foreach ($categories as $category)
                                     <div class="flex items-center" wire:click='appendCat({{ $category->id }})'>
-                                        {{-- value="{{"cat".$category->id}}" --}}
                                         @if (in_array($category->id, $catsFilter))
                                             <input id="{{ 'cat' . $category->id }}" name="{{ 'cat' . $category->id }}"
                                                 type="checkbox"
@@ -267,7 +267,6 @@
                         <div class="absolute transform -translate-x-[25%] p-4 z-10 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
                             role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1" @click.outside="$wire.isVisibleBrand = false">
                             <div name="brands" class="py-1" role="none">
-                                {{-- <select id="categories" name="categories" onchange="this.form.submit()"></select> --}}
                                 @foreach ($brands as $brand)
                                     <div class="flex items-center" wire:click='appendBrand({{ $brand->id }})'>
                                         @if (in_array($brand->id, $brandsFilter))

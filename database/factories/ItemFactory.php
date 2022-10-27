@@ -17,10 +17,9 @@ class ItemFactory extends Factory
     public function definition()
     {
         return [
-            'quantity' => fake()->numberBetween(0,50),
-            'price' => fake()->numberBetween(1,1000),
-            'model' => fake()->unique()->bothify('????-####'),
-            'comment' => fake()->sentence()
+            'price' => fake()->randomFloat(2, 1, 100),
+            'comment' => fake()->sentence(),
+            'serial_number' => fake()->regexify('^[0-9A-Za-z]{8,12}$'),
         ];
     }
 }
