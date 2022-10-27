@@ -24,6 +24,9 @@ jobs:
           php artisan route:clear
           php artisan config:clear 
           php artisan view:clear 
+          
+      - name: start sail    
+        run: ./vendor/bin/sail up
 
       - name: migrate
         run: ./vendor/bin/sail artisan migrate
