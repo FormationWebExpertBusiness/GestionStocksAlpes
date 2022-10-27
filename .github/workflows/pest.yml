@@ -27,7 +27,7 @@ jobs:
         env:
           DB_PORT: 3306
           DB_USER: root
-        run: php artisan migrate
+        run: php artisan migrate --force
 
       - name: run PEST Tests
         env:
