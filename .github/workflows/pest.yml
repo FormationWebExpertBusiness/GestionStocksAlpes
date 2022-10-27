@@ -24,12 +24,9 @@ jobs:
           php artisan route:clear
           php artisan config:clear 
           php artisan view:clear 
-          
-      - name: start sail 
-        run: ./vendor/bin/sail up -d
 
       - name: migrate
-        run: ./vendor/bin/sail artisan migrate
+        run: php artisan migrate
 
       - name: run PEST Tests
         run: ./vendor/bin/pest   
