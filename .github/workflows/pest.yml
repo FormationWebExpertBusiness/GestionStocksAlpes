@@ -36,10 +36,12 @@ jobs:
       - name: migrate
         env:
           DB_PORT: 3306
+          DB_USER: root
         run: php artisan migrate
 
       - name: run PEST Tests
         env:
           DB_PORT: 3306
+          DB_USER: root
         run: ./vendor/bin/pest  
     
