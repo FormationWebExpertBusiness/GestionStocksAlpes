@@ -16,6 +16,9 @@ jobs:
 
       - name: get .env file
         run: cp .env.testingCI .env
+        
+      - name: Start containers
+        run: docker-compose -f "docker-compose.yml" up -d --build
 
       - name: fix prob
         run: | 
