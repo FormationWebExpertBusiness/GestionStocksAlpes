@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return redirect('/stock');
+    return redirect('/dashboard');
 });
 
 Route::get('login', [LoginController::class, 'displayLogin'])->name('login');
@@ -27,8 +27,6 @@ Route::get('logout', [LoginController::class, 'logout'])->name('logout');
 
 Route::middleware('auth')->group(function () {
     Route::get('/stock', [displayController::class, 'displayStock']);
-    Route::get('/', function () {
-        return view('livewire.dashboard');
-    });
-    // Route::get('/dashboard', Dashboard::class);
+    Route::get('/dashboard', Dashboard::class);
+
 });

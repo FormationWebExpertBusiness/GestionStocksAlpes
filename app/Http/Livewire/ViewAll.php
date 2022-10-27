@@ -26,6 +26,8 @@ class ViewAll extends Component
     public $brandsF = [];
     public $racksF = [];
     public $rackLevelsF = [];
+    public $search;
+
 
     public $showToast = true;
 
@@ -36,6 +38,8 @@ class ViewAll extends Component
         'brandsF' => ['as' => 'bra'],
         'racksF' => ['as' => 'rac'],
         'rackLevelsF' => ['as' => 'rlv'],
+        'search' => ['as' => 'sea'],
+
     ];
 
     protected $listeners = [
@@ -114,6 +118,8 @@ class ViewAll extends Component
     public function resetValueSearchBar()
     {
         $this->searchValue = '';
+        $this->search = '';
+
     }
 
     public function updateCatF($cat)
@@ -194,6 +200,7 @@ class ViewAll extends Component
     public function search($searchV)
     {
         $this->searchValue = $searchV;
+        $this->search = $searchV;
     }
 
     public function render()

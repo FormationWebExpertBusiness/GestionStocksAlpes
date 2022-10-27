@@ -95,4 +95,22 @@ class CommonItem extends Model
     {
         return $this->TotalPriceOnRack($rack, $rack_level) / $this->QuantityOnRack($rack, $rack_level);
     }
+
+
+    public static function TotalQuantity()
+    {
+        return CommonItem::all()->sum('quantity');
+    }
+
+
+    public static function TotalCommonItem()
+    {
+        return CommonItem::all()->count('id');
+    }
+
+    public static function TotalFavoriteItem()
+    {
+        return CommonItem::where('favorite', '=', true)->get()->count();
+    }
+
 }

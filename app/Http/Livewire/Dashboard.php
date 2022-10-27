@@ -2,7 +2,7 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\Item;
+use App\Models\CommonItem;
 use Livewire\Component;
 
 class Dashboard extends Component
@@ -12,8 +12,7 @@ class Dashboard extends Component
 
     public function render()
     {
-
-        $this->items = Item::limit(10)->orderBy('id', 'DESC')->get();
+        $this->items = CommonItem::limit(10)->orderBy('id', 'DESC')->get();
 
         return view('livewire.dashboard')->layout('layout') ;
     }

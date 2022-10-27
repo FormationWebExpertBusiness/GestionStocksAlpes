@@ -27,23 +27,20 @@ class Item extends Model
     protected $with = [
         'rack',
     ];
+    
+
+    public function getModel()
+    {
+        return CommonItem::find($this->common_id)->model;
+        
+    }
 
     public function rack()
     {
         return $this->belongsTo(Rack::class);
     }
 
-    public static function total()
-    {
-        return Item::all()->count('id');
-    }
-
-    public static function quantity()
-    {
-        return Item::all()->sum('quantity');
-    }
-
-    public static function price()
+    public static function MostExpensiveItem()
     {
         return Item::orderby('price','desc')->first();
     }
