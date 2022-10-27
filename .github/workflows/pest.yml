@@ -27,8 +27,6 @@ jobs:
 
       - name: Run tests
         run: ./vendor/bin/pest
-        env:
-          APP_ENV: testing
 
       - name: Upload artifacts
         uses: actions/upload-artifact@master
