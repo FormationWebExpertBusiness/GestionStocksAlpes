@@ -34,6 +34,8 @@ jobs:
           php artisan view:clear 
 
       - name: migrate
+        env:
+          DB_PORT: 3306
         run: php artisan migrate
 
       - name: run PEST Tests
