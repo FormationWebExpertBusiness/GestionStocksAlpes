@@ -1,8 +1,5 @@
 name: PEST Tests
 on: push
-jobs:     
-  name: PEST Tests
-on: push
 
 jobs:
   pesttests:
