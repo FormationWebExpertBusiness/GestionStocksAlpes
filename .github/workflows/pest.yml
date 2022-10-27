@@ -22,9 +22,6 @@ jobs:
       - name: run composer dump-autoload
         run: composer dump-autoload
 
-      - name: get .env file
-        run: cp .env.example .env
-
       - name: fix prob
         run: | 
           php artisan key:generate
