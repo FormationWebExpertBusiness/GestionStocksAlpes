@@ -62,6 +62,11 @@ class CommonItem extends Model
         return $this->hasMany(Item::class, 'common_id', 'id');
     }
 
+    public function hasItem()
+    {
+        return $this->quantity > 0;
+    }
+
     public function ItemsOnRack(?array $rack = [], ?array $rack_level = [])
     {
         if (empty($rack) || $rack === null) {

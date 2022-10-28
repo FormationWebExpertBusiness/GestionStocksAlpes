@@ -81,9 +81,13 @@ class ViewAll extends Component
         $this->priceMax = $priceMax;
     }
 
-    public function openWarningDelete($itemId)
+    public function openWarningDelete($commonItemId)
     {
-        $this->emit('deleteWarning', $itemId, $this->warningDeleteItemSignal, 'Item', 'model');
+        $deleteMessage = '';
+        if (CommonItem::find($commonItemId)->hasItem()) {
+            $deleteMessage = '⚠️ Des produits existent dans le stock, si vous supprimez, les produits seront aussi supprimés';
+        }
+        $this->emit('deleteWarning', $commonItemId, $this->warningDeleteItemSignal, 'CommonItem', 'model', $deleteMessage);
     }
 
     public function getQuantityMin($quantityMin)
@@ -99,11 +103,11 @@ class ViewAll extends Component
         $this->quantityMax = $quantityMax;
     }
 
-    public function deleteItem($itemId)
+    public function deleteItem($commonItemId)
     {
-        $item = Item::findOrFail($itemId);
-        $item->delete();
-        return redirect()->with('status', 'Le produit '.$item->model.' a bien été supprimé !');
+        $commonItem = CommonItem::findOrFail($commonItemId);
+        $commonItem->delete();
+        return redirect()->with('status', 'Le produit '.$commonItem->model.' a bien été supprimé !');
     }
 
     public function closeToast()
@@ -147,7 +151,6 @@ class ViewAll extends Component
         }
 
         $this->emit('racksFilter', $this->racksF);
-        // $this->emitTo('details.item.detail-modal', 'racksFilter', $this->racksF);
     }
 
     public function updateRackLevelF($rackLevel)
@@ -159,7 +162,6 @@ class ViewAll extends Component
         }
 
         $this->emit('rackLevelsFilter', $this->rackLevelsF);
-        // $this->emitTo('details.item.detail-modal', 'rackLevelsFilter', $this->rackLevelsF);
     }
 
     public function toggleMode()
