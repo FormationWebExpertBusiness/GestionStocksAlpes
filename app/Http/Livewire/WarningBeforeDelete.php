@@ -17,7 +17,7 @@ class WarningBeforeDelete extends Component
     public $deleteEmit;
     public $tId;
     public $name;
-    public $massage;
+    public $message;
 
     protected $listeners = [
         'deleteWarning' => 'openModal',
