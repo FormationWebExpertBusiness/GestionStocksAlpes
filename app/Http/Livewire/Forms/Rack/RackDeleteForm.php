@@ -34,7 +34,9 @@ class RackDeleteForm extends Component
 
     public function updated($property)
     {
-        if($this->$property === "Non défini") $this->$property = null;
+        if ($this->$property === 'Non défini') {
+            $this->$property = null;
+        }
         $this->validateOnly($property);
     }
 

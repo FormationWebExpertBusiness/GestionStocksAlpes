@@ -96,12 +96,10 @@ class CommonItem extends Model
         return $this->TotalPriceOnRack($rack, $rack_level) / $this->QuantityOnRack($rack, $rack_level);
     }
 
-
     public static function TotalQuantity()
     {
         return CommonItem::all()->sum('quantity');
     }
-
 
     public static function TotalCommonItem()
     {
@@ -113,4 +111,20 @@ class CommonItem extends Model
         return CommonItem::where('favorite', '=', true)->get()->count();
     }
 
+    public static function TotalOutStockItem()
+    {
+        return CommonItem::all()->filter(function ($value) {
+            if ($value->quantity >= 5) {
+                return $value;
+            }
+        })->count();
+    }
+    public static function FilterOnCategories($commonItems, $categories)
+    {
+        return $commonItems->filter(function ($value) use ($categories) {
+            if (in_array($value->category->id, $categories)) {
+                return $value;
+            }
+        });
+    }
 }

@@ -28,7 +28,6 @@ class ViewAll extends Component
     public $rackLevelsF = [];
     public $search;
 
-
     public $showToast = true;
 
     protected $queryString = [
@@ -119,7 +118,6 @@ class ViewAll extends Component
     {
         $this->searchValue = '';
         $this->search = '';
-
     }
 
     public function updateCatF($cat)
