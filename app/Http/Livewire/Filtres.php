@@ -33,8 +33,6 @@ class Filtres extends Component
 
     public $search;
 
-    protected $listeners = ['catsFilter' => 'getCatF', 'brandsFilter' => 'getBrandF', 'racksFilter' => 'getRackF', 'rackLevelsFilter' => 'getRackLevelF'];
-
     protected $messages = [
         'priceMin.integer' => 'Le prix doit être un entier',
         'priceMax.integer' => 'Le prix doit être un entier',
@@ -64,66 +62,9 @@ class Filtres extends Component
 
             $this->emit($propertyTrueName, $this->$propertyTrueName);
         }
-    }
-
-    public function getBrandF($brand)
-    {
-        $this->brandsFilter = $brand;
-    }
-
-    public function getCatF($cat)
-    {
-        $this->catsFilter = $cat;
-    }
-
-    public function getRackF($rack)
-    {
-        $this->racksFilter = $rack;
-    }
-
-    public function getRackLevelF($rackLevel)
-    {
-        $this->rackLevelsFilter = $rackLevel;
-    }
-
-    public function toggleCatDropdown()
-    {
-        $this->isVisibleCat = ! $this->isVisibleCat;
-    }
-
-    public function toggleBrandDropdown()
-    {
-        $this->isVisibleBrand = ! $this->isVisibleBrand;
-    }
-
-    public function toggleRackDropdown()
-    {
-        $this->isVisibleRack = ! $this->isVisibleRack;
-    }
-
-    public function toggleRackLevelDropdown()
-    {
-        $this->isVisibleRackLevel = ! $this->isVisibleRackLevel;
-    }
-
-    public function appendCat($cat)
-    {
-        $this->emit('catFilter', $cat);
-    }
-
-    public function appendBrand($brand)
-    {
-        $this->emit('brandFilter', $brand);
-    }
-
-    public function appendRack($rack)
-    {
-        $this->emit('rackFilter', $rack);
-    }
-
-    public function appendRackLevel($rackLevel)
-    {
-        $this->emit('rackLevelFilter', $rackLevel);
+        elseif (substr($propertyName,-6) === 'Filter') {
+            $this->emit($propertyName, $this->$propertyName);
+        }
     }
 
     public function resetFilters()
@@ -143,7 +84,7 @@ class Filtres extends Component
     public function resetSearchBar()
     {
         $this->search = '';
-        $this->emit('resetSearchBar');
+        $this->getSearchInput();
     }
 
     public function getSearchInput()
