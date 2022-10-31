@@ -36,6 +36,8 @@ class ViewAll extends Component
         'racksF' => ['as' => 'rac'],
         'rackLevelsF' => ['as' => 'rlv'],
         'searchValue' => ['except' => '', 'as' => 'sea'],
+        'quantityMin' => ['except' => '', 'as' => 'qmin'],
+        'quantityMax' => ['except' => '', 'as' => 'qmax'],
     ];
 
     protected $listeners = [
@@ -84,9 +86,6 @@ class ViewAll extends Component
 
     public function getQuantityMax($quantityMax)
     {
-        if ($quantityMax === '') {
-            $quantityMax = CommonItem::all()->max('quantity');
-        }
         $this->quantityMax = $quantityMax;
     }
 
@@ -122,8 +121,8 @@ class ViewAll extends Component
         $this->racksF = [];
         $this->rackLevelsF = [];
 
-        $this->quantityMin = 0;
-        $this->quantityMax = CommonItem::all()->max('quantity') ?? 0;
+        $this->quantityMin = null;
+        $this->quantityMax = null;
     }
 
     public function toggleMode()
@@ -178,7 +177,7 @@ class ViewAll extends Component
     }
 
     public function render()
-    {        
+    {
         $this->FilterOnSearchBar();
         $this->commonItems = CommonItem::FilterOnBrands($this->commonItems, $this->brandsF);
         $this->commonItems = CommonItem::FilterOnCategories($this->commonItems, $this->categoriesF);
