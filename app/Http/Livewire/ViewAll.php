@@ -13,8 +13,6 @@ class ViewAll extends Component
     public $champ = 'id';
     public $mode = 'asc';
 
-    public $priceMin;
-    public $priceMax;
     public $quantityMin;
     public $quantityMax;
 
@@ -26,6 +24,8 @@ class ViewAll extends Component
     public $brandsF = [];
     public $racksF = [];
     public $rackLevelsF = [];
+
+    public $commonItems;
 
     public $showToast = true;
 
@@ -47,8 +47,6 @@ class ViewAll extends Component
         'resetFilters' => 'resetAllFilters',
         'searchF' => 'search',
         'resetSearchBar' => 'resetValueSearchBar',
-        'priceMin' => 'getPriceMin',
-        'priceMax' => 'getPriceMax',
         'quantityMin' => 'getQuantityMin',
         'quantityMax' => 'getQuantityMax',
         'deleteItem' => 'deleteItem',
@@ -56,9 +54,6 @@ class ViewAll extends Component
 
     public function mount()
     {
-        $this->priceMin = 0;
-        $this->priceMax = CommonItem::all()->max('totalPrice') ?? 0;
-
         $this->quantityMin = 0;
         $this->quantityMax = CommonItem::all()->max('quantity') ?? 0;
 
@@ -66,19 +61,6 @@ class ViewAll extends Component
         $this->brandsF = [];
         $this->racksF = [];
         $this->rackLevelsF = [];
-    }
-
-    public function getPriceMin($priceMin)
-    {
-        $this->priceMin = $priceMin;
-    }
-
-    public function getPriceMax($priceMax)
-    {
-        if ($priceMax === '') {
-            $priceMax = CommonItem::all()->max('totalPrice');
-        }
-        $this->priceMax = $priceMax;
     }
 
     public function openWarningDelete($commonItemId)
@@ -186,9 +168,6 @@ class ViewAll extends Component
         $this->racksF = [];
         $this->rackLevelsF = [];
 
-        $this->priceMin = 0;
-        $this->priceMax = CommonItem::all()->max('totalPrice') ?? 0;
-
         $this->quantityMin = 0;
         $this->quantityMax = CommonItem::all()->max('quantity') ?? 0;
     }
@@ -198,43 +177,57 @@ class ViewAll extends Component
         $this->searchValue = $searchV;
     }
 
-    public function render()
+    public function FilterOnSearchBar()
     {
-        $commonItems = CommonItem::where('common_items.id', '>', 0)
-            ->join('brands as brand', 'brand.id', '=', 'common_items.brand_id')
-            ->join('categories as category', 'category.id', '=', 'common_items.category_id')
-            ->join('common_items as comi', 'comi.id', '=', 'common_items.id') // I joined items on items because else eloquent erase the items id to replace it with the last joined table id
+        if ($this->searchValue) {
+            $this->commonItems = CommonItem::select('common_items.*')
+            ->join('brands', 'common_items.brand_id', '=', 'brands.id')
+            ->join('categories', 'common_items.category_id', '=', 'categories.id')
             ->where('common_items.model', 'LIKE', '%'.$this->searchValue.'%')
-            ->orWhere('category.name', 'LIKE', '%'.$this->searchValue.'%')
-            ->orWhere('brand.name', 'LIKE', '%'.$this->searchValue.'%')
-            ->get()
-            ->filter(function ($value) {
-                $catF = empty($this->categoriesF) ? Category::where('id', '>', 0)->pluck('id')->toArray() : $this->categoriesF;
-                $brandF = empty($this->brandsF) ? Brand::where('id', '>', 0)->pluck('id')->toArray() : $this->brandsF;
+            ->orWhere('categories.name', 'LIKE', '%'.$this->searchValue.'%')
+            ->orWhere('brands.name', 'LIKE', '%'.$this->searchValue.'%')
+            ->get();
+        } else {
+            $this->commonItems = CommonItem::all();
+        }
+    }
 
-                if (in_array($value->category->id, $catF) && in_array($value->brand->id, $brandF)) {
-                    if ($value->TotalPriceOnRack($this->racksF, $this->rackLevelsF) >= $this->priceMin
-                        && $value->TotalPriceOnRack($this->racksF, $this->rackLevelsF) <= $this->priceMax) {
-                        if ($value->QuantityOnRack($this->racksF, $this->rackLevelsF) >= $this->quantityMin
-                            && $value->QuantityOnRack($this->racksF, $this->rackLevelsF) <= $this->quantityMax) {
-                            if (! $this->racksF && ! $this->rackLevelsF) {
-                                return $value;
-                            } else {
-                                if ($value->QuantityOnRack($this->racksF, $this->rackLevelsF) > 0) {
-                                    return $value;
-                                }
-                            }
-                        }
-                    }
-                }
-            })
-            ->sortBy([[$this->champ === 'category' || $this->champ === 'brand' ? $this->champ.'.name' : $this->champ, $this->mode]]);
+    public function sortCommonItems(){
+
+        switch ($this->champ) {
+            case 'category':
+                $this->commonItems = CommonItem::SortOnCategories($this->commonItems, $this->mode);
+                break;
+            case 'brand':
+                $this->commonItems = CommonItem::SortOnBrands($this->commonItems, $this->mode);
+                break;
+            case 'model':
+                $this->commonItems = CommonItem::SortOnModels($this->commonItems, $this->mode);
+                break;
+            case 'quantity':
+                $this->commonItems = CommonItem::SortOnQuantitiesOnRack($this->commonItems, $this->mode, $this->racksF, $this->rackLevelsF);
+                break;
+            case 'price':
+                $this->commonItems = CommonItem::SortOnTotalPricesOnRack($this->commonItems, $this->mode, $this->racksF, $this->rackLevelsF);
+                break;
+        }
+    }
+
+    public function render()
+    {        
+        $this->FilterOnSearchBar();
+        $this->commonItems = CommonItem::FilterOnBrands($this->commonItems, $this->brandsF);
+        $this->commonItems = CommonItem::FilterOnCategories($this->commonItems, $this->categoriesF);
+        if ($this->racksF || $this->rackLevelsF) {
+            $this->commonItems = CommonItem::FilterOnRacksQuantities($this->commonItems, $this->quantityMin, $this->quantityMax, $this->racksF, $this->rackLevelsF);
+        } else {
+            $this->commonItems = CommonItem::FilterOnQuantities($this->commonItems, $this->quantityMin, $this->quantityMax);
+        }
+        $this->sortCommonItems();
 
         $this->showToast = true;
 
-        return view('livewire.view-all', [
-            'commonItems' => $commonItems,
-        ]);
+        return view('livewire.view-all');
     }
 
     public function reloadView()
