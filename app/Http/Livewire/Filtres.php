@@ -21,8 +21,6 @@ class Filtres extends Component
     public $racks;
     public $rackLevels;
 
-    public $priceMin;
-    public $priceMax;
     public $quantityMin;
     public $quantityMax;
 
@@ -34,10 +32,6 @@ class Filtres extends Component
     public $search;
 
     protected $messages = [
-        'priceMin.integer' => 'Le prix doit être un entier',
-        'priceMax.integer' => 'Le prix doit être un entier',
-        'priceMin.min' => 'Le prix min doit être supérieur à 0',
-        'priceMax.min' => 'Le prix max doit être supérieur au prix min',
         'quantityMin.integer' => 'La quantité doit être un entier',
         'quantityMax.integer' => 'La quantité doit être un entier',
         'quantityMin.min' => 'La quantité min doit être supérieur à 0',
@@ -47,12 +41,10 @@ class Filtres extends Component
     public function updated($propertyName)
     {
         $rules = [
-            'priceMin' => 'nullable|integer|min:0',
-            'priceMax' => 'nullable|integer|min:'.$this->priceMin,
             'quantityMin' => 'nullable|integer|min:0',
             'quantityMax' => 'nullable|integer|min:'.$this->quantityMin,
         ];
-        if ($propertyName === 'quantityMin' || $propertyName === 'quantityMax' || $propertyName === 'priceMin' || $propertyName === 'priceMax') {
+        if ($propertyName === 'quantityMin' || $propertyName === 'quantityMax') {
             $propertyTrueName = $propertyName;
             $propertyName = Str::remove('Min', $propertyName);
             $propertyName = Str::remove('Max', $propertyName);
@@ -73,8 +65,6 @@ class Filtres extends Component
         $this->brandsFilter = [];
         $this->racksFilter = [];
         $this->rackLevelsFilter = [];
-        $this->priceMin = null;
-        $this->priceMax = null;
         $this->quantityMin = null;
         $this->quantityMax = null;
 
