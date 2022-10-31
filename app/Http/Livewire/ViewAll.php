@@ -53,11 +53,6 @@ class ViewAll extends Component
         'deleteItem' => 'deleteItem',
     ];
 
-    public function mount()
-    {
-
-    }
-
     public function openWarningDelete($commonItemId)
     {
         $deleteMessage = '';

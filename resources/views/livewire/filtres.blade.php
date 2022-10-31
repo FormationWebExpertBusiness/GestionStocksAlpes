@@ -91,22 +91,11 @@
                             role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1" @click.outside="$wire.isVisibleRack = false">
                             <div name="racks" class="py-1 content-center" role="none">
                                 @foreach ($racks as $rack)
-                                    <div class="flex items-center" {{--wire:click='appendRack({{ $rack->id }})'--}}>
-                                        {{-- @if (in_array($rack->id, $racksFilter))
-                                            <input id="{{ 'rack' . $rack->id }}" name="{{ 'rack' . $rack->id }}"
-                                                type="checkbox"
-                                                class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
-                                                checked>
-                                        @else
-                                            <input id="{{ 'rack' . $rack->id }}" name="{{ 'rack' . $rack->id }}"
-                                                type="checkbox"
-                                                class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
-                                        @endif --}}
+                                    <div class="flex items-center">
                                         <input id="{{ 'rack' . $rack->id }}" name="{{ $rack->name }}"
                                             value="{{ $rack->id }}" type="checkbox" wire:model='racksFilter'
                                             class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
-                                        <label {{-- wire:click='appendRack({{ $rack->id }})' --}}
-                                            for="{{ 'rack' . $rack->id }}"
+                                        <label for="{{ 'rack' . $rack->id }}"
                                             class="ml-3 text-sm text-gray-500">{{ $rack->name }}</label>
                                     </div>
                                 @endforeach
@@ -143,22 +132,11 @@
                             role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1" @click.outside="$wire.isVisibleRackLevel = false">
                             <div name="rackLevels" class="py-1 content-center" role="none">
                                 @foreach ($rackLevels as $rackLevel)
-                                    <div class="flex items-center" {{-- wire:click='appendRackLevel({{ $rackLevel }})'--}}>
-                                        {{-- @if (in_array($rackLevel, $rackLevelsFilter))
-                                            <input id="{{ 'rackLevel' . $rackLevel }}" name="{{ 'rackLevel' . $rackLevel }}"
-                                                type="checkbox"
-                                                class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
-                                                checked>
-                                        @else
-                                            <input id="{{ 'rackLevel' . $rackLevel }}" name="{{ 'rackLevel' . $rackLevel }}"
-                                                type="checkbox"
-                                                class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
-                                        @endif --}}
+                                    <div class="flex items-center">
                                         <input id="{{ 'rackLevel' . $rackLevel }}" name="{{ 'rackLevel' . $rackLevel }}"
                                             value="{{ $rackLevel }}" type="checkbox" wire:model='rackLevelsFilter'
                                             class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
-                                        <label {{-- wire:click='appendRackLevel({{ $rackLevel }})' --}}
-                                            for="{{ 'rackLevel' . $rackLevel }}"
+                                        <label for="{{ 'rackLevel' . $rackLevel }}"
                                             class="ml-3 text-sm text-gray-500">Étage {{ $rackLevel }}</label>
                                     </div>
                                 @endforeach
@@ -195,23 +173,11 @@
                             role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1" @click.outside="$wire.isVisibleCat = false">
                             <div name="categories" class="py-1 content-center" role="none">
                                 @foreach ($categories as $category)
-                                    <div class="flex items-center" {{--wire:click='appendCat({{ $category->id }})'--}}>
-                                        {{-- @if (in_array($category->id, $catsFilter))
-                                            <input id="{{ 'cat' . $category->id }}" name="{{ 'cat' . $category->id }}"
-                                                type="checkbox"
-                                                class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
-                                                checked>
-                                        @else
-                                            <input id="{{ 'cat' . $category->id }}" name="{{ 'cat' . $category->id }}"
-                                                type="checkbox"
-                                                class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
-                                        @endif --}}
-
+                                    <div class="flex items-center">
                                         <input id="{{ 'cat' . $category->id }}" name="{{ $category->name }}"
                                                 value="{{ $category->id }}" type="checkbox" wire:model='catsFilter'
                                                 class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
-                                        <label {{-- wire:click='appendCat({{ $category->id }})' --}}
-                                            for="{{ $category->name }}"
+                                        <label for="{{ $category->name }}"
                                             class="ml-3 text-sm text-gray-500">{{ $category->name }}</label>
                                     </div>
                                 @endforeach
@@ -248,22 +214,11 @@
                             role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1" @click.outside="$wire.isVisibleBrand = false">
                             <div name="brands" class="py-1" role="none">
                                 @foreach ($brands as $brand)
-                                    <div class="flex items-center" {{-- wire:click='$emit("brandFilter",{{ $brand->id }})' --}}>
-                                        {{-- @if (in_array($brand->id, $brandsFilter))
-                                            <input id="{{ 'brand' . $brand->id }}" name="{{ 'brand' . $brand->id }}"
-                                                value="{{ 'brand' . $brand->id }}" type="checkbox"
-                                                class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
-                                                checked>
-                                        @else
-                                            <input id="{{ 'brand' . $brand->id }}" name="{{ 'brand' . $brand->id }}"
-                                                value="{{ 'brand' . $brand->id }}" type="checkbox"
-                                                class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
-                                        @endif --}}
+                                    <div class="flex items-center">
                                         <input id="{{ 'brand' . $brand->id }}" name="{{ 'brand' . $brand->id }}"
                                             value="{{ $brand->id }}" type="checkbox" wire:model='brandsFilter'
                                             class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
-                                        <label {{--wire:click='$emit("brandFilter",{{ $brand->id }})' --}}
-                                            for="{{ 'brand' . $brand->id }}"
+                                        <label for="{{ 'brand' . $brand->id }}"
                                             class="ml-3 text-sm text-gray-500">{{ $brand->name }}</label>
                                     </div>
                                 @endforeach
