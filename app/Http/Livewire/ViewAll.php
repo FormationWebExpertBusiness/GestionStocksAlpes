@@ -13,8 +13,6 @@ class ViewAll extends Component
     public $champ = 'id';
     public $mode = 'asc';
 
-    public $priceMin;
-    public $priceMax;
     public $quantityMin;
     public $quantityMax;
 
@@ -49,8 +47,6 @@ class ViewAll extends Component
         'resetFilters' => 'resetAllFilters',
         'searchF' => 'search',
         'resetSearchBar' => 'resetValueSearchBar',
-        'priceMin' => 'getPriceMin',
-        'priceMax' => 'getPriceMax',
         'quantityMin' => 'getQuantityMin',
         'quantityMax' => 'getQuantityMax',
         'deleteItem' => 'deleteItem',
@@ -58,9 +54,6 @@ class ViewAll extends Component
 
     public function mount()
     {
-        $this->priceMin = 0;
-        $this->priceMax = CommonItem::all()->max('totalPrice') ?? 0;
-
         $this->quantityMin = 0;
         $this->quantityMax = CommonItem::all()->max('quantity') ?? 0;
 
@@ -68,19 +61,6 @@ class ViewAll extends Component
         $this->brandsF = [];
         $this->racksF = [];
         $this->rackLevelsF = [];
-    }
-
-    public function getPriceMin($priceMin)
-    {
-        $this->priceMin = $priceMin;
-    }
-
-    public function getPriceMax($priceMax)
-    {
-        if ($priceMax === '') {
-            $priceMax = CommonItem::all()->max('totalPrice');
-        }
-        $this->priceMax = $priceMax;
     }
 
     public function openWarningDelete($commonItemId)
@@ -187,9 +167,6 @@ class ViewAll extends Component
         $this->brandsF = [];
         $this->racksF = [];
         $this->rackLevelsF = [];
-
-        $this->priceMin = 0;
-        $this->priceMax = CommonItem::all()->max('totalPrice') ?? 0;
 
         $this->quantityMin = 0;
         $this->quantityMax = CommonItem::all()->max('quantity') ?? 0;
