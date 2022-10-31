@@ -2,10 +2,7 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\Brand;
-use App\Models\Category;
 use App\Models\CommonItem;
-use App\Models\Item;
 use Livewire\Component;
 
 class ViewAll extends Component
@@ -181,19 +178,19 @@ class ViewAll extends Component
     {
         if ($this->searchValue) {
             $this->commonItems = CommonItem::select('common_items.*')
-            ->join('brands', 'common_items.brand_id', '=', 'brands.id')
-            ->join('categories', 'common_items.category_id', '=', 'categories.id')
-            ->where('common_items.model', 'LIKE', '%'.$this->searchValue.'%')
-            ->orWhere('categories.name', 'LIKE', '%'.$this->searchValue.'%')
-            ->orWhere('brands.name', 'LIKE', '%'.$this->searchValue.'%')
-            ->get();
+                ->join('brands', 'common_items.brand_id', '=', 'brands.id')
+                ->join('categories', 'common_items.category_id', '=', 'categories.id')
+                ->where('common_items.model', 'LIKE', '%'.$this->searchValue.'%')
+                ->orWhere('categories.name', 'LIKE', '%'.$this->searchValue.'%')
+                ->orWhere('brands.name', 'LIKE', '%'.$this->searchValue.'%')
+                ->get();
         } else {
             $this->commonItems = CommonItem::all();
         }
     }
 
-    public function sortCommonItems(){
-
+    public function sortCommonItems()
+    {
         switch ($this->champ) {
             case 'category':
                 $this->commonItems = CommonItem::SortOnCategories($this->commonItems, $this->mode);
@@ -214,7 +211,7 @@ class ViewAll extends Component
     }
 
     public function render()
-    {        
+    {
         $this->FilterOnSearchBar();
         $this->commonItems = CommonItem::FilterOnBrands($this->commonItems, $this->brandsF);
         $this->commonItems = CommonItem::FilterOnCategories($this->commonItems, $this->categoriesF);

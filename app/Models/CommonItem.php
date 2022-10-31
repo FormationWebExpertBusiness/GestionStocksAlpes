@@ -103,9 +103,9 @@ class CommonItem extends Model
 
     public static function FilterOnQuantities($commonItems, $quantityMin, $quantityMax)
     {
-        return $commonItems->filter(function ($value) use ($quantityMin, $quantityMax){
+        return $commonItems->filter(function ($value) use ($quantityMin, $quantityMax) {
             $quantity = $value->quantity;
-            if ($quantity >= $quantityMin 
+            if ($quantity >= $quantityMin
              && $quantity <= $quantityMax) {
                 return $value;
             }
@@ -116,8 +116,8 @@ class CommonItem extends Model
     {
         return $commonItems->filter(function ($value) use ($quantityMin, $quantityMax, $racks, $rackLevels) {
             $quantity = $value->QuantityOnRack($racks, $rackLevels);
-            if ($quantity >= $quantityMin 
-             && $quantity <= $quantityMax 
+            if ($quantity >= $quantityMin
+             && $quantity <= $quantityMax
              && $quantity > 0) {
                 return $value;
             }
@@ -127,7 +127,7 @@ class CommonItem extends Model
     public static function FilterOnBrands($commonItems, $brands)
     {
         $brands = empty($brands) ? Brand::pluck('id')->toArray() : $brands;
-        return $commonItems->filter(function ($value) use ($brands){
+        return $commonItems->filter(function ($value) use ($brands) {
             if (in_array($value->brand->id, $brands)) {
                 return $value;
             }
@@ -137,7 +137,7 @@ class CommonItem extends Model
     public static function FilterOnCategories($commonItems, $categories)
     {
         $categories = empty($categories) ? Category::pluck('id')->toArray() : $categories;
-        return $commonItems->filter(function ($value) use ($categories){
+        return $commonItems->filter(function ($value) use ($categories) {
             if (in_array($value->category->id, $categories)) {
                 return $value;
             }
@@ -164,9 +164,8 @@ class CommonItem extends Model
         return $commonItems->sortBy(function ($commonItem) use ($mode, $racksF, $rackLevelsF) {
             if ($mode === 'asc') {
                 return $commonItem->QuantityOnRack($racksF, $rackLevelsF);
-            } else {
-                return - $commonItem->QuantityOnRack($racksF, $rackLevelsF);
             }
+            return - $commonItem->QuantityOnRack($racksF, $rackLevelsF);
         });
     }
 
@@ -175,9 +174,8 @@ class CommonItem extends Model
         return $commonItems->sortBy(function ($commonItem) use ($mode, $racksF, $rackLevelsF) {
             if ($mode === 'asc') {
                 return $commonItem->TotalPriceOnRack($racksF, $rackLevelsF);
-            } else {
-                return - $commonItem->TotalPriceOnRack($racksF, $rackLevelsF);
             }
+            return - $commonItem->TotalPriceOnRack($racksF, $rackLevelsF);
         });
     }
 }

@@ -44,8 +44,7 @@ class Rack extends Model
     public static function getRackLevelMax(array $racks = [])
     {
         $max = 0;
-        if(empty($racks))
-        {
+        if (empty($racks)) {
             $allNbLevels = Rack::pluck('nb_level')->toArray();
             $max = max($allNbLevels);
         } else {

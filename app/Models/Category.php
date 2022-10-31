@@ -31,7 +31,7 @@ class Category extends Model
     {
         return $this->brands->contains($brand);
     }
-    
+
     public function hasCommonItem()
     {
         return CommonItem::where('category_id', $this->id)->get()->count() > 0;
@@ -40,9 +40,8 @@ class Category extends Model
     public static function getLinkedBrands($catsFilter)
     {
         $brands = collect();
-        
-        if(empty($catsFilter))
-        {
+
+        if (empty($catsFilter)) {
             $brands = Brand::all();
         } else {
             foreach ($catsFilter as $cat) {
