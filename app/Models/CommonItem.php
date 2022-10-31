@@ -100,4 +100,84 @@ class CommonItem extends Model
     {
         return $this->TotalPriceOnRack($rack, $rack_level) / $this->QuantityOnRack($rack, $rack_level);
     }
+
+    public static function FilterOnQuantities($commonItems, $quantityMin, $quantityMax)
+    {
+        return $commonItems->filter(function ($value) use ($quantityMin, $quantityMax){
+            $quantity = $value->quantity;
+            if ($quantity >= $quantityMin 
+             && $quantity <= $quantityMax) {
+                return $value;
+            }
+        });
+    }
+
+    public static function FilterOnRacksQuantities($commonItems, $quantityMin, $quantityMax, $racks, $rackLevels)
+    {
+        return $commonItems->filter(function ($value) use ($quantityMin, $quantityMax, $racks, $rackLevels) {
+            $quantity = $value->QuantityOnRack($racks, $rackLevels);
+            if ($quantity >= $quantityMin 
+             && $quantity <= $quantityMax 
+             && $quantity > 0) {
+                return $value;
+            }
+        });
+    }
+
+    public static function FilterOnBrands($commonItems, $brands)
+    {
+        $brands = empty($brands) ? Brand::pluck('id')->toArray() : $brands;
+        return $commonItems->filter(function ($value) use ($brands){
+            if (in_array($value->brand->id, $brands)) {
+                return $value;
+            }
+        });
+    }
+
+    public static function FilterOnCategories($commonItems, $categories)
+    {
+        $categories = empty($categories) ? Category::pluck('id')->toArray() : $categories;
+        return $commonItems->filter(function ($value) use ($categories){
+            if (in_array($value->category->id, $categories)) {
+                return $value;
+            }
+        });
+    }
+
+    public static function SortOncategories($commonItems, $mode)
+    {
+        return $commonItems->sortBy([['category.name', $mode]]);
+    }
+
+    public static function SortOnBrands($commonItems, $mode)
+    {
+        return $commonItems->sortBy([['brand.name', $mode]]);
+    }
+
+    public static function SortOnModels($commonItems, $mode)
+    {
+        return $commonItems->sortBy([['model', $mode]]);
+    }
+
+    public static function SortOnQuantitiesOnRack($commonItems, $mode, $racksF, $rackLevelsF)
+    {
+        return $commonItems->sortBy(function ($commonItem) use ($mode, $racksF, $rackLevelsF) {
+            if ($mode === 'asc') {
+                return $commonItem->QuantityOnRack($racksF, $rackLevelsF);
+            } else {
+                return - $commonItem->QuantityOnRack($racksF, $rackLevelsF);
+            }
+        });
+    }
+
+    public static function SortOnTotalPricesOnRack($commonItems, $mode, $racksF, $rackLevelsF)
+    {
+        return $commonItems->sortBy(function ($commonItem) use ($mode, $racksF, $rackLevelsF) {
+            if ($mode === 'asc') {
+                return $commonItem->TotalPriceOnRack($racksF, $rackLevelsF);
+            } else {
+                return - $commonItem->TotalPriceOnRack($racksF, $rackLevelsF);
+            }
+        });
+    }
 }
