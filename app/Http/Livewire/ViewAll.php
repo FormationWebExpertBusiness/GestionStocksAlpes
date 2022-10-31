@@ -2,10 +2,12 @@
 
 namespace App\Http\Livewire;
 
+use App\Exports\CommomItemExport;
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\CommonItem;
 use App\Models\Item;
+use Maatwebsite\Excel\Facades\Excel;
 use Livewire\Component;
 
 class ViewAll extends Component
@@ -235,6 +237,11 @@ class ViewAll extends Component
         return view('livewire.view-all', [
             'commonItems' => $commonItems,
         ]);
+    }
+
+    public function export() 
+    {   
+        return Excel::download(new CommomItemExport, 'commomItems.csv');
     }
 
     public function reloadView()
