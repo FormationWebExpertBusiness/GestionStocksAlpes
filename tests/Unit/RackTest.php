@@ -18,7 +18,7 @@ test('test Rack method getNameAttribute', function () {
     $this->assertEquals('étagère 1', $rack->getNameAttribute());
 });
 
-test('test Rack method ItemsOn', function () {
+test('test Rack method itemsOn', function () {
     // datas
     $rack = Rack::create(['nb_level' => 5]);
 
@@ -30,10 +30,10 @@ test('test Rack method ItemsOn', function () {
     $item  = Item::create(['price' => 5, 'serial_number' => 'ite1', 'common_id' => 1, 'rack_id' => 1, 'rack_level' => 1]);
     
     // test
-    $this->assertEquals([1,2], $rack->ItemsOn()->pluck('id')->toArray());
+    $this->assertEquals([1,2], $rack->itemsOn()->pluck('id')->toArray());
 });
 
-test('test Rack method ItemsOnLevel', function () {
+test('test Rack method itemsOnLevel', function () {
     // datas
     $rack = Rack::create(['nb_level' => 5]);
 
@@ -45,7 +45,7 @@ test('test Rack method ItemsOnLevel', function () {
     $item  = Item::create(['price' => 5, 'serial_number' => 'ite1', 'common_id' => 1, 'rack_id' => 1, 'rack_level' => 1]);
 
     // test
-    $this->assertEquals([2], $rack->ItemsOnLevel(1)->pluck('id')->toArray());
+    $this->assertEquals([2], $rack->itemsOnLevel(1)->pluck('id')->toArray());
 });
 
 test('test Rack method getRackLevelMax', function () {

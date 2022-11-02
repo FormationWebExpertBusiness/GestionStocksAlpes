@@ -48,7 +48,7 @@ class ItemAddForm extends Component
     {
         $this->validateOnly($property);
 
-        if ($property = 'rack_id' && $this->rack_level > $this->getSelectedRack()?->nb_level) {
+        if ($property === 'rack_id' && $this->rack_level > $this->getSelectedRack()?->nb_level) {
             $this->rack_level = null;
         }
     }

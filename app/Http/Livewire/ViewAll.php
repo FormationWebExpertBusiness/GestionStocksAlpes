@@ -2,8 +2,6 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\Brand;
-use App\Models\Category;
 use App\Models\CommonItem;
 use Livewire\Component;
 
@@ -135,51 +133,51 @@ class ViewAll extends Component
         $this->champ = $champO;
     }
 
-    public function FilterOnSearchBar()
+    public function filterOnSearchBar()
     {
         if ($this->searchValue) {
             $this->commonItems = CommonItem::select('common_items.*')
-            ->join('brands', 'common_items.brand_id', '=', 'brands.id')
-            ->join('categories', 'common_items.category_id', '=', 'categories.id')
-            ->where('common_items.model', 'LIKE', '%'.$this->searchValue.'%')
-            ->orWhere('categories.name', 'LIKE', '%'.$this->searchValue.'%')
-            ->orWhere('brands.name', 'LIKE', '%'.$this->searchValue.'%')
-            ->get();
+                ->join('brands', 'common_items.brand_id', '=', 'brands.id')
+                ->join('categories', 'common_items.category_id', '=', 'categories.id')
+                ->where('common_items.model', 'LIKE', '%'.$this->searchValue.'%')
+                ->orWhere('categories.name', 'LIKE', '%'.$this->searchValue.'%')
+                ->orWhere('brands.name', 'LIKE', '%'.$this->searchValue.'%')
+                ->get();
         } else {
             $this->commonItems = CommonItem::all();
         }
     }
 
-    public function sortCommonItems(){
-
+    public function sortCommonItems()
+    {
         switch ($this->champ) {
             case 'category':
-                $this->commonItems = CommonItem::SortOnCategories($this->commonItems, $this->mode);
+                $this->commonItems = CommonItem::sortOnCategories($this->commonItems, $this->mode);
                 break;
             case 'brand':
-                $this->commonItems = CommonItem::SortOnBrands($this->commonItems, $this->mode);
+                $this->commonItems = CommonItem::sortOnBrands($this->commonItems, $this->mode);
                 break;
             case 'model':
-                $this->commonItems = CommonItem::SortOnModels($this->commonItems, $this->mode);
+                $this->commonItems = CommonItem::sortOnModels($this->commonItems, $this->mode);
                 break;
             case 'quantity':
-                $this->commonItems = CommonItem::SortOnQuantitiesOnRack($this->commonItems, $this->mode, $this->racksF, $this->rackLevelsF);
+                $this->commonItems = CommonItem::sortOnQuantitiesOnRack($this->commonItems, $this->mode, $this->racksF, $this->rackLevelsF);
                 break;
             case 'price':
-                $this->commonItems = CommonItem::SortOnTotalPricesOnRack($this->commonItems, $this->mode, $this->racksF, $this->rackLevelsF);
+                $this->commonItems = CommonItem::sortOnTotalPricesOnRack($this->commonItems, $this->mode, $this->racksF, $this->rackLevelsF);
                 break;
         }
     }
 
     public function render()
     {
-        $this->FilterOnSearchBar();
-        $this->commonItems = CommonItem::FilterOnBrands($this->commonItems, $this->brandsF);
-        $this->commonItems = CommonItem::FilterOnCategories($this->commonItems, $this->categoriesF);
+        $this->filterOnSearchBar();
+        $this->commonItems = CommonItem::filterOnBrands($this->commonItems, $this->brandsF);
+        $this->commonItems = CommonItem::filterOnCategories($this->commonItems, $this->categoriesF);
         if ($this->racksF || $this->rackLevelsF) {
-            $this->commonItems = CommonItem::FilterOnRacksQuantities($this->commonItems, $this->quantityMin, $this->quantityMax, $this->racksF, $this->rackLevelsF);
+            $this->commonItems = CommonItem::filterOnRacksQuantities($this->commonItems, $this->quantityMin, $this->quantityMax, $this->racksF, $this->rackLevelsF);
         } else {
-            $this->commonItems = CommonItem::FilterOnQuantities($this->commonItems, $this->quantityMin, $this->quantityMax);
+            $this->commonItems = CommonItem::filterOnQuantities($this->commonItems, $this->quantityMin, $this->quantityMax);
         }
         $this->sortCommonItems();
 

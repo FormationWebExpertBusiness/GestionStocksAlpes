@@ -5,7 +5,7 @@ namespace App\Http\Livewire\Forms\Brand;
 use Livewire\Component;
 
 class BrandForm extends Component
-{ 
+{
     public $showDropdown = false;
 
     public function toggleDropdown()

@@ -63,7 +63,7 @@ class CommonItemForm extends Component
 
     public function updated($property)
     {
-        if (empty($this->commonItemToUpdate) || in_array($property, ['model', 'brand_id'])) {
+        if (! $this->commonItemToUpdate || in_array($property, ['model', 'brand_id'])) {
             $this->addDynamicRules();
         }
 
@@ -75,7 +75,7 @@ class CommonItemForm extends Component
 
     public function saveCommonItem()
     {
-        if (empty($this->commonItemToUpdate) || ($this->brand_id !== $this->commonItemToUpdate->brand_id || $this->model !== $this->commonItemToUpdate->model)) {
+        if (! $this->commonItemToUpdate || ($this->brand_id !== $this->commonItemToUpdate->brand_id || $this->model !== $this->commonItemToUpdate->model)) {
             $this->addDynamicRules();
         }
         $validatedData = $this->validate();
@@ -108,22 +108,22 @@ class CommonItemForm extends Component
     public function updateCatF($categories)
     {
         $this->selectedCategoryFilter = $categories;
-        if (empty($commonItemToUpdate)) {
+        if (! $this->commonItemToUpdate) {
             if (count($this->selectedCategoryFilter) === 1) {
                 $this->category_id = array_values($this->selectedCategoryFilter)[0];
             } else {
-                $this->category_id = $this->commonItemToUpdate?->category_id ?? 1;
+                $this->category_id = 1;
             }
         }
     }
     public function updateBrandF($brands)
     {
         $this->selectedBrandFilter = $brands;
-        if (empty($commonItemToUpdate)) {
+        if (! $this->commonItemToUpdate) {
             if (count($this->selectedBrandFilter) === 1) {
                 $this->brand_id = array_values($this->selectedBrandFilter)[0];
             } else {
-                $this->brand_id = $this->commonItemToUpdate?->category_id ?? 1;
+                $this->brand_id = 1;
             }
         }
     }
@@ -132,10 +132,10 @@ class CommonItemForm extends Component
         $this->selectedCategoryFilter = [];
         $this->selectedBrandFilter = [];
 
-        if (empty($commonItemToUpdate)) {
-            $this->category_id = $this->commonItemToUpdate?->category_id ?? 1;
+        if (! $this->commonItemToUpdate) {
+            $this->category_id = 1;
 
-            $this->brand_id = $this->commonItemToUpdate?->brand_id ?? 1;
+            $this->brand_id = 1;
         }
     }
 }

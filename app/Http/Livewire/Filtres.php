@@ -2,10 +2,8 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Rack;
-use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Livewire\Component;
 
