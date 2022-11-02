@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\displayController;
+use App\Http\Controllers\DisplayController;
 use App\Http\Controllers\LoginController;
 use App\Http\Livewire\Dashboard;
 use Illuminate\Support\Facades\Route;
@@ -24,6 +24,6 @@ Route::get('login', [LoginController::class, 'displayLogin'])->name('login');
 Route::get('logout', [LoginController::class, 'logout'])->name('logout');
 
 Route::middleware('auth')->group(function () {
-    Route::get('/stock', [displayController::class, 'displayStock']);
     Route::get('/dashboard', Dashboard::class);
+    Route::get('/stock', [DisplayController::class, 'displayStock']);
 });

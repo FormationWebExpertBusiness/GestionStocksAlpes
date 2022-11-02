@@ -46,9 +46,14 @@ class BrandDeleteForm extends Component
 
     public function openWarningDelete()
     {
-        $validatedData = $this->validate();
-        $brand = Brand::where('name', $this->selectedBrand);
-        $this->emit('deleteWarning', $brand->first()->id, $this->warningDeleteBrandSignal, 'Brand', 'name');
+        $this->validate();
+        $brand = Brand::where('name', $this->selectedBrand)->first();
+        $deleteMessage = '';
+        if ($brand->hasCommonItem()) {
+            $deleteMessage = '⚠️ Des produits existent pour cette marque, si vous la supprimez, la marque des produits associés sera modifiée en "Non définie"';
+        }
+
+        $this->emit('deleteWarning', $brand->id, $this->warningDeleteBrandSignal, 'Brand', 'name', $deleteMessage);
     }
 
     public function deleteBrand($brandId)

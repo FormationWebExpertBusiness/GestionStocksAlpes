@@ -2,8 +2,12 @@
 
 namespace App\Providers;
 
+use App\Models\Brand;
+use App\Models\Category;
 use App\Models\CommonItem;
 use App\Models\Item;
+use App\Observers\BrandObserver;
+use App\Observers\CategoryObserver;
 use App\Observers\CommonItemObserver;
 use App\Observers\ItemObserver;
 use Illuminate\Auth\Events\Registered;
@@ -26,6 +30,8 @@ class EventServiceProvider extends ServiceProvider
     protected $observers = [
         Item::class => [ItemObserver::class],
         CommonItem::class => [CommonItemObserver::class],
+        Brand::class => [BrandObserver::class],
+        Category::class => [CategoryObserver::class],
     ];
 
     /**

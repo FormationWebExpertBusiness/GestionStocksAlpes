@@ -17,11 +17,6 @@ class CommonItemSeeder extends Seeder
      */
     public function run()
     {
-        for ($i=0; $i < 20; $i++) {
-            \App\Models\CommonItem::factory()->create([
-                'category_id' => fake()->numberBetween(1,Category::all()->count()),
-                'brand_id' => fake()->numberBetween(1, Brand::all()->count()),
-            ]);
-        }
+        \App\Models\CommonItem::factory()->count(20)->create();
     }
 }

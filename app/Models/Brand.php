@@ -21,4 +21,9 @@ class Brand extends Model
     protected $with = [
 
     ];
+
+    public function hasCommonItem()
+    {
+        return CommonItem::where('brand_id', $this->id)->get()->count() > 0;
+    }
 }

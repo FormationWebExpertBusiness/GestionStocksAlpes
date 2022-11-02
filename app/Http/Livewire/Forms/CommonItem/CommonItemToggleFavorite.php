@@ -19,19 +19,19 @@ class CommonItemToggleFavorite extends Component
         return view('livewire.forms.common-item.common-item-toggle-favorite');
     }
 
-    public function AddFavorite()
+    public function addFavorite()
     {
         $this->isFavorite = true;
-        $this->SaveCommonItem();
+        $this->saveCommonItem();
     }
 
-    public function RemoveFavorite()
+    public function removeFavorite()
     {
         $this->isFavorite = false;
-        $this->SaveCommonItem();
+        $this->saveCommonItem();
     }
 
-    public function SaveCommonItem()
+    public function saveCommonItem()
     {
         $this->commonItem->favorite = $this->isFavorite;
         $this->commonItem->save();

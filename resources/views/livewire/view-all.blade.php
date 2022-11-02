@@ -1,5 +1,5 @@
 <div>
-    @livewire('filtres')
+    @livewire('filtres', ['search' => $searchValue, 'catsFilter' => $categoriesF, 'brandsFilter' => $brandsF, 'racksFilter' => $racksF, 'rackLevelsFilter' => $rackLevelsF, 'quantityMin' => $quantityMin, 'quantityMax' => $quantityMax])
     @if (session('status'))
         @if ($showToast)
             <div class="absolute min-w-[10%] pb-2 pt-2 top-0 right-0 rounded-lg bg-green-50 p-4">
@@ -142,7 +142,7 @@
                                                 {{ $commonItem->model }}</td>
                                             <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-500 w-[14%]">
                                                 <div class="inline-flex min-w-[70%]">
-                                                    {{ $commonItem->QuantityOnRack($racksF, $rackLevelsF) }} {{ $commonItem->unit }}
+                                                    {{ $commonItem->quantityOnRack($racksF, $rackLevelsF) }} {{ $commonItem->unit }}
                                                 </div>
                                                 <div class="align-middle inline-flex min-w-[15%]">
                                                     @livewire('forms.item.item-add-form', ['common_id' => $commonItem->id], key('item-add-form-' . $commonItem->id))
@@ -152,7 +152,7 @@
                                                 </div>
                                             </td>
                                             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 w-[14%]">
-                                                {{ number_format($commonItem->TotalPriceOnRack($racksF, $rackLevelsF), 2, ',', ' '); }} €</td>
+                                                {{ number_format($commonItem->totalPriceOnRack($racksF, $rackLevelsF), 2, ',', ' '); }} €</td>
                                             <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-center text-sm font-medium sm:pr-6 w-1/5">
                                                 <div class="inline-block px-6">
                                                     @livewire('details.item.detail-modal', ['commonItem' => $commonItem], key('item-detail-' . $commonItem->id))

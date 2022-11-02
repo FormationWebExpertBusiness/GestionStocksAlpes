@@ -46,9 +46,14 @@ class CategoryDeleteForm extends Component
 
     public function openWarningDelete()
     {
-        $validatedData = $this->validate();
-        $category = Category::where('name', $this->selectedCategory);
-        $this->emit('deleteWarning', $category->first()->id, $this->warningDeleteCategorySignal, 'Category', 'name');
+        $this->validate();
+        $category = Category::where('name', $this->selectedCategory)->first();
+        $deleteMessage = '';
+        if ($category->hasCommonItem()) {
+            $deleteMessage = '⚠️ Des produits existent pour cette catégorie, si vous la supprimez, la catégorie des produits associés sera modifiée en "Non définie"';
+        }
+
+        $this->emit('deleteWarning', $category->id, $this->warningDeleteCategorySignal, 'Category', 'name', $deleteMessage);
     }
 
     public function deleteCategory($categoryId)
