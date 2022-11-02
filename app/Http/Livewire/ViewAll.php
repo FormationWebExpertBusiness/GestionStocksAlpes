@@ -5,7 +5,6 @@ namespace App\Http\Livewire;
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\CommonItem;
-use App\Models\Item;
 use Livewire\Component;
 
 class ViewAll extends Component
@@ -36,32 +35,23 @@ class ViewAll extends Component
         'brandsF' => ['as' => 'bra'],
         'racksF' => ['as' => 'rac'],
         'rackLevelsF' => ['as' => 'rlv'],
+        'searchValue' => ['except' => '', 'as' => 'sea'],
+        'quantityMin' => ['except' => '', 'as' => 'qmin'],
+        'quantityMax' => ['except' => '', 'as' => 'qmax'],
     ];
 
     protected $listeners = [
         'stockUpdated' => 'reloadView',
-        'catFilter' => 'updateCatF',
-        'brandFilter' => 'updateBrandF',
-        'rackFilter' => 'updateRackF',
-        'rackLevelFilter' => 'updateRackLevelF',
+        'catsFilter' => 'updateCatF',
+        'brandsFilter' => 'updateBrandF',
+        'racksFilter' => 'updateRackF',
+        'rackLevelsFilter' => 'updateRackLevelF',
         'resetFilters' => 'resetAllFilters',
         'searchF' => 'search',
-        'resetSearchBar' => 'resetValueSearchBar',
         'quantityMin' => 'getQuantityMin',
         'quantityMax' => 'getQuantityMax',
         'deleteItem' => 'deleteItem',
     ];
-
-    public function mount()
-    {
-        $this->quantityMin = 0;
-        $this->quantityMax = CommonItem::all()->max('quantity') ?? 0;
-
-        $this->categoriesF = [];
-        $this->brandsF = [];
-        $this->racksF = [];
-        $this->rackLevelsF = [];
-    }
 
     public function openWarningDelete($commonItemId)
     {
@@ -70,19 +60,6 @@ class ViewAll extends Component
             $deleteMessage = '⚠️ Des produits existent dans le stock, si vous supprimez, les produits seront aussi supprimés';
         }
         $this->emit('deleteWarning', $commonItemId, $this->warningDeleteItemSignal, 'CommonItem', 'model', $deleteMessage);
-    }
-
-    public function getQuantityMin($quantityMin)
-    {
-        $this->quantityMin = $quantityMin;
-    }
-
-    public function getQuantityMax($quantityMax)
-    {
-        if ($quantityMax === '') {
-            $quantityMax = CommonItem::all()->max('quantity');
-        }
-        $this->quantityMax = $quantityMax;
     }
 
     public function deleteItem($commonItemId)
@@ -97,53 +74,50 @@ class ViewAll extends Component
         $this->showToast = false;
     }
 
-    public function resetValueSearchBar()
+    public function getQuantityMin($quantityMin)
     {
-        $this->searchValue = '';
+        $this->quantityMin = $quantityMin;
     }
 
-    public function updateCatF($cat)
+    public function getQuantityMax($quantityMax)
     {
-        if (in_array($cat, $this->categoriesF)) {
-            unset($this->categoriesF[array_search($cat, $this->categoriesF)]);
-        } else {
-            array_push($this->categoriesF, $cat);
-        }
-
-        $this->emit('catsFilter', $this->categoriesF);
+        $this->quantityMax = $quantityMax;
     }
 
-    public function updateBrandF($brand)
+    public function updateCatF($cats)
     {
-        if (in_array($brand, $this->brandsF)) {
-            unset($this->brandsF[array_search($brand, $this->brandsF)]);
-        } else {
-            array_push($this->brandsF, $brand);
-        }
-
-        $this->emit('brandsFilter', $this->brandsF);
+        $this->categoriesF = $cats;
     }
 
-    public function updateRackF($rack)
+    public function updateBrandF($brands)
     {
-        if (in_array($rack, $this->racksF)) {
-            unset($this->racksF[array_search($rack, $this->racksF)]);
-        } else {
-            array_push($this->racksF, $rack);
-        }
-
-        $this->emit('racksFilter', $this->racksF);
+           $this->brandsF = $brands;
     }
 
-    public function updateRackLevelF($rackLevel)
+    public function updateRackF($racks)
     {
-        if (in_array($rackLevel, $this->rackLevelsF)) {
-            unset($this->rackLevelsF[array_search($rackLevel, $this->rackLevelsF)]);
-        } else {
-            array_push($this->rackLevelsF, $rackLevel);
-        }
+        $this->racksF = $racks;
+    }
 
-        $this->emit('rackLevelsFilter', $this->rackLevelsF);
+    public function updateRackLevelF($rackLevels)
+    {
+        $this->rackLevelsF = $rackLevels;
+    }
+
+    public function search($searchV)
+    {
+        $this->searchValue = $searchV;
+    }
+
+    public function resetAllFilters()
+    {
+        $this->categoriesF = [];
+        $this->brandsF = [];
+        $this->racksF = [];
+        $this->rackLevelsF = [];
+
+        $this->quantityMin = null;
+        $this->quantityMax = null;
     }
 
     public function toggleMode()
@@ -159,22 +133,6 @@ class ViewAll extends Component
     {
         $this->toggleMode();
         $this->champ = $champO;
-    }
-
-    public function resetAllFilters()
-    {
-        $this->categoriesF = [];
-        $this->brandsF = [];
-        $this->racksF = [];
-        $this->rackLevelsF = [];
-
-        $this->quantityMin = 0;
-        $this->quantityMax = CommonItem::all()->max('quantity') ?? 0;
-    }
-
-    public function search($searchV)
-    {
-        $this->searchValue = $searchV;
     }
 
     public function FilterOnSearchBar()
@@ -214,7 +172,7 @@ class ViewAll extends Component
     }
 
     public function render()
-    {        
+    {
         $this->FilterOnSearchBar();
         $this->commonItems = CommonItem::FilterOnBrands($this->commonItems, $this->brandsF);
         $this->commonItems = CommonItem::FilterOnCategories($this->commonItems, $this->categoriesF);

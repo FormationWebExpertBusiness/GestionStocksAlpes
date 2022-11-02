@@ -65,7 +65,7 @@
                 {{-- Rack Dropdown --}}
                 <div class="relative mx-8 inline-block text-left">
                     <div>
-                        <button wire:click="toggleRackDropdown" type="button"
+                        <button wire:click="$toggle('isVisibleRack')" type="button"
                             class="inline-flex w-full justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-100"
                             id="menu-button" aria-expanded="true" aria-haspopup="true">
                             Étagère
@@ -78,7 +78,7 @@
                                 </svg>
                             @else
                                 <svg class="-mr-1 ml-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
-                                    fill="currentColor" class="w-5 h-5">
+                                    fill="currentColor">
                                     <path fill-rule="evenodd"
                                         d="M14.77 12.79a.75.75 0 01-1.06-.02L10 8.832 6.29 12.77a.75.75 0 11-1.08-1.04l4.25-4.5a.75.75 0 011.08 0l4.25 4.5a.75.75 0 01-.02 1.06z"
                                         clip-rule="evenodd" />
@@ -91,19 +91,11 @@
                             role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1" @click.outside="$wire.isVisibleRack = false">
                             <div name="racks" class="py-1 content-center" role="none">
                                 @foreach ($racks as $rack)
-                                    <div class="flex items-center" wire:click='appendRack({{ $rack->id }})'>
-                                        @if (in_array($rack->id, $racksFilter))
-                                            <input id="{{ 'rack' . $rack->id }}" name="{{ 'rack' . $rack->id }}"
-                                                type="checkbox"
-                                                class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
-                                                checked>
-                                        @else
-                                            <input id="{{ 'rack' . $rack->id }}" name="{{ 'rack' . $rack->id }}"
-                                                type="checkbox"
-                                                class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
-                                        @endif
-                                        <label wire:click='appendRack({{ $rack->id }})'
-                                            for="{{ 'rack' . $rack->id }}"
+                                    <div class="flex items-center">
+                                        <input id="{{ 'rack' . $rack->id }}" name="{{ $rack->name }}"
+                                            value="{{ $rack->id }}" type="checkbox" wire:model='racksFilter'
+                                            class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+                                        <label for="{{ 'rack' . $rack->id }}"
                                             class="ml-3 text-sm text-gray-500">{{ $rack->name }}</label>
                                     </div>
                                 @endforeach
@@ -114,7 +106,7 @@
                 {{-- RackLevel Dropdown --}}
                 <div class="relative mx-8 inline-block text-left">
                     <div>
-                        <button wire:click="toggleRackLevelDropdown" type="button"
+                        <button wire:click="$toggle('isVisibleRackLevel')" type="button"
                             class="inline-flex whitespace-nowrap w-full justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-100"
                             id="menu-button" aria-expanded="true" aria-haspopup="true">
                             Étage sur l'étagère
@@ -127,7 +119,7 @@
                                 </svg>
                             @else
                                 <svg class="-mr-1 ml-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
-                                    fill="currentColor" class="w-5 h-5">
+                                    fill="currentColor">
                                     <path fill-rule="evenodd"
                                         d="M14.77 12.79a.75.75 0 01-1.06-.02L10 8.832 6.29 12.77a.75.75 0 11-1.08-1.04l4.25-4.5a.75.75 0 011.08 0l4.25 4.5a.75.75 0 01-.02 1.06z"
                                         clip-rule="evenodd" />
@@ -140,19 +132,11 @@
                             role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1" @click.outside="$wire.isVisibleRackLevel = false">
                             <div name="rackLevels" class="py-1 content-center" role="none">
                                 @foreach ($rackLevels as $rackLevel)
-                                    <div class="flex items-center" wire:click='appendRackLevel({{ $rackLevel }})'>
-                                        @if (in_array($rackLevel, $rackLevelsFilter))
-                                            <input id="{{ 'rackLevel' . $rackLevel }}" name="{{ 'rackLevel' . $rackLevel }}"
-                                                type="checkbox"
-                                                class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
-                                                checked>
-                                        @else
-                                            <input id="{{ 'rackLevel' . $rackLevel }}" name="{{ 'rackLevel' . $rackLevel }}"
-                                                type="checkbox"
-                                                class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
-                                        @endif
-                                        <label wire:click='appendRackLevel({{ $rackLevel }})'
-                                            for="{{ 'rackLevel' . $rackLevel }}"
+                                    <div class="flex items-center">
+                                        <input id="{{ 'rackLevel' . $rackLevel }}" name="{{ 'rackLevel' . $rackLevel }}"
+                                            value="{{ $rackLevel }}" type="checkbox" wire:model='rackLevelsFilter'
+                                            class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+                                        <label for="{{ 'rackLevel' . $rackLevel }}"
                                             class="ml-3 text-sm text-gray-500">Étage {{ $rackLevel }}</label>
                                     </div>
                                 @endforeach
@@ -163,7 +147,7 @@
                 {{-- Category DropDown --}}
                 <div class="relative mx-8 inline-block text-left">
                     <div>
-                        <button wire:click="toggleCatDropdown" type="button"
+                        <button wire:click="$toggle('isVisibleCat')" type="button"
                             class="inline-flex w-full justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-100"
                             id="menu-button" aria-expanded="true" aria-haspopup="true">
                             Catégories
@@ -176,7 +160,7 @@
                                 </svg>
                             @else
                                 <svg class="-mr-1 ml-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
-                                    fill="currentColor" class="w-5 h-5">
+                                    fill="currentColor">
                                     <path fill-rule="evenodd"
                                         d="M14.77 12.79a.75.75 0 01-1.06-.02L10 8.832 6.29 12.77a.75.75 0 11-1.08-1.04l4.25-4.5a.75.75 0 011.08 0l4.25 4.5a.75.75 0 01-.02 1.06z"
                                         clip-rule="evenodd" />
@@ -189,19 +173,11 @@
                             role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1" @click.outside="$wire.isVisibleCat = false">
                             <div name="categories" class="py-1 content-center" role="none">
                                 @foreach ($categories as $category)
-                                    <div class="flex items-center" wire:click='appendCat({{ $category->id }})'>
-                                        @if (in_array($category->id, $catsFilter))
-                                            <input id="{{ 'cat' . $category->id }}" name="{{ 'cat' . $category->id }}"
-                                                type="checkbox"
-                                                class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
-                                                checked>
-                                        @else
-                                            <input id="{{ 'cat' . $category->id }}" name="{{ 'cat' . $category->id }}"
-                                                type="checkbox"
+                                    <div class="flex items-center">
+                                        <input id="{{ 'cat' . $category->id }}" name="{{ $category->name }}"
+                                                value="{{ $category->id }}" type="checkbox" wire:model='catsFilter'
                                                 class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
-                                        @endif
-                                        <label wire:click='appendCat({{ $category->id }})'
-                                            for="{{ 'cat' . $category->id }}"
+                                        <label for="{{ $category->name }}"
                                             class="ml-3 text-sm text-gray-500">{{ $category->name }}</label>
                                     </div>
                                 @endforeach
@@ -212,7 +188,7 @@
                 {{-- Brand Dropdown --}}
                 <div class="relative mx-8 inline-block text-left">
                     <div>
-                        <button wire:click="toggleBrandDropdown" type="button"
+                        <button wire:click="$toggle('isVisibleBrand')" type="button"
                             class="inline-flex w-full justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-100"
                             id="menu-button" aria-expanded="true" aria-haspopup="true">
                             Marques
@@ -225,7 +201,7 @@
                                 </svg>
                             @else
                                 <svg class="-mr-1 ml-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg"
-                                    viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
+                                    viewBox="0 0 20 20" fill="currentColor" >
                                     <path fill-rule="evenodd"
                                         d="M14.77 12.79a.75.75 0 01-1.06-.02L10 8.832 6.29 12.77a.75.75 0 11-1.08-1.04l4.25-4.5a.75.75 0 011.08 0l4.25 4.5a.75.75 0 01-.02 1.06z"
                                         clip-rule="evenodd" />
@@ -238,19 +214,11 @@
                             role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1" @click.outside="$wire.isVisibleBrand = false">
                             <div name="brands" class="py-1" role="none">
                                 @foreach ($brands as $brand)
-                                    <div class="flex items-center" wire:click='appendBrand({{ $brand->id }})'>
-                                        @if (in_array($brand->id, $brandsFilter))
-                                            <input id="{{ 'brand' . $brand->id }}" name="{{ 'brand' . $brand->id }}"
-                                                value="{{ 'brand' . $brand->id }}" type="checkbox"
-                                                class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
-                                                checked>
-                                        @else
-                                            <input id="{{ 'brand' . $brand->id }}" name="{{ 'brand' . $brand->id }}"
-                                                value="{{ 'brand' . $brand->id }}" type="checkbox"
-                                                class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
-                                        @endif
-                                        <label wire:click='appendBrand({{ $brand->id }})'
-                                            for="{{ 'brand' . $brand->id }}"
+                                    <div class="flex items-center">
+                                        <input id="{{ 'brand' . $brand->id }}" name="{{ 'brand' . $brand->id }}"
+                                            value="{{ $brand->id }}" type="checkbox" wire:model='brandsFilter'
+                                            class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+                                        <label for="{{ 'brand' . $brand->id }}"
                                             class="ml-3 text-sm text-gray-500">{{ $brand->name }}</label>
                                     </div>
                                 @endforeach
