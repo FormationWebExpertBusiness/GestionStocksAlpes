@@ -106,8 +106,8 @@ class CommonItem extends Model
     {
         return $commonItems->filter(function ($value) use ($quantityMin, $quantityMax) {
             $quantity = $value->quantity;
-            if ($quantity >= $quantityMin
-             && $quantity <= $quantityMax) {
+            if ($quantity >= $quantityMin 
+             && ($quantity <= $quantityMax || ! $quantityMax)) {
                 return $value;
             }
         });
@@ -117,8 +117,8 @@ class CommonItem extends Model
     {
         return $commonItems->filter(function ($value) use ($quantityMin, $quantityMax, $racks, $rackLevels) {
             $quantity = $value->quantityOnRack($racks, $rackLevels);
-            if ($quantity >= $quantityMin
-             && $quantity <= $quantityMax
+            if ($quantity >= $quantityMin 
+             && ($quantity <= $quantityMax || ! $quantityMax)
              && $quantity > 0) {
                 return $value;
             }
