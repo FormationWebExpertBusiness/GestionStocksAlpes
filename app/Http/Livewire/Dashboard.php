@@ -15,7 +15,9 @@ class Dashboard extends Component
 
     public $catsFilter = [];
 
-    protected $queryString = ['search'];
+    protected $queryString = [
+        'search' => ['except' => ''],
+    ];
 
     public function toggleCatDropdown()
     {
