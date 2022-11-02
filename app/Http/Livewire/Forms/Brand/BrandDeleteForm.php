@@ -46,7 +46,7 @@ class BrandDeleteForm extends Component
 
     public function openWarningDelete()
     {
-        $validatedData = $this->validate();
+        $this->validate();
         $brand = Brand::where('name', $this->selectedBrand)->first();
         $deleteMessage = '';
         if ($brand->hasCommonItem()) {

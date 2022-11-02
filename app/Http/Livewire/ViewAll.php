@@ -174,7 +174,7 @@ class ViewAll extends Component
         $this->searchValue = $searchV;
     }
 
-    public function FilterOnSearchBar()
+    public function filterOnSearchBar()
     {
         if ($this->searchValue) {
             $this->commonItems = CommonItem::select('common_items.*')
@@ -193,32 +193,32 @@ class ViewAll extends Component
     {
         switch ($this->champ) {
             case 'category':
-                $this->commonItems = CommonItem::SortOnCategories($this->commonItems, $this->mode);
+                $this->commonItems = CommonItem::sortOnCategories($this->commonItems, $this->mode);
                 break;
             case 'brand':
-                $this->commonItems = CommonItem::SortOnBrands($this->commonItems, $this->mode);
+                $this->commonItems = CommonItem::sortOnBrands($this->commonItems, $this->mode);
                 break;
             case 'model':
-                $this->commonItems = CommonItem::SortOnModels($this->commonItems, $this->mode);
+                $this->commonItems = CommonItem::sortOnModels($this->commonItems, $this->mode);
                 break;
             case 'quantity':
-                $this->commonItems = CommonItem::SortOnQuantitiesOnRack($this->commonItems, $this->mode, $this->racksF, $this->rackLevelsF);
+                $this->commonItems = CommonItem::sortOnQuantitiesOnRack($this->commonItems, $this->mode, $this->racksF, $this->rackLevelsF);
                 break;
             case 'price':
-                $this->commonItems = CommonItem::SortOnTotalPricesOnRack($this->commonItems, $this->mode, $this->racksF, $this->rackLevelsF);
+                $this->commonItems = CommonItem::sortOnTotalPricesOnRack($this->commonItems, $this->mode, $this->racksF, $this->rackLevelsF);
                 break;
         }
     }
 
     public function render()
     {
-        $this->FilterOnSearchBar();
-        $this->commonItems = CommonItem::FilterOnBrands($this->commonItems, $this->brandsF);
-        $this->commonItems = CommonItem::FilterOnCategories($this->commonItems, $this->categoriesF);
+        $this->filterOnSearchBar();
+        $this->commonItems = CommonItem::filterOnBrands($this->commonItems, $this->brandsF);
+        $this->commonItems = CommonItem::filterOnCategories($this->commonItems, $this->categoriesF);
         if ($this->racksF || $this->rackLevelsF) {
-            $this->commonItems = CommonItem::FilterOnRacksQuantities($this->commonItems, $this->quantityMin, $this->quantityMax, $this->racksF, $this->rackLevelsF);
+            $this->commonItems = CommonItem::filterOnRacksQuantities($this->commonItems, $this->quantityMin, $this->quantityMax, $this->racksF, $this->rackLevelsF);
         } else {
-            $this->commonItems = CommonItem::FilterOnQuantities($this->commonItems, $this->quantityMin, $this->quantityMax);
+            $this->commonItems = CommonItem::filterOnQuantities($this->commonItems, $this->quantityMin, $this->quantityMax);
         }
         $this->sortCommonItems();
 

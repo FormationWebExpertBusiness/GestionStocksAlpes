@@ -55,7 +55,7 @@ test('test CommonItem method getTotalPriceAttribute', function () {
     $this->assertEquals(18, $commonItem->getTotalPriceAttribute());
 });
 
-test('test CommonItem method UnitPrice', function () {
+test('test CommonItem method unitPrice', function () {
     // datas
     $rack = Rack::create(['nb_level' => 5]);
     $brand = Brand::create(['name' => 'marque']);
@@ -67,7 +67,7 @@ test('test CommonItem method UnitPrice', function () {
     $item3 = Item::create(['price' => 3, 'serial_number' => 'ite3', 'common_id' => 1, 'rack_id' => 1, 'rack_level' => 4]);
 
     // test
-    $this->assertEquals(5, $commonItem->UnitPrice());
+    $this->assertEquals(5, $commonItem->unitPrice());
 });
 
 test('test CommonItem method brand', function () {
@@ -90,7 +90,7 @@ test('test CommonItem method category', function () {
     $this->assertEquals([1], $commonItem->category()->pluck('id')->toArray());
 });
 
-test('test CommonItem method ItemsOnRack', function () {
+test('test CommonItem method itemsOnRack', function () {
     // datas
     $rack = Rack::create(['nb_level' => 5]);
     $rack = Rack::create(['nb_level' => 2]);
@@ -109,11 +109,11 @@ test('test CommonItem method ItemsOnRack', function () {
 
 
     // test
-    $this->expect([5,6])->toBe($commonItem->ItemsOnRack([2])->pluck('id')->toArray());
-    $this->expect([1,3,4])->toBe($commonItem->ItemsOnRack([1], [3,4])->pluck('id')->toArray());
+    $this->expect([5,6])->toBe($commonItem->itemsOnRack([2])->pluck('id')->toArray());
+    $this->expect([1,3,4])->toBe($commonItem->itemsOnRack([1], [3,4])->pluck('id')->toArray());
 });
 
-test('test CommonItem method QuantityOnRack', function () {
+test('test CommonItem method quantityOnRack', function () {
     // datas
     $rack = Rack::create(['nb_level' => 5]);
     $rack = Rack::create(['nb_level' => 2]);
@@ -132,11 +132,11 @@ test('test CommonItem method QuantityOnRack', function () {
 
 
     // test
-    $this->expect(2)->toBe($commonItem->QuantityOnRack([2]));
-    $this->expect(3)->toBe($commonItem->QuantityOnRack([1],[3,4]));
+    $this->expect(2)->toBe($commonItem->quantityOnRack([2]));
+    $this->expect(3)->toBe($commonItem->quantityOnRack([1],[3,4]));
 });
 
-test('test CommonItem method TotalPriceOnRack', function () {
+test('test CommonItem method totalPriceOnRack', function () {
     // datas
     $rack = Rack::create(['nb_level' => 5]);
     $rack = Rack::create(['nb_level' => 2]);
@@ -155,11 +155,11 @@ test('test CommonItem method TotalPriceOnRack', function () {
 
 
     // test
-    $this->expect(8.0)->toBe($commonItem->TotalPriceOnRack([2]));
-    $this->expect(13.0)->toBe($commonItem->TotalPriceOnRack([1],[3,4]));
+    $this->expect(8.0)->toBe($commonItem->totalPriceOnRack([2]));
+    $this->expect(13.0)->toBe($commonItem->totalPriceOnRack([1],[3,4]));
 });
 
-test('test CommonItem method UnitPriceOnRack', function () {
+test('test CommonItem method unitPriceOnRack', function () {
     // datas
     $rack = Rack::create(['nb_level' => 5]);
     $rack = Rack::create(['nb_level' => 2]);
@@ -178,7 +178,7 @@ test('test CommonItem method UnitPriceOnRack', function () {
 
 
     // test
-    $this->expect(7.0)->toBe($commonItem->UnitPriceOnRack([2]));
-    $this->expect(5.0)->toBe($commonItem->UnitPriceOnRack([1],[3,4]));
+    $this->expect(7.0)->toBe($commonItem->unitPriceOnRack([2]));
+    $this->expect(5.0)->toBe($commonItem->unitPriceOnRack([1],[3,4]));
 });
 

@@ -17,7 +17,6 @@ class DifferentThanNonDefini implements InvokableRule
      */
     public function __invoke($attribute, $value, $fail)
     {
-        // dd('test');
         if ($value === 'Non défini' || $value === null || $value === '1') {
             $fail('L\'attribut doit être défini.');
         }

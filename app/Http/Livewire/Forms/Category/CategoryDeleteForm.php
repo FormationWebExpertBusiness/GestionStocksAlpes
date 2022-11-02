@@ -46,7 +46,7 @@ class CategoryDeleteForm extends Component
 
     public function openWarningDelete()
     {
-        $validatedData = $this->validate();
+        $this->validate();
         $category = Category::where('name', $this->selectedCategory)->first();
         $deleteMessage = '';
         if ($category->hasCommonItem()) {
