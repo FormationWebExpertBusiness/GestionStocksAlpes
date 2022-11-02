@@ -69,11 +69,11 @@ class CommonItem extends Model
 
     public function itemsOnRack(?array $rack = [], ?array $rack_level = [])
     {
-        if (count($rack) === 0 || $rack === null) {
+        if (count($rack ?? []) === 0) {
             $rack = Rack::pluck('id')->toArray();
         }
 
-        if (count($rack_level) === 0 || $rack_level === null) {
+        if (count($rack_level ?? []) === 0) {
             $nb_levelMax = Rack::all()->max('nb_level');
             for ($i = 1; $i <= $nb_levelMax; $i++) {
                 $rack_level[] = $i;
