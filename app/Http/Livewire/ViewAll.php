@@ -21,6 +21,7 @@ class ViewAll extends Component
     public $brandsF = [];
     public $racksF = [];
     public $rackLevelsF = [];
+    public $search;
 
     public $commonItems;
 
@@ -89,7 +90,7 @@ class ViewAll extends Component
 
     public function updateBrandF($brands)
     {
-           $this->brandsF = $brands;
+        $this->brandsF = $brands;
     }
 
     public function updateRackF($racks)
