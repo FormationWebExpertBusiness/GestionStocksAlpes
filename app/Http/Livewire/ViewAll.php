@@ -90,7 +90,7 @@ class ViewAll extends Component
 
     public function updateBrandF($brands)
     {
-           $this->brandsF = $brands;
+        $this->brandsF = $brands;
     }
 
     public function updateRackF($racks)

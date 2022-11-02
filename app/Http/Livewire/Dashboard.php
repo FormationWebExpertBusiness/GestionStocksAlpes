@@ -21,7 +21,7 @@ class Dashboard extends Component
 
     public function toggleCatDropdown()
     {
-        $this->isVisibleCat = !$this->isVisibleCat;
+        $this->isVisibleCat = ! $this->isVisibleCat;
     }
 
     public function render()
@@ -29,11 +29,11 @@ class Dashboard extends Component
         $this->categories = Category::all();
         $this->commonItems = CommonItem::select('common_items.*')
             ->join('categories', 'categories.id', '=', 'common_items.category_id')
-            ->where('categories.name', 'like', '%' . $this->search . '%',)
+            ->where('categories.name', 'like', '%' . $this->search . '%', )
             ->where('favorite', '=', true)
             ->get();
-        $catF = empty($this->catsFilter) ? Category::where('id', '>', 0)->pluck('id')->toArray() : $this->catsFilter;
-        $this->commonItems = CommonItem::FilterOnCategories($this->commonItems, $catF);
+        $catF = count($this->catsFilter) === 0 ? Category::where('id', '>', 0)->pluck('id')->toArray() : $this->catsFilter;
+        $this->commonItems = CommonItem::filterOnCategories($this->commonItems, $catF);
         //dump($this->commonItems);
         return view('livewire.dashboard')->layout('layout');
     }

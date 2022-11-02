@@ -37,7 +37,7 @@ class Item extends Model
         return $this->belongsTo(Rack::class);
     }
 
-    public static function MostExpensiveItem()
+    public static function mostExpensiveItem()
     {
         return Item::orderby('price', 'desc')->first();
     }

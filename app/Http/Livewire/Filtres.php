@@ -51,8 +51,7 @@ class Filtres extends Component
             $this->validateOnly($propertyName.'Max', $rules);
 
             $this->emit($propertyTrueName, $this->$propertyTrueName);
-        }
-        elseif (substr($propertyName,-6) === 'Filter') {
+        } elseif (substr($propertyName, -6) === 'Filter') {
             $this->emit($propertyName, $this->$propertyName);
         }
     }

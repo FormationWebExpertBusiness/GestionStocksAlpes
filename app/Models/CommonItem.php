@@ -106,7 +106,7 @@ class CommonItem extends Model
     {
         return $commonItems->filter(function ($value) use ($quantityMin, $quantityMax) {
             $quantity = $value->quantity;
-            if ($quantity >= $quantityMin 
+            if ($quantity >= $quantityMin
              && ($quantity <= $quantityMax || ! $quantityMax)) {
                 return $value;
             }
@@ -117,7 +117,7 @@ class CommonItem extends Model
     {
         return $commonItems->filter(function ($value) use ($quantityMin, $quantityMax, $racks, $rackLevels) {
             $quantity = $value->quantityOnRack($racks, $rackLevels);
-            if ($quantity >= $quantityMin 
+            if ($quantity >= $quantityMin
              && ($quantity <= $quantityMax || ! $quantityMax)
              && $quantity > 0) {
                 return $value;
@@ -180,22 +180,22 @@ class CommonItem extends Model
         });
     }
 
-    public static function TotalQuantity()
+    public static function totalQuantity()
     {
         return CommonItem::all()->sum('quantity');
     }
 
-    public static function TotalCommonItem()
+    public static function totalCommonItem()
     {
         return CommonItem::all()->count('id');
     }
 
-    public static function TotalFavoriteItem()
+    public static function totalFavoriteItem()
     {
         return CommonItem::where('favorite', '=', true)->get()->count();
     }
 
-    public static function TotalOutStockItem()
+    public static function totalOutStockItem()
     {
         return CommonItem::all()->filter(function ($value) {
             if ($value->quantity >= 5) {

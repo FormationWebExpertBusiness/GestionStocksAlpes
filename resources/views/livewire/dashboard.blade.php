@@ -25,7 +25,7 @@
                         </dt>
                         <dd class="ml-16 flex items-baseline pb-6 sm:pb-7">
                             <p class="text-2xl font-semibold text-gray-900">
-                                {{ App\Models\CommonItem::TotalCommonItem() }} produits
+                                {{ App\Models\CommonItem::totalCommonItem() }} produits
                             </p>
                             <p class="ml-2 flex items-baseline text-sm font-semibold text-red-500">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -37,7 +37,7 @@
                                 </svg>
 
                                 <span class="px-1">
-                                    {{ App\Models\CommonItem::TotalOutStockItem() }} en rupture de stock
+                                    {{ App\Models\CommonItem::totalOutStockItem() }} en rupture de stock
 
 
                                 </span>
@@ -69,7 +69,7 @@
                         </dt>
                         <dd class="ml-16 flex items-baseline pb-6 sm:pb-7">
                             <p class="text-2xl font-semibold text-gray-900">
-                                {{ App\Models\Item::MostExpensiveItem()->price }} €
+                                {{ App\Models\Item::mostExpensiveItem()->price }} €
                             </p>
                             <p class="ml-2 flex items-baseline text-sm font-semibold text-green-600">
                                 <!-- Heroicon name: mini/arrow-up -->
@@ -80,7 +80,7 @@
                                         d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z" />
                                 </svg>
                                 <span class="px-1">
-                                    {{ App\Models\Item::MostExpensiveItem()->getModel() }}
+                                    {{ App\Models\Item::mostExpensiveItem()->getModel() }}
                                 </span>
                             </p>
                             <div class="absolute inset-x-0 bottom-0 bg-gray-50 px-4 py-4 sm:px-6">
@@ -131,7 +131,7 @@
                         </dt>
                         <dd class="ml-16 flex items-baseline pb-6 sm:pb-7">
                             <p class="my-2 text-2xl font-semibold text-gray-900">
-                                {{ App\Models\CommonItem::TotalFavoriteItem() }} produits en favoris
+                                {{ App\Models\CommonItem::totalFavoriteItem() }} produits en favoris
                             </p>
                             <div class="absolute inset-x-0 bottom-0 bg-gray-50 px-4 py-4 sm:px-6">
                                 <div class="text-sm">
