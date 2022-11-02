@@ -21,7 +21,7 @@ class ItemSeeder extends Seeder
 
     private function createRand()
     {
-        for ($i=0; $i < 800; $i++) { 
+        for ($i=0; $i < 100; $i++) { 
             $rack = Rack::inRandomOrder()->first();
             \App\Models\Item::factory()->create([
                 'rack_id' => $rack->id,

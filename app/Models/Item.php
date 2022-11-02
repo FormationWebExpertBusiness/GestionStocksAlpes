@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\DB;
 
 class Item extends Model
 {
@@ -28,25 +27,18 @@ class Item extends Model
         'rack',
     ];
 
+    public function getModel()
+    {
+        return CommonItem::find($this->common_id)->model;
+    }
+
     public function rack()
     {
         return $this->belongsTo(Rack::class);
     }
 
-    public static function total()
+    public static function MostExpensiveItem()
     {
-        return Item::all()->count('id');
+        return Item::orderby('price', 'desc')->first();
     }
-
-    public static function quantity()
-    {
-        return Item::all()->sum('quantity');
-    }
-
-    public static function price()
-    {
-        return Item::orderby('price','desc')->first();
-    }
-
-
 }
