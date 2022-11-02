@@ -27,7 +27,7 @@ class Filtres extends Component
     public $racksFilter = [];
     public $rackLevelsFilter = [];
 
-    public $search;
+    public $searchFilter;
 
     protected $messages = [
         'quantityMin.integer' => 'La quantité doit être un entier',
@@ -71,12 +71,7 @@ class Filtres extends Component
     public function resetSearchBar()
     {
         $this->search = '';
-        $this->getSearchInput();
-    }
-
-    public function getSearchInput()
-    {
-        $this->emit('searchF', $this->search);
+        $this->emit('searchFilter', $this->search);
     }
 
     public function render()

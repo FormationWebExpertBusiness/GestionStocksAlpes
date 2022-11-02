@@ -8,7 +8,7 @@
                         <div class="relative inline-flex">
                             <input id="search" name="search"
                                 class="w-full rounded-md border border-gray-300 bg-white py-2 pl-2.5 pr-3 text-sm placeholder-gray-500 focus:border-indigo-500 focus:text-gray-900 focus:placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm"
-                                placeholder="Recherche" type="search" wire:model="search">
+                                placeholder="Recherche" type="search" wire:model="searchFilter">
                             <div wire:click="resetSearchBar"
                                 class="absolute right-1 top-1.5 hover:bg-red-200 p-0.5 rounded-full  text-red-600 inline-flex">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -17,15 +17,6 @@
                                 </svg>
                             </div>
                         </div>
-                        <button wire:click="getSearchInput" type="button"
-                            class="ml-5 inline-flex items-center rounded-full border w-10 border-transparent bg-indigo-600 px-2.5 py-1.5 text-xs font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
-                            <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
-                                fill="currentColor" aria-hidden="true">
-                                <path fill-rule="evenodd"
-                                    d="M9 3.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM2 9a7 7 0 1112.452 4.391l3.328 3.329a.75.75 0 11-1.06 1.06l-3.329-3.328A7 7 0 012 9z"
-                                    clip-rule="evenodd" />
-                            </svg>
-                        </button>
                     </div>
                 </div>
             </div>
