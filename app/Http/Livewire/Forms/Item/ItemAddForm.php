@@ -5,13 +5,14 @@ namespace App\Http\Livewire\Forms\Item;
 use App\Models\Item;
 use App\Models\Rack;
 use Livewire\Component;
+use Livewire\WithFileUploads;
 
 class ItemAddForm extends Component
 {
+
     public $show = false;
 
     public $racks;
-
     public $serial_number;
     public $price;
     public $comment;
@@ -26,6 +27,7 @@ class ItemAddForm extends Component
         'comment' => ['nullable'],
         'rack_id' => ['integer', 'required'],
         'rack_level' => ['required', 'integer', 'min:1'],
+
     ];
     protected $messages = [
         'serial_number.required' => 'Le numéro de série dois être renseigné',

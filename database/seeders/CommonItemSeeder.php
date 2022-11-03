@@ -17,6 +17,6 @@ class CommonItemSeeder extends Seeder
      */
     public function run()
     {
-        \App\Models\CommonItem::factory()->count(20)->create();
+        \App\Models\CommonItem::factory()->count(3)->create();
     }
 }

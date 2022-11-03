@@ -19,7 +19,6 @@ return new class extends Migration
             $table->string('comment')->nullable();
             $table->integer('rack_level');
             $table->string('serial_number');
-
             $table->foreignId('rack_id')->constrained('racks')->onUpdate('restrict')->onDelete('cascade');
             $table->foreignId('common_id')->constrained('common_items')->onUpdate('restrict')->onDelete('cascade');
 

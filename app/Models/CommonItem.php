@@ -19,6 +19,7 @@ class CommonItem extends Model
         'brand_id',
         'model',
         'favorite',
+        'photo_item',
     ];
 
     protected $with = [

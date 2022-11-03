@@ -23,5 +23,5 @@ Route::get('login', [LoginController::class, 'displayLogin'])->name('login');
 Route::get('logout', [LoginController::class, 'logout'])->name('logout');
 
 Route::middleware('auth')->group(function () {
-    Route::get('/stock', [displayController::class, 'displayStock']);
+    Route::get('/stock', [displayController::class, 'displayStock'])->name('stock');
 });
