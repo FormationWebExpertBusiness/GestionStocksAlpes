@@ -208,7 +208,7 @@
                                             {{ $commonItem->model }}
                                         </td>
                                         <td class="whitespace-nowrap p-4 text-sm text-gray-500">
-                                            {{ $commonItem->totalPrice }}
+                                            {{ $commonItem->totalPrice }} €
                                         </td>
                                         <td class="whitespace-nowrap p-4 text-sm text-gray-500">
                                             {{ $commonItem->quantity }}
@@ -216,16 +216,16 @@
                                         <td class="whitespace-nowrap pl-4">
                                             @if ($commonItem->quantity <= $commonItem->quantity_urgent)
                                                 <span
-                                                    class="items-center px-2 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">En
-                                                    rupture de stock</span>
+                                                    class="items-center px-2 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">
+                                                    En rupture de stock</span>
                                             @elseif ($commonItem->quantity <= $commonItem->quantity_warning)
                                                 <span
-                                                    class="items-center px-2 py-0.5 rounded-full text-xs font-medium bg-orange-100 text-orange-800">En
-                                                    bientôt en rupture de stock</span>
+                                                    class="items-center px-2 py-0.5 rounded-full text-xs font-medium bg-orange-100 text-orange-800">
+                                                    Bientôt en rupture de stock</span>
                                             @else
                                                 <span
-                                                    class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800 capitalize">En
-                                                    stock</span>
+                                                    class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800 capitalize">
+                                                    En stock</span>
                                             @endif
                                         </td>
                                         <td
