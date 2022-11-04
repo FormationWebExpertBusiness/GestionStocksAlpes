@@ -167,21 +167,6 @@
                                     </div>
                                 </div>
 
-                                {{-- unit text field --}}
-                                <div class="w-[48%]">
-                                    <div class="flex justify-between">
-                                        <label for="unit"
-                                            class="block text-sm font-medium text-gray-700">Unité</label>
-                                        <span class="text-sm text-gray-500">Optionnel</span>
-                                    </div>
-                                    <div class="mt-1">
-                                        <input wire:model="unit" type="text" name="unit" id="unit"
-                                            autocomplete="unit"
-                                            class="block w-full rounded-md border-gray-300 py-3 px-4 placeholder-gray-500 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
-                                            placeholder="Ex: kg">
-                                    </div>
-                                </div>
-
                                 <div class="mb-20"></div>
                                 {{-- buttons --}}
                                 <div
