@@ -18,6 +18,8 @@ class CommonItemForm extends Component
     public $brand_id;
     public $model;
     public $unit;
+    public $quantity_warning;
+    public $quantity_urgent;
 
     public $selectedCategoryFilter = [];
     public $selectedBrandFilter = [];
@@ -29,6 +31,8 @@ class CommonItemForm extends Component
         'brand_id' => ['nullable', 'integer'],
         'model' => ['required'],
         'unit' => ['nullable'],
+        'quantity_warning' => ['nullable', 'integer', 'min:0'],
+        'quantity_urgent' => ['nullable', 'integer', 'min:0'],
     ];
 
     protected $listeners = [
@@ -43,6 +47,10 @@ class CommonItemForm extends Component
         'brand_id.unique' => 'Cette marque a déjà ce model dans le stock',
         'model.unique' => 'Ce model existe déjà dans la stock pour cette marque',
         'model.required' => 'Le model ou la référence de l\'objet doit être rensigné.',
+        'quantity_warning.integer' => 'La quantité doit être un nombre entier',
+        'quantity_warning.min' => 'La quantité doit être un nombre positif',
+        'quantity_urgent.integer' => 'La quantité doit être un nombre entier',
+        'quantity_urgent.min' => 'La quantité doit être un nombre positif',
     ];
 
     public function mount()
@@ -51,6 +59,8 @@ class CommonItemForm extends Component
         $this->brand_id = $this->commonItemToUpdate?->brand_id ?? 1;
         $this->model = $this->commonItemToUpdate?->model;
         $this->unit = $this->commonItemToUpdate?->unit;
+        $this->quantity_warning = $this->commonItemToUpdate?->quantity_warning ?? 0;
+        $this->quantity_urgent = $this->commonItemToUpdate?->quantity_urgent ?? 0;
 
         $this->brands = Brand::all();
         $this->categories = Category::all();

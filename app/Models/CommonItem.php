@@ -19,6 +19,8 @@ class CommonItem extends Model
         'brand_id',
         'model',
         'favorite',
+        'quantity_urgent',
+        'quantity_warning',
     ];
 
     protected $with = [
@@ -198,7 +200,7 @@ class CommonItem extends Model
     public static function totalOutStockItem()
     {
         return CommonItem::all()->filter(function ($value) {
-            if ($value->quantity >= 5) {
+            if ($value->quantity <= $value->quantity_urgent) {
                 return $value;
             }
         })->count();
