@@ -142,7 +142,7 @@
                                                 {{ $commonItem->model }}</td>
                                             <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-500 w-[14%]">
                                                 <div class="inline-flex min-w-[70%]">
-                                                    {{ $commonItem->quantityOnRack($racksF, $rackLevelsF) }} {{ $commonItem->unit }}
+                                                    {{ $commonItem->quantityOnRack($racksF, $rackLevelsF) }}
                                                 </div>
                                                 <div class="align-middle inline-flex min-w-[15%]">
                                                     @livewire('forms.item.item-add-form', ['common_id' => $commonItem->id], key('item-add-form-' . $commonItem->id))

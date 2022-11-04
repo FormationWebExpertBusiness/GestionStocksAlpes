@@ -17,7 +17,6 @@ class CommonItemForm extends Component
     public $category_id;
     public $brand_id;
     public $model;
-    public $unit;
 
     public $selectedCategoryFilter = [];
     public $selectedBrandFilter = [];
@@ -28,7 +27,6 @@ class CommonItemForm extends Component
         'category_id' => ['nullable', 'integer'],
         'brand_id' => ['nullable', 'integer'],
         'model' => ['required'],
-        'unit' => ['nullable'],
     ];
 
     protected $listeners = [
@@ -50,7 +48,6 @@ class CommonItemForm extends Component
         $this->category_id = $this->commonItemToUpdate?->category_id ?? 1;
         $this->brand_id = $this->commonItemToUpdate?->brand_id ?? 1;
         $this->model = $this->commonItemToUpdate?->model;
-        $this->unit = $this->commonItemToUpdate?->unit;
 
         $this->brands = Brand::all();
         $this->categories = Category::all();

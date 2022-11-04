@@ -14,7 +14,6 @@ class CommonItem extends Model
     protected $primaryKey = 'id';
 
     protected $fillable = [
-        'unit',
         'category_id',
         'brand_id',
         'model',
