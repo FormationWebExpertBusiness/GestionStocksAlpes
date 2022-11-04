@@ -48,15 +48,24 @@ class CommonItemObserver
      * @param  \App\Models\CommonItem  $commonItem
      * @return void
      */
+    public function deleted(CommonItem $commonItem)
+    {
+        if (CommonItem::where('brand_id', $commonItem->brand_id)->where('category_id', $commonItem->category_id)->count() == 0)
+        {
+            $commonItem->category->brands()->detach($commonItem->brand_id);
+        }
+    }
+
+    /**
+     * Handle the CommonItem "deleting" event.
+     *
+     * @param  \App\Models\CommonItem  $commonItem
+     * @return void
+     */
     public function deleting(CommonItem $commonItem)
     {
         foreach ($commonItem->items as $item) {
             $item->delete();
-        }
-
-        if (CommonItem::where('brand_id', $commonItem->brand_id)->where('category_id', $commonItem->category_id)->count() == 0)
-        {
-            $commonItem->category->brands()->detach($commonItem->brand_id);
         }
     }
 
