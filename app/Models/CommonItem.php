@@ -68,11 +68,11 @@ class CommonItem extends Model
 
     public function itemsOnRack(?array $rack = [], ?array $rack_level = [])
     {
-        if (count($rack) === 0 || $rack === null) {
+        if (count($rack ?? []) === 0) {
             $rack = Rack::pluck('id')->toArray();
         }
 
-        if (count($rack_level) === 0 || $rack_level === null) {
+        if (count($rack_level ?? []) === 0) {
             $nb_levelMax = Rack::all()->max('nb_level');
             for ($i = 1; $i <= $nb_levelMax; $i++) {
                 $rack_level[] = $i;
@@ -83,7 +83,7 @@ class CommonItem extends Model
             if (in_array($value->rack_id, $rack) && in_array($value->rack_level, $rack_level)) {
                 return $value;
             }
-        });
+        })->values();
     }
 
     public function quantityOnRack(?array $rack = [], ?array $rack_level = [])
@@ -109,9 +109,9 @@ class CommonItem extends Model
              && ($quantity <= $quantityMax || ! $quantityMax)) {
                 return $value;
             }
-        });
+        })->values();
     }
-
+    
     public static function filterOnRacksQuantities($commonItems, $quantityMin, $quantityMax, $racks, $rackLevels)
     {
         return $commonItems->filter(function ($value) use ($quantityMin, $quantityMax, $racks, $rackLevels) {
@@ -121,7 +121,7 @@ class CommonItem extends Model
              && $quantity > 0) {
                 return $value;
             }
-        });
+        })->values();
     }
 
     public static function filterOnBrands($commonItems, $brands)
@@ -131,7 +131,7 @@ class CommonItem extends Model
             if (in_array($value->brand->id, $brands)) {
                 return $value;
             }
-        });
+        })->values();
     }
 
     public static function filterOnCategories($commonItems, $categories)
@@ -141,22 +141,22 @@ class CommonItem extends Model
             if (in_array($value->category->id, $categories)) {
                 return $value;
             }
-        });
+        })->values();
     }
 
-    public static function sortOncategories($commonItems, $mode)
+    public static function sortOnCategories($commonItems, $mode)
     {
-        return $commonItems->sortBy([['category.name', $mode]]);
+        return $commonItems->sortBy([['category.name', $mode]])->values();
     }
 
     public static function sortOnBrands($commonItems, $mode)
     {
-        return $commonItems->sortBy([['brand.name', $mode]]);
+        return $commonItems->sortBy([['brand.name', $mode]])->values();
     }
 
     public static function sortOnModels($commonItems, $mode)
     {
-        return $commonItems->sortBy([['model', $mode]]);
+        return $commonItems->sortBy([['model', $mode]])->values();
     }
 
     public static function sortOnQuantitiesOnRack($commonItems, $mode, $racksF, $rackLevelsF)
@@ -166,7 +166,7 @@ class CommonItem extends Model
                 return $commonItem->quantityOnRack($racksF, $rackLevelsF);
             }
             return - $commonItem->quantityOnRack($racksF, $rackLevelsF);
-        });
+        })->values();
     }
 
     public static function sortOnTotalPricesOnRack($commonItems, $mode, $racksF, $rackLevelsF)
@@ -176,7 +176,7 @@ class CommonItem extends Model
                 return $commonItem->totalPriceOnRack($racksF, $rackLevelsF);
             }
             return - $commonItem->totalPriceOnRack($racksF, $rackLevelsF);
-        });
+        })->values();
     }
 
     public static function totalQuantity()
@@ -197,7 +197,7 @@ class CommonItem extends Model
     public static function totalOutStockItem()
     {
         return CommonItem::all()->filter(function ($value) {
-            if ($value->quantity >= 5) {
+            if ($value->quantity <= 5) {
                 return $value;
             }
         })->count();

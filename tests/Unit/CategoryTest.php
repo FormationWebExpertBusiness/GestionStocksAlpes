@@ -26,11 +26,13 @@ test('test category method brands', function () {
 test('test category method hasBrand', function () {
     // datas
     $brand = Brand::create(['name' => 'marque']);
+    $brand2 = Brand::create(['name' => 'marque2']);
     $category = Category::create(['name' => 'categorie']);
     $commonItem = CommonItem::create(['category_id' => 1, 'brand_id' => 1, 'model' => 'ba']);
 
     // test
-    $this->assertTrue($category->hasBrand($brand));
+    $this->expect($category->hasBrand($brand))->toBe(true);
+    $this->expect($category->hasBrand($brand2))->toBe(false);
 });
 
 test('test category method getLinkedBrands', function () {
