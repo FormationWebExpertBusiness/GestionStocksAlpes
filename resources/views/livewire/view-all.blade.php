@@ -141,14 +141,34 @@
                                             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                                                 {{ $commonItem->model }}</td>
                                             <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-500 w-[14%]">
-                                                <div class="inline-flex min-w-[70%]">
-                                                    {{ $commonItem->quantityOnRack($racksF, $rackLevelsF) }}
+                                                @php
+                                                    $quantity = $commonItem->quantityOnRack($racksF, $rackLevelsF);
+                                                @endphp
+                                                <div class="w-4/6 inline-block">
+                                                    <div class="inline-block align-middle">
+                                                        {{ $quantity }} {{ $commonItem->unit }}
+                                                        @if ($commonItem->quantity_urgent >= $quantity)
+                                                            <div class="inline-block rounded-full align-middle bg-red-200 text-red-800">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" />
+                                                                </svg>                                                      
+                                                            </div>
+                                                        @elseif ($commonItem->quantity_warning >= $quantity)
+                                                            <div class="inline-block rounded-full align-middle bg-orange-200 text-orange-800">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" />
+                                                                </svg>                                                      
+                                                            </div>
+                                                        @endif
+                                                    </div>    
                                                 </div>
-                                                <div class="align-middle inline-flex min-w-[15%]">
-                                                    @livewire('forms.item.item-add-form', ['common_id' => $commonItem->id], key('item-add-form-' . $commonItem->id))
-                                                </div>
-                                                <div class="align-middle inline-flex min-w-[15%]">
-                                                    @livewire('forms.item.item-delete-form', ['commonItem' => $commonItem], key('item-delete-form-' . $commonItem->id))
+                                                <div class="w-2/6 inline-block">
+                                                    <div class="inline-block align-middle min-w-[15%]">
+                                                        @livewire('forms.item.item-add-form', ['common_id' => $commonItem->id], key('item-add-form-' . $commonItem->id))
+                                                    </div>
+                                                    <div class="inline-block align-middle min-w-[15%]">
+                                                        @livewire('forms.item.item-delete-form', ['commonItem' => $commonItem], key('item-delete-form-' . $commonItem->id))
+                                                    </div>
                                                 </div>
                                             </td>
                                             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 w-[14%]">
