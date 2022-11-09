@@ -37,7 +37,10 @@ class ItemDeleteForm extends Component
         substr($noms, 0, strlen($noms) - 2);
 
         $this->toggleDeleteForm();
-        return redirect('stock')->with('status', 'Le produit '.$noms.' a bien été ajouté !');
+        if (count($this->itemsToDelete) === 1) {
+            return redirect('stock')->with('status', 'Le produit '.$noms.' a bien été retiré du stock !');
+        }
+        return redirect('stock')->with('status', 'Les produits '.$noms.' ont bien étés retirés du stock !');
     }
 
     public function toggleDeleteForm()

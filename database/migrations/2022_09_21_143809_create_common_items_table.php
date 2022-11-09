@@ -15,7 +15,6 @@ return new class extends Migration
     {
         Schema::create('common_items', function (Blueprint $table) {
             $table->id();
-            $table->string('unit')->nullable();
             $table->unsignedBigInteger('category_id')->default(1);
             $table->unsignedBigInteger('brand_id')->default(1);
             $table->string('model');

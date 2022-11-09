@@ -3,6 +3,7 @@
 use App\Http\Controllers\DisplayController;
 use App\Http\Controllers\LoginController;
 use App\Http\Livewire\Dashboard;
+use App\Http\Livewire\History;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,4 +27,5 @@ Route::get('logout', [LoginController::class, 'logout'])->name('logout');
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', Dashboard::class);
     Route::get('/stock', [DisplayController::class, 'displayStock']);
+    Route::get('/history', History::class);
 });

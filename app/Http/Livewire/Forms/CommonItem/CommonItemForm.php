@@ -17,6 +17,7 @@ class CommonItemForm extends Component
     public $category_id;
     public $brand_id;
     public $model;
+
     public $unit;
     public $quantity_warning;
     public $quantity_urgent;
