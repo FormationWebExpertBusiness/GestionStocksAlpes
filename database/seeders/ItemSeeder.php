@@ -93,7 +93,6 @@ class ItemSeeder extends Seeder
             'category_id' => 9,
             'price' => 270,
             'brand_id' => 8,
-            'unit' => 'm',
             'currency' => 'USD',
             'model' => 'L1084-1',
             'comment' => 'Fibre optique',

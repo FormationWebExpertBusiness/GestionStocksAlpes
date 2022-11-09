@@ -104,12 +104,12 @@
                                         Prix Total
                                     </dt>
                                     <dd class="mt-1 text-2xl font-semibold tracking-tight text-gray-900">
-                                        {{ number_format($commonItem->TotalPriceOnRack($rack, $rack_level), 2, ',', ' ') }}
+                                        {{ number_format($commonItem->totalPriceOnRack($rack, $rack_level), 2, ',', ' ') }}
                                         €
-                                        @if ($commonItem->QuantityOnRack($rack, $rack_level) > 1)
+                                        @if ($commonItem->quantityOnRack($rack, $rack_level) > 1)
                                             <p class="flex items-baseline text-sm font-semibold text-green-600">
                                                 <span class="px-24">
-                                                    ({{ number_format($commonItem->TotalPriceOnRack($rack, $rack_level) / $commonItem->quantityOnRack($rack, $rack_level), 2, ',', ' ') }}
+                                                    ({{ number_format($commonItem->totalPriceOnRack($rack, $rack_level) / $commonItem->quantityOnRack($rack, $rack_level), 2, ',', ' ') }}
                                                     € /u) </span>
 
                                             </p>
@@ -119,8 +119,8 @@
                                 <div class="overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6">
                                     <dt class="truncate text-sm font-medium text-gray-500">Quantité</dt>
                                     <dd class="mt-1 text-2xl font-semibold tracking-tight text-gray-900">
-                                        {{ $commonItem->QuantityOnRack($rack, $rack_level) }}
-                                        {{ $commonItem->unit }}</dd>
+                                        {{ $commonItem->quantityOnRack($rack, $rack_level) }}
+                                    </dd>
                                 </div>
                             </dl>
                         </div>
@@ -159,7 +159,7 @@
                                                 </tr>
                                             </thead>
                                             <tbody class="bg-white block max-h-[40vh] overflow-y-scroll">
-                                                @forelse ($commonItem->ItemsOnRack($rack, $rack_level) as $item)
+                                                @forelse ($commonItem->itemsOnRack($rack, $rack_level) as $item)
                                                     <div wire:key="Item-{{ $commonItem->id }}-{{ $item->id }}">
                                                         <tr
                                                             class="odd:bg-white even:bg-gray-50 divide-x divide-gray-200 table w-full table-fixed">

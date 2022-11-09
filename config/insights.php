@@ -86,15 +86,17 @@ return [
         PropertyTypeHintSniff::class,
         ReturnTypeHintSniff::class,
         UselessFunctionDocCommentSniff::class,
+        SlevomatCodingStandard\Sniffs\Classes\ForbiddenPublicPropertySniff::class,
+        PHP_CodeSniffer\Standards\Generic\Sniffs\Files\LineLengthSniff::class,
     ],
 
     'config' => [
         \PhpCsFixer\Fixer\LanguageConstruct\DeclareEqualNormalizeFixer::class => [
             'space' => 'single', // possible values ['none', 'single']
         ],
-    \PhpCsFixer\Fixer\Basic\BracesFixer::class => [
-            'allow_single_line_closure' => true,   
-    ],  
+        \PhpCsFixer\Fixer\Basic\BracesFixer::class => [
+                'allow_single_line_closure' => true,   
+        ],  
         ForbiddenPrivateMethods::class => [
             'title' => 'The usage of private methods is not idiomatic in Laravel.',
         ],

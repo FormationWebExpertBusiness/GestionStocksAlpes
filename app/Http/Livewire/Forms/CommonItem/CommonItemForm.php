@@ -18,9 +18,11 @@ class CommonItemForm extends Component
     public $category_id;
     public $brand_id;
     public $model;
+
     public $unit;
     public $photo_item;
-
+    public $quantity_warning;
+    public $quantity_urgent;
 
     public $selectedCategoryFilter = [];
     public $selectedBrandFilter = [];
@@ -33,7 +35,8 @@ class CommonItemForm extends Component
         'model' => ['required'],
         'unit' => ['nullable'],
         'photo_item' => ['image'],
-
+        'quantity_warning' => ['nullable', 'integer', 'min:0'],
+        'quantity_urgent' => ['nullable', 'integer', 'min:0'],
     ];
 
     protected $listeners = [
@@ -49,6 +52,10 @@ class CommonItemForm extends Component
         'model.unique' => 'Ce model existe déjà dans la stock pour cette marque',
         'model.required' => 'Le model ou la référence de l\'objet doit être renseigné.',
         'photo_item.image' => 'La photo du produit doit être de type PNG,JPG,JPEG.',
+        'quantity_warning.integer' => 'La quantité doit être un nombre entier',
+        'quantity_warning.min' => 'La quantité doit être un nombre positif',
+        'quantity_urgent.integer' => 'La quantité doit être un nombre entier',
+        'quantity_urgent.min' => 'La quantité doit être un nombre positif',
     ];
 
     public function mount()
@@ -58,6 +65,8 @@ class CommonItemForm extends Component
         $this->model = $this->commonItemToUpdate?->model;
         $this->unit = $this->commonItemToUpdate?->unit;
         $this->photo_item = $this->commonItemToUpdate?->photo_item;
+        $this->quantity_warning = $this->commonItemToUpdate?->quantity_warning ?? 0;
+        $this->quantity_urgent = $this->commonItemToUpdate?->quantity_urgent ?? 0;
 
         $this->brands = Brand::all();
         $this->categories = Category::all();
@@ -70,7 +79,7 @@ class CommonItemForm extends Component
 
     public function updated($property)
     {
-        if (empty($this->commonItemToUpdate) || in_array($property, ['model', 'brand_id'])) {
+        if (! $this->commonItemToUpdate || in_array($property, ['model', 'brand_id'])) {
             $this->addDynamicRules();
         }
 
@@ -82,8 +91,7 @@ class CommonItemForm extends Component
 
     public function saveCommonItem()
     {
-
-        if (empty($this->commonItemToUpdate) || ($this->brand_id !== $this->commonItemToUpdate->brand_id || $this->model !== $this->commonItemToUpdate->model)) {
+        if (! $this->commonItemToUpdate || ($this->brand_id !== $this->commonItemToUpdate->brand_id || $this->model !== $this->commonItemToUpdate->model)) {
             $this->addDynamicRules();
         }
         $validatedData = $this->validate();
@@ -91,8 +99,6 @@ class CommonItemForm extends Component
         $photo = $this->photo_item->store('public');
         $validatedData['photo_item'] = $photo;
 
-        // dd($this->photo_item);
-        // $validatedData ['photo_item'] = 'public/'.$this->photo_item->getHashNameAttribute();
         if (isset($this->commonItemToUpdate)) {
             $this->commonItemToUpdate->update($validatedData);
         } else {
@@ -120,22 +126,22 @@ class CommonItemForm extends Component
     public function updateCatF($categories)
     {
         $this->selectedCategoryFilter = $categories;
-        if (empty($commonItemToUpdate)) {
+        if (! $this->commonItemToUpdate) {
             if (count($this->selectedCategoryFilter) === 1) {
                 $this->category_id = array_values($this->selectedCategoryFilter)[0];
             } else {
-                $this->category_id = $this->commonItemToUpdate?->category_id ?? 1;
+                $this->category_id = 1;
             }
         }
     }
     public function updateBrandF($brands)
     {
         $this->selectedBrandFilter = $brands;
-        if (empty($commonItemToUpdate)) {
+        if (! $this->commonItemToUpdate) {
             if (count($this->selectedBrandFilter) === 1) {
                 $this->brand_id = array_values($this->selectedBrandFilter)[0];
             } else {
-                $this->brand_id = $this->commonItemToUpdate?->category_id ?? 1;
+                $this->brand_id = 1;
             }
         }
     }
@@ -144,10 +150,10 @@ class CommonItemForm extends Component
         $this->selectedCategoryFilter = [];
         $this->selectedBrandFilter = [];
 
-        if (empty($commonItemToUpdate)) {
-            $this->category_id = $this->commonItemToUpdate?->category_id ?? 1;
+        if (! $this->commonItemToUpdate) {
+            $this->category_id = 1;
 
-            $this->brand_id = $this->commonItemToUpdate?->brand_id ?? 1;
+            $this->brand_id = 1;
         }
     }
 }

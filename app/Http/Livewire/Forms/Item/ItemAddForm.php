@@ -5,11 +5,9 @@ namespace App\Http\Livewire\Forms\Item;
 use App\Models\Item;
 use App\Models\Rack;
 use Livewire\Component;
-use Livewire\WithFileUploads;
 
 class ItemAddForm extends Component
 {
-
     public $show = false;
 
     public $racks;
@@ -50,7 +48,7 @@ class ItemAddForm extends Component
     {
         $this->validateOnly($property);
 
-        if ($property = 'rack_id' && $this->rack_level > $this->getSelectedRack()?->nb_level) {
+        if ($property === 'rack_id' && $this->rack_level > $this->getSelectedRack()?->nb_level) {
             $this->rack_level = null;
         }
     }

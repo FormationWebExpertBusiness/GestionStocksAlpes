@@ -9,10 +9,11 @@ use App\Models\User;
 uses(RefreshDatabase::class);
 
 test('not connected users redirected to login', function () {
-    get('/')->assertRedirect('/stock');
+    get('/dashboard')->assertRedirect('/login');
+    get('/stock')->assertRedirect('/login');
 });
 
 test('connected user redirected to stock', function () {
     $user = User::factory()->create();
-    $this->actingAs($user)->get('/')->assertRedirect('/stock');
+    $this->actingAs($user)->get('/')->assertRedirect('/dashboard');
 });

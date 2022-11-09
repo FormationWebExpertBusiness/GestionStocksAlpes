@@ -2,8 +2,8 @@
 
 namespace App\Http\Livewire\Forms\Brand;
 
-use Livewire\Component;
 use App\Models\Brand;
+use Livewire\Component;
 
 class BrandDeleteForm extends Component
 {
@@ -33,7 +33,9 @@ class BrandDeleteForm extends Component
 
     public function updated($property)
     {
-        if($this->$property === "Non défini") $this->$property = null;
+        if ($this->$property === 'Non défini') {
+            $this->$property = null;
+        }
         $this->validateOnly($property);
     }
 
@@ -44,13 +46,13 @@ class BrandDeleteForm extends Component
 
     public function openWarningDelete()
     {
-        $validatedData = $this->validate();
+        $this->validate();
         $brand = Brand::where('name', $this->selectedBrand)->first();
         $deleteMessage = '';
         if ($brand->hasCommonItem()) {
             $deleteMessage = '⚠️ Des produits existent pour cette marque, si vous la supprimez, la marque des produits associés sera modifiée en "Non définie"';
         }
-        
+
         $this->emit('deleteWarning', $brand->id, $this->warningDeleteBrandSignal, 'Brand', 'name', $deleteMessage);
     }
 

@@ -2,10 +2,8 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Rack;
-use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Livewire\Component;
 
@@ -29,7 +27,7 @@ class Filtres extends Component
     public $racksFilter = [];
     public $rackLevelsFilter = [];
 
-    public $search;
+    public $searchFilter;
 
     protected $messages = [
         'quantityMin.integer' => 'La quantité doit être un entier',
@@ -53,8 +51,7 @@ class Filtres extends Component
             $this->validateOnly($propertyName.'Max', $rules);
 
             $this->emit($propertyTrueName, $this->$propertyTrueName);
-        }
-        elseif (substr($propertyName,-6) === 'Filter') {
+        } elseif (substr($propertyName, -6) === 'Filter') {
             $this->emit($propertyName, $this->$propertyName);
         }
     }
@@ -74,12 +71,7 @@ class Filtres extends Component
     public function resetSearchBar()
     {
         $this->search = '';
-        $this->getSearchInput();
-    }
-
-    public function getSearchInput()
-    {
-        $this->emit('searchF', $this->search);
+        $this->emit('searchFilter', $this->search);
     }
 
     public function render()

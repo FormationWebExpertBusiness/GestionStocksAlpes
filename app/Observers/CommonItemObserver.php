@@ -57,6 +57,19 @@ class CommonItemObserver
     }
 
     /**
+     * Handle the CommonItem "deleting" event.
+     *
+     * @param  \App\Models\CommonItem  $commonItem
+     * @return void
+     */
+    public function deleting(CommonItem $commonItem)
+    {
+        foreach ($commonItem->items as $item) {
+            $item->delete();
+        }
+    }
+
+    /**
      * Handle the CommonItem "restored" event.
      *
      * @param  \App\Models\CommonItem  $commonItem

@@ -224,6 +224,39 @@
                                     </div>
                                 </div>
 
+                                {{-- quantities field --}}
+                                <div class="flex justify-between mt-6">
+                                    {{-- quantity warning number field --}}
+                                    <div class="w-[48%] inline-block">
+                                        <div class="flex justify-between">
+                                            <label for="quantity_warning"
+                                                class="block text-sm font-medium text-gray-700">Quantité nécéssaire</label>
+                                            <span class="text-sm text-gray-500">Optionnel</span>
+                                        </div>
+                                        <div class="mt-1">
+                                            <input wire:model="quantity_warning" type="number" name="quantity_warning" id="quantity_warning"
+                                                autocomplete="quantity_warning"
+                                                class="block w-full rounded-md border-gray-300 py-3 px-4 placeholder-gray-500 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                                placeholder="Ex: 5">
+                                        </div>
+                                    </div>
+    
+                                    {{-- quantity urgent number field --}}
+                                    <div class="w-[50%] inline-block">
+                                        <div class="flex justify-between">
+                                            <label for="quantity_urgent"
+                                                class="block text-sm font-medium text-gray-700">Quantité alert urgent</label>
+                                            <span class="text-sm text-gray-500">Optionnel</span>
+                                        </div>
+                                        <div class="mt-1">
+                                            <input wire:model="quantity_urgent" type="number" name="quantity_urgent" id="quantity_urgent"
+                                                autocomplete="quantity_urgent"
+                                                class="block w-full rounded-md border-gray-300 py-3 px-4 placeholder-gray-500 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                                placeholder="Ex: 2">
+                                        </div>
+                                    </div>
+                                </div>
+
                                 <div class="mb-20"></div>
                                 {{-- buttons --}}
                                 <div

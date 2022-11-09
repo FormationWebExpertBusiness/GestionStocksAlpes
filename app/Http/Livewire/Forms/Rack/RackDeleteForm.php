@@ -34,7 +34,9 @@ class RackDeleteForm extends Component
 
     public function updated($property)
     {
-        if($this->$property === "Non défini") $this->$property = null;
+        if ($this->$property === 'Non défini') {
+            $this->$property = null;
+        }
         $this->validateOnly($property);
     }
 
@@ -51,7 +53,7 @@ class RackDeleteForm extends Component
     public function openWarningDelete()
     {
         array_push($this->rules['selectedRack'], new NotEmptyRack());
-        $validatedData = $this->validate();
+        $this->validate();
         $rack = Rack::find($this->selectedRack);
         $this->emit('deleteWarning', $rack->id, $this->warningDeleteRackSignal, 'Rack', 'name');
     }

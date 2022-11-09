@@ -32,7 +32,6 @@ class WarningBeforeDelete extends Component
         $this->deleteEmit = $emitSignal;
         $useClass = "App\Models\\".$type;
         $this->name = $useClass::find($tId)->$champ;
-        $obj = $useClass::find($tId);
         $this->message = $message;
     }
 

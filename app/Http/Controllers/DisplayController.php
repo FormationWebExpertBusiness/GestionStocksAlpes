@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-class displayController extends Controller
+class DisplayController extends Controller
 {
     public function displayStock()
     {

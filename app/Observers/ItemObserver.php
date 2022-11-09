@@ -2,6 +2,8 @@
 
 namespace App\Observers;
 
+use App\Models\CommonItem;
+use App\Models\HistoryItem;
 use App\Models\Item;
 
 class ItemObserver
@@ -14,7 +16,17 @@ class ItemObserver
      */
     public function created(Item $item)
     {
-        
+        $commonItem = CommonItem::find($item->common_id);
+
+        HistoryItem::create([
+            'code_action' => 'C',
+            'category' => $commonItem->category->name,
+            'brand' => $commonItem->brand->name,
+            'model' => $commonItem->model,
+            'serial_number' => $item->serial_number,
+            'price' => $item->price,
+            'comment' => $item->comment,
+        ]);
     }
 
     /**
@@ -36,7 +48,17 @@ class ItemObserver
      */
     public function deleted(Item $item)
     {
-        
+        $commonItem = CommonItem::find($item->common_id);
+
+        HistoryItem::create([
+            'category' => $commonItem->category->name,
+            'code_action' => 'D',
+            'brand' => $commonItem->brand->name,
+            'model' => $commonItem->model,
+            'serial_number' => $item->serial_number,
+            'price' => $item->price,
+            'comment' => $item->comment,
+        ]);
     }
 
     /**

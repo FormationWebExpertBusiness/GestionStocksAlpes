@@ -19,7 +19,7 @@ class NotEmptyRack implements InvokableRule
     public function __invoke($attribute, $value, $fail)
     {
         $rack = Rack::find($value);
-        if ($rack->ItemsOn()->count()) {
+        if ($rack->itemsOn()->count()) {
             $fail('L\'étagère ne peut pas être supprimée car elle contient des produits');
         }
     }

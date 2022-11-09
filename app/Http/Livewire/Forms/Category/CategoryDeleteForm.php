@@ -33,7 +33,9 @@ class CategoryDeleteForm extends Component
 
     public function updated($property)
     {
-        if($this->$property === "Non défini") $this->$property = null;
+        if ($this->$property === 'Non défini') {
+            $this->$property = null;
+        }
         $this->validateOnly($property);
     }
 
@@ -44,7 +46,7 @@ class CategoryDeleteForm extends Component
 
     public function openWarningDelete()
     {
-        $validatedData = $this->validate();
+        $this->validate();
         $category = Category::where('name', $this->selectedCategory)->first();
         $deleteMessage = '';
         if ($category->hasCommonItem()) {

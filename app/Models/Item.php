@@ -27,8 +27,18 @@ class Item extends Model
         'rack',
     ];
 
+    public function getModel()
+    {
+        return CommonItem::find($this->common_id)->model;
+    }
+
     public function rack()
     {
         return $this->belongsTo(Rack::class);
+    }
+
+    public static function mostExpensiveItem()
+    {
+        return Item::orderby('price', 'desc')->first();
     }
 }

@@ -2,8 +2,8 @@
 
 namespace App\Http\Livewire\Forms\Brand;
 
-use Livewire\Component;
 use App\Models\Brand;
+use Livewire\Component;
 
 class BrandAddForm extends Component
 {
