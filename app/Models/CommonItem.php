@@ -20,6 +20,7 @@ class CommonItem extends Model
         'favorite',
         'quantity_urgent',
         'quantity_warning',
+        'photo_item',
     ];
 
     protected $with = [
@@ -113,7 +114,7 @@ class CommonItem extends Model
             }
         })->values();
     }
-    
+
     public static function filterOnRacksQuantities($commonItems, $quantityMin, $quantityMax, $racks, $rackLevels)
     {
         return $commonItems->filter(function ($value) use ($quantityMin, $quantityMax, $racks, $rackLevels) {

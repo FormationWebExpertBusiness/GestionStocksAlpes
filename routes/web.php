@@ -26,6 +26,6 @@ Route::get('logout', [LoginController::class, 'logout'])->name('logout');
 
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', Dashboard::class);
-    Route::get('/stock', [DisplayController::class, 'displayStock']);
+    Route::get('/stock', [DisplayController::class, 'displayStock'])->name('stock');
     Route::get('/history', History::class);
 });

@@ -7,8 +7,7 @@ use Livewire\Component;
 
 class History extends Component
 {
-    public $historyItems; 
-
+    public $historyItems;
 
     public function render()
     {

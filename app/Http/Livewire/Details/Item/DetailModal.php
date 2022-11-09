@@ -3,11 +3,15 @@
 namespace App\Http\Livewire\Details\Item;
 
 use Livewire\Component;
+use Livewire\WithFileUploads;
 
 class DetailModal extends Component
 {
+    use WithFileUploads;
+
     public $show = false;
     public $commonItem;
+    public $photo_item;
     public $rack;
     public $rack_level;
 

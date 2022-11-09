@@ -5,8 +5,8 @@
             <div class="fixed inset-0 bg-gray-500 bg-opacity-50 transition-opacity"></div>
             <div class="fixed inset-0 z-10 overflow-y-auto">
                 <div class="flex min-h-full p-4 text-center sm:items-center sm:p-0">
-                    <div class="relative mx-auto content-center ml-[30%] max-w-5xl lg:grid lg:grid-cols-5">
-                        <div class="bg-gray-50 rounded-l-lg py-16 px-4 sm:px-6 lg:col-span-2 lg:px-8 lg:py-24 xl:pr-12">
+                    <div class="relative mx-auto content-center ml-[24%] max-w-6xl lg:grid lg:grid-cols-5">
+                        <div class="bg-gray-50 rounded-l-lg py-16 px-4 sm:px-6 lg:col-span-2 lg:px-10 lg:py-24 xl:px-12">
                             <div class="hidden sm:block absolute top-0 right-0 pt-4 pr-4">
                                 <button wire:click="$toggle('isFormOpen')" type="button"
                                     class="bg-white rounded-md text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
@@ -19,24 +19,65 @@
                                 </button>
                             </div>
                             @if (isset($commonItemToUpdate))
-                                <h2 class="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">
+                                <h2 class="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl text-center">
                                     Modifier un type de produit
                                 </h2>
                                 <p class="mt-3 text-md leading-6 text-gray-500">
                                     Formulaire pour modifier un type de produit qui existant
                                 </p>
                             @else
-                                <h2 class="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">
+                                <h2 class="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl text-center">
                                     Ajouter un type de produit
                                 </h2>
                                 <p class="mt-3 text-md leading-6 text-gray-500">
                                     Formulaire pour créer un nouveau type de produit
                                 </p>
                             @endif
+                            <div class="mt-4">
+                                @if ($photo_item)
+                                    <div class="max-h-40 max-w-full">
+                                        @if (!is_string($photo_item))
+                                            <img class="m-auto inline-block max-h-40 max-w-full rounded-md"
+                                                src="{{ $photo_item->temporaryUrl() }}" alt="cover image">
+                                        @else
+                                            <img class="m-auto inline-block max-h-40 max-w-full rounded-md"
+                                                src="{{ Storage::url($photo_item) }}" alt="cover image">
+                                        @endif
+                                    </div>
+                                @endif
+                                <div class="sm:col-span-2 sm:mt-0">
+                                    <div
+                                        class="mt-4 flex max-w-lg justify-center rounded-md border-2 border-dashed border-gray-300 px-6 pt-5 pb-6">
+                                        <div class="space-y-1 text-center">
+                                            <svg class="mx-auto h-12 w-12 text-gray-400" stroke="currentColor"
+                                                fill="none" viewBox="0 0 48 48" aria-hidden="true">
+                                                <path
+                                                    d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02"
+                                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                            </svg>
+                                            <div class="flex text-sm text-gray-600">
+                                                <label for="file-upload"
+                                                    class="relative cursor-pointer bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500">
+                                                    <span>Ajouter une photo</span>
+                                                    <input wire:model="photo_item" id="file-upload" accept="image/*"
+                                                        name="file" type="file" class="sr-only">
+                                                </label>
+                                                <p class="pl-1">ou le glisser / déposer</p>
+                                            </div>
+                                            <p class="text-xs text-gray-500">PNG, JPG, GIF up to 10MB</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                @error('photo_item')
+                                    <p class="mt-2 h-4 text-sm text-red-600" id="email-error">
+                                        {{ $message }}
+                                    </p>
+                                @enderror
+                            </div>
+
                         </div>
                         <div class="bg-white flex-col justify-between rounded-r-lg sm:px-6 col-span-3 py-4 px-8">
                             <form wire:submit.prevent='saveCommonItem'>
-                                
                                 {{-- categories select field --}}
                                 <div class=" mt-10">
                                     <div class="flex justify-between">
@@ -95,13 +136,15 @@
                                                 <select wire:model="brand_id" id="brand_id" name="brand_id"
                                                     class="mt-1 block text-red-900 placeholder-red-300 w-full rounded-md border-red-300 py-3 pl-3 pr-10 text-base focus:border-red-500 focus:outline-none focus:ring-red-500 sm:text-sm">
                                                     @foreach ($brands as $option)
-                                                        <option value="{{ $option->id }}">{{ $option->name }}</option>
+                                                        <option value="{{ $option->id }}">{{ $option->name }}
+                                                        </option>
                                                     @endforeach
                                                 </select>
                                                 <div
                                                     class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
-                                                    <svg class="h-5 w-5 text-red-500" xmlns="http://www.w3.org/2000/svg"
-                                                        viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                                    <svg class="h-5 w-5 text-red-500"
+                                                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                                                        fill="currentColor" aria-hidden="true">
                                                         <path fill-rule="evenodd"
                                                             d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-5a.75.75 0 01.75.75v4.5a.75.75 0 01-1.5 0v-4.5A.75.75 0 0110 5zm0 10a1 1 0 100-2 1 1 0 000 2z"
                                                             clip-rule="evenodd" />
@@ -135,9 +178,8 @@
                                     <div class="mt-1">
                                         @if ($errors->has('model'))
                                             <div class="relative">
-                                                <input wire:model="model" type="text" name="model" id="model"
-                                                    autocomplete="model"
-                                                    placeholder="Ex: AX6000"
+                                                <input wire:model="model" type="text" name="model"
+                                                    id="model" autocomplete="model" placeholder="Ex: AX6000"
                                                     class="block w-full py-3 px-4 rounded-md border-red-300 pr-10 text-red-900 placeholder-red-300 focus:border-red-500 focus:outline-none focus:ring-red-500"
                                                     aria-invalid="true" aria-describedby="email-error">
                                                 <div
@@ -223,10 +265,10 @@
                                         class="inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
                                         Enregistrer
                                     </button>
-                                    <button wire:click="closeForm" type="button"
+                                    <a href="{{ route('stock') }}"
                                         class="mt-3 inline-flex w-full justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-base font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:mt-0 sm:w-auto sm:text-sm">
                                         Annuler
-                                    </button>
+                                    </a>
                                 </div>
                             </form>
                         </div>

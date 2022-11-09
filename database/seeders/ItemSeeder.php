@@ -21,7 +21,7 @@ class ItemSeeder extends Seeder
 
     private function createRand()
     {
-        \App\Models\Item::factory()->count(200)->create();
+        \App\Models\Item::factory()->count(20)->create();
     }
 
     private function createCustom()
