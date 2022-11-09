@@ -1,8 +1,7 @@
 <div>
-    @livewire('filtres', ['searchFilter' => $searchValue, 'catsFilter' => $categoriesF, 'brandsFilter' => $brandsF, 'racksFilter' => $racksF, 'rackLevelsFilter' => $rackLevelsF, 'quantityMin' => $quantityMin, 'quantityMax' => $quantityMax])
     @if (session('status'))
         @if ($showToast)
-            <div class="absolute min-w-[10%] pb-2 pt-2 top-0 right-0 rounded-lg bg-green-50 p-4">
+            <div class="absolute min-w-[10%] pb-2 pt-2 top-0 left-1/2 -translate-x-1/2 rounded-lg bg-green-50 p-4">
                 <div class="flex">
                     <div class="flex-shrink-0">
                         <svg class="h-5 w-5 text-green-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
@@ -57,7 +56,7 @@
         @endif  
     @endif
     <div class="px-4 sm:px-6 lg:px-8">
-        <div class="sm:flex sm:items-center">
+        <div class="sm:flex sm:items-center mt-10 mb-6">
             <div class="sm:flex-auto">
                 <div class="min-w-0 flex-1">
                     <h2 class="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">
@@ -81,7 +80,9 @@
             </div>
         </div>
         @livewire('warning-before-delete')
-        <div class="mt-8 flex flex-col">
+        @livewire('filtres', ['search' => $searchValue, 'catsFilter' => $categoriesF, 'brandsFilter' => $brandsF, 'racksFilter' => $racksF, 'rackLevelsFilter' => $rackLevelsF, 'quantityMin' => $quantityMin, 'quantityMax' => $quantityMax])
+    
+        <div class="flex flex-col">
             <div class="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
                 <div class="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
                     <div class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg">
@@ -127,7 +128,7 @@
                                     </th>
                                 </tr>
                             </thead>
-                            <tbody class="bg-white block max-h-[62vh] overflow-y-scroll">
+                            <tbody class="bg-white block max-h-[72vh] overflow-y-scroll">
                                 @forelse ($commonItems as $commonItem)
                                     <div wire:key="Common-item-{{ $commonItem->id }}">
                                         <tr class="odd:bg-white even:bg-gray-50 divide-x divide-gray-200 table w-full table-fixed">
