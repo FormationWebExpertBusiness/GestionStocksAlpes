@@ -1,6 +1,6 @@
 <div>
     <div class="px-4 sm:px-6 lg:px-8">
-        <div class="sm:flex sm:items-center mt-10">
+        <div class="sm:flex sm:items-center mt-10 mb-6">
             <div class="sm:flex-auto">
                 <div class="min-w-0 flex-1">
                     <h2 class="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">
@@ -9,7 +9,125 @@
                 <p class="mt-2 text-sm text-gray-700">Liste des déplacements du stock</p>
             </div>
         </div>
-        <div class="mt-8 flex flex-col">
+        {{-- filters --}}
+        <header class="bg-white pb-2 rounded-t-lg">
+            <section aria-labelledby="filter-heading">
+                <div class="bg-white pb-4">
+                    <div class="mx-auto flex max-w-7xl items-center justify-between ">
+                        <div class="flow-root ml-auto">
+                            <div class="-mx-4 flex items-center divide-x divide-gray-200">
+                                {{-- search bar --}}
+                                <div class="relative inline-flex items-center px-4 h-10 text-left" >
+                                    <div class="min-w-0 flex-1">
+                                        <label for="search" class="sr-only">Search</label>
+                                        <div class="relative rounded-md shadow-sm">
+                                                <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                                                <!-- Heroicon name: mini/magnifying-glass -->
+                                                    <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                                            <path fill-rule="evenodd" d="M9 3.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM2 9a7 7 0 1112.452 4.391l3.328 3.329a.75.75 0 11-1.06 1.06l-3.329-3.328A7 7 0 012 9z" clip-rule="evenodd" />
+                                                    </svg>
+                                                </div >
+                                                <div class="inline-block mt-1 w-80 border rounded-md border-gray-300 focus-within:border-indigo-600">
+                                                    <input type="search" name="search" id="search" wire:model="searchFilter" class="block rounded-md w-full pl-10 border border-transparent bg-gray-50 focus:border-indigo-600 focus:ring-0 sm:text-sm" placeholder="Rechercher">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {{-- datepicker --}}
+                                <div class="relative inline-flex items-center px-4 h-10 text-left">
+                                    <div class="min-w-max inline-block flex-1">
+                                        <label for="dateFrom" class="inline-block mr-2 text-sm font-medium text-gray-700">Entre le </label>
+                                        <div class="relative inline-block rounded-md shadow-sm">
+                                                <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                                                <!-- Heroicon name: mini/magnifying-glass -->
+                                                    <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                                            <path fill-rule="evenodd" d="M9 3.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM2 9a7 7 0 1112.452 4.391l3.328 3.329a.75.75 0 11-1.06 1.06l-3.329-3.328A7 7 0 012 9z" clip-rule="evenodd" />
+                                                    </svg>
+                                                </div>
+                                                <div class="inline-block mt-1 w-40 border rounded-md border-gray-300 focus-within:border-indigo-600">
+                                                    <input type="date" name="dateFrom" id="dateFrom" wire:model="dateFrom" min="{{ App\Models\HistoryItem::oldestDate() }}" max="{{ App\Models\HistoryItem::newestDate() }}" class="block rounded-md w-full pl-10 border border-transparent bg-gray-50 focus:border-indigo-600 focus:ring-0 sm:text-sm"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="min-w-0 inline-block flex-1">
+                                        <label for="dateFrom" class="inline-block mx-2 text-sm font-medium text-gray-700">et le </label>
+                                        <div class="relative inline-block rounded-md shadow-sm">
+                                            <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                                                <!-- Heroicon name: mini/magnifying-glass -->
+                                                <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                                        <path fill-rule="evenodd" d="M9 3.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM2 9a7 7 0 1112.452 4.391l3.328 3.329a.75.75 0 11-1.06 1.06l-3.329-3.328A7 7 0 012 9z" clip-rule="evenodd" />
+                                                </svg>
+                                            </div>
+                                            <div class="inline-block mt-1 w-40 border rounded-md border-gray-300 focus-within:border-indigo-600">
+                                                <input type="date" name="dateTo" id="dateTo" wire:model="dateTo" min="{{ App\Models\HistoryItem::oldestDate() }}" max="{{ App\Models\HistoryItem::newestDate() }}" class="block rounded-md w-full pl-10 border border-transparent bg-gray-50 focus:border-indigo-600 focus:ring-0 sm:text-sm"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {{-- categories Dropdown --}}
+                                <div class="relative inline-flex items-center px-4 h-10 text-left">
+                                    <button type="button" wire:click="$toggle('isVisibleCat')" class="group inline-flex justify-center text-sm font-medium text-gray-700 hover:text-gray-900" aria-expanded="false">
+                                        <span>Catégories</span>
+                                        <span class="ml-1.5 rounded bg-gray-200 py-0.5 px-1.5 text-xs font-semibold tabular-nums text-gray-700">{{ count($catsFilter) }}</span>
+                                        <svg class="-mr-1 ml-1 h-5 w-5 flex-shrink-0 text-gray-400 group-hover:text-gray-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                            <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
+                                        </svg>
+                                    </button>
+                                    @if ($isVisibleCat)
+                                        <div class="absolute right-0 z-10 mt-2 origin-top-right rounded-md bg-white p-4 shadow-2xl ring-1 ring-black ring-opacity-5 focus:outline-none" @click.outside="$wire.isVisibleCat = false">
+                                            <form class="space-y-1">
+                                                @foreach ($categories as $category)
+                                                    <div class="flex items-center">
+                                                        <input id="{{ 'cat-' . $category }}" name="{{ $category }}" value="{{ $category }}" type="checkbox" wire:model='catsFilter' class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+                                                        <label for="{{ 'cat-' . $category }}" class="ml-3 whitespace-nowrap pr-6 text-sm font-medium text-gray-900">{{ $category }}</label>
+                                                    </div>
+                                                @endforeach
+                                            </form>
+                                        </div>
+                                    @endif
+                                </div>
+                                {{-- brands Dropdown --}}
+                                <div class="relative inline-flex items-center px-4 h-10 text-left">
+                                    <button wire:click="$toggle('isVisibleBrand')" type="button" class="group inline-flex justify-center text-sm font-medium text-gray-700 hover:text-gray-900" aria-expanded="false">
+                                        <span>Marques</span>
+                                        <span class="ml-1.5 rounded bg-gray-200 py-0.5 px-1.5 text-xs font-semibold tabular-nums text-gray-700">{{ count($brandsFilter) }}</span>
+                                        <svg class="-mr-1 ml-1 h-5 w-5 flex-shrink-0 text-gray-400 group-hover:text-gray-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                            <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
+                                        </svg>
+                                    </button>
+                                    @if ($isVisibleBrand)
+                                        <div class="absolute right-0 z-10 mt-2 origin-top-right rounded-md bg-white p-4 shadow-2xl ring-1 ring-black ring-opacity-5 focus:outline-none" @click.outside="$wire.isVisibleBrand = false">
+                                            <form class="space-y-1">
+                                                @foreach ($brands as $brand)
+                                                    <div class="flex items-center">
+                                                        <input id="{{ 'brand-' . $brand }}" name="{{ $brand }}" 
+                                                            value="{{ $brand }}" type="checkbox" wire:model='brandsFilter' 
+                                                            class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+                                                        <label for="{{ 'brand-' . $brand }}" 
+                                                            class="ml-3 whitespace-nowrap pr-6 text-sm font-medium text-gray-900">{{ $brand }}</label>
+                                                    </div>
+                                                @endforeach
+                                            </form>
+                                        </div>
+                                    @endif
+                                </div>
+                                {{-- resert filters button --}}
+                                <div class="relative inline-flex items-center px-4 h-10 text-left">
+                                    <button wire:click="resetFilters" type="button" class="group inline-flex justify-center text-sm font-medium text-gray-700 hover:text-gray-900" aria-expanded="false">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99" />
+                                        </svg>                                      
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </header> 
+
+        {{-- history table --}}
+        <div class="flex flex-col">
             <div class="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
                 <div class="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
                     <div class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg">
@@ -50,7 +168,7 @@
                                     </th>
                                 </tr>
                             </thead>
-                            <tbody class="bg-white block max-h-[77vh] overflow-y-scroll">
+                            <tbody class="bg-white block max-h-[72vh] overflow-y-scroll">
                                 @forelse ($historyItems as $historyItem)
                                     <div wire:key="History-item-{{ $historyItem->id }}">
                                         <tr class="odd:bg-white even:bg-gray-50 divide-x divide-gray-200 table w-full table-fixed">
@@ -91,15 +209,11 @@
                                     <tr class="bg-white divide-x divide-gray-200 table w-full table-fixed">
                                         <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                                     <div class="text-center">
-                                        <svg class="mx-auto h-12 w-12 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                        </svg>
-                                          
-                                        <h3 class="mt-2 text-sm font-medium text-gray-900">Aucun produit</h3>
-                                        <p class="mt-1 text-sm text-gray-500">Vous pouvez en ajouter un nouveau</p>
-                                        <div class="mt-3">
-                                            @livewire('forms.common-item.common-item-form')
-                                        </div>
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-12 h-12 mx-auto text-gray-400">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M21 7.5l-9-5.25L3 7.5m18 0l-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9" />
+                                          </svg>
+                                        <h3 class="mt-2 text-sm font-medium text-gray-900">Aucun mouvement dans le stock</h3>
+                                        
                                       </div>
                                     </td>
                                     </tr>
