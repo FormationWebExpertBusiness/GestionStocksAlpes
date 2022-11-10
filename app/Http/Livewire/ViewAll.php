@@ -2,11 +2,10 @@
 
 namespace App\Http\Livewire;
 
-use App\Jobs\NotifyUserOfCompletedExport;
 use App\Exports\CommonItemExport;
+use App\Jobs\NotifyUserOfCompletedExport;
 use App\Models\Brand;
 use App\Models\Category;
-use Illuminate\Support\Facades\Log;
 use App\Models\CommonItem;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
@@ -225,10 +224,9 @@ class ViewAll extends Component
                             && $value->QuantityOnRack($this->racksF, $this->rackLevelsF) <= $this->quantityMax) {
                             if (! $this->racksF && ! $this->rackLevelsF) {
                                 return $value;
-                            } else {
-                                if ($value->QuantityOnRack($this->racksF, $this->rackLevelsF) > 0) {
-                                    return $value;
-                                }
+                            }
+                            if ($value->QuantityOnRack($this->racksF, $this->rackLevelsF) > 0) {
+                                return $value;
                             }
                         }
                     }
@@ -254,9 +252,9 @@ class ViewAll extends Component
         return redirect('/stock')->with('message', 'Votre export est prêt !');
     }
 
-    public function export() {
-
-        (new CommonItemExport)->queue('typeitems.csv')->chain([
+    public function export()
+    {
+        (new CommonItemExport())->queue('typeitems.csv')->chain([
             new NotifyUserOfCompletedExport(),
         ]);
 

@@ -3,8 +3,6 @@
 namespace App\Listeners;
 
 use App\Events\EndedCommonItemCsvExport;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Facades\Log;
 
 class EndedCommonItemCsvExportListen
@@ -16,7 +14,6 @@ class EndedCommonItemCsvExportListen
      */
     public function __construct()
     {
-        //
     }
 
     // /**
@@ -36,10 +33,11 @@ class EndedCommonItemCsvExportListen
      * Handle the event.
      *
      * @param  \App\Events\EndedCommonItemCsvExport  $event
+     *
      * @return void
      */
     public function handle(EndedCommonItemCsvExport $event)
     {
-        Log::debug("EndedCommonItemCsvExportListen");
+        Log::debug('EndedCommonItemCsvExportListen');
     }
 }

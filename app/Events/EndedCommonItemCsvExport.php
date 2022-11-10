@@ -4,9 +4,6 @@ namespace App\Events;
 
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
-use Illuminate\Broadcasting\PresenceChannel;
-use Illuminate\Broadcasting\PrivateChannel;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcastNow;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
@@ -22,7 +19,6 @@ class EndedCommonItemCsvExport implements ShouldBroadcastNow
      */
     public function __construct()
     {
-        //
     }
     /**
      * Get the channels the event should broadcast on.
@@ -38,6 +34,4 @@ class EndedCommonItemCsvExport implements ShouldBroadcastNow
     {
         // ログ出力
     }
-
-    
 }

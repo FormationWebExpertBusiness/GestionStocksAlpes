@@ -3,7 +3,6 @@
 use App\Http\Controllers\displayController;
 use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Storage;
 
 /*
 |--------------------------------------------------------------------------
