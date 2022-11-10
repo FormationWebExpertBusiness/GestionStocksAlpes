@@ -34,8 +34,6 @@
             </script>
         </div>
     @endif
-    <h2>{{$statusExport}}</h2>
-    <button wire:click='downloadCommonItemCsv' type="button" class="inline-flex items-center rounded-md border border-transparent bg-indigo-100 px-4 py-2 text-sm font-medium text-indigo-700 hover:bg-indigo-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">downloadCommonItemCsv</button>
     @if (session('status'))
         @if ($showToast)
             <div class="absolute min-w-[10%] pb-2 pt-2 top-2 right-2 rounded-lg bg-green-50 p-4">
