@@ -49,10 +49,10 @@ class History extends Component
 
     public function updated($property)
     {
-        if ( ! $this->$property) {
+        if (! $this->$property) {
             if ($property === 'dateFrom') {
                 $this->dateFrom = HistoryItem::oldestDate();
-            } else if ($property === 'dateTo') {
+            } elseif ($property === 'dateTo') {
                 $this->dateTo = HistoryItem::newestDate();
             }
         }
@@ -72,8 +72,8 @@ class History extends Component
         $this->filterOnSearchBar();
         $this->historyItems = HistoryItem::filterOnBrands($this->historyItems, $this->brandsFilter);
         $this->historyItems = HistoryItem::filterOnCategories($this->historyItems, $this->catsFilter);
-        $this->historyItems = HistoryItem::filterOnMovedAfter($this->historyItems,$this->dateFrom);
-        $this->historyItems = HistoryItem::filterOnMovedBefore($this->historyItems,$this->dateTo);
+        $this->historyItems = HistoryItem::filterOnMovedAfter($this->historyItems, $this->dateFrom);
+        $this->historyItems = HistoryItem::filterOnMovedBefore($this->historyItems, $this->dateTo);
 
         return view('livewire.history')->layout('layout');
     }

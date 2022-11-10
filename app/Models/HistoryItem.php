@@ -46,7 +46,7 @@ class HistoryItem extends Model
     public static function filterOnBrands($historyItems, $brands)
     {
         if (count($brands) !== 0) {//filter
-            return $historyItems->filter(function ($value) use ($brands){
+            return $historyItems->filter(function ($value) use ($brands) {
                 if (in_array($value->brand, $brands)) {
                     return $value;
                 }
@@ -59,7 +59,7 @@ class HistoryItem extends Model
     public static function filterOnCategories($historyItems, $categories)
     {
         if (count($categories) !== 0) {//filter
-            return $historyItems->filter(function ($value) use ($categories){
+            return $historyItems->filter(function ($value) use ($categories) {
                 if (in_array($value->category, $categories)) {
                     return $value;
                 }
@@ -72,7 +72,7 @@ class HistoryItem extends Model
     public static function filterOnMovedAfter($historyItems, $dateFrom)
     {
         if ($dateFrom) {//filter
-            return $historyItems->filter(function ($value) use ($dateFrom){
+            return $historyItems->filter(function ($value) use ($dateFrom) {
                 // dump($value->created_at->format('d/m/Y'),'>=', $dateFrom);
                 if ($value->created_at->format('Y-m-d') >= $dateFrom) {
                     // dump('ok');
@@ -87,7 +87,7 @@ class HistoryItem extends Model
     public static function filterOnMovedBefore($historyItems, $dateTo)
     {
         if ($dateTo) {//filter
-            return $historyItems->filter(function ($value) use ($dateTo){
+            return $historyItems->filter(function ($value) use ($dateTo) {
                 // dump($value->created_at->format('d/m/Y'),'<=', $dateTo);
                 if ($value->created_at->format('Y-m-d') <= $dateTo) {
                     // dump('ok');
