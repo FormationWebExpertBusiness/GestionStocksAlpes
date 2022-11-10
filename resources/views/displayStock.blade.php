@@ -3,6 +3,7 @@
 @section('content')
 <div class="min-w-0 ml-64">
     @livewire('view-all')
-    <livewire:scripts />
 </div>
+<script src="{{ asset('js/app.js') }}"></script>
+<livewire:scripts />
 @endsection

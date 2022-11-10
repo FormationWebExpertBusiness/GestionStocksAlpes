@@ -2,12 +2,15 @@
 
 namespace App\Http\Livewire;
 
-use App\Exports\CommomItemExport;
+use App\Jobs\NotifyUserOfCompletedExport;
+use App\Exports\CommonItemExport;
 use App\Models\Brand;
 use App\Models\Category;
+use Illuminate\Support\Facades\Log;
 use App\Models\CommonItem;
 use App\Models\Item;
 use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 
 class ViewAll extends Component
@@ -19,6 +22,8 @@ class ViewAll extends Component
     public $priceMax;
     public $quantityMin;
     public $quantityMax;
+
+    public $statusExport;
 
     public $searchValue = '';
 
@@ -54,6 +59,7 @@ class ViewAll extends Component
         'quantityMin' => 'getQuantityMin',
         'quantityMax' => 'getQuantityMax',
         'deleteItem' => 'deleteItem',
+        'echo:commonitemcsv,EndedCommonItemCsvExport' => 'downloadCommonItemCsv2',
     ];
 
     public function mount()
@@ -68,6 +74,8 @@ class ViewAll extends Component
         $this->brandsF = [];
         $this->racksF = [];
         $this->rackLevelsF = [];
+
+        $this->changeStatus(0);
     }
 
     public function getPriceMin($priceMin)
@@ -239,9 +247,50 @@ class ViewAll extends Component
         ]);
     }
 
-    public function export() 
-    {   
-        return Excel::download(new CommomItemExport, 'commomItems.csv');
+    public function downloadCommonItemCsv()
+    {
+        $filename = '../storage/app/testBonjour.csv';
+        // dd(new CommonItemExport::queue());
+        if (file_exists($filename)) {
+            return response()->download($filename)->deleteFileAfterSend(true);
+        } else {
+            dd("The file $filename does not exist");
+        }
+    }
+
+    public function changeStatus($status)
+    {
+        switch($status) {
+            case 0:
+                $this->statusExport = 'Exporter les produits';
+                break;
+            case 1:
+                $this->statusExport = 'Export en cours......';
+                break;
+            case 2:
+                $this->statusExport = 'Télécharger votre fichier';
+                break;
+        }
+    }
+
+    public function downloadCommonItemCsv2()
+    {
+        // dd("DOWNLOAD STARTING !!!!!!!!!!!!!!!!!");
+        Log::debug('downloadCommonItemCsv2');
+        return Storage::download('testBonjour.csv');
+        // $this->dispatchBrowserEvent('exportCommonItemCsv');
+    }
+
+    public function export() {
+
+        (new CommonItemExport)->queue('testBonjour.csv')->chain([
+            new NotifyUserOfCompletedExport(),
+        ]);
+
+        $this->changeStatus(1);
+
+        return redirect('/stock')->with('message', 'Export à Commencé!');
+        // return Excel::download(new CommomItemExport, 'items.csv');
     }
 
     public function reloadView()

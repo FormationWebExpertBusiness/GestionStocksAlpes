@@ -196,6 +196,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\HorizonServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        App\Providers\TelescopeServiceProvider::class,
 
     ],
 
@@ -211,6 +212,7 @@ return [
     */
 
     'aliases' => Facade::defaultAliases()->merge([
+        'Pusher' => Pusher\Pusher::class,
         // 'Excel' => Maatwebsite\Excel\Facades\Excel::class
     ])->toArray(),
 

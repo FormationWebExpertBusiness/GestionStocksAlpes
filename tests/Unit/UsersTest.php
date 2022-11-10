@@ -1,14 +1,8 @@
 <?php
 use function Pest\Laravel\get;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
-// use function Pest\Laravel\actingAs;
-// use function Illuminate\Database\Eloquent\Factories\Factory;
-
 use App\Models\User;
-// use function Faker\Factory;
-// use DatabaseMigrations;
 
 uses(RefreshDatabase::class);
 
