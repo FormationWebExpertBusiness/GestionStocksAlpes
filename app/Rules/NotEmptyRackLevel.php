@@ -27,9 +27,9 @@ class NotEmptyRackLevel implements DataAwareRule, InvokableRule
     public function __invoke($attribute, $value, $fail)
     {
         $rack = Rack::find($this->data['selectedRack']);
-        if ($rack->nb_level > $this->data['nb_level']) {
-            for ($i = $this->data['nb_level'] + 1; $i <= $rack->nb_level; $i++) {
-                if ($rack->ItemsOnLevel($i)->count()) {
+        if ($rack->$attribute > $value) {
+            for ($i = $value + 1; $i <= $rack->$attribute; $i++) {
+                if ($rack->itemsOnLevel($i)->count()) {
                     $fail('Il reste des Items sur l\''.$rack->name.' étage '.$i);
                 }
             }

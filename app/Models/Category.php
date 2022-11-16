@@ -41,7 +41,7 @@ class Category extends Model
     {
         $brands = collect();
 
-        if (empty($catsFilter)) {
+        if (count($catsFilter) === 0) {
             $brands = Brand::all();
         } else {
             foreach ($catsFilter as $cat) {

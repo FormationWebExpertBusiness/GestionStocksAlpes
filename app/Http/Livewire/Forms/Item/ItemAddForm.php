@@ -11,7 +11,6 @@ class ItemAddForm extends Component
     public $show = false;
 
     public $racks;
-
     public $serial_number;
     public $price;
     public $comment;
@@ -26,6 +25,7 @@ class ItemAddForm extends Component
         'comment' => ['nullable'],
         'rack_id' => ['integer', 'required'],
         'rack_level' => ['required', 'integer', 'min:1'],
+
     ];
     protected $messages = [
         'serial_number.required' => 'Le numéro de série dois être renseigné',
@@ -48,7 +48,7 @@ class ItemAddForm extends Component
     {
         $this->validateOnly($property);
 
-        if ($property = 'rack_id' && $this->rack_level > $this->getSelectedRack()?->nb_level) {
+        if ($property === 'rack_id' && $this->rack_level > $this->getSelectedRack()?->nb_level) {
             $this->rack_level = null;
         }
     }

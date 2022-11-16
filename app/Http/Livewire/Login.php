@@ -32,7 +32,7 @@ class Login extends Component
         $credentials = $this->validate();
 
         if (Auth::attempt($credentials)) {
-            return redirect('/stock');
+            return redirect('/');
         }
         $this->adderror('password', 'Le mot de passe est incorrect pour cet utilisateur');
         $this->password = '';

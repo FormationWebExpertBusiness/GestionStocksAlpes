@@ -21,7 +21,7 @@ class ItemSeeder extends Seeder
 
     private function createRand()
     {
-        \App\Models\Item::factory()->count(10)->create();
+        \App\Models\Item::factory()->count(20)->create();
     }
 
     private function createCustom()
@@ -93,7 +93,6 @@ class ItemSeeder extends Seeder
             'category_id' => 9,
             'price' => 270,
             'brand_id' => 8,
-            'unit' => 'm',
             'currency' => 'USD',
             'model' => 'L1084-1',
             'comment' => 'Fibre optique',

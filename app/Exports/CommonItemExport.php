@@ -24,7 +24,6 @@ class CommonItemExport implements FromCollection, FromQuery, WithEvents, ShouldQ
         return CommonItem::query()
             ->select(
                 'common_items.id as cii',
-                'common_items.unit as ciu',
                 'common_items.favorite as cif',
                 'brand.name as bn',
                 'category.name as cn',

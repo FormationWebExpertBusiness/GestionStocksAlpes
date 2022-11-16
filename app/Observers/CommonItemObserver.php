@@ -6,6 +6,8 @@ use App\Models\CommonItem;
 
 use App\Models\Category;
 
+use Illuminate\Support\Facades\Storage;
+
 class CommonItemObserver
 {
     /**
@@ -32,6 +34,10 @@ class CommonItemObserver
      */
     public function updated(CommonItem $commonItem)
     {
+        if ($commonItem->photo_item !== $commonItem->getOriginal('photo_item') && $commonItem->getOriginal('photo_item')) {
+            Storage::delete($commonItem->getOriginal('photo_item'));
+        }
+
         if ($commonItem->getOriginal('category') != $commonItem->category || $commonItem->getOriginal('brand') != $commonItem->brand) {
             
             if(CommonItem::where('category_id', $commonItem->getOriginal('category_id'))->where('brand_id', $commonItem->getOriginal('brand_id'))->get()->count() == 0){
@@ -50,9 +56,26 @@ class CommonItemObserver
      */
     public function deleted(CommonItem $commonItem)
     {
+        if ($commonItem->getOriginal('photo_item')) {
+            Storage::delete($commonItem->photo_item);
+        }
+
         if (CommonItem::where('brand_id', $commonItem->brand_id)->where('category_id', $commonItem->category_id)->count() == 0)
         {
             $commonItem->category->brands()->detach($commonItem->brand_id);
+        }
+    }
+
+    /**
+     * Handle the CommonItem "deleting" event.
+     *
+     * @param  \App\Models\CommonItem  $commonItem
+     * @return void
+     */
+    public function deleting(CommonItem $commonItem)
+    {
+        foreach ($commonItem->items as $item) {
+            $item->delete();
         }
     }
 

@@ -19,8 +19,6 @@ class Filtres extends Component
     public $racks;
     public $rackLevels;
 
-    public $priceMin;
-    public $priceMax;
     public $quantityMin;
     public $quantityMax;
 
@@ -29,15 +27,9 @@ class Filtres extends Component
     public $racksFilter = [];
     public $rackLevelsFilter = [];
 
-    public $search;
-
-    protected $listeners = ['catsFilter' => 'getCatF', 'brandsFilter' => 'getBrandF', 'racksFilter' => 'getRackF', 'rackLevelsFilter' => 'getRackLevelF'];
+    public $searchFilter;
 
     protected $messages = [
-        'priceMin.integer' => 'Le prix doit être un entier',
-        'priceMax.integer' => 'Le prix doit être un entier',
-        'priceMin.min' => 'Le prix min doit être supérieur à 0',
-        'priceMax.min' => 'Le prix max doit être supérieur au prix min',
         'quantityMin.integer' => 'La quantité doit être un entier',
         'quantityMax.integer' => 'La quantité doit être un entier',
         'quantityMin.min' => 'La quantité min doit être supérieur à 0',
@@ -47,12 +39,10 @@ class Filtres extends Component
     public function updated($propertyName)
     {
         $rules = [
-            'priceMin' => 'nullable|integer|min:0',
-            'priceMax' => 'nullable|integer|min:'.$this->priceMin,
             'quantityMin' => 'nullable|integer|min:0',
             'quantityMax' => 'nullable|integer|min:'.$this->quantityMin,
         ];
-        if ($propertyName === 'quantityMin' || $propertyName === 'quantityMax' || $propertyName === 'priceMin' || $propertyName === 'priceMax') {
+        if ($propertyName === 'quantityMin' || $propertyName === 'quantityMax') {
             $propertyTrueName = $propertyName;
             $propertyName = Str::remove('Min', $propertyName);
             $propertyName = Str::remove('Max', $propertyName);
@@ -61,67 +51,9 @@ class Filtres extends Component
             $this->validateOnly($propertyName.'Max', $rules);
 
             $this->emit($propertyTrueName, $this->$propertyTrueName);
+        } elseif (substr($propertyName, -6) === 'Filter') {
+            $this->emit($propertyName, $this->$propertyName);
         }
-    }
-
-    public function getBrandF($brand)
-    {
-        $this->brandsFilter = $brand;
-    }
-
-    public function getCatF($cat)
-    {
-        $this->catsFilter = $cat;
-    }
-
-    public function getRackF($rack)
-    {
-        $this->racksFilter = $rack;
-    }
-
-    public function getRackLevelF($rackLevel)
-    {
-        $this->rackLevelsFilter = $rackLevel;
-    }
-
-    public function toggleCatDropdown()
-    {
-        $this->isVisibleCat = ! $this->isVisibleCat;
-    }
-
-    public function toggleBrandDropdown()
-    {
-        $this->isVisibleBrand = ! $this->isVisibleBrand;
-    }
-
-    public function toggleRackDropdown()
-    {
-        $this->isVisibleRack = ! $this->isVisibleRack;
-    }
-
-    public function toggleRackLevelDropdown()
-    {
-        $this->isVisibleRackLevel = ! $this->isVisibleRackLevel;
-    }
-
-    public function appendCat($cat)
-    {
-        $this->emit('catFilter', $cat);
-    }
-
-    public function appendBrand($brand)
-    {
-        $this->emit('brandFilter', $brand);
-    }
-
-    public function appendRack($rack)
-    {
-        $this->emit('rackFilter', $rack);
-    }
-
-    public function appendRackLevel($rackLevel)
-    {
-        $this->emit('rackLevelFilter', $rackLevel);
     }
 
     public function resetFilters()
@@ -130,8 +62,6 @@ class Filtres extends Component
         $this->brandsFilter = [];
         $this->racksFilter = [];
         $this->rackLevelsFilter = [];
-        $this->priceMin = null;
-        $this->priceMax = null;
         $this->quantityMin = null;
         $this->quantityMax = null;
 
@@ -141,12 +71,7 @@ class Filtres extends Component
     public function resetSearchBar()
     {
         $this->search = '';
-        $this->emit('resetSearchBar');
-    }
-
-    public function getSearchInput()
-    {
-        $this->emit('searchF', $this->search);
+        $this->emit('searchFilter', $this->search);
     }
 
     public function render()

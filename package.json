@@ -17,6 +17,7 @@
     "dependencies": {
         "laravel-echo": "^1.14.1",
         "laravel-mix": "^6.0.49",
-        "pusher-js": "^7.4.0"
+        "pusher-js": "^7.4.0",
+        "lightbox2": "^2.11.3"
     }
 }

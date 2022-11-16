@@ -19,5 +19,10 @@ class UserSeeder extends Seeder
             'username' => 'test',
             'password' => Hash::make('test')
         ]);
+
+        \App\Models\User::create([
+            'username' => 'testt',
+            'password' => Hash::make('testt')
+        ]);
     }
 }

@@ -1,7 +1,9 @@
 <?php
 
-use App\Http\Controllers\displayController;
+use App\Http\Controllers\DisplayController;
 use App\Http\Controllers\LoginController;
+use App\Http\Livewire\Dashboard;
+use App\Http\Livewire\History;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,12 +18,14 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return redirect('/stock');
+    return redirect('/dashboard');
 });
 
 Route::get('login', [LoginController::class, 'displayLogin'])->name('login');
 Route::get('logout', [LoginController::class, 'logout'])->name('logout');
 
 Route::middleware('auth')->group(function () {
-    Route::get('/stock', [displayController::class, 'displayStock']);
+    Route::get('/dashboard', Dashboard::class);
+    Route::get('/stock', [DisplayController::class, 'displayStock'])->name('stock');
+    Route::get('/history', History::class);
 });

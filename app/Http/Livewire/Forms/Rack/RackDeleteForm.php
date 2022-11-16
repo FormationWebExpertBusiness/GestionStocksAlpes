@@ -53,7 +53,7 @@ class RackDeleteForm extends Component
     public function openWarningDelete()
     {
         array_push($this->rules['selectedRack'], new NotEmptyRack());
-        $validatedData = $this->validate();
+        $this->validate();
         $rack = Rack::find($this->selectedRack);
         $this->emit('deleteWarning', $rack->id, $this->warningDeleteRackSignal, 'Rack', 'name');
     }

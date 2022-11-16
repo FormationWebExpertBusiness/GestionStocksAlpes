@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
@@ -13,15 +14,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('items', function (Blueprint $table) {
+        Schema::create('history_items', function (Blueprint $table) {
             $table->id();
-            $table->float('price', 8, 2)->default(0);
-            $table->string('comment')->nullable();
-            $table->integer('rack_level');
+            $table->string('code_action');
+            $table->string('category');
+            $table->string('brand');
+            $table->string('model');
             $table->string('serial_number');
-            $table->foreignId('rack_id')->constrained('racks')->onUpdate('restrict')->onDelete('cascade');
-            $table->foreignId('common_id')->constrained('common_items')->onUpdate('restrict')->onDelete('cascade');
-
+            $table->float('price');
+            $table->string('comment')->nullable();
             $table->timestamps();
         });
     }
@@ -33,6 +34,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('items');
+        Schema::dropIfExists('history_items');
     }
 };
