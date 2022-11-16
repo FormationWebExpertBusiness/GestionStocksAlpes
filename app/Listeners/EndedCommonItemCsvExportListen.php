@@ -38,6 +38,6 @@ class EndedCommonItemCsvExportListen
      */
     public function handle(EndedCommonItemCsvExport $event)
     {
-        Log::debug('EndedCommonItemCsvExportListen');
+        // 
     }
 }

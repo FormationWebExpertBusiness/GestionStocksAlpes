@@ -2,11 +2,13 @@
 
 namespace App\Events;
 
-use Illuminate\Broadcasting\Channel;
+use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcastNow;
 use Illuminate\Foundation\Events\Dispatchable;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Auth;
 
 class EndedCommonItemCsvExport implements ShouldBroadcastNow
 {
@@ -17,8 +19,11 @@ class EndedCommonItemCsvExport implements ShouldBroadcastNow
      *
      * @return void
      */
-    public function __construct()
+    public $csvExportId;
+
+    public function __construct($csvExportId)
     {
+        $this->csvExportId = $csvExportId;
     }
     /**
      * Get the channels the event should broadcast on.
@@ -27,7 +32,7 @@ class EndedCommonItemCsvExport implements ShouldBroadcastNow
      */
     public function broadcastOn()
     {
-        return new Channel('commonitemcsv');
+        return new PrivateChannel('commonitemcsv.'.$this->csvExportId);
     }
 
     public function handle()

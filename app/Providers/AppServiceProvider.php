@@ -26,19 +26,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        // Queue::before(function (JobProcessing $event) {
-        //     // $event->connectionName
-        //     // $event->job
-        //     // $event->job->payload()
-        //     dd($event->job->payload());
-        // });
+        // 
 
         Queue::after(function (JobProcessed $event) {
-            // Log::debug("gbvcds");
-            // $filename = '../storage/app/testBonjour.csv';
-            Log::debug('Queue::after AppServiceProvider');
-            // return Storage::download('testBonjour.csv');
-            // return response()->download($filename)->deleteFileAfterSend(true);
+            // 
         });
     }
 }

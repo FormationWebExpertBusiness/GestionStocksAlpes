@@ -4,7 +4,9 @@ use App\Http\Controllers\DisplayController;
 use App\Http\Controllers\LoginController;
 use App\Http\Livewire\Dashboard;
 use App\Http\Livewire\History;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Log;
 
 /*
 |--------------------------------------------------------------------------

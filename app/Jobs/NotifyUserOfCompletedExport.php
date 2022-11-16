@@ -8,13 +8,18 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class NotifyUserOfCompletedExport implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    public function __construct()
+    public $csvExportId;
+
+    public function __construct($csvExportId)
     {
+        $this->csvExportId = $csvExportId;
     }
 
     /**
@@ -24,6 +29,6 @@ class NotifyUserOfCompletedExport implements ShouldQueue
      */
     public function handle()
     {
-        event(new EndedCommonItemCsvExport());
+        event(new EndedCommonItemCsvExport($this->csvExportId));
     }
 }
