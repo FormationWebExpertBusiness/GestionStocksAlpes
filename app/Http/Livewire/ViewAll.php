@@ -7,9 +7,14 @@ use App\Jobs\NotifyUserOfCompletedExport;
 use App\Models\CommonItem;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
+use Livewire\WithPagination;
+
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class ViewAll extends Component
 {
+    use WithPagination;
+
     public $champ = 'id';
     public $mode = 'asc';
 
@@ -28,9 +33,11 @@ class ViewAll extends Component
     public $rackLevelsF = [];
     public $search;
 
-    public $commonItems;
+    private $commonItems;
 
     public $showToast = true;
+
+    public $paginatedCommonItems;
 
     protected $queryString = [
         'champ' => ['except' => 'id', 'as' => 'cha'],
@@ -176,6 +183,15 @@ class ViewAll extends Component
         }
     }
 
+    public function collectionToPaginator()
+    {
+        $perPage = 10;
+
+        $commonItemsOnPage = $this->commonItems->forPage($this->page, $perPage);
+
+        return new LengthAwarePaginator($commonItemsOnPage, $this->commonItems->count(), $perPage, $this->page);
+    }
+
     public function render()
     {
         $this->filterOnSearchBar();
@@ -187,10 +203,12 @@ class ViewAll extends Component
             $this->commonItems = CommonItem::filterOnQuantities($this->commonItems, $this->quantityMin, $this->quantityMax);
         }
         $this->sortCommonItems();
+        $paginatedCommonItems = $this->collectionToPaginator();
 
         $this->showToast = true;
 
-        return view('livewire.view-all');
+        // return view('livewire.view-all');
+        return view('livewire.view-all', ['commonItems' => $paginatedCommonItems]);
     }
 
     public function downloadCommonItemCsv()
