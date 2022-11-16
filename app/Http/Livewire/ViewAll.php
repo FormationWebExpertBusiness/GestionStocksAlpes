@@ -2,7 +2,10 @@
 
 namespace App\Http\Livewire;
 
+use App\Exports\CommonItemExport;
+use App\Jobs\NotifyUserOfCompletedExport;
 use App\Models\CommonItem;
+use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 
 class ViewAll extends Component
@@ -12,6 +15,8 @@ class ViewAll extends Component
 
     public $quantityMin;
     public $quantityMax;
+
+    public $statusExport;
 
     public $searchValue = '';
 
@@ -50,6 +55,7 @@ class ViewAll extends Component
         'quantityMin' => 'getQuantityMin',
         'quantityMax' => 'getQuantityMax',
         'deleteItem' => 'deleteItem',
+        'echo:commonitemcsv,EndedCommonItemCsvExport' => 'downloadCommonItemCsv',
     ];
 
     public function openWarningDelete($commonItemId)
@@ -185,6 +191,26 @@ class ViewAll extends Component
         $this->showToast = true;
 
         return view('livewire.view-all');
+    }
+
+    public function downloadCommonItemCsv()
+    {
+        $this->exportCommonItemCsvReady();
+        return Storage::download('typeitems.csv');
+    }
+
+    public function exportCommonItemCsvReady()
+    {
+        return redirect('/stock')->with('message', 'Votre export est prêt !');
+    }
+
+    public function export()
+    {
+        (new CommonItemExport())->queue('typeitems.csv')->chain([
+            new NotifyUserOfCompletedExport(),
+        ]);
+
+        return redirect('/stock')->with('message', 'Votre export à Commencé!');
     }
 
     public function reloadView()
