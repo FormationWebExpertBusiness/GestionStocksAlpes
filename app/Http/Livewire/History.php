@@ -3,11 +3,15 @@
 namespace App\Http\Livewire;
 
 use App\Models\HistoryItem;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class History extends Component
 {
-    public $historyItems;
+    use WithPagination;
+
+    private $historyItems;
 
     public $isVisibleCat = false;
     public $isVisibleBrand = false;
@@ -47,6 +51,15 @@ class History extends Component
         }
     }
 
+    public function collectionToPaginator()
+    {
+        $perPage = 50;
+
+        $historyItemsOnPage = $this->historyItems->forPage($this->page, $perPage);
+
+        return new LengthAwarePaginator($historyItemsOnPage, $this->historyItems->count(), $perPage, $this->page);
+    }
+
     public function updated($property)
     {
         if (! $this->$property) {
@@ -74,7 +87,8 @@ class History extends Component
         $this->historyItems = HistoryItem::filterOnCategories($this->historyItems, $this->catsFilter);
         $this->historyItems = HistoryItem::filterOnMovedAfter($this->historyItems, $this->dateFrom);
         $this->historyItems = HistoryItem::filterOnMovedBefore($this->historyItems, $this->dateTo);
+        $paginatedHistoItems = $this->collectionToPaginator();
 
-        return view('livewire.history')->layout('layout');
+        return view('livewire.history', ['historyItems' => $paginatedHistoItems])->layout('layout');
     }
 }
