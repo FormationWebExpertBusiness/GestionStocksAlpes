@@ -150,7 +150,7 @@
                                     </th>
                                 </tr>
                             </thead>
-                            <tbody class="bg-white block max-h-[65vh] overflow-y-scroll">
+                            <tbody class="bg-white block max-h-[62vh] overflow-y-scroll">
                                 @forelse ($commonItems as $commonItem)
                                     <div wire:key="Common-item-{{ $commonItem->id }}">
                                         <tr class="odd:bg-white even:bg-gray-50 divide-x divide-gray-200 table w-full table-fixed">
@@ -244,13 +244,17 @@
                                 @endforelse
                             </tbody>
                         </table>
-                        <div class="border-t justify-center flex py-4">
-                            {{ $commonItems->links() }}
+                        <div class="relative">
+                            <div class="border-t justify-center flex py-4">
+                                {{ $commonItems->links() }}
+                            </div>
+                            <div class="justify-end flex">
+                                <button wire:click='export' type="button" class=" absolute top-6 bottom-6 right-4 inline-flex items-center rounded-md border border-transparent bg-indigo-100 px-4 py-2 text-sm font-medium text-indigo-700 hover:bg-indigo-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Exporter</button>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <button wire:click='export' type="button" class="absolute bottom-2 right-7 inline-flex items-center rounded-md border border-transparent bg-indigo-100 px-4 py-2 text-sm font-medium text-indigo-700 hover:bg-indigo-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Exporter</button>
 </div>

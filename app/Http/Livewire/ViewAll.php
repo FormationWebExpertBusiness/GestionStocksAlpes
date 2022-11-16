@@ -185,7 +185,7 @@ class ViewAll extends Component
 
     public function collectionToPaginator()
     {
-        $perPage = 10;
+        $perPage = 12;
 
         $commonItemsOnPage = $this->commonItems->forPage($this->page, $perPage);
 
@@ -207,7 +207,6 @@ class ViewAll extends Component
 
         $this->showToast = true;
 
-        // return view('livewire.view-all');
         return view('livewire.view-all', ['commonItems' => $paginatedCommonItems]);
     }
 
