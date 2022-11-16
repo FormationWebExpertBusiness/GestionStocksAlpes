@@ -11,8 +11,6 @@ class History extends Component
 {
     use WithPagination;
 
-    private $historyItems;
-
     public $isVisibleCat = false;
     public $isVisibleBrand = false;
 
@@ -24,6 +22,8 @@ class History extends Component
     public $dateFrom;
     public $dateTo;
     public $searchFilter;
+
+    private $historyItems;
 
     public function resetFilters()
     {

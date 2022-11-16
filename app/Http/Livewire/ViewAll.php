@@ -5,11 +5,10 @@ namespace App\Http\Livewire;
 use App\Exports\CommonItemExport;
 use App\Jobs\NotifyUserOfCompletedExport;
 use App\Models\CommonItem;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 use Livewire\WithPagination;
-
-use Illuminate\Pagination\LengthAwarePaginator;
 
 class ViewAll extends Component
 {
@@ -32,8 +31,6 @@ class ViewAll extends Component
     public $racksF = [];
     public $rackLevelsF = [];
     public $search;
-
-    private $commonItems;
 
     public $showToast = true;
 
@@ -64,6 +61,8 @@ class ViewAll extends Component
         'deleteItem' => 'deleteItem',
         'echo:commonitemcsv,EndedCommonItemCsvExport' => 'downloadCommonItemCsv',
     ];
+
+    private $commonItems;
 
     public function openWarningDelete($commonItemId)
     {
