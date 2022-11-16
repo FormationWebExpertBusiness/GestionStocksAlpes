@@ -3,7 +3,6 @@
 namespace App\Listeners;
 
 use App\Events\EndedCommonItemCsvExport;
-use Illuminate\Support\Facades\Log;
 
 class EndedCommonItemCsvExportListen
 {
@@ -38,6 +37,5 @@ class EndedCommonItemCsvExportListen
      */
     public function handle(EndedCommonItemCsvExport $event)
     {
-        Log::debug('EndedCommonItemCsvExportListen');
     }
 }

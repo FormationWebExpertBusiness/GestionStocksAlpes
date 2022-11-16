@@ -5,6 +5,9 @@ namespace App\Http\Livewire;
 use App\Exports\CommonItemExport;
 use App\Jobs\NotifyUserOfCompletedExport;
 use App\Models\CommonItem;
+use App\Models\CsvExport;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 
@@ -28,6 +31,8 @@ class ViewAll extends Component
     public $rackLevelsF = [];
     public $search;
 
+    public $csvExportId;
+
     public $commonItems;
 
     public $showToast = true;
@@ -42,20 +47,6 @@ class ViewAll extends Component
         'searchValue' => ['except' => '', 'as' => 'sea'],
         'quantityMin' => ['except' => '', 'as' => 'qmin'],
         'quantityMax' => ['except' => '', 'as' => 'qmax'],
-    ];
-
-    protected $listeners = [
-        'stockUpdated' => 'reloadView',
-        'catsFilter' => 'updateCatF',
-        'brandsFilter' => 'updateBrandF',
-        'racksFilter' => 'updateRackF',
-        'rackLevelsFilter' => 'updateRackLevelF',
-        'searchFilter' => 'search',
-        'resetFilters' => 'resetAllFilters',
-        'quantityMin' => 'getQuantityMin',
-        'quantityMax' => 'getQuantityMax',
-        'deleteItem' => 'deleteItem',
-        'echo:commonitemcsv,EndedCommonItemCsvExport' => 'downloadCommonItemCsv',
     ];
 
     public function openWarningDelete($commonItemId)
@@ -178,6 +169,8 @@ class ViewAll extends Component
 
     public function render()
     {
+        $this->csvExportId = Cache::get('csvExportId');
+
         $this->filterOnSearchBar();
         $this->commonItems = CommonItem::filterOnBrands($this->commonItems, $this->brandsF);
         $this->commonItems = CommonItem::filterOnCategories($this->commonItems, $this->categoriesF);
@@ -195,6 +188,8 @@ class ViewAll extends Component
 
     public function downloadCommonItemCsv()
     {
+        Cache::forget('csvExportId');
+
         $this->exportCommonItemCsvReady();
         return Storage::download('typeitems.csv');
     }
@@ -206,8 +201,14 @@ class ViewAll extends Component
 
     public function export()
     {
+        $csvExportId = CsvExport::create([
+            'user_id' => Auth::user()->id,
+        ])->id;
+
+        Cache::forever('csvExportId', $csvExportId);
+
         (new CommonItemExport())->queue('typeitems.csv')->chain([
-            new NotifyUserOfCompletedExport(),
+            new NotifyUserOfCompletedExport($csvExportId),
         ]);
 
         return redirect('/stock')->with('message', 'Votre export à Commencé!');
@@ -216,5 +217,23 @@ class ViewAll extends Component
     public function reloadView()
     {
         return redirect();
+    }
+
+    protected function getListeners()
+    {
+        return [
+            'stockUpdated' => 'reloadView',
+            'catsFilter' => 'updateCatF',
+            'brandsFilter' => 'updateBrandF',
+            'racksFilter' => 'updateRackF',
+            'rackLevelsFilter' => 'updateRackLevelF',
+            'searchFilter' => 'search',
+            'resetFilters' => 'resetAllFilters',
+            'quantityMin' => 'getQuantityMin',
+            'quantityMax' => 'getQuantityMax',
+            'deleteItem' => 'deleteItem',
+            'downloadCommonItemCsv' => 'downloadCommonItemCsv',
+            "echo-private:commonitemcsv.{$this->csvExportId},EndedCommonItemCsvExport" => 'downloadCommonItemCsv',
+        ];
     }
 }

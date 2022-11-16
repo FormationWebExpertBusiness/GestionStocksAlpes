@@ -23591,7 +23591,7 @@ process.umask = function() { return 0; };
 /***/ ((module) => {
 
 /*!
- * Pusher JavaScript Library v7.4.0
+ * Pusher JavaScript Library v7.5.0
  * https://pusher.com/
  *
  * Copyright 2020, Pusher
@@ -24180,7 +24180,7 @@ var ScriptReceivers = new ScriptReceiverFactory('_pusher_script_', 'Pusher.Scrip
 
 // CONCATENATED MODULE: ./src/core/defaults.ts
 var Defaults = {
-    VERSION: "7.4.0",
+    VERSION: "7.5.0",
     PROTOCOL: 7,
     wsPort: 80,
     wssPort: 443,
@@ -24472,7 +24472,7 @@ var ajax = function (context, query, authOptions, authRequestType, callback) {
                         suffix = url_store.buildLogSuffix('authenticationEndpoint');
                         break;
                     case AuthRequestType.ChannelAuthorization:
-                        suffix = "Clients must be authenticated to join private or presence channels. " + url_store.buildLogSuffix('authorizationEndpoint');
+                        suffix = "Clients must be authorized to join private or presence channels. " + url_store.buildLogSuffix('authorizationEndpoint');
                         break;
                 }
                 callback(new HTTPAuthError(xhr.status, "Unable to retrieve auth string from " + authRequestType.toString() + " endpoint - " +
@@ -26061,10 +26061,11 @@ var presence_channel_extends = ( false) || (function () {
     };
 })();
 var __awaiter = ( false) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
         function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
@@ -27462,7 +27463,7 @@ function replaceHost(url, hostname) {
     return urlParts[1] + hostname + urlParts[3];
 }
 function randomNumber(max) {
-    return Math.floor(Math.random() * max);
+    return runtime.randomInt(max);
 }
 function randomString(length) {
     var result = [];
@@ -27708,6 +27709,14 @@ var Runtime = {
         else if (window.detachEvent !== undefined) {
             window.detachEvent('onunload', listener);
         }
+    },
+    randomInt: function (max) {
+        var random = function () {
+            var crypto = window.crypto || window['msCrypto'];
+            var random = crypto.getRandomValues(new Uint32Array(1))[0];
+            return random / Math.pow(2, 32);
+        };
+        return Math.floor(random() * max);
     }
 };
 /* harmony default export */ var runtime = (Runtime);
@@ -28087,7 +28096,7 @@ function getEnableStatsConfig(opts) {
     return false;
 }
 function buildUserAuthenticator(opts) {
-    var userAuthentication = __assign({}, defaults.userAuthentication, opts.userAuthentication);
+    var userAuthentication = __assign(__assign({}, defaults.userAuthentication), opts.userAuthentication);
     if ('customHandler' in userAuthentication &&
         userAuthentication['customHandler'] != null) {
         return userAuthentication['customHandler'];
@@ -28097,7 +28106,7 @@ function buildUserAuthenticator(opts) {
 function buildChannelAuth(opts, pusher) {
     var channelAuthorization;
     if ('channelAuthorization' in opts) {
-        channelAuthorization = __assign({}, defaults.channelAuthorization, opts.channelAuthorization);
+        channelAuthorization = __assign(__assign({}, defaults.channelAuthorization), opts.channelAuthorization);
     }
     else {
         channelAuthorization = {
@@ -28124,6 +28133,51 @@ function buildChannelAuthorizer(opts, pusher) {
     return channel_authorizer(channelAuthorization);
 }
 
+// CONCATENATED MODULE: ./src/core/watchlist.ts
+var watchlist_extends = ( false) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+
+
+var watchlist_WatchlistFacade = (function (_super) {
+    watchlist_extends(WatchlistFacade, _super);
+    function WatchlistFacade(pusher) {
+        var _this = _super.call(this, function (eventName, data) {
+            logger.debug("No callbacks on watchlist events for " + eventName);
+        }) || this;
+        _this.pusher = pusher;
+        _this.bindWatchlistInternalEvent();
+        return _this;
+    }
+    WatchlistFacade.prototype.handleEvent = function (pusherEvent) {
+        var _this = this;
+        pusherEvent.data.events.forEach(function (watchlistEvent) {
+            _this.emit(watchlistEvent.name, watchlistEvent);
+        });
+    };
+    WatchlistFacade.prototype.bindWatchlistInternalEvent = function () {
+        var _this = this;
+        this.pusher.connection.bind('message', function (pusherEvent) {
+            var eventName = pusherEvent.event;
+            if (eventName === 'pusher_internal:watchlist_events') {
+                _this.handleEvent(pusherEvent);
+            }
+        });
+    };
+    return WatchlistFacade;
+}(dispatcher));
+/* harmony default export */ var watchlist = (watchlist_WatchlistFacade);
+
 // CONCATENATED MODULE: ./src/core/utils/flat_promise.ts
 function flatPromise() {
     var resolve, reject;
@@ -28149,6 +28203,7 @@ var user_extends = ( false) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+
 
 
 
@@ -28186,6 +28241,7 @@ var user_UserFacade = (function (_super) {
                 _this._newSigninPromiseIfNeeded();
             }
         });
+        _this.watchlist = new watchlist(pusher);
         _this.pusher.connection.bind('message', function (event) {
             var eventName = event.event;
             if (eventName === 'pusher:signin_success') {
@@ -28316,7 +28372,7 @@ var pusher_Pusher = (function () {
         this.config = getConfig(options, this);
         this.channels = factory.createChannels();
         this.global_emitter = new dispatcher();
-        this.sessionID = Math.floor(Math.random() * 1000000000);
+        this.sessionID = runtime.randomInt(1000000000);
         this.timeline = new timeline_timeline(this.key, this.sessionID, {
             cluster: this.config.cluster,
             features: Pusher.getClientFeatures(),
@@ -28632,7 +28688,8 @@ window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_2__["default"]({
   broadcaster: 'pusher',
   key: '971643962ccb3f1390ae',
   cluster: 'eu',
-  forceTLS: true
+  forceTLS: true,
+  authEndpoint: "/broadcasting/auth"
 });
 })();
 
