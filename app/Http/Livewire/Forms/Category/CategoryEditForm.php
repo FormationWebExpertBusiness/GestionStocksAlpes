@@ -39,7 +39,7 @@ class CategoryEditForm extends Component
         $oldName = $categorie->name;
         $categorie->update(['name' => $this->newName]);
         $this->toggleEditForm();
-        return redirect('stock')->with('status', 'Le nom de la categorie '.$oldName.' a bien été changé en '.$this->newName.' !');
+        return redirect('/configuration')->with('status', 'Le nom de la categorie '.$oldName.' a bien été changé en '.$this->newName.' !');
     }
 
     public function toggleEditForm()

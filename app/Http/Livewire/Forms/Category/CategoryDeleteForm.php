@@ -60,7 +60,7 @@ class CategoryDeleteForm extends Component
     {
         Category::find($categoryId)->delete();
         $this->toggleDeleteForm();
-        return redirect('stock')->with('status', 'La categorie '.$this->selectedCategory.' a bien été supprimé !');
+        return redirect('/configuration')->with('status', 'La categorie '.$this->selectedCategory.' a bien été supprimé !');
     }
 
     public function render()

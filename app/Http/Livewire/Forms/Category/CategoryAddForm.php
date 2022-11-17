@@ -32,7 +32,7 @@ class CategoryAddForm extends Component
             'name' => $this->name,
         ]);
         $this->toggleAddForm();
-        return redirect('stock')->with('status', 'La categorie '.$nom.' a bien été ajouté !');
+        return redirect('/configuration')->with('status', 'La categorie '.$nom.' a bien été ajouté !');
     }
 
     public function toggleAddForm()
