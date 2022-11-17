@@ -21,19 +21,7 @@ class CommonItemExport implements FromCollection, FromQuery, WithEvents, ShouldQ
 
     public function collection()
     {
-        return CommonItem::query()
-            ->select(
-                'common_items.id as cii',
-                'common_items.favorite as cif',
-                'brand.name as bn',
-                'category.name as cn',
-                'common_items.model',
-                'common_items.created_at as cica',
-                'common_items.updated_at as ciua',
-            )
-            ->join('brands as brand', 'brand.id', '=', 'common_items.brand_id')
-            ->join('categories as category', 'category.id', '=', 'common_items.category_id')
-            ->get();
+        return $this->query()->get();
     }
 
     public function query()
@@ -41,7 +29,6 @@ class CommonItemExport implements FromCollection, FromQuery, WithEvents, ShouldQ
         return CommonItem::query()
             ->select(
                 'common_items.id as cii',
-                'common_items.unit as ciu',
                 'common_items.favorite as cif',
                 'brand.name as bn',
                 'category.name as cn',

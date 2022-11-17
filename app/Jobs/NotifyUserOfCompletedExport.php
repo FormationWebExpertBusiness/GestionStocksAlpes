@@ -13,8 +13,11 @@ class NotifyUserOfCompletedExport implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    public function __construct()
+    public $csvExportId;
+
+    public function __construct($csvExportId)
     {
+        $this->csvExportId = $csvExportId;
     }
 
     /**
@@ -24,6 +27,6 @@ class NotifyUserOfCompletedExport implements ShouldQueue
      */
     public function handle()
     {
-        event(new EndedCommonItemCsvExport());
+        event(new EndedCommonItemCsvExport($this->csvExportId));
     }
 }
