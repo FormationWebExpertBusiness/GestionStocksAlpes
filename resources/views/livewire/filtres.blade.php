@@ -2,7 +2,7 @@
 	<header class="bg-white pb-2 rounded-t-lg">
         <section aria-labelledby="filter-heading">
 			<div class="bg-white pb-4">
-				<div class="mx-auto flex max-w-7xl items-center justify-between ">
+				<div class="mx-auto flex max-w-full items-center justify-center ">
 					<div class="flow-root">
 						<div class="-mx-4 flex items-center divide-x divide-gray-200">
 							{{-- search bar --}}

@@ -127,30 +127,30 @@
                                     </th>
                                     <th wire:click="reOrder('category')" scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
                                         Catégorie
-                                        <x-ordering-arrows champ='category' champF={{ $champ }} modeF={{ $mode }}></x-ordering-arrows>
+                                        <x-ordering-arrows champ='category' champF={{$champ}} modeF={{$mode}}></x-ordering-arrows>
                                     </th>
                                     <th wire:click="reOrder('brand')" scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
                                         Marque
-                                        <x-ordering-arrows champ='brand' champF={{ $champ }} modeF={{ $mode }}></x-ordering-arrows>
+                                        <x-ordering-arrows champ='brand' champF={{$champ}} modeF={{$mode}}></x-ordering-arrows>
                                     </th>
                                     <th wire:click="reOrder('model')" scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
                                         Modèle
-                                        <x-ordering-arrows champ='model' champF={{ $champ }} modeF={{ $mode }}></x-ordering-arrows>
+                                        <x-ordering-arrows champ='model' champF={{$champ}} modeF={{$mode}}></x-ordering-arrows>
                                     </th>
                                     <th wire:click="reOrder('quantity')" scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 w-[14%]">
                                         Quantité
-                                        <x-ordering-arrows champ='quantity' champF={{ $champ }} modeF={{ $mode }}></x-ordering-arrows>
+                                        <x-ordering-arrows champ='quantity' champF={{$champ}} modeF={{$mode}}></x-ordering-arrows>
                                     </th>
                                     <th wire:click="reOrder('price')" scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 w-[14%]">
                                         Prix Total
-                                        <x-ordering-arrows champ='price' champF={{ $champ }} modeF={{ $mode }}></x-ordering-arrows>
+                                        <x-ordering-arrows champ='price' champF={{$champ}} modeF={{$mode}}></x-ordering-arrows>
                                     </th>
                                     <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-6 w-1/5">
                                         <span class="sr-only">Actions</span>
                                     </th>
                                 </tr>
                             </thead>
-                            <tbody class="bg-white block max-h-[72vh] overflow-y-scroll">
+                            <tbody class="bg-white block max-h-[62vh] overflow-y-scroll">
                                 @forelse ($commonItems as $commonItem)
                                     <div wire:key="Common-item-{{ $commonItem->id }}">
                                         <tr class="odd:bg-white even:bg-gray-50 divide-x divide-gray-200 table w-full table-fixed">
@@ -244,12 +244,17 @@
                                 @endforelse
                             </tbody>
                         </table>
+                        <div class="relative">
+                            <div class="border-t justify-center flex py-4">
+                                {{ $commonItems->links() }}
+                            </div>
+                            <div class="justify-end flex">
+                                <button wire:click='export' type="button" class=" absolute top-6 bottom-6 right-4 inline-flex items-center rounded-md border border-transparent bg-indigo-100 px-4 py-2 text-sm font-medium text-indigo-700 hover:bg-indigo-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Exporter</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <br>
-    <button wire:click='export' type="button" class="absolute bottom-2 right-7 inline-flex items-center rounded-md border border-transparent bg-indigo-100 px-4 py-2 text-sm font-medium text-indigo-700 hover:bg-indigo-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Exporter</button>
-    <br>
 </div>

@@ -3,11 +3,13 @@
 namespace App\Http\Livewire;
 
 use App\Models\HistoryItem;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class History extends Component
 {
-    public $historyItems;
+    use WithPagination;
 
     public $isVisibleCat = false;
     public $isVisibleBrand = false;
@@ -20,6 +22,8 @@ class History extends Component
     public $dateFrom;
     public $dateTo;
     public $searchFilter;
+
+    private $historyItems;
 
     public function resetFilters()
     {
@@ -45,6 +49,15 @@ class History extends Component
             $this->historyItems = HistoryItem::orderByDesc('created_at')
                 ->get();
         }
+    }
+
+    public function collectionToPaginator()
+    {
+        $perPage = 50;
+
+        $historyItemsOnPage = $this->historyItems->forPage($this->page, $perPage);
+
+        return new LengthAwarePaginator($historyItemsOnPage, $this->historyItems->count(), $perPage, $this->page);
     }
 
     public function updated($property)
@@ -74,7 +87,8 @@ class History extends Component
         $this->historyItems = HistoryItem::filterOnCategories($this->historyItems, $this->catsFilter);
         $this->historyItems = HistoryItem::filterOnMovedAfter($this->historyItems, $this->dateFrom);
         $this->historyItems = HistoryItem::filterOnMovedBefore($this->historyItems, $this->dateTo);
+        $paginatedHistoItems = $this->collectionToPaginator();
 
-        return view('livewire.history')->layout('layout');
+        return view('livewire.history', ['historyItems' => $paginatedHistoItems])->layout('layout');
     }
 }

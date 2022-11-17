@@ -40,8 +40,8 @@
                                         <div class="relative inline-block rounded-md shadow-sm">
                                                 <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
                                                 <!-- Heroicon name: mini/magnifying-glass -->
-                                                    <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                                            <path fill-rule="evenodd" d="M9 3.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM2 9a7 7 0 1112.452 4.391l3.328 3.329a.75.75 0 11-1.06 1.06l-3.329-3.328A7 7 0 012 9z" clip-rule="evenodd" />
+                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5" />
                                                     </svg>
                                                 </div>
                                                 <div class="inline-block mt-1 w-40 border rounded-md border-gray-300 focus-within:border-indigo-600">
@@ -54,9 +54,9 @@
                                         <div class="relative inline-block rounded-md shadow-sm">
                                             <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
                                                 <!-- Heroicon name: mini/magnifying-glass -->
-                                                <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                                        <path fill-rule="evenodd" d="M9 3.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM2 9a7 7 0 1112.452 4.391l3.328 3.329a.75.75 0 11-1.06 1.06l-3.329-3.328A7 7 0 012 9z" clip-rule="evenodd" />
-                                                </svg>
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5" />
+                                                </svg>  
                                             </div>
                                             <div class="inline-block mt-1 w-40 border rounded-md border-gray-300 focus-within:border-indigo-600">
                                                 <input type="date" name="dateTo" id="dateTo" wire:model="dateTo" min="{{ App\Models\HistoryItem::oldestDate() }}" max="{{ App\Models\HistoryItem::newestDate() }}" class="block rounded-md w-full pl-10 border border-transparent bg-gray-50 focus:border-indigo-600 focus:ring-0 sm:text-sm"/>
@@ -135,11 +135,11 @@
                             <thead class="bg-gray-100 block">
                                 <tr class="table w-full table-fixed">
                                     <th scope="col"
-                                        class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 w-20">
+                                        class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 w-28">
                                         Date
                                     </th>
                                     <th scope="col"
-                                        class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 w-36">
+                                        class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 w-44">
                                         Action
                                     </th>
                                     <th scope="col"
@@ -168,23 +168,23 @@
                                     </th>
                                 </tr>
                             </thead>
-                            <tbody class="bg-white block max-h-[72vh] overflow-y-scroll">
+                            <tbody class="bg-white block max-h-[62vh] overflow-y-scroll">
                                 @forelse ($historyItems as $historyItem)
                                     <div wire:key="History-item-{{ $historyItem->id }}">
                                         <tr class="odd:bg-white even:bg-gray-50 divide-x divide-gray-200 table w-full table-fixed">
-                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 w-20">
+                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 w-28">
                                                 {{ $historyItem->created_at->format('d/m/y') }}</td>
-                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 w-36">
+                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 w-44 justify-center">
                                                 @if ($historyItem->code_action === 'C')
-                                                    <span class="bg-green-300 text-green-600 p-1 rounded-md">
+                                                    <span class="bg-green-300 text-green-600 py-2 px-4 w-full h-full text-center rounded-md">
                                                         Entrée en stock
                                                     </span> 
                                                 @elseif ($historyItem->code_action === 'D')
-                                                    <span class="bg-red-300 text-red-600 p-1 rounded-md">
+                                                    <span class="bg-red-300 text-red-600 py-2 px-4 w-full h-full text-center rounded-md">
                                                         Sortie du stock
                                                     </span>
                                                 @else
-                                                    <span class="bg-gray-300 text-gray-600 p-1 rounded-md">
+                                                    <span class="bg-gray-300 text-gray-600 py-2 px-4 w-full h-full text-center rounded-md">
                                                         Inconnue
                                                     </span>
                                                 @endif
@@ -220,6 +220,11 @@
                                 @endforelse
                             </tbody>
                         </table>
+                        <div class="relative">
+                            <div class="border-t justify-center flex py-4">
+                                {{ $historyItems->links() }}
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

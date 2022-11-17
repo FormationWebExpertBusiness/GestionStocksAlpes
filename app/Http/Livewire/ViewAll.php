@@ -5,14 +5,18 @@ namespace App\Http\Livewire;
 use App\Exports\CommonItemExport;
 use App\Jobs\NotifyUserOfCompletedExport;
 use App\Models\CommonItem;
+use Illuminate\Pagination\LengthAwarePaginator;
 use App\Models\CsvExport;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class ViewAll extends Component
 {
+    use WithPagination;
+
     public $champ = 'id';
     public $mode = 'asc';
 
@@ -37,6 +41,8 @@ class ViewAll extends Component
 
     public $showToast = true;
 
+    public $paginatedCommonItems;
+
     protected $queryString = [
         'champ' => ['except' => 'id', 'as' => 'cha'],
         'mode' => ['as' => 'mod'],
@@ -48,6 +54,8 @@ class ViewAll extends Component
         'quantityMin' => ['except' => '', 'as' => 'qmin'],
         'quantityMax' => ['except' => '', 'as' => 'qmax'],
     ];
+
+    private $commonItems;
 
     public function openWarningDelete($commonItemId)
     {
@@ -167,6 +175,15 @@ class ViewAll extends Component
         }
     }
 
+    public function collectionToPaginator()
+    {
+        $perPage = 12;
+
+        $commonItemsOnPage = $this->commonItems->forPage($this->page, $perPage);
+
+        return new LengthAwarePaginator($commonItemsOnPage, $this->commonItems->count(), $perPage, $this->page);
+    }
+
     public function render()
     {
         $this->csvExportId = Cache::get('csvExportId');
@@ -180,10 +197,11 @@ class ViewAll extends Component
             $this->commonItems = CommonItem::filterOnQuantities($this->commonItems, $this->quantityMin, $this->quantityMax);
         }
         $this->sortCommonItems();
+        $paginatedCommonItems = $this->collectionToPaginator();
 
         $this->showToast = true;
 
-        return view('livewire.view-all');
+        return view('livewire.view-all', ['commonItems' => $paginatedCommonItems]);
     }
 
     public function downloadCommonItemCsv()
