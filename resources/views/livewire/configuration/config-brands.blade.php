@@ -56,15 +56,15 @@
             <div class="sm:flex-auto">
                 <div class="min-w-0 flex-1">
                     <h2 class="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">
-                        Configuration</h2>
+                        Configuration des marques</h2>
                 </div>
-                <p class="mt-2 text-sm text-gray-700">modification des étagères, catégories et marques</p>
+                <p class="mt-2 text-sm text-gray-700">Ajouter, modifier ou supprimer des marques</p>
             </div>
             <div class="mt-4 sm:mt-0 sm:ml-10 sm:flex-none">
                 @livewire('forms.brand.brand-add-form')
             </div>
         </div>
-        <div class="relative inline-block text-left min-w-full py-24">
+        <div class="relative inline-block text-left min-w-full py-12">
             <div class="flex flex-col">
                 <div class="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
                     <div class="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
@@ -73,14 +73,14 @@
                                 <thead class="bg-gray-100 block">
                                     <tr class="table w-full table-fixed">
                                         <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-                                            Marque
+                                            Marques
                                         </th>
                                         <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-6 w-1/5">
                                             <span class="sr-only">Actions</span>
                                         </th>
                                     </tr>
                                 </thead>
-                                <tbody class="bg-white block max-h-[60vh] overflow-y-scroll overflow-x-hidden">
+                                <tbody class="bg-white block max-h-[70vh] overflow-y-scroll overflow-x-hidden">
                                     @forelse ($brands as $brand)
                                         <div wire:key="brand-{{ $brand->id }}">
                                             <tr class="odd:bg-white even:bg-gray-50 divide-x divide-gray-200 table w-full table-fixed">
