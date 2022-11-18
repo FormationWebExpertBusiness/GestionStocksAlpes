@@ -27,8 +27,8 @@
                                     </svg>
                                 </button>
                             </div>
-                            <h2 class="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">Supprimez une
-                                étagère
+                            <h2 class="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">
+                                Supprimez une étagère
                             </h2>
                             <p class="mt-3 text-md leading-6 text-gray-500">
                                 Sélectionnez une étagère pour la supprimer
