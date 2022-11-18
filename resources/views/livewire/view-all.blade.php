@@ -101,7 +101,7 @@
                 @livewire('forms.category.category-form')
             </div>
             <div class="mt-4 sm:mt-0 sm:ml-10 sm:flex-none">
-                @livewire('forms.brand.brand-form')
+                {{-- @livewire('forms.brand.brand-form') --}}
             </div>
 
             <div class="mt-4 sm:mt-0 sm:ml-10 sm:flex-none">

@@ -32,7 +32,7 @@ class BrandAddForm extends Component
             'name' => $this->name,
         ]);
         $this->toggleAddForm();
-        return redirect('stock')->with('status', 'La marque '.$nom.' a bien été ajouté !');
+        return redirect('/configuration')->with('status', 'La marque '.$nom.' a bien été ajouté !');
     }
 
     public function toggleAddForm()

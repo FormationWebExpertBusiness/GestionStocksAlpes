@@ -69,56 +69,57 @@
             <div class="border-b border-gray-200">
                 <nav class="-mb-px flex space-x-8" aria-label="Tabs">
                     <!-- Current: "border-indigo-500 text-indigo-600", Default: "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300" -->
-                    <a href="#category" class="border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm">
-                        Catégorie
-                    </a>
-
-                    <a href="#marque" class="border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm">
-                        Marque
-                    </a>
-
-                    <a href="#etagere" class="border-indigo-500 text-indigo-600 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm" aria-current="page">
-                        Étagère
-                    </a>
+                    @foreach ($tabs as $t)
+                        @if ($tab === $t)
+                            <button wire:click='changeTab({{ array_search($t, $tabs) }})' class="border-indigo-500 text-indigo-600 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm" aria-current="page">
+                                {{ $t }}
+                            </button>
+                        @else
+                            <button wire:click='changeTab({{ array_search($t, $tabs) }})' class="border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm">
+                                {{ $t }}
+                            </button>
+                        @endif
+                    @endforeach
                 </nav>
             </div>
         </div>
 
-        {{-- categories forms --}}
-        <div id="category" class="max-h-[80vh] py-8 overflow-scroll">
-            {{-- add --}}
-            @livewire('forms.category.category-add-form')
+        @if ($tab === $tabs[0])
+            {{-- categories forms --}}
+            <div class="max-h-[80vh] py-8 overflow-scroll" wire:key='categories-forms'>
+                {{-- add --}}
+                @livewire('forms.category.category-add-form')
 
-            <div class="hidden sm:block" aria-hidden="true">
-                <div class="py-5">
-                    <div class="border-t border-gray-200"></div>
+                <div class="hidden sm:block" aria-hidden="true">
+                    <div class="py-5">
+                        <div class="border-t border-gray-200"></div>
+                    </div>
                 </div>
-            </div>
 
-            {{-- modify --}}
-            @livewire('forms.category.category-edit-form')
+                {{-- modify --}}
+                @livewire('forms.category.category-edit-form')
 
-            <div class="hidden sm:block" aria-hidden="true">
-                <div class="py-5">
-                    <div class="border-t border-gray-200"></div>
+                <div class="hidden sm:block" aria-hidden="true">
+                    <div class="py-5">
+                        <div class="border-t border-gray-200"></div>
+                    </div>
                 </div>
+
+                {{-- delete --}}
+                @livewire('forms.category.category-delete-form')
+
             </div>
+        @elseif($tab === $tabs[1])
+            {{-- brands forms --}}
+            <div class="py-8" wire:key='brands-forms'>
+                @livewire('forms.brand.brand-form')
+            </div>
+        @else
+            {{-- racks forms --}}
+            <div class="max-h-[80vh] py-8 overflow-scroll" wire:key='racks-forms'>
 
-            {{-- delete --}}
-            @livewire('forms.category.category-delete-form')
-
-        </div>
-
-        {{-- brands forms --}}
-        <div id="marque">
-
-        </div>
-
-        {{-- rack forms --}}
-        <div id="etagere">
-
-        </div>
-
+            </div>
+        @endif
 
     </div>
 </div>

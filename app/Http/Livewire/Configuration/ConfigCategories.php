@@ -8,6 +8,6 @@ class ConfigCategories extends Component
 {
     public function render()
     {
-        return view('livewire.configuration.config-categories');
+        return view('livewire.configuration.config-categories')->layout('layout');
     }
 }

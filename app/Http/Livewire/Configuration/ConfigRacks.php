@@ -8,6 +8,6 @@ class ConfigRacks extends Component
 {
     public function render()
     {
-        return view('livewire.configuration.config-racks');
+        return view('livewire.configuration.config-racks')->layout('layout');
     }
 }
