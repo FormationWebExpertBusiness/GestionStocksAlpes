@@ -37,7 +37,7 @@ class ViewAll extends Component
 
     public $csvExportId;
 
-    public $commonItems;
+    private $commonItems;
 
     public $showToast = true;
 
