@@ -12,9 +12,9 @@ class ConfigRacks extends Component
     public $racks;
     public $warningDeleteItemSignal = 'deleteRack';
     
-    public $showToast = false;
+    public $showToast = true;
 
-    protected $listners = [
+    protected $listeners = [
         'deleteRack' => 'deleteRack',
     ];
 
@@ -39,14 +39,10 @@ class ConfigRacks extends Component
     {
         $this->showDropdown = ! $this->showDropdown;
     }
-
-    public function mount()
-    {
-        $this->racks = Rack::all();
-    }
-
+    
     public function render()
     {
+        $this->racks = Rack::all();
         return view('livewire.configuration.config-racks')->layout('layout');
     }
 }

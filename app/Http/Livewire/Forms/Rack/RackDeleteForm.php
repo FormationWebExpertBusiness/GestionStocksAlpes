@@ -9,41 +9,13 @@ use Livewire\Component;
 class RackDeleteForm extends Component
 {
     public $show = false;
-    public $racks;
-    public $showDropdown = false;
-    public $selectedRack;
+    public $rack;
 
     public $warningDeleteRackSignal = 'deleteRack';
 
     protected $listeners = [
         'deleteRack' => 'deleteRack',
     ];
-
-    protected $rules = [
-        'selectedRack' => ['required'],
-    ];
-
-    protected $messages = [
-        'selectedRack.required' => 'L\'étagère à supprimer dois être selectionnée',
-    ];
-
-    public function mount()
-    {
-        $this->selectedRack = null;
-    }
-
-    public function updated($property)
-    {
-        if ($this->$property === 'Non défini') {
-            $this->$property = null;
-        }
-        $this->validateOnly($property);
-    }
-
-    public function toggleDropdown()
-    {
-        $this->showDropdown = ! $this->showDropdown;
-    }
 
     public function toggleDeleteForm()
     {

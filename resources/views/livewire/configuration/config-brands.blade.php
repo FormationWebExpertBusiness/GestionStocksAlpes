@@ -90,7 +90,7 @@
                                                 
                                                 <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-center text-sm font-medium sm:pr-6 w-1/5">
                                                     <div class="inline-block px-4">
-                                                        @livewire('forms.brand.brand-edit-form', key('brand-delete-'.$brand->id))
+                                                        @livewire('forms.brand.brand-edit-form', ['brand' => $brand], key('brand-delete-'.$brand->id))
                                                     </div>
                                                     <div class="inline-block px-4">
                                                         <button wire:click="openWarningDelete({{ $brand->id }})" class="text-gray-700 group flex items-center px-4 py-2 text-sm">

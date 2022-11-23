@@ -8,11 +8,12 @@ use Livewire\Component;
 
 class ConfigBrands extends Component
 {
-    public $showDropdown = false;
     public $brands;
     public $warningDeleteItemSignal = 'deleteBrand';
 
-    protected $listners = [
+    public $showToast = true;
+
+    protected $listeners = [
         'deleteBrand' => 'deleteBrand',
     ];
 
@@ -32,19 +33,10 @@ class ConfigBrands extends Component
         $brand->delete();
         return redirect()->with('status', 'La marque '.$brand->name.' a bien été supprimé !');
     }
-
-    public function toggleDropdown()
-    {
-        $this->showDropdown = ! $this->showDropdown;
-    }
-
-    public function mount()
-    {
-        $this->brands = Brand::where('id', '<>', 1)->get();
-    }
-
+    
     public function render()
     {
+        $this->brands = Brand::where('id', '<>', 1)->get();
         return view('livewire.configuration.config-brands')->layout('layout');
     }
 }
