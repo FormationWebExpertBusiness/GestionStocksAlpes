@@ -1,15 +1,13 @@
 <div>
-    <a wire:click="toggleAddForm" class="text-gray-700 group flex items-center px-4 py-2 text-sm" role="menuitem"
-        tabindex="-1" id="menu-item-1">
-        <svg class="mr-3 h-5 w-5 text-indigo-600 group-hover:text-indigo-900" xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
-            <path fill-rule="evenodd"
-                d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zM12.75 9a.75.75 0 00-1.5 0v2.25H9a.75.75 0 000 1.5h2.25V15a.75.75 0 001.5 0v-2.25H15a.75.75 0 000-1.5h-2.25V9z"
-                clip-rule="evenodd" />
-        </svg>
-        <button>Ajouter </button>
-    </a>
-    @if ($show)
+    
+
+    <button
+            class="inline-flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:w-auto"
+            wire:click.prevent="toggleAddForm">
+            Ajouter une nouvelle categorie
+        </button>
+
+        @if ($show)
         <div class="relative z-10" aria-labelledby="modal-title" role="dialog" aria-modal="true">
             <div class="fixed inset-0 bg-gray-500 bg-opacity-50 transition-opacity"></div>
             <div class="fixed inset-0 z-10 overflow-y-auto">
@@ -28,10 +26,10 @@
                                 </button>
                             </div>
                             <h2 class="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">Ajoutez une
-                                catégorie
+                                categorie
                             </h2>
                             <p class="mt-3 text-md leading-6 text-gray-500">
-                                Les catégories permettent de regrouper les items pour les trier et les filtrer
+                                Les categories permettent de regrouper les items pour les trier et les filtrer
                             </p>
                         </div>
                         <div class="bg-white rounded-r-lg py-16 px-4 sm:px-6 lg:col-span-3 lg:py-24 lg:px-8 xl:pl-12">
@@ -40,7 +38,7 @@
                                 <div>
                                     <div class="text-left">
                                         <label for="full-name" class="text-sm font-medium text-gray-700">Nom de la
-                                            catégorie :
+                                            categorie :
                                         </label>
                                     </div>
                                     <div class="mt-1">

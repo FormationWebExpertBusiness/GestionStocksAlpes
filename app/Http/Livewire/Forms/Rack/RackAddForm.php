@@ -20,7 +20,7 @@ class RackAddForm extends Component
 
     public function mount()
     {
-        $this->nb_level = 0;
+        $this->nb_level = 1;
     }
 
     public function updated($property)
@@ -33,12 +33,13 @@ class RackAddForm extends Component
         $validatedData = $this->validate();
         $rack = Rack::create($validatedData);
         $this->toggleAddForm();
-        return redirect('stock')->with('status', 'L\'étagère '.$rack->id.' a bien été ajouté avec '.$rack->nb_level .' étage(s) !');
+        return redirect('/configuration/rack')->with('status', 'L\'étagère '.$rack->id.' a bien été ajouté avec '.$rack->nb_level .' étage(s) !');
     }
 
     public function toggleAddForm()
     {
         $this->show = ! $this->show;
+        $this->nb_level = 0;
     }
 
     public function render()
