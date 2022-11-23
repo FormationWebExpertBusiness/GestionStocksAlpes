@@ -1,5 +1,5 @@
 <div>
-    <a wire:click="toggleAddForm" class="text-gray-700 group flex items-center px-4 py-2 text-sm" role="menuitem"
+    {{-- <a wire:click="toggleAddForm" class="text-gray-700 group flex items-center px-4 py-2 text-sm" role="menuitem"
         tabindex="-1" id="menu-item-1">
         <svg class="mr-3 h-5 w-5 text-indigo-600 group-hover:text-indigo-900" xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
@@ -9,7 +9,11 @@
         </svg>
         <button>Ajouter </button>
 
-    </a>
+    </a> --}}
+    <button class="inline-flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:w-auto"
+        wire:click.prevent="toggleAddForm">
+        Ajouter une nouvelle étagère
+    </button>
 
 
     @if ($show)
@@ -30,8 +34,8 @@
                                     </svg>
                                 </button>
                             </div>
-                            <h2 class="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">Ajoutez une
-                                Étagère
+                            <h2 class="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">
+                                Ajoutez une étagère
                             </h2>
                             <p class="mt-3 text-md leading-6 text-gray-500">
                                 Les étagères permettent de savoir où sont rangé les objets dans le stock.

@@ -95,16 +95,6 @@
             </div>
 
             <div class="mt-4 sm:mt-0 sm:ml-10 sm:flex-none">
-                @livewire('forms.rack.rack-forms')
-            </div>
-            <div class="mt-4 sm:mt-0 sm:ml-10 sm:flex-none">
-                @livewire('forms.category.category-form')
-            </div>
-            <div class="mt-4 sm:mt-0 sm:ml-10 sm:flex-none">
-                @livewire('forms.brand.brand-form')
-            </div>
-
-            <div class="mt-4 sm:mt-0 sm:ml-10 sm:flex-none">
                 @livewire('forms.common-item.common-item-form')
             </div>
         </div>

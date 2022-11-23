@@ -26,13 +26,12 @@ class BrandAddForm extends Component
 
     public function saveBrand()
     {
-        $nom = $this->name;
         $this->validate();
         Brand::create([
             'name' => $this->name,
         ]);
         $this->toggleAddForm();
-        return redirect('stock')->with('status', 'La marque '.$nom.' a bien été ajouté !');
+        return redirect('/configuration/brand')->with('status', 'La marque '. $this->name .' a bien été ajouté !');
     }
 
     public function toggleAddForm()
