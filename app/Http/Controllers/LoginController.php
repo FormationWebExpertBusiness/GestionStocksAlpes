@@ -8,7 +8,11 @@ class LoginController extends Controller
 {
     public function displayLogin()
     {
-        return view('displayLogin');
+        if (! Auth::check()) {
+            return view('displayLogin');
+        }
+
+        return redirect('/');
     }
 
     public function logout()
