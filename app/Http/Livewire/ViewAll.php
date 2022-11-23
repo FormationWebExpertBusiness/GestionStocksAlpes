@@ -55,8 +55,6 @@ class ViewAll extends Component
         'quantityMax' => ['except' => '', 'as' => 'qmax'],
     ];
 
-    private $commonItems;
-
     public function openWarningDelete($commonItemId)
     {
         $deleteMessage = '';
