@@ -2,7 +2,6 @@
 
 namespace App\Http\Livewire\Forms\Rack;
 
-use App\Models\Rack;
 use App\Rules\NotEmptyRackLevel;
 use Livewire\Component;
 
@@ -43,6 +42,7 @@ class RackEditForm extends Component
     public function toggleEditForm()
     {
         $this->show = ! $this->show;
+        $this->nb_level = 1;
     }
 
     public function render()

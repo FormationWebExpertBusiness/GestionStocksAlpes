@@ -2,16 +2,14 @@
 
 namespace App\Http\Livewire\Configuration;
 
-use App\Models\CommonItem;
 use App\Models\Rack;
 use Livewire\Component;
 
 class ConfigRacks extends Component
 {
-    public $showDropdown = false;
     public $racks;
     public $warningDeleteItemSignal = 'deleteRack';
-    
+
     public $showToast = true;
 
     protected $listeners = [
@@ -35,11 +33,6 @@ class ConfigRacks extends Component
         return redirect()->with('status', 'La marque '.$rack->name.' a bien été supprimé !');
     }
 
-    public function toggleDropdown()
-    {
-        $this->showDropdown = ! $this->showDropdown;
-    }
-    
     public function render()
     {
         $this->racks = Rack::all();

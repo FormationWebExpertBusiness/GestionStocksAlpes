@@ -32,7 +32,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/dashboard', Dashboard::class);
     Route::get('/stock', [DisplayController::class, 'displayStock'])->name('stock');
     Route::get('/history', History::class);
-    Route::get('/configuration', Configuration::class);
     Route::get('/configuration/category', ConfigCategories::class);
     Route::get('/configuration/brand', ConfigBrands::class);
     Route::get('/configuration/rack', ConfigRacks::class);

@@ -33,7 +33,7 @@ class ConfigBrands extends Component
         $brand->delete();
         return redirect()->with('status', 'La marque '.$brand->name.' a bien été supprimé !');
     }
-    
+
     public function render()
     {
         $this->brands = Brand::where('id', '<>', 1)->get();

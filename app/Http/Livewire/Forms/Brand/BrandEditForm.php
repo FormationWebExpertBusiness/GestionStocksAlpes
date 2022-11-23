@@ -2,7 +2,6 @@
 
 namespace App\Http\Livewire\Forms\Brand;
 
-use App\Models\Brand;
 use Livewire\Component;
 
 class BrandEditForm extends Component
@@ -37,6 +36,7 @@ class BrandEditForm extends Component
     public function toggleEditForm()
     {
         $this->show = ! $this->show;
+        $this->newName = '';
     }
 
     public function render()

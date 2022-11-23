@@ -8,7 +8,6 @@ use Livewire\Component;
 
 class ConfigCategories extends Component
 {
-    public $showDropdown = false;
     public $categories;
     public $warningDeleteItemSignal = 'deleteCategory';
 
@@ -33,11 +32,6 @@ class ConfigCategories extends Component
         $category = Category::findOrFail($categoryId);
         $category->delete();
         return redirect()->with('status', 'La catégorie '.$category->name.' a bien été supprimé !');
-    }
-
-    public function toggleDropdown()
-    {
-        $this->showDropdown = ! $this->showDropdown;
     }
 
     public function render()

@@ -26,13 +26,12 @@ class CategoryAddForm extends Component
 
     public function saveCategory()
     {
-        $nom = $this->name;
         $this->validate();
         Category::create([
             'name' => $this->name,
         ]);
         $this->toggleAddForm();
-        return redirect('/configuration/category')->with('status', 'La categorie '.$nom.' a bien été ajouté !');
+        return redirect('/configuration/category')->with('status', 'La categorie '. $this->name .' a bien été ajouté !');
     }
 
     public function toggleAddForm()

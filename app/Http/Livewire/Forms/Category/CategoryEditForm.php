@@ -2,8 +2,6 @@
 
 namespace App\Http\Livewire\Forms\Category;
 
-use App\Models\Category;
-use App\Rules\DifferentThanNonDefini;
 use Livewire\Component;
 
 class CategoryEditForm extends Component
@@ -38,6 +36,7 @@ class CategoryEditForm extends Component
     public function toggleEditForm()
     {
         $this->show = ! $this->show;
+        $this->newName = '';
     }
 
     public function render()
