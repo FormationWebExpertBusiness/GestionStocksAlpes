@@ -49,7 +49,7 @@
 							{{-- Rack Dropdown --}}
 							<div class="relative inline-block px-4 text-left">
 								<button type="button" wire:click="$toggle('isVisibleRack')" class="group inline-flex justify-center text-sm font-medium text-gray-700 hover:text-gray-900" aria-expanded="false">
-								<span>Étage</span>
+								<span>Étagère</span>
 								<span class="ml-1.5 rounded bg-gray-200 py-0.5 px-1.5 text-xs font-semibold tabular-nums text-gray-700">{{ count($racksFilter) }}</span>
 								<!-- Heroicon name: mini/chevron-down -->
 								<svg class="-mr-1 ml-1 h-5 w-5 flex-shrink-0 text-gray-400 group-hover:text-gray-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
