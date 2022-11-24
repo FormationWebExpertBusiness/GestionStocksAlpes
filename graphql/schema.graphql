@@ -1,0 +1,41 @@
+"A datetime string with format `Y-m-d H:i:s`, e.g. `2018-05-23 13:43:32`."
+scalar DateTime @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\DateTime")
+
+"Indicates what fields are available at the top level of a query operation."
+type Query {
+	"Hello world"
+	hello: String!
+
+	"List of all items on a rack"
+	items(
+		rack_id: Int!
+		rack_level: Int!
+		): [Item!]
+
+	"All CommonItems with their items"
+	commonItems: [CommonItem!]
+}
+
+type Item {
+	id: ID!
+	serial_number: String!
+	comment: String
+	rack_id: Int!
+	rack_level: Int!
+}
+
+type CommonItem {
+	id: ID!
+	category: Category!
+	brand: Brand! 
+	model: String!
+	items: [Item!]
+}
+
+type Category {
+	name: String!
+}
+
+type Brand {
+	name: String!
+}
