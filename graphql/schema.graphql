@@ -3,46 +3,39 @@ scalar DateTime @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\Date
 
 "Indicates what fields are available at the top level of a query operation."
 type Query {
-    "Find a single user by an identifying attribute."
-    user(
-      "Search by primary key."
-      id: ID @eq @rules(apply: ["prohibits:email", "required_without:email"])
+	"Hello world"
+	hello: String!
 
-      "Search by email address."
-      email: String @eq @rules(apply: ["prohibits:id", "required_without:id", "email"])
-    ): User @find
+	"List of all items on a rack"
+	items(
+		rack_id: Int!
+		rack_level: Int!
+		): [Item!]
 
-    "List multiple users."
-    users(
-      "Filters by name. Accepts SQL LIKE wildcards `%` and `_`."
-      name: String @where(operator: "like")
-    ): [User!]! @paginate(defaultCount: 10)
-
-    "List all item in"
-    items(
-      rack_id: Int
-    ): [Item!]! @all
-}
-
-"Account of a person who utilizes this application."
-type User {
-    "Unique primary key."
-    id: ID!
-
-    "Non-unique name."
-    username: String!
-
-    "When the account was created."
-    created_at: DateTime!
-
-    "When the account was last updated."
-    updated_at: DateTime!
+	"All CommonItems with their items"
+	commonItems: [CommonItem!]
 }
 
 type Item {
-    id: ID!
-    serial_number: String!
-    comment: String!
-    rack_id: Int!
-    rack_level: Int!
+	id: ID!
+	serial_number: String!
+	comment: String
+	rack_id: Int!
+	rack_level: Int!
+}
+
+type CommonItem {
+	id: ID!
+	category: Category!
+	brand: Brand! 
+	model: String!
+	items: [Item!]
+}
+
+type Category {
+	name: String!
+}
+
+type Brand {
+	name: String!
 }

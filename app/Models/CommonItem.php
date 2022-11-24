@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class CommonItem extends Model
 {
@@ -49,17 +51,17 @@ class CommonItem extends Model
         return $this->totalPrice / $this->quantity;
     }
 
-    public function brand()
+    public function brand() : BelongsTo
     {
         return $this->belongsTo(Brand::class);
     }
 
-    public function category()
+    public function category() : BelongsTo
     {
         return $this->belongsTo(Category::class);
     }
 
-    public function items()
+    public function items() : HasMany
     {
         return $this->hasMany(Item::class, 'common_id', 'id');
     }
