@@ -2,7 +2,6 @@
 
 use App\Http\Controllers\DisplayController;
 use App\Http\Controllers\LoginController;
-use App\Http\Livewire\Configuration;
 use App\Http\Livewire\Configuration\ConfigBrands;
 use App\Http\Livewire\Configuration\ConfigCategories;
 use App\Http\Livewire\Configuration\ConfigRacks;
@@ -35,7 +34,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/configuration/category', ConfigCategories::class);
     Route::get('/configuration/brand', ConfigBrands::class);
     Route::get('/configuration/rack', ConfigRacks::class);
-    
-    Route::get('logout', [LoginController::class, 'logout'])->name('logout');
 
+    Route::get('logout', [LoginController::class, 'logout'])->name('logout');
 });

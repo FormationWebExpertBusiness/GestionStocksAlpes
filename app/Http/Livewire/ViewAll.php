@@ -5,8 +5,8 @@ namespace App\Http\Livewire;
 use App\Exports\CommonItemExport;
 use App\Jobs\NotifyUserOfCompletedExport;
 use App\Models\CommonItem;
-use Illuminate\Pagination\LengthAwarePaginator;
 use App\Models\CsvExport;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
@@ -37,8 +37,6 @@ class ViewAll extends Component
 
     public $csvExportId;
 
-    private $commonItems;
-
     public $showToast = true;
 
     public $paginatedCommonItems;
@@ -54,6 +52,8 @@ class ViewAll extends Component
         'quantityMin' => ['except' => '', 'as' => 'qmin'],
         'quantityMax' => ['except' => '', 'as' => 'qmax'],
     ];
+
+    private $commonItems;
 
     public function openWarningDelete($commonItemId)
     {

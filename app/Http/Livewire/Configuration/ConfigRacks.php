@@ -30,7 +30,7 @@ class ConfigRacks extends Component
     {
         $rack = Rack::findOrFail($rackId);
         $rack->delete();
-        return redirect()->with('status', 'La marque '.$rack->name.' a bien été supprimé !');
+        return redirect()->with('status', $rack->name.' a bien été supprimé !');
     }
 
     public function render()

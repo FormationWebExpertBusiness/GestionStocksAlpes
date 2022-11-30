@@ -30,7 +30,7 @@ class NotEmptyRackLevel implements DataAwareRule, InvokableRule
         if ($rack->$attribute > $value) {
             for ($i = $value + 1; $i <= $rack->$attribute; $i++) {
                 if ($rack->itemsOnLevel($i)->count()) {
-                    $fail('Il reste des Items sur l\''.$rack->name.' étage '.$i);
+                    $fail('Il reste des Items sur '.$rack->name.' étage '.$i);
                 }
             }
         }

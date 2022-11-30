@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -28,7 +29,17 @@ class Rack extends Model
 
     public function getNameAttribute()
     {
-        return 'étagère ' . $this->id;
+        return 'Étagère ' . $this->id;
+    }
+
+    public function getQrcode($level)
+    {
+        return QrCode::format('svg')->generate($this->dataInQrcode($level));
+    }
+
+    public function dataInQrcode($level)
+    {
+        return '{"rack_id":'.$this->id.', "rack_level":'.$level.'}';
     }
 
     public function itemsOn()

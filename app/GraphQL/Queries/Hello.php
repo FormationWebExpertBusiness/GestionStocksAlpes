@@ -2,7 +2,7 @@
 
 namespace App\GraphQL\Queries;
 
-final class Hello
+class Hello
 {
     /**
      * @param  null  $_
@@ -10,6 +10,6 @@ final class Hello
      */
     public function __invoke($_, array $args)
     {
-        return "hello world!";
+        return 'hello world!';
     }
 }
