@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Item extends Model
 {
@@ -27,12 +28,22 @@ class Item extends Model
         'rack',
     ];
 
-    public function getModel()
+    protected $appends = [
+        'category',
+        'model',
+    ];
+
+    public function getCategoryAttribute()
+    {
+        return CommonItem::find($this->common_id)->category;
+    }
+
+    public function getModelAttribute()
     {
         return CommonItem::find($this->common_id)->model;
     }
 
-    public function rack()
+    public function rack() : BelongsTo
     {
         return $this->belongsTo(Rack::class);
     }
