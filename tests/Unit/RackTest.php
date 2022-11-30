@@ -15,7 +15,7 @@ test('test Rack method getNameAttribute', function () {
     $rack = Rack::create(['nb_level' => 5]);
 
     // test
-    $this->assertEquals('étagère 1', $rack->getNameAttribute());
+    $this->assertEquals('Étagère 1', $rack->getNameAttribute());
 });
 
 test('test Rack method itemsOn', function () {
