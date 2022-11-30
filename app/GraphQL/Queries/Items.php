@@ -2,7 +2,10 @@
 
 namespace App\GraphQL\Queries;
 
+use App\Models\CommonItem;
 use App\Models\Item;
+use App\Models\Rack;
+use PhpParser\Node\Expr\Cast\Object_;
 
 class Items
 {
@@ -12,6 +15,7 @@ class Items
      */
     public function __invoke($_, array $args)
     {
-        return Item::where('rack_id', $args['rack_id'])->where('rack_level', $args['rack_level'])->get();
+        $items = Rack::find($args['rack_id'])->itemsOnLevel($args['rack_level']);
+        return $items;
     }
 }

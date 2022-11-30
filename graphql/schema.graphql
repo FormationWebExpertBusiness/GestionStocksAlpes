@@ -19,9 +19,12 @@ type Query {
 type Item {
 	id: ID!
 	serial_number: String!
+	category: Category!
+	model: String!
 	comment: String
-	rack_id: Int!
+	rack: Rack!
 	rack_level: Int!
+	created_at: DateTime!
 }
 
 type CommonItem {
@@ -37,5 +40,10 @@ type Category {
 }
 
 type Brand {
+	name: String!
+}
+
+type Rack {
+	id: ID!
 	name: String!
 }
