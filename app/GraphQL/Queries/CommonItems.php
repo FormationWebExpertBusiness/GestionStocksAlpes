@@ -4,7 +4,7 @@ namespace App\GraphQL\Queries;
 
 use App\Models\CommonItem;
 
-final class CommonItems
+class CommonItems
 {
     /**
      * @param  null  $_

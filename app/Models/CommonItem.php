@@ -51,17 +51,17 @@ class CommonItem extends Model
         return $this->totalPrice / $this->quantity;
     }
 
-    public function brand() : BelongsTo
+    public function brand(): BelongsTo
     {
         return $this->belongsTo(Brand::class);
     }
 
-    public function category() : BelongsTo
+    public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class);
     }
 
-    public function items() : HasMany
+    public function items(): HasMany
     {
         return $this->hasMany(Item::class, 'common_id', 'id');
     }

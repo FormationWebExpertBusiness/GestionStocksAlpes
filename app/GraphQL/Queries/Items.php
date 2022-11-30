@@ -4,7 +4,7 @@ namespace App\GraphQL\Queries;
 
 use App\Models\Item;
 
-final class Items
+class Items
 {
     /**
      * @param  null  $_
