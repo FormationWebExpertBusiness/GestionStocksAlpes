@@ -17,7 +17,7 @@ class RackObserver
     public function created(Rack $rack)
     {
         for ($level=1; $level <= $rack->nb_level; $level++) { 
-            $qrcode = QrCode::format('svg')->generate('{"rack_id":'.$rack->id.', "rack_level":'.$level.'}');
+            $qrcode = QrCode::format('svg')->generate($rack->dataInQrcode($level));
             Storage::disk('local')->put('public/code-qr/rack-'.$rack->id.'_lvl-'.$level.'.svg', $qrcode);
         }
     }
@@ -32,7 +32,7 @@ class RackObserver
     {
         if ($rack->nb_level > $rack->getOriginal('nb_level')) {
             for ($level = $rack->getOriginal('nb_level'); $level <= $rack->nb_level; $level++) { 
-                $qrcode = QrCode::format('svg')->generate('{"rack_id":'.$rack->id.', "rack_level":'.$level.'}');
+                $qrcode = QrCode::format('svg')->generate($rack->dataInQrcode($level));
                 Storage::disk('local')->put('public/code-qr/rack-'.$rack->id.'_lvl-'.$level.'.svg', $qrcode);
             }
         } else  if ($rack->nb_level < $rack->getOriginal('nb_level')) {

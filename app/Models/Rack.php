@@ -24,21 +24,26 @@ class Rack extends Model
 
     protected $appends = [
         'name',
-        'qrcodesLinks'
+        'qrcodesLinks',
     ];
 
     public function getNameAttribute()
     {
-        return 'étagère ' . $this->id;
+        return 'Étagère ' . $this->id;
     }
 
     public function getQrcodesLinksAttribute()
     {
         $qrcodes = [];
-        for ($level=1; $level <= $this->nb_level; $level++) { 
+        for ($level = 1; $level <= $this->nb_level; $level++) {
             $qrcodes[$level] = 'public/code-qr/rack-'.$this->id.'_lvl-'.$level.'.svg';
         }
         return $qrcodes;
+    }
+
+    public function dataInQrcode($level)
+    {
+        return '{"rack_id":'.$this->id.', "rack_level":'.$level.'}';
     }
 
     public function itemsOn()
