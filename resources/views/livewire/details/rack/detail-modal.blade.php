@@ -84,7 +84,6 @@
                                         </thead>
                                         <tbody class="bg-white block max-h-[40vh] overflow-y-scroll">
                                             @for ($level = 1; $level <= $rack->nb_level; $level++)
-                                            {{-- @foreach ($commonItem->itemsOnRack($rack, $rack_level) as $item) --}}
                                                 <div wire:key="Rack-{{ $rack->id }}-{{ $level }}">
                                                     <tr class="odd:bg-white even:bg-gray-50 divide-x divide-gray-200 table w-full table-fixed">
                                                         <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
@@ -94,7 +93,7 @@
                                                             {{ $rack->itemsOnLevel($level)->count() }}
                                                         </td>
                                                         <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                                            {!! Storage::get($rack->qrcodeslinks[$level]) !!}
+                                                            {!! $rack->getQrcode($level) !!}
                                                         </td>
                                                         <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-center text-sm font-medium sm:pr-6 w-1/6">
                                                             <div class="inline-block px-6">
@@ -109,7 +108,6 @@
                                                         </td>
                                                     </tr>
                                                 </div>
-                                            {{-- @endforeach --}}
                                             @endfor
                                         </tbody>
                                     </table>

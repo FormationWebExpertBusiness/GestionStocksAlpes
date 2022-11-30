@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -24,7 +25,6 @@ class Rack extends Model
 
     protected $appends = [
         'name',
-        'qrcodesLinks',
     ];
 
     public function getNameAttribute()
@@ -32,13 +32,9 @@ class Rack extends Model
         return 'Étagère ' . $this->id;
     }
 
-    public function getQrcodesLinksAttribute()
+    public function getQrcode($level)
     {
-        $qrcodes = [];
-        for ($level = 1; $level <= $this->nb_level; $level++) {
-            $qrcodes[$level] = 'public/code-qr/rack-'.$this->id.'_lvl-'.$level.'.svg';
-        }
-        return $qrcodes;
+        return QrCode::format('svg')->generate($this->dataInQrcode($level));
     }
 
     public function dataInQrcode($level)

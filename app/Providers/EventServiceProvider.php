@@ -6,12 +6,10 @@ use App\Models\Brand;
 use App\Models\Category;
 use App\Models\CommonItem;
 use App\Models\Item;
-use App\Models\Rack;
 use App\Observers\BrandObserver;
 use App\Observers\CategoryObserver;
 use App\Observers\CommonItemObserver;
 use App\Observers\ItemObserver;
-use App\Observers\RackObserver;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -34,7 +32,6 @@ class EventServiceProvider extends ServiceProvider
         CommonItem::class => [CommonItemObserver::class],
         Brand::class => [BrandObserver::class],
         Category::class => [CategoryObserver::class],
-        Rack::class => [RackObserver::class],
     ];
 
     /**
