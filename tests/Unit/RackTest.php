@@ -10,14 +10,6 @@ afterEach(function () {
     $this->artisan('migrate:fresh');
 });
 
-test('test Rack method getNameAttribute', function () {
-    // datas
-    $rack = Rack::create(['nb_level' => 5]);
-
-    // test
-    $this->assertEquals('Étagère 1', $rack->getNameAttribute());
-});
-
 test('test Rack method itemsOn', function () {
     // datas
     $rack = Rack::create(['nb_level' => 5]);
