@@ -32,7 +32,7 @@ class CommonItemForm extends Component
         'category_id' => ['nullable', 'integer'],
         'brand_id' => ['nullable', 'integer'],
         'model' => ['required'],
-        'photo_item' => ['image'],
+        'photo_item' => ['nullable','image'],
         'quantity_warning' => ['nullable', 'integer', 'min:0'],
         'quantity_urgent' => ['nullable', 'integer', 'min:0'],
     ];
@@ -92,9 +92,10 @@ class CommonItemForm extends Component
             $this->addDynamicRules();
         }
         $validatedData = $this->validate();
-
-        $photo = $this->photo_item->store('public');
-        $validatedData['photo_item'] = $photo;
+        if ($this->photo_item) {
+            $photo = $this->photo_item->store('public');
+            $validatedData['photo_item'] = $photo;
+        }
 
         if (isset($this->commonItemToUpdate)) {
             $this->commonItemToUpdate->update($validatedData);
