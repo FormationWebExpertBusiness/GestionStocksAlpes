@@ -21,6 +21,13 @@ type Query {
 	): Rack! @find
 }
 
+type Mutation {
+	"delete item according to the id param"
+	deleteItem(
+		id: ID!
+	): Item
+}
+
 type Item {
 	id: ID!
 	serial_number: String!
