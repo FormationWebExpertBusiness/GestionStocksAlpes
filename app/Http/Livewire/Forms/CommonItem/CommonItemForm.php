@@ -19,7 +19,6 @@ class CommonItemForm extends Component
     public $brand_id;
     public $model;
 
-    public $unit;
     public $photo_item;
     public $quantity_warning;
     public $quantity_urgent;
@@ -33,7 +32,6 @@ class CommonItemForm extends Component
         'category_id' => ['nullable', 'integer'],
         'brand_id' => ['nullable', 'integer'],
         'model' => ['required'],
-        'unit' => ['nullable'],
         'photo_item' => ['image'],
         'quantity_warning' => ['nullable', 'integer', 'min:0'],
         'quantity_urgent' => ['nullable', 'integer', 'min:0'],
@@ -63,7 +61,6 @@ class CommonItemForm extends Component
         $this->category_id = $this->commonItemToUpdate?->category_id ?? 1;
         $this->brand_id = $this->commonItemToUpdate?->brand_id ?? 1;
         $this->model = $this->commonItemToUpdate?->model;
-        $this->unit = $this->commonItemToUpdate?->unit;
         $this->photo_item = $this->commonItemToUpdate?->photo_item;
         $this->quantity_warning = $this->commonItemToUpdate?->quantity_warning ?? 0;
         $this->quantity_urgent = $this->commonItemToUpdate?->quantity_urgent ?? 0;
