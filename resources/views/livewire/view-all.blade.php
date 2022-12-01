@@ -127,11 +127,11 @@
                                         Modèle
                                         <x-ordering-arrows champ='model' champF={{$champ}} modeF={{$mode}}></x-ordering-arrows>
                                     </th>
-                                    <th wire:click="reOrder('quantity')" scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 w-[14%]">
+                                    <th wire:click="reOrder('quantity')" scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 w-[12%]">
                                         Quantité
                                         <x-ordering-arrows champ='quantity' champF={{$champ}} modeF={{$mode}}></x-ordering-arrows>
                                     </th>
-                                    <th wire:click="reOrder('price')" scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 w-[14%]">
+                                    <th wire:click="reOrder('price')" scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 w-[10%]">
                                         Prix Total
                                         <x-ordering-arrows champ='price' champF={{$champ}} modeF={{$mode}}></x-ordering-arrows>
                                     </th>
@@ -162,7 +162,7 @@
                                                 {{ $commonItem->brand->name }}</td>
                                             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                                                 {{ $commonItem->model }}</td>
-                                            <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-500 w-[14%]">
+                                            <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-500 w-[12%]">
                                                 @php
                                                     $quantity = $commonItem->quantityOnRack($racksF, $rackLevelsF);
                                                 @endphp
@@ -187,14 +187,14 @@
                                                 </div>
                                                 <div class="w-2/6 inline-block">
                                                     <div class="inline-block align-middle min-w-[15%]">
-                                                        @livewire('forms.item.item-add-form', ['common_id' => $commonItem->id], key('item-add-form-' . $commonItem->id))
+                                                        @livewire('forms.item.item-add-form', ['commonItem' => $commonItem], key('item-add-form-' . $commonItem->id))
                                                     </div>
                                                     <div class="inline-block align-middle min-w-[15%]">
                                                         @livewire('forms.item.item-delete-form', ['commonItem' => $commonItem], key('item-delete-form-' . $commonItem->id))
                                                     </div>
                                                 </div>
                                             </td>
-                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 w-[14%]">
+                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 w-[10%]">
                                                 {{ number_format($commonItem->totalPriceOnRack($racksF, $rackLevelsF), 2, ',', ' ') }}€
                                             </td>
                                             <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-center text-sm font-medium sm:pr-6 w-1/5">
@@ -239,7 +239,7 @@
                                 {{ $commonItems->links() }}
                             </div>
                             <div class="justify-end flex">
-                                <button wire:click='export' type="button" class=" absolute top-6 bottom-6 right-4 inline-flex items-center rounded-md border border-transparent bg-indigo-100 px-4 py-2 text-sm font-medium text-indigo-700 hover:bg-indigo-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Exporter</button>
+                                <button wire:click='export' type="button" class=" absolute top-6 bottom-6 right-4 inline-flex items-center rounded-md border border-transparent bg-indigo-100 px-4 py-2 text-sm font-medium text-indigo-700 hover:bg-indigo-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Exporter en CSV</button>
                             </div>
                         </div>
                     </div>

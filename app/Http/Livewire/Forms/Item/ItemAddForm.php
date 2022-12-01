@@ -9,6 +9,8 @@ use Livewire\Component;
 class ItemAddForm extends Component
 {
     public $show = false;
+    
+    public $commonItem;
 
     public $racks;
     public $serial_number;
@@ -25,7 +27,6 @@ class ItemAddForm extends Component
         'comment' => ['nullable'],
         'rack_id' => ['integer', 'required'],
         'rack_level' => ['required', 'integer', 'min:1'],
-
     ];
     protected $messages = [
         'serial_number.required' => 'Le numéro de série dois être renseigné',
@@ -75,6 +76,7 @@ class ItemAddForm extends Component
 
     public function resetInput()
     {
+        $this->common_id = $this->commonItem->id;
         $this->serial_number = null;
         $this->price = null;
         $this->comment = null;
