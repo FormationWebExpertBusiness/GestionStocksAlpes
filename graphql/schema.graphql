@@ -17,8 +17,9 @@ type Query {
 
 	"A rack"
 	rack(
-		id: ID! @eq
-	): Rack! @find
+		id: ID!
+		level: Int!
+	): Rack!
 }
 
 type Mutation {
@@ -61,4 +62,5 @@ type Brand {
 type Rack {
 	id: ID!
 	name: String!
+	nb_item: Int
 }
