@@ -32,20 +32,27 @@
                         </div>
                         <div class="bg-white rounded-r-lg py-16 px-4 sm:px-6 lg:col-span-3 lg:py-24 lg:px-8 xl:pl-12">
                             <form wire:submit.prevent='updateRack'>
-                                {{-- rack dropdown --}}
-                                {{-- <div class="mt-[-10%] mb-9">
-                                    <div class="text-left">
-                                        <label for="location" class="block text-sm font-medium text-gray-700">Étagère à modifier : </label>
+                                <div class="mt-[-10%] mb-9">
+                                    <p>
+                                        {{$rack->name}} <br> {{$rack->nb_level}} étage(s)
+                                    </p>
+                                </div>
+                                
+                                {{-- name text field --}}
+                                <div>
+                                    <div class="text-left flex justify-between">
+                                        <label for="nb_level" class="text-sm font-medium text-gray-700">
+                                            Nom de l'étagère
+                                        </label>
+                                        <span class="text-sm text-gray-500">Optionnel</span>
                                     </div>
                                     <div class="mt-1">
-                                        @if ($errors->has('selectedRack'))
+                                        @if ($errors->has('name'))
                                         <div class="relative">
-                                            <select wire:model="selectedRack" id="location" name="location" class="mt-1 block text-red-900 placeholder-red-300 w-full rounded-md border-red-300 py-3 pl-3 pr-10 text-base focus:border-red-500 focus:outline-none focus:ring-red-500 sm:text-sm">
-                                                <option selected>Non défini</option>
-                                                @foreach ($racks as $rack)
-                                                    <option value="{{$rack->id}}">Étagère {{$rack->id}} <p> - {{$rack->nb_level}} étage(s)</p></option>
-                                                @endforeach
-                                            </select>
+                                            <input wire:model="name" type="text" name="full-name" id="full-name"
+                                                autocomplete="name" placeholder="Ex: Étagère 1"
+                                                class="block w-full py-3 px-4 rounded-md border-red-300 pr-10 text-red-900 placeholder-red-300 focus:border-red-500 focus:outline-none focus:ring-red-500"
+                                                aria-invalid="true" aria-describedby="email-error">
                                             <div
                                                 class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
                                                 <svg class="h-5 w-5 text-red-500" xmlns="http://www.w3.org/2000/svg"
@@ -57,26 +64,19 @@
                                             </div>
                                         </div>
 
-                                            @error('selectedRack')
+                                            @error('name')
                                                 <p class="mt-2 h-4 text-sm text-red-600" id="email-error">{{ $message }}</p>
                                             @enderror
                                         @else
-                                            <select wire:model="selectedRack" id="location" name="location" class="mt-1 block w-full rounded-md border-gray-300 py-3 pl-3 pr-10 text-base focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
-                                                <option selected>Non défini</option>
-                                                @foreach ($racks as $rack)
-                                                <option value="{{$rack->id}}">Étagère {{$rack->id}} <p> - {{$rack->nb_level}} étage(s)</p></option>
-                                                @endforeach
-                                            </select>
-                                            <p class="mt-2 h-4"/>
+                                            <input wire:model="name" type="text" name="full-name" id="full-name"
+                                                autocomplete="name"
+                                                class="block w-full rounded-md border-gray-300 py-3 px-4 placeholder-gray-500 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                                placeholder="Ex: Étagère 1">
+                                            <p class="mt-2 text-sm h-4 text-red-600" id="email-error" />
                                         @endif
                                     </div>
-                                </div> --}}
-
-                                <div class="mt-[-10%] mb-9">
-                                    <p>
-                                        Étagère {{$rack->id}} <br> {{$rack->nb_level}} étage(s)
-                                    </->
                                 </div>
+                                
                                 {{-- nb_level number --}}
                                 <div>
                                     <div class="text-left">

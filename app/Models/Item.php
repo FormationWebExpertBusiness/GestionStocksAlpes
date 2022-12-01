@@ -31,11 +31,17 @@ class Item extends Model
     protected $appends = [
         'category',
         'model',
+        'brand',
     ];
 
     public function getCategoryAttribute()
     {
         return CommonItem::find($this->common_id)->category;
+    }
+
+    public function getBrandAttribute()
+    {
+        return CommonItem::find($this->common_id)->brand;
     }
 
     public function getModelAttribute()

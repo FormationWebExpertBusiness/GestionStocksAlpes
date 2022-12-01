@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('racks', function (Blueprint $table) {
             $table->id();
+            $table->string('name')->unique()->nullable();
             $table->integer('nb_level');
             $table->timestamps();
         });
