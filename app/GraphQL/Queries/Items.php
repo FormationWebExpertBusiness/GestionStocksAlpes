@@ -16,6 +16,11 @@ class Items
     public function __invoke($_, array $args)
     {
         $items = Rack::find($args['rack_id'])->itemsOnLevel($args['rack_level']);
+        foreach ($items as $item) {
+            $item->category = $item->getCategory();
+            $item->brand = $item->getBrand();
+            $item->model = $item->getModel();
+        } 
         return $items;
     }
 }
