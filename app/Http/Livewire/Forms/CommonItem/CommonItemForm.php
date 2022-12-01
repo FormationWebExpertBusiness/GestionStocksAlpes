@@ -97,6 +97,14 @@ class CommonItemForm extends Component
             $validatedData['photo_item'] = $photo;
         }
 
+        if (!$validatedData['quantity_warning']) {
+            $validatedData['quantity_warning'] = 0;
+        }
+
+        if (!$validatedData['quantity_urgent']) {
+            $validatedData['quantity_urgent'] = 0;
+        }
+
         if (isset($this->commonItemToUpdate)) {
             $this->commonItemToUpdate->update($validatedData);
         } else {
