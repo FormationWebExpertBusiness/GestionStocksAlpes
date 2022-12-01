@@ -13,10 +13,11 @@ class RackEditForm extends Component
     public $rack;
 
     protected $rules = [
-        'name' => ['nullable', 'unique:racks,name'],
+        'name' => ['nullable'],
         'nb_level' => ['min:1', 'numeric', 'required'],
     ];
     protected $messages = [
+        'name.unique' => 'Le nom est déjà utilisé par une autre étagère',
         'nb_level.min' => 'Il doit y avoir au moins un étage',
         'nb_level.required' => 'Le nombre d\'étage dois être renseigné',
     ];
@@ -29,12 +30,18 @@ class RackEditForm extends Component
 
     public function updated($property)
     {
+        if ($this->name !== $this->rack->name) {
+            array_push($this->rules['name'], 'unique:racks,name');
+        }
         $this->validateOnly($property);
     }
 
     public function updateRack()
     {
         array_push($this->rules['nb_level'], new NotEmptyRackLevel());
+        if ($this->name !== $this->rack->name) {
+            array_push($this->rules['name'], 'unique:racks,name');
+        }
         $validatedData = $this->validate();
         $oldNbLevel = $this->rack->nb_level;
         $this->rack->update($validatedData);

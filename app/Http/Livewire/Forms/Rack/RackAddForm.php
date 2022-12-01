@@ -16,7 +16,7 @@ class RackAddForm extends Component
         'nb_level' => ['min:1', 'numeric', 'required'],
     ];
     protected $messages = [
-        'name' => 'Le nom est déjà utilisé par une autre étagère',
+        'name.unique' => 'Le nom est déjà utilisé par une autre étagère',
         'nb_level.required' => 'Le nombre d\'étage dois être renseigné',
         'nb_level.min' => 'Il doit y avoir au moins un étage',
     ];
