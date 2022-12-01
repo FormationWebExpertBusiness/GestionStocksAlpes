@@ -63,7 +63,7 @@
                                                     <tr
                                                         class="odd:bg-white even:bg-gray-50 divide-x divide-gray-200 table w-full table-fixed">
                                                         <td class="whitespace-nowrap py-4 pl-4 text-sm text-gray-500 text-left">
-                                                            <input wire:model="itemsToDelete" type="checkbox" name="item-{{$item->id}}" value="{{ $item->id }}">
+                                                            <input wire:model="itemsToDelete" type="checkbox" id="item-{{$item->id}}" name="item-{{$item->id}}" value="{{ $item->id }}">
                                                             <label for="item-{{$item->id}}">{{ $item->serial_number }}</label>
                                                         </td>
                                                         <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">

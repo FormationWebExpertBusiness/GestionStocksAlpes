@@ -48,14 +48,17 @@
                                         </label>
                                     </div>
                                     <div class="mt-1">
-                                        @if ($errors->has('newName'))
-                                            <div class="relative">
-                                                <input wire:model="newName" type="text" name="full-name" id="full-name"
-                                                    autocomplete="newName" placeholder="Ex: Firewall"
+                                        <div class="relative">
+                                            <input wire:model="newName" type="text" name="full-name" id="full-name"
+                                                autocomplete="newName" placeholder="Ex: Firewall"
+                                                @if ($errors->has('newName'))
                                                     class="block w-full py-3 px-4 rounded-md border-red-300 pr-10 text-red-900 placeholder-red-300 focus:border-red-500 focus:outline-none focus:ring-red-500"
+                                                @else
+                                                    class="block w-full rounded-md border-gray-300 py-3 px-4 placeholder-gray-500 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                                @endif
                                                     aria-invalid="true" aria-describedby="email-error">
-                                                <div
-                                                    class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+                                            @error('newName')
+                                                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
                                                     <svg class="h-5 w-5 text-red-500" xmlns="http://www.w3.org/2000/svg"
                                                         viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                                                         <path fill-rule="evenodd"
@@ -63,18 +66,14 @@
                                                             clip-rule="evenodd" />
                                                     </svg>
                                                 </div>
-                                            </div>
-
-                                            @error('newName')
-                                                <p class="mt-2 h-4 text-sm text-red-600" id="newName">{{ $message }}</p>
                                             @enderror
-                                        @else
-                                            <input wire:model="newName" type="text" name="full-name" id="full-name"
-                                                autocomplete="newName"
-                                                class="block w-full rounded-md border-gray-300 py-3 px-4 placeholder-gray-500 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
-                                                placeholder="Ex: Firewall">
-                                            <p class="mt-2 text-sm h-4 text-red-600" id="email-error" />
-                                        @endif
+                                        </div>
+
+                                        <p class="mt-2 h-4 text-sm text-red-600" id="newName">
+                                            @error('newName')
+                                                {{ $message }}
+                                            @enderror
+                                        </p>
                                     </div>
                                 </div>
                                 <div class="absolute bottom-5 right-2 text-right sm:px-6">

@@ -42,27 +42,27 @@
                                         </label>
                                     </div>
                                     <div class="mt-1">
-                                        @if ($errors->has('name'))
                                         <div class="relative">
                                             <input wire:model="name" type="text" name="full-name" id="full-name" autocomplete="name" placeholder="Ex: Firewall"
-                                                class="block w-full py-3 px-4 rounded-md border-red-300 pr-10 text-red-900 placeholder-red-300 focus:border-red-500 focus:outline-none focus:ring-red-500"
-                                                aria-invalid="true" aria-describedby="email-error">
-                                            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
-                                                <svg class="h-5 w-5 text-red-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                                    <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-5a.75.75 0 01.75.75v4.5a.75.75 0 01-1.5 0v-4.5A.75.75 0 0110 5zm0 10a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"/>
-                                                </svg>
-                                            </div>
-                                        </div>
+                                                @if ($errors->has('name'))
+                                                    class="block w-full py-3 px-4 rounded-md border-red-300 pr-10 text-red-900 placeholder-red-300 focus:border-red-500 focus:outline-none focus:ring-red-500"
+                                                @else
+                                                    class="block w-full rounded-md border-gray-300 py-3 px-4 placeholder-gray-500 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                                @endif
+                                                    aria-invalid="true" aria-describedby="email-error">
                                             @error('name')
-                                                <p class="mt-2 text-sm text-red-600" id="email-error">{{ $message }}</p>
+                                                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+                                                    <svg class="h-5 w-5 text-red-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                                        <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-5a.75.75 0 01.75.75v4.5a.75.75 0 01-1.5 0v-4.5A.75.75 0 0110 5zm0 10a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"/>
+                                                    </svg>
+                                                </div>
                                             @enderror
-                                        @else
-                                            <input wire:model="name" type="text" name="full-name" id="full-name"
-                                                autocomplete="name"
-                                                class="block w-full rounded-md border-gray-300 py-3 px-4 placeholder-gray-500 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
-                                                placeholder="Ex: Firewall">
-                                            <p class="mt-2 text-sm h-4 text-red-600" id="email-error" />
-                                        @endif
+                                        </div>
+                                        <p class="mt-2 text-sm text-red-600" id="email-error">
+                                            @error('name')
+                                                {{ $message }}
+                                            @enderror
+                                        </p>
                                     </div>
 
                                 </div>

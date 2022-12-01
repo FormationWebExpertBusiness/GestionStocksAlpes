@@ -1,15 +1,4 @@
 <div>
-    {{-- <a wire:click="toggleAddForm" class="text-gray-700 group flex items-center px-4 py-2 text-sm" role="menuitem"
-        tabindex="-1" id="menu-item-1">
-        <svg class="mr-3 h-5 w-5 text-indigo-600 group-hover:text-indigo-900" xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
-            <path fill-rule="evenodd"
-                d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zM12.75 9a.75.75 0 00-1.5 0v2.25H9a.75.75 0 000 1.5h2.25V15a.75.75 0 001.5 0v-2.25H15a.75.75 0 000-1.5h-2.25V9z"
-                clip-rule="evenodd" />
-        </svg>
-        <button>Ajouter</button>
-    </a> --}}
-
     <button
             class="inline-flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:w-auto"
             wire:click.prevent="toggleAddForm">
@@ -50,27 +39,27 @@
                                         </label>
                                     </div>
                                     <div class="mt-1">
-                                        @if ($errors->has('name'))
                                         <div class="relative">
                                             <input wire:model="name" type="text" name="full-name" id="full-name" autocomplete="name" placeholder="Ex: HP"
-                                                class="block w-full py-3 px-4 rounded-md border-red-300 pr-10 text-red-900 placeholder-red-300 focus:border-red-500 focus:outline-none focus:ring-red-500"
+                                                @if ($errors->has('name'))
+                                                    class="block w-full py-3 px-4 rounded-md border-red-300 pr-10 text-red-900 placeholder-red-300 focus:border-red-500 focus:outline-none focus:ring-red-500"
+                                                @else
+                                                    class="block w-full rounded-md border-gray-300 py-3 px-4 placeholder-gray-500 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                                @endif
                                                 aria-invalid="true" aria-describedby="email-error">
-                                            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
-                                                <svg class="h-5 w-5 text-red-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                                    <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-5a.75.75 0 01.75.75v4.5a.75.75 0 01-1.5 0v-4.5A.75.75 0 0110 5zm0 10a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"/>
-                                                </svg>
-                                            </div>
-                                        </div>
                                             @error('name')
-                                                <p class="mt-2 text-sm text-red-600" id="email-error">{{ $message }}</p>
+                                                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+                                                    <svg class="h-5 w-5 text-red-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                                        <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-5a.75.75 0 01.75.75v4.5a.75.75 0 01-1.5 0v-4.5A.75.75 0 0110 5zm0 10a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"/>
+                                                    </svg>
+                                                </div>
                                             @enderror
-                                        @else
-                                            <input wire:model="name" type="text" name="full-name" id="full-name"
-                                                autocomplete="name"
-                                                class="block w-full rounded-md border-gray-300 py-3 px-4 placeholder-gray-500 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
-                                                placeholder="Ex: HP">
-                                            <p class="mt-2 text-sm h-4 text-red-600" id="email-error" />
-                                        @endif
+                                        </div>
+                                        <p class="mt-2 text-sm text-red-600" id="email-error">
+                                            @error('name')
+                                                {{ $message }}
+                                            @enderror
+                                        </p>
                                     </div>
 
                                 </div>
