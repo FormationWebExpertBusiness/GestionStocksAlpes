@@ -25,6 +25,7 @@ type Item {
 	id: ID!
 	serial_number: String!
 	category: Category!
+	brand: Brand!
 	model: String!
 	comment: String
 	rack: Rack!
@@ -37,6 +38,8 @@ type CommonItem {
 	category: Category!
 	brand: Brand! 
 	model: String!
+	quantity_urgent: Int!
+	quantity_warning: Int!
 	items: [Item!]
 }
 
