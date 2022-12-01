@@ -9,9 +9,11 @@ class RackEditForm extends Component
 {
     public $show = false;
     public $nb_level;
+    public $name;
     public $rack;
 
     protected $rules = [
+        'name' => ['nullable', 'unique:racks,name'],
         'nb_level' => ['min:1', 'numeric', 'required'],
     ];
     protected $messages = [
@@ -21,7 +23,8 @@ class RackEditForm extends Component
 
     public function mount()
     {
-        $this->nb_level = 1;
+        $this->nb_level = $this->rack->nb_level;
+        $this->name = $this->rack->name;
     }
 
     public function updated($property)
@@ -36,13 +39,14 @@ class RackEditForm extends Component
         $oldNbLevel = $this->rack->nb_level;
         $this->rack->update($validatedData);
         $this->toggleEditForm();
-        return redirect('/configuration/rack')->with('status', 'L\'étagère '.$this->rack->id.' est passé de '.$oldNbLevel.' à '.$this->rack->nb_level.' étage(s) !');
+        return redirect('/configuration/rack')->with('status', $this->rack->name.' est passé de '.$oldNbLevel.' à '.$this->rack->nb_level.' étage(s) !');
     }
 
     public function toggleEditForm()
     {
         $this->show = ! $this->show;
-        $this->nb_level = 1;
+        $this->nb_level = $this->rack->nb_level;
+        $this->name = $this->rack->name;
     }
 
     public function render()

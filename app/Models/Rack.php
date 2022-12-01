@@ -16,6 +16,7 @@ class Rack extends Model
 
     protected $fillable = [
         'id',
+        'name',
         'nb_level',
     ];
 
@@ -24,13 +25,8 @@ class Rack extends Model
     ];
 
     protected $appends = [
-        'name',
+        
     ];
-
-    public function getNameAttribute()
-    {
-        return 'Étagère ' . $this->id;
-    }
 
     public function getQrcode($level)
     {
