@@ -17,8 +17,16 @@ type Query {
 
 	"A rack"
 	rack(
-		id: ID! @eq
-	): Rack! @find
+		id: ID!
+		level: Int!
+	): Rack!
+}
+
+type Mutation {
+	"delete item according to the id param"
+	deleteItem(
+		id: ID!
+	): Item @delete
 }
 
 type Item {
@@ -54,4 +62,5 @@ type Brand {
 type Rack {
 	id: ID!
 	name: String!
+	nb_item: Int
 }
