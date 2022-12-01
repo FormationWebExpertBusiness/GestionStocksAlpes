@@ -11,12 +11,12 @@ class BrandAddForm extends Component
     public $show = false;
 
     protected $rules = [
-        'name' => ['required', 'alpha_dash', 'unique:App\Models\Category,name'],
+        'name' => ['required', 'alpha_dash', 'unique:App\Models\Brand,name'],
     ];
     protected $messages = [
         'name.required' => 'Le nom dois être renseigné',
-        'name.alpha_dash' => 'Le nom de la catégorie ne doit contenir que des lettres, des chiffres',
-        'name.unique' => 'Le nom de la catégorie doit être unique',
+        'name.alpha_dash' => 'Le nom de la marque ne doit contenir que des lettres, des chiffres',
+        'name.unique' => 'Le nom de la marque doit être unique',
     ];
 
     public function updated($property)

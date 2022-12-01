@@ -43,15 +43,18 @@
                                         </label>
                                     </div>
                                     <div class="mt-1">
-                                        @if ($errors->has('serial_number'))
-                                            <div class="relative">
-                                                <input wire:model="serial_number" type="text" name="serial_number"
-                                                    id="serial_number" autocomplete="serial_number"
-                                                    placeholder="Ex: U4uBbhCHz5h"
+                                        <div class="relative">
+                                            <input wire:model="serial_number" type="text" name="serial_number"
+                                                id="serial_number" autocomplete="serial_number"
+                                                placeholder="Ex: U4uBbhCHz5h"
+                                                @if ($errors->has('serial_number'))
                                                     class="block w-full py-3 px-4 rounded-md border-red-300 pr-10 text-red-900 placeholder-red-300 focus:border-red-500 focus:outline-none focus:ring-red-500"
-                                                    aria-invalid="true" aria-describedby="email-error">
-                                                <div
-                                                    class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+                                                @else
+                                                    class="block w-full rounded-md border-gray-300 py-3 px-4 placeholder-gray-500 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                                @endif
+                                                aria-invalid="true" aria-describedby="email-error">
+                                            @error('serial_number')
+                                                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
                                                     <svg class="h-5 w-5 text-red-500" xmlns="http://www.w3.org/2000/svg"
                                                         viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                                                         <path fill-rule="evenodd"
@@ -59,20 +62,14 @@
                                                             clip-rule="evenodd" />
                                                     </svg>
                                                 </div>
-                                            </div>
-                                            @error('serial_number')
-                                                <p class="mt-2 text-sm text-red-600" id="email-error">{{ $message }}
-                                                </p>
                                             @enderror
-                                        @else
-                                            <input wire:model="serial_number" type="text" name="serial_number"
-                                                id="serial_number" autocomplete="serial_number"
-                                                class="block w-full rounded-md border-gray-300 py-3 px-4 placeholder-gray-500 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
-                                                placeholder="Ex: U4uBbhCHz5h">
-                                            <p class="mt-2 text-sm h-4 text-red-600" id="email-error" />
-                                        @endif
+                                        </div>
+                                        <p class="mt-2 text-sm text-red-600" id="email-error">
+                                            @error('serial_number')
+                                                {{ $message }}
+                                            @enderror
+                                        </p>
                                     </div>
-
                                 </div>
 
                                 {{-- price number field --}}
@@ -82,14 +79,17 @@
                                             total</label>
                                     </div>
                                     <div class="mt-1">
-                                        @if ($errors->has('price'))
-                                            <div class="relative">
-                                                <input wire:model="price" type="number" name="price"
-                                                    id="price" autocomplete="price" placeholder="Ex: 250"
+                                        <div class="relative">
+                                            <input wire:model="price" type="number" name="price"
+                                                id="price" autocomplete="price" placeholder="Ex: 250"
+                                                @if ($errors->has('price'))
                                                     class="block w-full py-3 px-4 rounded-md border-red-300 pr-10 text-red-900 placeholder-red-300 focus:border-red-500 focus:outline-none focus:ring-red-500"
-                                                    aria-invalid="true" aria-describedby="email-error">
-                                                <div
-                                                    class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+                                                @else
+                                                    class="block w-full rounded-md border-gray-300 py-3 px-4 placeholder-gray-500 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                                @endif        
+                                                aria-invalid="true" aria-describedby="email-error">
+                                            @error('price')
+                                                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
                                                     <svg class="h-5 w-5 text-red-500"
                                                         xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
                                                         fill="currentColor" aria-hidden="true">
@@ -98,20 +98,14 @@
                                                             clip-rule="evenodd" />
                                                     </svg>
                                                 </div>
-                                            </div>
-
-                                            @error('price')
-                                                <p class="mt-2 h-4 text-sm text-red-600" id="email-error">
-                                                    {{ $message }}
-                                                </p>
                                             @enderror
-                                        @else
-                                            <input wire:model="price" type="number" name="price" id="price"
-                                                autocomplete="price"
-                                                class="block w-full rounded-md border-gray-300 py-3 px-4 placeholder-gray-500 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
-                                                placeholder="Ex: 250">
-                                            <p class="mt-2 h-4" />
-                                        @endif
+                                        </div>
+
+                                        <p class="mt-2 h-4 text-sm text-red-600" id="email-error">
+                                            @error('price')
+                                                {{ $message }}
+                                            @enderror
+                                        </p>
                                     </div>
                                 </div>
 

@@ -35,6 +35,7 @@
                             @endif
                             <div class="mt-4">
                                 @if ($photo_item)
+                                    {{-- TODO add remove button --}}
                                     <div class="max-h-40 max-w-full">
                                         @if (!is_string($photo_item))
                                             <img class="m-auto inline-block max-h-40 max-w-full rounded-md"
@@ -176,14 +177,17 @@
                                             class="block text-sm font-medium text-gray-700">Modèle</label>
                                     </div>
                                     <div class="mt-1">
-                                        @if ($errors->has('model'))
-                                            <div class="relative">
-                                                <input wire:model="model" type="text" name="model"
-                                                    id="model" autocomplete="model" placeholder="Ex: AX6000"
+                                        <div class="relative">
+                                            <input wire:model="model" type="text" name="model"
+                                                id="model" autocomplete="model" placeholder="Ex: AX6000"
+                                                @if ($errors->has('model'))
                                                     class="block w-full py-3 px-4 rounded-md border-red-300 pr-10 text-red-900 placeholder-red-300 focus:border-red-500 focus:outline-none focus:ring-red-500"
-                                                    aria-invalid="true" aria-describedby="email-error">
-                                                <div
-                                                    class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+                                                @else
+                                                    class="block w-full rounded-md border-gray-300 py-3 px-4 placeholder-gray-500 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                                @endif
+                                                aria-invalid="true" aria-describedby="email-error">
+                                            @error('model')
+                                                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
                                                     <svg class="h-5 w-5 text-red-500"
                                                         xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
                                                         fill="currentColor" aria-hidden="true">
@@ -192,20 +196,14 @@
                                                             clip-rule="evenodd" />
                                                     </svg>
                                                 </div>
-                                            </div>
-
-                                            @error('model')
-                                                <p class="mt-2 h-4 text-sm text-red-600" id="email-error">
-                                                    {{ $message }}
-                                                </p>
                                             @enderror
-                                        @else
-                                            <input wire:model="model" type="text" name="model" id="model"
-                                                autocomplete="model"
-                                                class="block w-full rounded-md border-gray-300 py-3 px-4 placeholder-gray-500 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
-                                                placeholder="Ex: AX6000">
-                                            <p class="mt-2 h-4" />
-                                        @endif
+                                        </div>
+
+                                        <p class="mt-2 h-4 text-sm text-red-600" id="email-error">
+                                            @error('model')
+                                                {{ $message }}
+                                            @enderror
+                                        </p>
                                     </div>
                                 </div>
 
@@ -219,10 +217,33 @@
                                             <span class="text-sm text-gray-500">Optionnel</span>
                                         </div>
                                         <div class="mt-1">
-                                            <input wire:model="quantity_warning" type="number" name="quantity_warning" id="quantity_warning"
-                                                autocomplete="quantity_warning"
-                                                class="block w-full rounded-md border-gray-300 py-3 px-4 placeholder-gray-500 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
-                                                placeholder="Ex: 5">
+                                            <div class="relative">
+                                                <input wire:model="quantity_warning" type="number" name="quantity_warning" id="quantity_warning"
+                                                    autocomplete="quantity_warning"
+                                                    @if ($errors->has('quantity_warning'))
+                                                    class="block w-full py-3 px-4 rounded-md border-red-300 pr-10 text-red-900 placeholder-red-300 focus:border-red-500 focus:outline-none focus:ring-red-500"
+                                                    @else
+                                                        class="block w-full rounded-md border-gray-300 py-3 px-4 placeholder-gray-500 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                                    @endif
+                                                    placeholder="Ex: 5">
+                                                
+                                                @error('quantity_warning')
+                                                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+                                                        <svg class="h-5 w-5 text-red-500"
+                                                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                                                            fill="currentColor" aria-hidden="true">
+                                                            <path fill-rule="evenodd"
+                                                                d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-5a.75.75 0 01.75.75v4.5a.75.75 0 01-1.5 0v-4.5A.75.75 0 0110 5zm0 10a1 1 0 100-2 1 1 0 000 2z"
+                                                                clip-rule="evenodd" />
+                                                        </svg>
+                                                    </div>
+                                                @enderror
+                                            </div>
+                                            <p class="mt-2 h-4 text-sm text-red-600" id="email-error">
+                                                @error('quantity_warning')
+                                                    {{ $message }}
+                                                @enderror
+                                            </p>
                                         </div>
                                     </div>
     
@@ -234,10 +255,33 @@
                                             <span class="text-sm text-gray-500">Optionnel</span>
                                         </div>
                                         <div class="mt-1">
-                                            <input wire:model="quantity_urgent" type="number" name="quantity_urgent" id="quantity_urgent"
-                                                autocomplete="quantity_urgent"
-                                                class="block w-full rounded-md border-gray-300 py-3 px-4 placeholder-gray-500 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
-                                                placeholder="Ex: 2">
+                                            <div class="relative">
+                                                <input wire:model="quantity_urgent" type="number" name="quantity_urgent" id="quantity_urgent"
+                                                    autocomplete="quantity_urgent"
+                                                    @if ($errors->has('quantity_urgent'))
+                                                    class="block w-full py-3 px-4 rounded-md border-red-300 pr-10 text-red-900 placeholder-red-300 focus:border-red-500 focus:outline-none focus:ring-red-500"
+                                                    @else
+                                                        class="block w-full rounded-md border-gray-300 py-3 px-4 placeholder-gray-500 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                                    @endif
+                                                    placeholder="Ex: 5">
+                                                
+                                                @error('quantity_urgent')
+                                                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+                                                        <svg class="h-5 w-5 text-red-500"
+                                                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                                                            fill="currentColor" aria-hidden="true">
+                                                            <path fill-rule="evenodd"
+                                                                d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-5a.75.75 0 01.75.75v4.5a.75.75 0 01-1.5 0v-4.5A.75.75 0 0110 5zm0 10a1 1 0 100-2 1 1 0 000 2z"
+                                                                clip-rule="evenodd" />
+                                                        </svg>
+                                                    </div>
+                                                @enderror
+                                            </div>
+                                            <p class="mt-2 h-4 text-sm text-red-600" id="email-error">
+                                                @error('quantity_urgent')
+                                                    {{ $message }}
+                                                @enderror
+                                            </p>
                                         </div>
                                     </div>
                                 </div>
