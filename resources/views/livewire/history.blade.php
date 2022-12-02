@@ -176,15 +176,24 @@
                                                 {{ $historyItem->created_at->format('d/m/y') }}</td>
                                             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 w-44 justify-center">
                                                 @if ($historyItem->code_action === 'C')
-                                                    <span class="bg-green-300 text-green-600 py-2 px-4 w-full h-full text-center rounded-md">
-                                                        Entrée en stock
-                                                    </span> 
+                                                    <span class="inline-flex items-center rounded-md bg-green-200 px-2.5 py-0.5 text-sm font-medium text-green-800">
+                                                        <svg class="-ml-0.5 mr-1.5 h-2 w-2 text-green-400" fill="currentColor" viewBox="0 0 8 8">
+                                                          <circle cx="4" cy="4" r="3" />
+                                                        </svg>
+                                                        Entrée du stock
+                                                    </span>
                                                 @elseif ($historyItem->code_action === 'D')
-                                                    <span class="bg-red-300 text-red-600 py-2 px-4 w-full h-full text-center rounded-md">
+                                                    <span class="inline-flex items-center rounded-md bg-red-200 px-2.5 py-0.5 text-sm font-medium text-red-800">
+                                                        <svg class="-ml-0.5 mr-1.5 h-2 w-2 text-red-400" fill="currentColor" viewBox="0 0 8 8">
+                                                          <circle cx="4" cy="4" r="3" />
+                                                        </svg>
                                                         Sortie du stock
                                                     </span>
                                                 @else
-                                                    <span class="bg-gray-300 text-gray-600 py-2 px-4 w-full h-full text-center rounded-md">
+                                                    <span class="inline-flex items-center rounded-md bg-gray-200 px-2.5 py-0.5 text-sm font-medium text-gray-800">
+                                                        <svg class="-ml-0.5 mr-1.5 h-2 w-2 text-gray-400" fill="currentColor" viewBox="0 0 8 8">
+                                                          <circle cx="4" cy="4" r="3" />
+                                                        </svg>
                                                         Inconnue
                                                     </span>
                                                 @endif
