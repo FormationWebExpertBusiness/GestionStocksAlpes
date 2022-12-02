@@ -24,7 +24,7 @@ class WarningBeforeDelete extends Component
         'deleteWarning' => 'openModal',
     ];
 
-    // $this->emit('deleteWarning', $itemId, $this->warningDeleteItemSignal, 'Item', 'model');
+    // $this->emit('deleteWarning', $productId, $this->warningDeleteProductSignal, 'Product', 'model');
 
     public function openModal($tId, $emitSignal, $type, $champ, $message = '', $isAllowingDeletion = true)
     {

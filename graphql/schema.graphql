@@ -6,14 +6,14 @@ type Query {
 	"Hello world"
 	hello: String!
 
-	"List of all items on a rack"
-	items(
+	"List of all products on a rack"
+	products(
 		rack_id: Int!
 		rack_level: Int!
-		): [Item!]
+		): [Product!]
 
-	"All CommonItems with their items"
-	commonItems: [CommonItem!]
+	"All CommonProducts with their products"
+	commonProducts: [CommonProduct!]
 
 	"A rack"
 	rack(
@@ -23,13 +23,13 @@ type Query {
 }
 
 type Mutation {
-	"delete item according to the id param"
-	deleteItem(
+	"delete product according to the id param"
+	deleteProduct(
 		id: ID!
-	): Item @delete
+	): Product @delete
 }
 
-type Item {
+type Product {
 	id: ID!
 	serial_number: String!
 	category: Category!
@@ -41,14 +41,14 @@ type Item {
 	created_at: DateTime!
 }
 
-type CommonItem {
+type CommonProduct {
 	id: ID!
 	category: Category!
 	brand: Brand! 
 	model: String!
 	quantity_urgent: Int!
 	quantity_warning: Int!
-	items: [Item!]
+	products: [Product!]
 }
 
 type Category {
@@ -62,5 +62,5 @@ type Brand {
 type Rack {
 	id: ID!
 	name: String!
-	nb_item: Int
+	nb_product: Int
 }

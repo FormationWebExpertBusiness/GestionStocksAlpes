@@ -32,9 +32,9 @@ class Category extends Model
         return $this->brands->contains($brand);
     }
 
-    public function hasCommonItem()
+    public function hasCommonProduct()
     {
-        return CommonItem::where('category_id', $this->id)->get()->count() > 0;
+        return CommonProduct::where('category_id', $this->id)->get()->count() > 0;
     }
 
     public static function getLinkedBrands($catsFilter)

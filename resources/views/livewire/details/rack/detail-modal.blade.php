@@ -13,7 +13,7 @@
                 <div
                     class="transform overflow-hidden rounded-lg bg-white px-4 pt-5 pb-4 text-left shadow-xl transition-all sm:my-8 sm:w-full max-w-5xl sm:p-6">
 
-                    {{--  CommonItem values --}}
+                    {{--  CommonProduct values --}}
                     <div>
                         <div class="min-w-0 flex-1 w-full relative">
                             <h2
@@ -51,12 +51,12 @@
                             <div class="overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6">
                                 <dt class="truncate text-sm font-medium text-gray-500">Nombre de produit sur l'étagère</dt>
                                 <dd class="mt-1 text-xl font-semibold tracking-tight text-gray-900">
-                                    {{ $rack->itemsOn()->count() }}</dd>
+                                    {{ $rack->productsOn()->count() }}</dd>
                             </div>
 
                         </dl>
                     </div>
-                    {{-- Items details --}}
+                    {{-- Products details --}}
                     <div class="mt-8 flex flex-col">
                         <div class="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
                             <div class="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
@@ -90,7 +90,7 @@
                                                             {{ $level }}
                                                         </td>
                                                         <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                                            {{ $rack->itemsOnLevel($level)->count() }}
+                                                            {{ $rack->productsOnLevel($level)->count() }}
                                                         </td>
                                                         <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                                                             {!! $rack->getQrcode($level) !!}

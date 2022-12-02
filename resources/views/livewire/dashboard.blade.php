@@ -25,7 +25,7 @@
                         </dt>
                         <dd class="ml-16 flex items-baseline pb-6 sm:pb-7">
                             <p class="text-2xl font-semibold text-gray-900">
-                                {{ App\Models\CommonItem::totalCommonItem() }} produits
+                                {{ App\Models\CommonProduct::totalCommonProduct() }} produits
                             </p>
                             <p class="ml-2 flex items-baseline text-sm font-semibold text-red-500">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -37,7 +37,7 @@
                                 </svg>
 
                                 <span class="px-1">
-                                    {{ App\Models\CommonItem::totalOutStockItem() }} en rupture de stock
+                                    {{ App\Models\CommonProduct::totalOutStockProduct() }} en rupture de stock
 
 
                                 </span>
@@ -69,7 +69,7 @@
                         </dt>
                         <dd class="ml-16 flex items-baseline pb-6 sm:pb-7">
                             <p class="text-2xl font-semibold text-gray-900">
-                                {{ App\Models\Item::mostExpensiveItem()->price }} €
+                                {{ App\Models\Product::mostExpensiveProduct()->price }} €
                             </p>
                             <p class="ml-2 flex items-baseline text-sm font-semibold text-green-600">
                                 <!-- Heroicon name: mini/arrow-up -->
@@ -80,7 +80,7 @@
                                         d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z" />
                                 </svg>
                                 <span class="px-1">
-                                    {{ App\Models\Item::mostExpensiveItem()->model }}
+                                    {{ App\Models\Product::mostExpensiveProduct()->model }}
                                 </span>
                             </p>
                             <div class="absolute inset-x-0 bottom-0 bg-gray-50 px-4 py-4 sm:px-6">
@@ -107,7 +107,7 @@
                         </dt>
                         <dd class="ml-16 flex items-baseline pb-6 sm:pb-7">
                             <p class="text-2xl font-semibold text-gray-900">
-                                {{ App\Models\Item::all()->sum('price') }} €
+                                {{ App\Models\Product::all()->sum('price') }} €
                             </p>
                             <div class="absolute inset-x-0 bottom-0 bg-gray-50 px-4 py-4 sm:px-6">
                                 <div class="text-sm">
@@ -131,7 +131,7 @@
                         </dt>
                         <dd class="ml-16 flex items-baseline pb-6 sm:pb-7">
                             <p class="my-2 text-2xl font-semibold text-gray-900">
-                                {{ App\Models\CommonItem::totalFavoriteItem() }} produits en favoris
+                                {{ App\Models\CommonProduct::totalFavoriteProduct() }} produits en favoris
                             </p>
                             <div class="absolute inset-x-0 bottom-0 bg-gray-50 px-4 py-4 sm:px-6">
                                 <div class="text-sm">
@@ -193,32 +193,32 @@
                                 </tr>
                             </thead>
                             <tbody class="divide-y divide-gray-200 bg-white">
-                                @forelse ($commonItems as $commonItem)
-                                    <tr class="divide-x divide-gray-200" wire:key='commonItem-{{ $commonItem->id }}'>
+                                @forelse ($commonProducts as $commonProduct)
+                                    <tr class="divide-x divide-gray-200" wire:key='commonProduct-{{ $commonProduct->id }}'>
                                         <td
                                             class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 w-[5%] text-center">
-                                            @livewire('forms.common-item.common-item-toggle-favorite', ['commonItem' => $commonItem], key('common-item-favorite-' . $commonItem->id))
+                                            @livewire('forms.common-product.common-product-toggle-favorite', ['commonProduct' => $commonProduct], key('common-product-favorite-' . $commonProduct->id))
                                         </td>
                                         <td class="whitespace-nowrap text-sm font-medium text-gray-900 sm:pl-6">
-                                            {{ $commonItem->category->name }}
+                                            {{ $commonProduct->category->name }}
 
                                         </td>
 
                                         <td class="whitespace-nowrap p-4 text-sm text-gray-500">
-                                            {{ $commonItem->model }}
+                                            {{ $commonProduct->model }}
                                         </td>
                                         <td class="whitespace-nowrap p-4 text-sm text-gray-500">
-                                            {{ $commonItem->totalPrice }} €
+                                            {{ $commonProduct->totalPrice }} €
                                         </td>
                                         <td class="whitespace-nowrap p-4 text-sm text-gray-500">
-                                            {{ $commonItem->quantity }}
+                                            {{ $commonProduct->quantity }}
                                         </td>
                                         <td class="whitespace-nowrap pl-4">
-                                            @if ($commonItem->quantity <= $commonItem->quantity_urgent)
+                                            @if ($commonProduct->quantity <= $commonProduct->quantity_urgent)
                                                 <span
                                                     class="items-center px-2 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">
                                                     En rupture de stock</span>
-                                            @elseif ($commonItem->quantity <= $commonItem->quantity_warning)
+                                            @elseif ($commonProduct->quantity <= $commonProduct->quantity_warning)
                                                 <span
                                                     class="items-center px-2 py-0.5 rounded-full text-xs font-medium bg-orange-100 text-orange-800">
                                                     Bientôt en rupture de stock</span>
@@ -230,7 +230,7 @@
                                         </td>
                                         <td
                                             class="whitespace-nowrap py-4 pl-4 pr-4 text-sm text-center text-gray-500 sm:pr-6">
-                                            @livewire('details.item.detail-modal', ['commonItem' => $commonItem], key('item-detail-' . $commonItem->id))
+                                            @livewire('details.product.detail-modal', ['commonProduct' => $commonProduct], key('product-detail-' . $commonProduct->id))
                                         </td>
                                     </tr>
                                 @empty

@@ -2,7 +2,7 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\HistoryItem;
+use App\Models\HistoryProduct;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -23,30 +23,30 @@ class History extends Component
     public $dateTo;
     public $searchFilter;
 
-    private $historyItems;
+    private $historyProducts;
 
     public function resetFilters()
     {
         $this->catsFilter = [];
         $this->brandsFilter = [];
         $this->searchFilter = '';
-        $this->dateFrom = HistoryItem::oldestDate();
-        $this->dateTo = HistoryItem::newestDate();
+        $this->dateFrom = HistoryProduct::oldestDate();
+        $this->dateTo = HistoryProduct::newestDate();
     }
 
     public function filterOnSearchBar()
     {
         if ($this->searchFilter) {
-            $this->historyItems = HistoryItem::select('history_items.*')
-                ->where('history_items.model', 'LIKE', '%'.$this->searchFilter.'%')
-                ->orWhere('history_items.serial_number', 'LIKE', '%'.$this->searchFilter.'%')
-                ->orWhere('history_items.comment', 'LIKE', '%'.$this->searchFilter.'%')
-                ->orWhere('history_items.category', 'LIKE', '%'.$this->searchFilter.'%')
-                ->orWhere('history_items.brand', 'LIKE', '%'.$this->searchFilter.'%')
+            $this->historyProducts = HistoryProduct::select('history_products.*')
+                ->where('history_products.model', 'LIKE', '%'.$this->searchFilter.'%')
+                ->orWhere('history_products.serial_number', 'LIKE', '%'.$this->searchFilter.'%')
+                ->orWhere('history_products.comment', 'LIKE', '%'.$this->searchFilter.'%')
+                ->orWhere('history_products.category', 'LIKE', '%'.$this->searchFilter.'%')
+                ->orWhere('history_products.brand', 'LIKE', '%'.$this->searchFilter.'%')
                 ->orderByDesc('created_at')
                 ->get();
         } else {
-            $this->historyItems = HistoryItem::orderByDesc('created_at')
+            $this->historyProducts = HistoryProduct::orderByDesc('created_at')
                 ->get();
         }
     }
@@ -55,18 +55,18 @@ class History extends Component
     {
         $perPage = 50;
 
-        $historyItemsOnPage = $this->historyItems->forPage($this->page, $perPage);
+        $historyProductsOnPage = $this->historyProducts->forPage($this->page, $perPage);
 
-        return new LengthAwarePaginator($historyItemsOnPage, $this->historyItems->count(), $perPage, $this->page);
+        return new LengthAwarePaginator($historyProductsOnPage, $this->historyProducts->count(), $perPage, $this->page);
     }
 
     public function updated($property)
     {
         if (! $this->$property) {
             if ($property === 'dateFrom') {
-                $this->dateFrom = HistoryItem::oldestDate();
+                $this->dateFrom = HistoryProduct::oldestDate();
             } elseif ($property === 'dateTo') {
-                $this->dateTo = HistoryItem::newestDate();
+                $this->dateTo = HistoryProduct::newestDate();
             }
         }
     }
@@ -78,17 +78,17 @@ class History extends Component
 
     public function render()
     {
-        $this->brands = HistoryItem::getAllBrands();
+        $this->brands = HistoryProduct::getAllBrands();
 
-        $this->categories = HistoryItem::getAllCategories();
+        $this->categories = HistoryProduct::getAllCategories();
 
         $this->filterOnSearchBar();
-        $this->historyItems = HistoryItem::filterOnBrands($this->historyItems, $this->brandsFilter);
-        $this->historyItems = HistoryItem::filterOnCategories($this->historyItems, $this->catsFilter);
-        $this->historyItems = HistoryItem::filterOnMovedAfter($this->historyItems, $this->dateFrom);
-        $this->historyItems = HistoryItem::filterOnMovedBefore($this->historyItems, $this->dateTo);
-        $paginatedHistoItems = $this->collectionToPaginator();
+        $this->historyProducts = HistoryProduct::filterOnBrands($this->historyProducts, $this->brandsFilter);
+        $this->historyProducts = HistoryProduct::filterOnCategories($this->historyProducts, $this->catsFilter);
+        $this->historyProducts = HistoryProduct::filterOnMovedAfter($this->historyProducts, $this->dateFrom);
+        $this->historyProducts = HistoryProduct::filterOnMovedBefore($this->historyProducts, $this->dateTo);
+        $paginatedHistoProducts = $this->collectionToPaginator();
 
-        return view('livewire.history', ['historyItems' => $paginatedHistoItems])->layout('layout');
+        return view('livewire.history', ['historyProducts' => $paginatedHistoProducts])->layout('layout');
     }
 }

@@ -18,6 +18,6 @@ Broadcast::channel('App.Models.User.{id}', function ($user, $id) {
     return (int) $user->id === (int) $id;
 });
 
-Broadcast::channel('commonitemcsv.{csvExportId}', function ($user, $csvExportId) {
+Broadcast::channel('commonproductcsv.{csvExportId}', function ($user, $csvExportId) {
     return $user->id === CsvExport::findOrNew($csvExportId)->user_id;
 });

@@ -2,9 +2,9 @@
 
 namespace App\Http\Livewire;
 
-use App\Exports\CommonItemExport;
+use App\Exports\CommonProductExport;
 use App\Jobs\NotifyUserOfCompletedExport;
-use App\Models\CommonItem;
+use App\Models\CommonProduct;
 use App\Models\CsvExport;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Auth;
@@ -27,7 +27,7 @@ class ViewAll extends Component
 
     public $searchValue = '';
 
-    public $warningDeleteItemSignal = 'deleteItem';
+    public $warningDeleteProductSignal = 'deleteProduct';
 
     public $categoriesF = [];
     public $brandsF = [];
@@ -39,7 +39,7 @@ class ViewAll extends Component
 
     public $showToast = true;
 
-    public $paginatedCommonItems;
+    public $paginatedCommonProducts;
 
     protected $queryString = [
         'champ' => ['except' => 'id', 'as' => 'cha'],
@@ -53,22 +53,22 @@ class ViewAll extends Component
         'quantityMax' => ['except' => '', 'as' => 'qmax'],
     ];
 
-    private $commonItems;
+    private $commonProducts;
 
-    public function openWarningDelete($commonItemId)
+    public function openWarningDelete($commonProductId)
     {
         $deleteMessage = '';
-        if (CommonItem::find($commonItemId)->hasItem()) {
+        if (CommonProduct::find($commonProductId)->hasProduct()) {
             $deleteMessage = '⚠️ Des produits existent dans le stock, si vous supprimez, les produits seront aussi supprimés';
         }
-        $this->emit('deleteWarning', $commonItemId, $this->warningDeleteItemSignal, 'CommonItem', 'model', $deleteMessage);
+        $this->emit('deleteWarning', $commonProductId, $this->warningDeleteProductSignal, 'CommonProduct', 'model', $deleteMessage);
     }
 
-    public function deleteItem($commonItemId)
+    public function deleteProduct($commonProductId)
     {
-        $commonItem = CommonItem::findOrFail($commonItemId);
-        $commonItem->delete();
-        return redirect()->with('status', 'Le produit '.$commonItem->model.' a bien été supprimé !');
+        $commonProduct = CommonProduct::findOrFail($commonProductId);
+        $commonProduct->delete();
+        return redirect()->with('status', 'Le produit '.$commonProduct->model.' a bien été supprimé !');
     }
 
     public function closeToast()
@@ -140,35 +140,35 @@ class ViewAll extends Component
     public function filterOnSearchBar()
     {
         if ($this->searchValue) {
-            $this->commonItems = CommonItem::select('common_items.*')
-                ->join('brands', 'common_items.brand_id', '=', 'brands.id')
-                ->join('categories', 'common_items.category_id', '=', 'categories.id')
-                ->where('common_items.model', 'LIKE', '%'.$this->searchValue.'%')
+            $this->commonProducts = CommonProduct::select('common_products.*')
+                ->join('brands', 'common_products.brand_id', '=', 'brands.id')
+                ->join('categories', 'common_products.category_id', '=', 'categories.id')
+                ->where('common_products.model', 'LIKE', '%'.$this->searchValue.'%')
                 ->orWhere('categories.name', 'LIKE', '%'.$this->searchValue.'%')
                 ->orWhere('brands.name', 'LIKE', '%'.$this->searchValue.'%')
                 ->get();
         } else {
-            $this->commonItems = CommonItem::all();
+            $this->commonProducts = CommonProduct::all();
         }
     }
 
-    public function sortCommonItems()
+    public function sortCommonProducts()
     {
         switch ($this->champ) {
             case 'category':
-                $this->commonItems = CommonItem::sortOnCategories($this->commonItems, $this->mode);
+                $this->commonProducts = CommonProduct::sortOnCategories($this->commonProducts, $this->mode);
                 break;
             case 'brand':
-                $this->commonItems = CommonItem::sortOnBrands($this->commonItems, $this->mode);
+                $this->commonProducts = CommonProduct::sortOnBrands($this->commonProducts, $this->mode);
                 break;
             case 'model':
-                $this->commonItems = CommonItem::sortOnModels($this->commonItems, $this->mode);
+                $this->commonProducts = CommonProduct::sortOnModels($this->commonProducts, $this->mode);
                 break;
             case 'quantity':
-                $this->commonItems = CommonItem::sortOnQuantitiesOnRack($this->commonItems, $this->mode, $this->racksF, $this->rackLevelsF);
+                $this->commonProducts = CommonProduct::sortOnQuantitiesOnRack($this->commonProducts, $this->mode, $this->racksF, $this->rackLevelsF);
                 break;
             case 'price':
-                $this->commonItems = CommonItem::sortOnTotalPricesOnRack($this->commonItems, $this->mode, $this->racksF, $this->rackLevelsF);
+                $this->commonProducts = CommonProduct::sortOnTotalPricesOnRack($this->commonProducts, $this->mode, $this->racksF, $this->rackLevelsF);
                 break;
         }
     }
@@ -177,9 +177,9 @@ class ViewAll extends Component
     {
         $perPage = 12;
 
-        $commonItemsOnPage = $this->commonItems->forPage($this->page, $perPage);
+        $commonProductsOnPage = $this->commonProducts->forPage($this->page, $perPage);
 
-        return new LengthAwarePaginator($commonItemsOnPage, $this->commonItems->count(), $perPage, $this->page);
+        return new LengthAwarePaginator($commonProductsOnPage, $this->commonProducts->count(), $perPage, $this->page);
     }
 
     public function render()
@@ -187,30 +187,30 @@ class ViewAll extends Component
         $this->csvExportId = Cache::get('csvExportId');
 
         $this->filterOnSearchBar();
-        $this->commonItems = CommonItem::filterOnBrands($this->commonItems, $this->brandsF);
-        $this->commonItems = CommonItem::filterOnCategories($this->commonItems, $this->categoriesF);
+        $this->commonProducts = CommonProduct::filterOnBrands($this->commonProducts, $this->brandsF);
+        $this->commonProducts = CommonProduct::filterOnCategories($this->commonProducts, $this->categoriesF);
         if ($this->racksF || $this->rackLevelsF) {
-            $this->commonItems = CommonItem::filterOnRacksQuantities($this->commonItems, $this->quantityMin, $this->quantityMax, $this->racksF, $this->rackLevelsF);
+            $this->commonProducts = CommonProduct::filterOnRacksQuantities($this->commonProducts, $this->quantityMin, $this->quantityMax, $this->racksF, $this->rackLevelsF);
         } else {
-            $this->commonItems = CommonItem::filterOnQuantities($this->commonItems, $this->quantityMin, $this->quantityMax);
+            $this->commonProducts = CommonProduct::filterOnQuantities($this->commonProducts, $this->quantityMin, $this->quantityMax);
         }
-        $this->sortCommonItems();
-        $paginatedCommonItems = $this->collectionToPaginator();
+        $this->sortCommonProducts();
+        $paginatedCommonProducts = $this->collectionToPaginator();
 
         $this->showToast = true;
 
-        return view('livewire.view-all', ['commonItems' => $paginatedCommonItems]);
+        return view('livewire.view-all', ['commonProducts' => $paginatedCommonProducts]);
     }
 
-    public function downloadCommonItemCsv()
+    public function downloadCommonProductCsv()
     {
         Cache::forget('csvExportId');
 
-        $this->exportCommonItemCsvReady();
-        return Storage::download('typeitems.csv');
+        $this->exportCommonProductCsvReady();
+        return Storage::download('typeproducts.csv');
     }
 
-    public function exportCommonItemCsvReady()
+    public function exportCommonProductCsvReady()
     {
         return redirect('/stock')->with('message', 'Votre export est prêt !');
     }
@@ -223,7 +223,7 @@ class ViewAll extends Component
 
         Cache::forever('csvExportId', $csvExportId);
 
-        (new CommonItemExport())->queue('typeitems.csv')->chain([
+        (new CommonProductExport())->queue('typeproducts.csv')->chain([
             new NotifyUserOfCompletedExport($csvExportId),
         ]);
 
@@ -247,9 +247,9 @@ class ViewAll extends Component
             'resetFilters' => 'resetAllFilters',
             'quantityMin' => 'getQuantityMin',
             'quantityMax' => 'getQuantityMax',
-            'deleteItem' => 'deleteItem',
-            'downloadCommonItemCsv' => 'downloadCommonItemCsv',
-            "echo-private:commonitemcsv.{$this->csvExportId},EndedCommonItemCsvExport" => 'downloadCommonItemCsv',
+            'deleteProduct' => 'deleteProduct',
+            'downloadCommonProductCsv' => 'downloadCommonProductCsv',
+            "echo-private:commonproductcsv.{$this->csvExportId},EndedCommonProductCsvExport" => 'downloadCommonProductCsv',
         ];
     }
 }

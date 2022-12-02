@@ -45,7 +45,7 @@
                                                     </svg>
                                                 </div>
                                                 <div class="inline-block mt-1 w-40 border rounded-md border-gray-300 focus-within:border-indigo-600">
-                                                    <input type="date" name="dateFrom" id="dateFrom" wire:model="dateFrom" min="{{ App\Models\HistoryItem::oldestDate() }}" max="{{ App\Models\HistoryItem::newestDate() }}" class="block rounded-md w-full pl-10 border border-transparent bg-gray-50 focus:border-indigo-600 focus:ring-0 sm:text-sm"/>
+                                                    <input type="date" name="dateFrom" id="dateFrom" wire:model="dateFrom" min="{{ App\Models\HistoryProduct::oldestDate() }}" max="{{ App\Models\HistoryProduct::newestDate() }}" class="block rounded-md w-full pl-10 border border-transparent bg-gray-50 focus:border-indigo-600 focus:ring-0 sm:text-sm"/>
                                             </div>
                                         </div>
                                     </div>
@@ -59,7 +59,7 @@
                                                 </svg>  
                                             </div>
                                             <div class="inline-block mt-1 w-40 border rounded-md border-gray-300 focus-within:border-indigo-600">
-                                                <input type="date" name="dateTo" id="dateTo" wire:model="dateTo" min="{{ App\Models\HistoryItem::oldestDate() }}" max="{{ App\Models\HistoryItem::newestDate() }}" class="block rounded-md w-full pl-10 border border-transparent bg-gray-50 focus:border-indigo-600 focus:ring-0 sm:text-sm"/>
+                                                <input type="date" name="dateTo" id="dateTo" wire:model="dateTo" min="{{ App\Models\HistoryProduct::oldestDate() }}" max="{{ App\Models\HistoryProduct::newestDate() }}" class="block rounded-md w-full pl-10 border border-transparent bg-gray-50 focus:border-indigo-600 focus:ring-0 sm:text-sm"/>
                                             </div>
                                         </div>
                                     </div>
@@ -169,20 +169,20 @@
                                 </tr>
                             </thead>
                             <tbody class="bg-white block max-h-[62vh] overflow-y-scroll">
-                                @forelse ($historyItems as $historyItem)
-                                    <div wire:key="History-item-{{ $historyItem->id }}">
+                                @forelse ($historyProducts as $historyProduct)
+                                    <div wire:key="History-product-{{ $historyProduct->id }}">
                                         <tr class="odd:bg-white even:bg-gray-50 divide-x divide-gray-200 table w-full table-fixed">
                                             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 w-28">
-                                                {{ $historyItem->created_at->format('d/m/y') }}</td>
+                                                {{ $historyProduct->created_at->format('d/m/y') }}</td>
                                             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 w-44 justify-center">
-                                                @if ($historyItem->code_action === 'C')
+                                                @if ($historyProduct->code_action === 'C')
                                                     <span class="inline-flex items-center rounded-md bg-green-200 px-2.5 py-0.5 text-sm font-medium text-green-800">
                                                         <svg class="-ml-0.5 mr-1.5 h-2 w-2 text-green-400" fill="currentColor" viewBox="0 0 8 8">
                                                           <circle cx="4" cy="4" r="3" />
                                                         </svg>
                                                         Entrée du stock
                                                     </span>
-                                                @elseif ($historyItem->code_action === 'D')
+                                                @elseif ($historyProduct->code_action === 'D')
                                                     <span class="inline-flex items-center rounded-md bg-red-200 px-2.5 py-0.5 text-sm font-medium text-red-800">
                                                         <svg class="-ml-0.5 mr-1.5 h-2 w-2 text-red-400" fill="currentColor" viewBox="0 0 8 8">
                                                           <circle cx="4" cy="4" r="3" />
@@ -199,18 +199,18 @@
                                                 @endif
                                             </td>
                                             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                                {{ $historyItem->category }}</td>
+                                                {{ $historyProduct->category }}</td>
                                             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                                {{ $historyItem->brand }}</td>
+                                                {{ $historyProduct->brand }}</td>
                                             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                                {{ $historyItem->model }}</td>
+                                                {{ $historyProduct->model }}</td>
                                             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                                {{ $historyItem->serial_number }}
+                                                {{ $historyProduct->serial_number }}
                                             </td>
                                             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 w-32">
-                                                {{ number_format($historyItem->price, 2, ',', ' '); }} €</td>
+                                                {{ number_format($historyProduct->price, 2, ',', ' '); }} €</td>
                                             <td class="whitespace-wrap px-3 py-4 text-sm text-gray-500 w-1/4">
-                                                {{ $historyItem->comment }}
+                                                {{ $historyProduct->comment }}
                                             </td>
                                         </tr>
                                     </div>
@@ -231,7 +231,7 @@
                         </table>
                         <div class="relative">
                             <div class="border-t justify-center flex py-4">
-                                {{ $historyItems->links() }}
+                                {{ $historyProducts->links() }}
                             </div>
                         </div>
                     </div>

@@ -26,7 +26,7 @@
                                 Ajoutez une étagère
                             </h2>
                             <p class="mt-3 text-md leading-6 text-gray-500">
-                                Les étagères permettent de savoir où sont rangé les objets dans le stock.
+                                Les étagères permettent de savoir où sont rangé les produits dans le stock.
                             </p>
                         </div>
                         <div class="bg-white rounded-r-lg py-16 px-4 sm:px-6 lg:col-span-3 lg:py-24 lg:px-8 xl:pl-12">

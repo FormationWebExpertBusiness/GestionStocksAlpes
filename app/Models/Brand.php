@@ -22,8 +22,8 @@ class Brand extends Model
 
     ];
 
-    public function hasCommonItem()
+    public function hasCommonProduct()
     {
-        return CommonItem::where('brand_id', $this->id)->get()->count() > 0;
+        return CommonProduct::where('brand_id', $this->id)->get()->count() > 0;
     }
 }

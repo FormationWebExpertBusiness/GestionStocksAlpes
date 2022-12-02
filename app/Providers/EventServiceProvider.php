@@ -4,13 +4,13 @@ namespace App\Providers;
 
 use App\Models\Brand;
 use App\Models\Category;
-use App\Models\CommonItem;
-use App\Models\Item;
+use App\Models\CommonProduct;
+use App\Models\Product;
 use App\Models\Rack;
 use App\Observers\BrandObserver;
 use App\Observers\CategoryObserver;
-use App\Observers\CommonItemObserver;
-use App\Observers\ItemObserver;
+use App\Observers\CommonProductObserver;
+use App\Observers\ProductObserver;
 use App\Observers\RackObserver;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
@@ -30,8 +30,8 @@ class EventServiceProvider extends ServiceProvider
     ];
 
     protected $observers = [
-        Item::class => [ItemObserver::class],
-        CommonItem::class => [CommonItemObserver::class],
+        Product::class => [ProductObserver::class],
+        CommonProduct::class => [CommonProductObserver::class],
         Brand::class => [BrandObserver::class],
         Category::class => [CategoryObserver::class],
         Rack::class => [RackObserver::class],
