@@ -20,8 +20,8 @@ class CommonProductForm extends Component
     public $model;
 
     public $photo_product;
-    public $quantity_warning;
-    public $quantity_urgent;
+    public $quantity_low;
+    public $quantity_critical;
 
     public $selectedCategoryFilter = [];
     public $selectedBrandFilter = [];
@@ -33,8 +33,8 @@ class CommonProductForm extends Component
         'brand_id' => ['nullable', 'integer'],
         'model' => ['required'],
         'photo_product' => ['nullable','image'],
-        'quantity_warning' => ['nullable', 'integer', 'min:0'],
-        'quantity_urgent' => ['nullable', 'integer', 'min:0'],
+        'quantity_low' => ['nullable', 'integer', 'min:0'],
+        'quantity_critical' => ['nullable', 'integer', 'min:0'],
     ];
 
     protected $listeners = [
@@ -50,10 +50,10 @@ class CommonProductForm extends Component
         'model.unique' => 'Ce model existe déjà dans la stock pour cette marque',
         'model.required' => 'Le model ou la référence du produit doit être renseigné.',
         'photo_product.image' => 'La photo du produit doit être de type PNG,JPG,JPEG.',
-        'quantity_warning.integer' => 'La quantité doit être un nombre entier',
-        'quantity_warning.min' => 'La quantité doit être un nombre positif',
-        'quantity_urgent.integer' => 'La quantité doit être un nombre entier',
-        'quantity_urgent.min' => 'La quantité doit être un nombre positif',
+        'quantity_low.integer' => 'La quantité doit être un nombre entier',
+        'quantity_low.min' => 'La quantité doit être un nombre positif',
+        'quantity_critical.integer' => 'La quantité doit être un nombre entier',
+        'quantity_critical.min' => 'La quantité doit être un nombre positif',
     ];
 
     public function mount()
@@ -62,8 +62,8 @@ class CommonProductForm extends Component
         $this->brand_id = $this->commonProductToUpdate?->brand_id ?? 1;
         $this->model = $this->commonProductToUpdate?->model;
         $this->photo_product = $this->commonProductToUpdate?->photo_product;
-        $this->quantity_warning = $this->commonProductToUpdate?->quantity_warning ?? 0;
-        $this->quantity_urgent = $this->commonProductToUpdate?->quantity_urgent ?? 0;
+        $this->quantity_low = $this->commonProductToUpdate?->quantity_low ?? 0;
+        $this->quantity_critical = $this->commonProductToUpdate?->quantity_critical ?? 0;
 
         $this->brands = Brand::all();
         $this->categories = Category::all();
@@ -97,12 +97,12 @@ class CommonProductForm extends Component
             $validatedData['photo_product'] = $photo;
         }
 
-        if (!$validatedData['quantity_warning']) {
-            $validatedData['quantity_warning'] = 0;
+        if (!$validatedData['quantity_low']) {
+            $validatedData['quantity_low'] = 0;
         }
 
-        if (!$validatedData['quantity_urgent']) {
-            $validatedData['quantity_urgent'] = 0;
+        if (!$validatedData['quantity_critical']) {
+            $validatedData['quantity_critical'] = 0;
         }
 
         if (isset($this->commonProductToUpdate)) {

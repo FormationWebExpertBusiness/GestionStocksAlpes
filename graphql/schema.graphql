@@ -46,8 +46,8 @@ type CommonProduct {
 	category: Category!
 	brand: Brand! 
 	model: String!
-	quantity_urgent: Int!
-	quantity_warning: Int!
+	quantity_low: Int!
+	quantity_critical: Int!
 	products: [Product!]
 }
 
