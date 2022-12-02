@@ -8,7 +8,7 @@ use Livewire\Component;
 class ConfigRacks extends Component
 {
     public $racks;
-    public $warningDeleteItemSignal = 'deleteRack';
+    public $warningDeleteProductSignal = 'deleteRack';
 
     public $showToast = true;
 
@@ -20,10 +20,10 @@ class ConfigRacks extends Component
     {
         $rack = Rack::find($rackId);
         $deleteMessage = '';
-        if ($rack->itemsOn()->count() > 0) {
+        if ($rack->productsOn()->count() > 0) {
             $deleteMessage = '⚠️ ' . $rack->name . ' n\'est pas vide, la suppresion est impossible';
         }
-        $this->emit('deleteWarning', $rackId, $this->warningDeleteItemSignal, 'Rack', 'name', $deleteMessage, $rack->itemsOn()->count() <= 0);
+        $this->emit('deleteWarning', $rackId, $this->warningDeleteProductSignal, 'Rack', 'name', $deleteMessage, $rack->productsOn()->count() <= 0);
     }
 
     public function deleteRack($rackId)

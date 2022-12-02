@@ -38,14 +38,14 @@ class Rack extends Model
         return '{"rack_id":'.$this->id.', "rack_level":'.$level.'}';
     }
 
-    public function itemsOn()
+    public function productsOn()
     {
-        return Item::where('rack_id', $this->id)->get();
+        return Product::where('rack_id', $this->id)->get();
     }
 
-    public function itemsOnLevel($level)
+    public function productsOnLevel($level)
     {
-        return Item::where('rack_id', $this->id)->where('rack_level', $level)->get();
+        return Product::where('rack_id', $this->id)->where('rack_level', $level)->get();
     }
 
     public static function getRackLevelMax(array $racks = [])

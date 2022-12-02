@@ -26,7 +26,7 @@
                                 marque
                             </h2>
                             <p class="mt-3 text-md leading-6 text-gray-500">
-                                Les marques permettent de regrouper les items pour les trier et les filtrer
+                                Les marques permettent de regrouper les produits pour les trier et les filtrer
                             </p>
                         </div>
                         <div class="bg-white rounded-r-lg py-16 px-4 sm:px-6 lg:col-span-3 lg:py-24 lg:px-8 xl:pl-12">

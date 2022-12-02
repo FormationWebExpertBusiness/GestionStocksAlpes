@@ -3,41 +3,41 @@
 use App\Models\Rack;
 use App\Models\Brand;
 use App\Models\Category;
-use App\Models\CommonItem;
-use App\Models\Item;
+use App\Models\CommonProduct;
+use App\Models\Product;
 
 afterEach(function () {
     $this->artisan('migrate:fresh');
 });
 
-test('test Rack method itemsOn', function () {
+test('test Rack method productsOn', function () {
     // datas
     $rack = Rack::create(['nb_level' => 5]);
 
     $brand = Brand::create(['name' => 'marque']);
     $category = Category::create(['name' => 'categorie']);
-    $commonItem = CommonItem::create(['category_id' => 1, 'brand_id' => 1, 'model' => 'ba']);
+    $commonProduct = CommonProduct::create(['category_id' => 1, 'brand_id' => 1, 'model' => 'ba']);
 
-    $item2 = Item::create(['price' => 5, 'serial_number' => 'ite2', 'common_id' => 1, 'rack_id' => 1, 'rack_level' => 2]);
-    $item  = Item::create(['price' => 5, 'serial_number' => 'ite1', 'common_id' => 1, 'rack_id' => 1, 'rack_level' => 1]);
+    $product2 = Product::create(['price' => 5, 'serial_number' => 'ite2', 'common_id' => 1, 'rack_id' => 1, 'rack_level' => 2]);
+    $product  = Product::create(['price' => 5, 'serial_number' => 'ite1', 'common_id' => 1, 'rack_id' => 1, 'rack_level' => 1]);
     
     // test
-    $this->assertEquals([1,2], $rack->itemsOn()->pluck('id')->toArray());
+    $this->assertEquals([1,2], $rack->productsOn()->pluck('id')->toArray());
 });
 
-test('test Rack method itemsOnLevel', function () {
+test('test Rack method productsOnLevel', function () {
     // datas
     $rack = Rack::create(['nb_level' => 5]);
 
     $brand = Brand::create(['name' => 'marque']);
     $category = Category::create(['name' => 'categorie']);
-    $commonItem = CommonItem::create(['category_id' => 1, 'brand_id' => 1, 'model' => 'ba']);
+    $commonProduct = CommonProduct::create(['category_id' => 1, 'brand_id' => 1, 'model' => 'ba']);
 
-    $item2 = Item::create(['price' => 5, 'serial_number' => 'ite2', 'common_id' => 1, 'rack_id' => 1, 'rack_level' => 2]);
-    $item  = Item::create(['price' => 5, 'serial_number' => 'ite1', 'common_id' => 1, 'rack_id' => 1, 'rack_level' => 1]);
+    $product2 = Product::create(['price' => 5, 'serial_number' => 'ite2', 'common_id' => 1, 'rack_id' => 1, 'rack_level' => 2]);
+    $product  = Product::create(['price' => 5, 'serial_number' => 'ite1', 'common_id' => 1, 'rack_id' => 1, 'rack_level' => 1]);
 
     // test
-    $this->assertEquals([2], $rack->itemsOnLevel(1)->pluck('id')->toArray());
+    $this->assertEquals([2], $rack->productsOnLevel(1)->pluck('id')->toArray());
 });
 
 test('test Rack method getRackLevelMax', function () {

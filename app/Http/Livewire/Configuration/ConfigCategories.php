@@ -3,13 +3,13 @@
 namespace App\Http\Livewire\Configuration;
 
 use App\Models\Category;
-use App\Models\CommonItem;
+use App\Models\CommonProduct;
 use Livewire\Component;
 
 class ConfigCategories extends Component
 {
     public $categories;
-    public $warningDeleteItemSignal = 'deleteCategory';
+    public $warningDeleteProductSignal = 'deleteCategory';
 
     public $showToast = true;
 
@@ -21,10 +21,10 @@ class ConfigCategories extends Component
     {
         $category = Category::find($categoryId);
         $deleteMessage = '';
-        if (CommonItem::where('category_id', $categoryId)->count() > 0) {
+        if (CommonProduct::where('category_id', $categoryId)->count() > 0) {
             $deleteMessage = '⚠️ Des produits de la catégorie ' . $category->name . 'existent dans le stock, si vous supprimez, les produits leur catégorie à "Non définie"';
         }
-        $this->emit('deleteWarning', $categoryId, $this->warningDeleteItemSignal, 'Category', 'name', $deleteMessage);
+        $this->emit('deleteWarning', $categoryId, $this->warningDeleteProductSignal, 'Category', 'name', $deleteMessage);
     }
 
     public function deleteCat($categoryId)

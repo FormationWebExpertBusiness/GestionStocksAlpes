@@ -3,7 +3,7 @@
 namespace App\Observers;
 
 use App\Models\Category;
-use App\Models\CommonItem;
+use App\Models\CommonProduct;
 
 class CategoryObserver
 {
@@ -37,10 +37,10 @@ class CategoryObserver
      */
     public function deleting(Category $category)
     {
-        $items = CommonItem::where('category_id', $category->id)->get();
-        foreach ($items as $item) {
-            $item->category_id = 1;
-            $item->save();
+        $products = CommonProduct::where('category_id', $category->id)->get();
+        foreach ($products as $product) {
+            $product->category_id = 1;
+            $product->save();
         }
     }
 

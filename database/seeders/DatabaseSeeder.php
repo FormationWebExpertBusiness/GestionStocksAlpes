@@ -18,8 +18,8 @@ class DatabaseSeeder extends Seeder
             BrandSeeder::class,
             CategorySeeder::class,
             RackSeeder::class,
-            CommonItemSeeder::class,
-            ItemSeeder::class,
+            CommonProductSeeder::class,
+            ProductSeeder::class,
         ]);
     }
 }

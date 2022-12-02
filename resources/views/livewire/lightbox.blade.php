@@ -19,7 +19,7 @@
                             x-transition:leave="transition ease-in duration-150"
                             x-transition:leave-start="opacity-100 transform scale-100"
                             x-transition:leave-end="opacity-0 transform scale-90">
-                            <img src="{{ Storage::url($commonItem->photo_item) }}"
+                            <img src="{{ Storage::url($commonProduct->photo_product) }}"
                                 class="object-contain max-w-full max-h-full rounded shadow-lg " />
                         </div>
 

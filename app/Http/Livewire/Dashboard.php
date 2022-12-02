@@ -3,12 +3,12 @@
 namespace App\Http\Livewire;
 
 use App\Models\Category;
-use App\Models\CommonItem;
+use App\Models\CommonProduct;
 use Livewire\Component;
 
 class Dashboard extends Component
 {
-    public $commonItems;
+    public $commonProducts;
     public $search;
     public $isVisibleCat = false;
     public $categories;
@@ -27,14 +27,14 @@ class Dashboard extends Component
     public function render()
     {
         $this->categories = Category::all();
-        $this->commonItems = CommonItem::select('common_items.*')
-            ->join('categories', 'categories.id', '=', 'common_items.category_id')
+        $this->commonProducts = CommonProduct::select('common_products.*')
+            ->join('categories', 'categories.id', '=', 'common_products.category_id')
             ->where('categories.name', 'like', '%' . $this->search . '%', )
             ->where('favorite', '=', true)
             ->get();
         $catF = count($this->catsFilter) === 0 ? Category::where('id', '>', 0)->pluck('id')->toArray() : $this->catsFilter;
-        $this->commonItems = CommonItem::filterOnCategories($this->commonItems, $catF);
-        //dump($this->commonItems);
+        $this->commonProducts = CommonProduct::filterOnCategories($this->commonProducts, $catF);
+        //dump($this->commonProducts);
         return view('livewire.dashboard')->layout('layout');
     }
 }

@@ -2,7 +2,7 @@
 
 namespace App\Jobs;
 
-use App\Events\EndedCommonItemCsvExport;
+use App\Events\EndedCommonProductCsvExport;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -27,6 +27,6 @@ class NotifyUserOfCompletedExport implements ShouldQueue
      */
     public function handle()
     {
-        event(new EndedCommonItemCsvExport($this->csvExportId));
+        event(new EndedCommonProductCsvExport($this->csvExportId));
     }
 }

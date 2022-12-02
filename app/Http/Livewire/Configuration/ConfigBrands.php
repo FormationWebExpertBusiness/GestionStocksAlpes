@@ -3,13 +3,13 @@
 namespace App\Http\Livewire\Configuration;
 
 use App\Models\Brand;
-use App\Models\CommonItem;
+use App\Models\CommonProduct;
 use Livewire\Component;
 
 class ConfigBrands extends Component
 {
     public $brands;
-    public $warningDeleteItemSignal = 'deleteBrand';
+    public $warningDeleteProductSignal = 'deleteBrand';
 
     public $showToast = true;
 
@@ -21,10 +21,10 @@ class ConfigBrands extends Component
     {
         $brand = Brand::find($brandId);
         $deleteMessage = '';
-        if (CommonItem::where('brand_id', $brandId)->count() > 0) {
+        if (CommonProduct::where('brand_id', $brandId)->count() > 0) {
             $deleteMessage = '⚠️ Des produits de la marque ' . $brand->name . 'existent dans le stock, si vous supprimez, les produits leur marque à "Non définie"';
         }
-        $this->emit('deleteWarning', $brandId, $this->warningDeleteItemSignal, 'Brand', 'name', $deleteMessage);
+        $this->emit('deleteWarning', $brandId, $this->warningDeleteProductSignal, 'Brand', 'name', $deleteMessage);
     }
 
     public function deleteBrand($brandId)

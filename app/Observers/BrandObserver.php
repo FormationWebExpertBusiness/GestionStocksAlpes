@@ -3,7 +3,7 @@
 namespace App\Observers;
 
 use App\Models\Brand;
-use App\Models\CommonItem;
+use App\Models\CommonProduct;
 
 class BrandObserver
 {
@@ -37,10 +37,10 @@ class BrandObserver
      */
     public function deleting(Brand $brand)
     {
-        $items = CommonItem::where('brand_id', $brand->id)->get();
-        foreach ($items as $item) {
-            $item->brand_id = 1;
-            $item->save();
+        $products = CommonProduct::where('brand_id', $brand->id)->get();
+        foreach ($products as $product) {
+            $product->brand_id = 1;
+            $product->save();
         }
     }
 
