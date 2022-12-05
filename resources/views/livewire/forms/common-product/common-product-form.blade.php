@@ -209,25 +209,25 @@
 
                                 {{-- quantities field --}}
                                 <div class="flex justify-between mt-6">
-                                    {{-- quantity warning number field --}}
+                                    {{-- quantity low number field --}}
                                     <div class="w-[48%] inline-block">
                                         <div class="flex justify-between">
-                                            <label for="quantity_warning"
-                                                class="block text-sm font-medium text-gray-700">Quantité nécéssaire</label>
+                                            <label for="quantity_low"
+                                                class="block text-sm font-medium text-gray-700">Quantité faible</label>
                                             <span class="text-sm text-gray-500">Optionnel</span>
                                         </div>
                                         <div class="mt-1">
                                             <div class="relative">
-                                                <input wire:model="quantity_warning" type="number" name="quantity_warning" id="quantity_warning"
-                                                    autocomplete="quantity_warning"
-                                                    @if ($errors->has('quantity_warning'))
+                                                <input wire:model="quantity_low" type="number" name="quantity_low" id="quantity_low"
+                                                    autocomplete="quantity_low"
+                                                    @if ($errors->has('quantity_low'))
                                                     class="block w-full py-3 px-4 rounded-md border-red-300 pr-10 text-red-900 placeholder-red-300 focus:border-red-500 focus:outline-none focus:ring-red-500"
                                                     @else
                                                         class="block w-full rounded-md border-gray-300 py-3 px-4 placeholder-gray-500 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
                                                     @endif
                                                     placeholder="Ex: 5">
                                                 
-                                                @error('quantity_warning')
+                                                @error('quantity_low')
                                                     <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
                                                         <svg class="h-5 w-5 text-red-500"
                                                             xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
@@ -240,32 +240,32 @@
                                                 @enderror
                                             </div>
                                             <p class="mt-2 h-4 text-sm text-red-600" id="email-error">
-                                                @error('quantity_warning')
+                                                @error('quantity_low')
                                                     {{ $message }}
                                                 @enderror
                                             </p>
                                         </div>
                                     </div>
     
-                                    {{-- quantity urgent number field --}}
+                                    {{-- quantity critical number field --}}
                                     <div class="w-[50%] inline-block">
                                         <div class="flex justify-between">
-                                            <label for="quantity_urgent"
-                                                class="block text-sm font-medium text-gray-700">Quantité alert urgent</label>
+                                            <label for="quantity_critical"
+                                                class="block text-sm font-medium text-gray-700">Quantité critique</label>
                                             <span class="text-sm text-gray-500">Optionnel</span>
                                         </div>
                                         <div class="mt-1">
                                             <div class="relative">
-                                                <input wire:model="quantity_urgent" type="number" name="quantity_urgent" id="quantity_urgent"
-                                                    autocomplete="quantity_urgent"
-                                                    @if ($errors->has('quantity_urgent'))
+                                                <input wire:model="quantity_critical" type="number" name="quantity_critical" id="quantity_critical"
+                                                    autocomplete="quantity_critical"
+                                                    @if ($errors->has('quantity_critical'))
                                                     class="block w-full py-3 px-4 rounded-md border-red-300 pr-10 text-red-900 placeholder-red-300 focus:border-red-500 focus:outline-none focus:ring-red-500"
                                                     @else
                                                         class="block w-full rounded-md border-gray-300 py-3 px-4 placeholder-gray-500 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
                                                     @endif
                                                     placeholder="Ex: 5">
                                                 
-                                                @error('quantity_urgent')
+                                                @error('quantity_critical')
                                                     <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
                                                         <svg class="h-5 w-5 text-red-500"
                                                             xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
@@ -278,7 +278,7 @@
                                                 @enderror
                                             </div>
                                             <p class="mt-2 h-4 text-sm text-red-600" id="email-error">
-                                                @error('quantity_urgent')
+                                                @error('quantity_critical')
                                                     {{ $message }}
                                                 @enderror
                                             </p>

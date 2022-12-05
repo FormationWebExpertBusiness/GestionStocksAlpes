@@ -20,8 +20,8 @@ class CommonProduct extends Model
         'brand_id',
         'model',
         'favorite',
-        'quantity_urgent',
-        'quantity_warning',
+        'quantity_low',
+        'quantity_critical',
         'photo_product',
     ];
 
@@ -202,7 +202,7 @@ class CommonProduct extends Model
     public static function totalOutStockProduct()
     {
         return CommonProduct::all()->filter(function ($value) {
-            if ($value->quantity <= $value->quantity_urgent) {
+            if ($value->quantity <= $value->quantity_critical) {
                 return $value;
             }
         })->count();

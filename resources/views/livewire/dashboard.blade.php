@@ -214,11 +214,11 @@
                                             {{ $commonProduct->quantity }}
                                         </td>
                                         <td class="whitespace-nowrap pl-4">
-                                            @if ($commonProduct->quantity <= $commonProduct->quantity_urgent)
+                                            @if ($commonProduct->quantity <= $commonProduct->quantity_critical)
                                                 <span
                                                     class="items-center px-2 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">
                                                     En rupture de stock</span>
-                                            @elseif ($commonProduct->quantity <= $commonProduct->quantity_warning)
+                                            @elseif ($commonProduct->quantity <= $commonProduct->quantity_low)
                                                 <span
                                                     class="items-center px-2 py-0.5 rounded-full text-xs font-medium bg-orange-100 text-orange-800">
                                                     Bientôt en rupture de stock</span>

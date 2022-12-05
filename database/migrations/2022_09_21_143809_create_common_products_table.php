@@ -18,8 +18,8 @@ return new class extends Migration
             $table->unsignedBigInteger('category_id')->default(1);
             $table->unsignedBigInteger('brand_id')->default(1);
             $table->string('model');
-            $table->integer('quantity_warning')->default(10);
-            $table->integer('quantity_urgent')->default(5);
+            $table->integer('quantity_low')->default(0);
+            $table->integer('quantity_critical')->default(0);
             $table->boolean('favorite')->default(false);
             $table->string('photo_product')->nullable();
             $table->foreign('category_id')->references('id')->on('categories')->onUpdate('restrict')->onDelete('cascade');
