@@ -58,12 +58,7 @@ class CommonProductForm extends Component
 
     public function mount()
     {
-        $this->category_id = $this->commonProductToUpdate?->category_id ?? 1;
-        $this->brand_id = $this->commonProductToUpdate?->brand_id ?? 1;
-        $this->model = $this->commonProductToUpdate?->model;
-        $this->photo_product = $this->commonProductToUpdate?->photo_product;
-        $this->quantity_low = $this->commonProductToUpdate?->quantity_low ?? 0;
-        $this->quantity_critical = $this->commonProductToUpdate?->quantity_critical ?? 0;
+        $this->resetInputs();
 
         $this->brands = Brand::all();
         $this->categories = Category::all();
@@ -111,17 +106,33 @@ class CommonProductForm extends Component
             $commonProduct = CommonProduct::create($validatedData);
         }
         $this->closeForm();
+        $this->emit('stockUpdated');
         if (isset($this->commonProductToUpdate)) {
             return redirect('stock')->with('status', 'Le produit ' . $this->model . ' a bien été modifié !');
         }
         return redirect('stock')->with('status', 'Le produit ' . $commonProduct->model . ' a bien été créé !');
     }
 
+    public function removeImage()
+    {
+        $this->photo_product = null;
+    }
+
     public function closeForm()
     {
+        $this->resetInputs();
+        
         $this->isFormOpen = false;
+    }
 
-        $this->emit('stockUpdated');
+    public function resetInputs()
+    {
+        $this->category_id = $this->commonProductToUpdate?->category_id ?? 1;
+        $this->brand_id = $this->commonProductToUpdate?->brand_id ?? 1;
+        $this->model = $this->commonProductToUpdate?->model;
+        $this->photo_product = $this->commonProductToUpdate?->photo_product ?? null;
+        $this->quantity_low = $this->commonProductToUpdate?->quantity_low ?? 0;
+        $this->quantity_critical = $this->commonProductToUpdate?->quantity_critical ?? 0;
     }
 
     public function addDynamicRules()
