@@ -58,13 +58,6 @@ class CommonProductForm extends Component
 
     public function mount()
     {
-        // $this->category_id = $this->commonProductToUpdate?->category_id ?? 1;
-        // $this->brand_id = $this->commonProductToUpdate?->brand_id ?? 1;
-        // $this->model = $this->commonProductToUpdate?->model;
-        // $this->photo_product = $this->commonProductToUpdate?->photo_product ?? null;
-        // $this->quantity_low = $this->commonProductToUpdate?->quantity_low ?? 0;
-        // $this->quantity_critical = $this->commonProductToUpdate?->quantity_critical ?? 0;
-
         $this->resetInputs();
 
         $this->brands = Brand::all();

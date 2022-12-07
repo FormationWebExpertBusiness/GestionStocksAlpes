@@ -35,15 +35,12 @@
                             @endif
                             <div class="mt-4">
                                 @if ($photo_product)
-                                    {{-- TODO add remove button --}}
                                     <div class="max-h-40 max-w-full relative">
                                         <img class="m-auto inline-block max-h-40 max-w-full rounded-md"
                                         @if (!is_string($photo_product))
                                             src="{{ $photo_product->temporaryUrl() }}" 
                                         @else
-                                            {{-- <img class="m-auto inline-block max-h-40 max-w-full rounded-md" --}}
                                             src="{{ Storage::url($photo_product) }}" 
-                                            {{-- alt="cover image"> --}}
                                         @endif
                                         alt="cover image">
                                         <button wire:click='removeImage' class="text-red-600 absolute">
