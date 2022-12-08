@@ -18,7 +18,7 @@ class ProductObserver
     {
         $commonProduct = CommonProduct::find($product->common_id);
 
-        $commonProduct->UpdateStatusQuantity();
+        $commonProduct->updateStatusQuantity();
 
         HistoryProduct::create([
             'code_action' => 'C',
@@ -52,7 +52,7 @@ class ProductObserver
     {
         $commonProduct = CommonProduct::find($product->common_id);
 
-        $commonProduct->UpdateStatusQuantity();
+        $commonProduct->updateStatusQuantity();
 
         HistoryProduct::create([
             'category' => $commonProduct->category->name,

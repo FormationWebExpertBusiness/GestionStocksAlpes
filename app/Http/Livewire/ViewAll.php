@@ -206,7 +206,7 @@ class ViewAll extends Component
         $paginatedCommonProducts = $this->collectionToPaginator();
 
         $this->showToast = true;
-        
+
         return view('livewire.view-all', ['commonProducts' => $paginatedCommonProducts])->layout('layout');
     }
 

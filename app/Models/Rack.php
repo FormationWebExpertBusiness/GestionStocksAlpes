@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
-use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class Rack extends Model
 {
@@ -25,7 +25,7 @@ class Rack extends Model
     ];
 
     protected $appends = [
-        
+
     ];
 
     public function getQrcode($level)

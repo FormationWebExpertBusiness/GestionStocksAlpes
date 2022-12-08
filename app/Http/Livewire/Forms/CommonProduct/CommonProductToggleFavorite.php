@@ -25,8 +25,8 @@ class CommonProductToggleFavorite extends Component
         if (CommonProduct::totalFavoriteProduct() < 20) {//limit to 20 Product in favorite
             $this->isFavorite = true;
             $this->saveCommonProduct();
-            if(CommonProduct::totalFavoriteProduct() == 20){
-                $this->dispatchBrowserEvent('alert', ['type' => 'info',  'message' => 'La limite de 20 favoris vient d\'être atteinte']);    
+            if (CommonProduct::totalFavoriteProduct() === 20) {
+                $this->dispatchBrowserEvent('alert', ['type' => 'info',  'message' => 'La limite de 20 favoris vient d\'être atteinte']);
             }
         } else {
             $this->dispatchBrowserEvent('alert', ['type' => 'warning',  'message' => 'Il ne peut pas y avoir plus de 20 produit en favoris']);

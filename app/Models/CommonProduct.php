@@ -13,6 +13,12 @@ class CommonProduct extends Model
     use HasFactory;
     public $timestamps = true;
 
+    public static $statutesQuantity = [
+        'S' => 'Quantité suffisante',
+        'F' => 'Quantité faible',
+        'C' => 'Quantité critique',
+    ];
+
     protected $table = 'common_products';
     protected $primaryKey = 'id';
 
@@ -36,13 +42,7 @@ class CommonProduct extends Model
     protected $appends = [
         'quantity',
         'totalPrice',
-        'statutQuantity'
-    ];
-
-    public static $statutesQuantity = [
-        'S' => 'Quantité suffisante',
-        'F' => 'Quantité faible',
-        'C' => 'Quantité critique',
+        'statutQuantity',
     ];
 
     public function getQuantityAttribute()
@@ -120,11 +120,11 @@ class CommonProduct extends Model
         return $this->totalPriceOnRack($rack, $rack_level) / $this->quantityOnRack($rack, $rack_level);
     }
 
-    public function UpdateStatusQuantity()
+    public function updateStatusQuantity()
     {
         if ($this->quantity <= $this->quantity_critical) {
             $this->code_statut_quantity = 'C';
-        } else if ($this->quantity <= $this->quantity_low) {
+        } elseif ($this->quantity <= $this->quantity_low) {
             $this->code_statut_quantity = 'F';
         } else {
             $this->code_statut_quantity = 'S';

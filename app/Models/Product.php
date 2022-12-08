@@ -29,7 +29,7 @@ class Product extends Model
     ];
 
     protected $appends = [
-        
+
     ];
 
     public function getCategory()
@@ -47,7 +47,7 @@ class Product extends Model
         return CommonProduct::find($this->common_id)->model;
     }
 
-    public function rack() : BelongsTo
+    public function rack(): BelongsTo
     {
         return $this->belongsTo(Rack::class);
     }

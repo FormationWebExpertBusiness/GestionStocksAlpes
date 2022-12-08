@@ -25,7 +25,7 @@ class CommonProductObserver
             $cat->brands()->attach($commonProduct->brand_id);
         }
 
-        $commonProduct->UpdateStatusQuantity();
+        $commonProduct->updateStatusQuantity();
     }
 
     /**
@@ -52,7 +52,7 @@ class CommonProductObserver
             }
             
             if (array_key_exists('quantity_low',$commonProduct->getChanges()) || array_key_exists('quantity_critical', $commonProduct->getChanges())) {
-                $commonProduct->UpdateStatusQuantity();
+                $commonProduct->updateStatusQuantity();
             }
         }
     }

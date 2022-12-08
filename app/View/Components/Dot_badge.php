@@ -4,9 +4,8 @@ namespace App\View\Components;
 
 use Illuminate\View\Component;
 
-class dot_badge extends Component
+class DotBadge extends Component
 {
-
     /**
      * color use to the badge
      *
