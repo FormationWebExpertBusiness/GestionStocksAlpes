@@ -163,20 +163,24 @@ class CommonProduct extends Model
         })->values();
     }
 
-    public static function filterOnquantityLow($commonProducts)
+    public static function filterOnquantitystatut($commonProducts, $statutes)
     {
-        return $commonProducts->filter(function ($value) {
-            if ($value->quantity <= $value->quantity_low && $value->quantity > $value->quantity_critical) {
-                return $value;
+        $statutes = count($statutes) === 0 ? ['En stock', 'Quantité faible', 'Quantité critique'] : $statutes;
+        return $commonProducts->filter(function ($value) use ($statutes) {
+            if (in_array('En stock', $statutes)) {
+                if ($value->quantity > $value->quantity_low) {
+                    return $value;
+                }
             }
-        })->values();
-    }
-
-    public static function filterOnquantityCritical($commonProducts)
-    {
-        return $commonProducts->filter(function ($value) {
-            if ($value->quantity <= $value->quantity_critical) {
-                return $value;
+            if (in_array('Quantité faible', $statutes)){
+                if ($value->quantity <= $value->quantity_low && $value->quantity > $value->quantity_critical) {
+                    return $value;
+                }
+            } 
+            if (in_array('Quantité critique', $statutes)) {
+                if ($value->quantity <= $value->quantity_critical) {
+                    return $value;
+                }
             }
         })->values();
     }

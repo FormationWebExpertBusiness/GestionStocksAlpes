@@ -22,12 +22,12 @@
                         </dt>
                         <dd class="ml-16 flex items-baseline pb-6 sm:pb-7">
                             <p class="text-2xl font-semibold text-gray-900">
-                                {{ App\Models\CommonProduct::filterOnquantityCritical(App\Models\CommonProduct::all())->count() }} produits
+                                {{ App\Models\CommonProduct::filterOnquantityStatut(App\Models\CommonProduct::all(), ['Quantité critique'])->count() }} produits
                             </p>
                             <div class="absolute inset-x-0 bottom-0 bg-gray-50 px-4 py-4 sm:px-6">
                                 <div class="text-sm">
-                                    <a href="/stock" class="font-medium text-indigo-600 hover:text-indigo-500">
-                                        Voir tout (marche pas encore)
+                                    <a href="/stock?sta[0]=Quantité+critique" class="font-medium text-indigo-600 hover:text-indigo-500">
+                                        Voir tout
                                         <span class="sr-only"> Total du stock</span>
                                     </a>
                                 </div>
@@ -46,12 +46,12 @@
                         </dt>
                         <dd class="ml-16 flex items-baseline pb-6 sm:pb-7">
                             <p class="text-2xl font-semibold text-gray-900">
-                                {{ App\Models\CommonProduct::filterOnquantityLow(App\Models\CommonProduct::all())->count() }} produits
+                                {{ App\Models\CommonProduct::filterOnquantityStatut(App\Models\CommonProduct::all(), ['Quantité faible'])->count() }} produits
                             </p>
                             <div class="absolute inset-x-0 bottom-0 bg-gray-50 px-4 py-4 sm:px-6">
                                 <div class="text-sm">
-                                    <a href="/stock" class="font-medium text-indigo-600 hover:text-indigo-500">
-                                        Voir tout (marche pas encore)
+                                    <a href="/stock?sta[0]=Quantité+faible" class="font-medium text-indigo-600 hover:text-indigo-500">
+                                        Voir tout
                                         <span class="sr-only"> Total du stock</span>
                                     </a>
                                 </div>
