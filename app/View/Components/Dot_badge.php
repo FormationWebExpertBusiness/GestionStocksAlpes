@@ -28,7 +28,7 @@ class DotBadge extends Component
     public function __construct($color, $text)
     {
         $this->color = $color;
-        $this->txet = $text;
+        $this->text = $text;
     }
 
     /**
