@@ -3,15 +3,12 @@
 namespace App\Http\Livewire;
 
 use App\Models\CommonProduct;
-use App\Models\Product;
 use Livewire\Component;
 
 class Dashboard extends Component
 {
     public $commonProducts;
     public $search;
-
-    public $mostExpensiveProduct;
 
     protected $queryString = [
         'search' => ['except' => ''],
@@ -20,11 +17,6 @@ class Dashboard extends Component
     public function toggleCatDropdown()
     {
         $this->isVisibleCat = ! $this->isVisibleCat;
-    }
-
-    public function mount()
-    {
-        $this->mostExpensiveProduct = Product::mostExpensiveProduct();
     }
 
     public function render()
