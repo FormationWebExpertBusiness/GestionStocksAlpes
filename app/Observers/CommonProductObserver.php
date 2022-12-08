@@ -24,6 +24,8 @@ class CommonProductObserver
         {
             $cat->brands()->attach($commonProduct->brand_id);
         }
+
+        $commonProduct->UpdateStatusQuantity();
     }
 
     /**
@@ -45,6 +47,10 @@ class CommonProductObserver
             }
 
             $cat = Category::find($commonProduct->category_id)->brands()->syncWithoutDetaching([$commonProduct->brand_id]);
+        }
+        
+        if (array_key_exists('quantity_low',$commonProduct->getChanges()) || array_key_exists('quantity_critical', $commonProduct->getChanges())) {
+            $commonProduct->UpdateStatusQuantity();
         }
     }
 

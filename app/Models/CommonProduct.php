@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Facades\DB;
 
 class CommonProduct extends Model
 {
@@ -23,6 +24,7 @@ class CommonProduct extends Model
         'quantity_low',
         'quantity_critical',
         'photo_product',
+        'status_quantity',
     ];
 
     protected $with = [
@@ -38,12 +40,12 @@ class CommonProduct extends Model
 
     public function getQuantityAttribute()
     {
-        return $this->products()->count();
+        return Product::select(DB::raw('count(*) as count'))->where('common_id', $this->id)->first()->count;
     }
 
     public function getTotalPriceAttribute()
     {
-        return $this->products()->sum('price');
+        return Product::select(DB::raw('sum(price) as value'))->where('common_id', $this->id)->first()->value;
     }
 
     public function unitPrice()
@@ -106,6 +108,18 @@ class CommonProduct extends Model
         return $this->totalPriceOnRack($rack, $rack_level) / $this->quantityOnRack($rack, $rack_level);
     }
 
+    public function UpdateStatusQuantity()
+    {
+        if ($this->quantity <= $this->quantity_critical) {
+            $this->status_quantity = 'Quantité critique';
+        } else if ($this->quantity <= $this->quantity_low) {
+            $this->status_quantity = 'Quantité faible';
+        } else {
+            $this->status_quantity = 'En Stock';
+        }
+        $this->save();
+    }
+
     public static function filterOnQuantities($commonProducts, $quantityMin, $quantityMax)
     {
         return $commonProducts->filter(function ($value) use ($quantityMin, $quantityMax) {
@@ -144,6 +158,24 @@ class CommonProduct extends Model
         $categories = count($categories) === 0 ? Category::pluck('id')->toArray() : $categories;
         return $commonProducts->filter(function ($value) use ($categories) {
             if (in_array($value->category->id, $categories)) {
+                return $value;
+            }
+        })->values();
+    }
+
+    public static function filterOnquantityLow($commonProducts)
+    {
+        return $commonProducts->filter(function ($value) {
+            if ($value->quantity <= $value->quantity_low && $value->quantity > $value->quantity_critical) {
+                return $value;
+            }
+        })->values();
+    }
+
+    public static function filterOnquantityCritical($commonProducts)
+    {
+        return $commonProducts->filter(function ($value) {
+            if ($value->quantity <= $value->quantity_critical) {
                 return $value;
             }
         })->values();
@@ -191,20 +223,16 @@ class CommonProduct extends Model
 
     public static function totalCommonProduct()
     {
-        return CommonProduct::all()->count('id');
+        return CommonProduct::count();
     }
 
     public static function totalFavoriteProduct()
     {
-        return CommonProduct::where('favorite', '=', true)->get()->count();
+        return CommonProduct::where('favorite', true)->get()->count();
     }
 
     public static function totalOutStockProduct()
     {
-        return CommonProduct::all()->filter(function ($value) {
-            if ($value->quantity <= $value->quantity_critical) {
-                return $value;
-            }
-        })->count();
+        return CommonProduct::where('status_quantity', 'Quantité critique')->count();
     }
 }

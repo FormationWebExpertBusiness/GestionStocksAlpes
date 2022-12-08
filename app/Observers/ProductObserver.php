@@ -18,6 +18,8 @@ class ProductObserver
     {
         $commonProduct = CommonProduct::find($product->common_id);
 
+        $commonProduct->UpdateStatusQuantity();
+
         HistoryProduct::create([
             'code_action' => 'C',
             'category' => $commonProduct->category->name,
@@ -49,6 +51,8 @@ class ProductObserver
     public function deleted(Product $product)
     {
         $commonProduct = CommonProduct::find($product->common_id);
+
+        $commonProduct->UpdateStatusQuantity();
 
         HistoryProduct::create([
             'category' => $commonProduct->category->name,

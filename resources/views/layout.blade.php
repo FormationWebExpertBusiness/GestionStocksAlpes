@@ -24,5 +24,15 @@
 <div class="min-w-0 ml-64">
     {{ $slot }}
     <livewire:scripts />
+    <script defer>
+        window.addEventListener('alert', event => { 
+            toastr[event.detail.type](event.detail.message, 
+            event.detail.title ?? ''), toastr.options = {
+                "closeButton": true,
+                "progressBar": true,
+            }
+        });
+    </script>
+    <script defer src="{{ asset('js/app.js') }}"></script>
 </div>
 @endsection

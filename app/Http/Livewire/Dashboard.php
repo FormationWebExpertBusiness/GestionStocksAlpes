@@ -2,18 +2,16 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\Category;
 use App\Models\CommonProduct;
+use App\Models\Product;
 use Livewire\Component;
 
 class Dashboard extends Component
 {
     public $commonProducts;
     public $search;
-    public $isVisibleCat = false;
-    public $categories;
 
-    public $catsFilter = [];
+    public $mostExpensiveProduct;
 
     protected $queryString = [
         'search' => ['except' => ''],
@@ -24,17 +22,21 @@ class Dashboard extends Component
         $this->isVisibleCat = ! $this->isVisibleCat;
     }
 
+    public function mount()
+    {
+        $this->mostExpensiveProduct = Product::mostExpensiveProduct();
+    }
+
     public function render()
     {
-        $this->categories = Category::all();
         $this->commonProducts = CommonProduct::select('common_products.*')
-            ->join('categories', 'categories.id', '=', 'common_products.category_id')
-            ->where('categories.name', 'like', '%' . $this->search . '%', )
-            ->where('favorite', '=', true)
-            ->get();
-        $catF = count($this->catsFilter) === 0 ? Category::where('id', '>', 0)->pluck('id')->toArray() : $this->catsFilter;
-        $this->commonProducts = CommonProduct::filterOnCategories($this->commonProducts, $catF);
-        //dump($this->commonProducts);
+                                    ->join('categories', 'categories.id', '=', 'common_products.category_id')
+                                    ->where('categories.name', 'like', '%' . $this->search . '%')
+                                    ->where('favorite', '=', true)
+                                    ->orWhere('model', 'like', '%' . $this->search . '%')
+                                    ->where('favorite', '=', true)
+                                    ->limit(20)
+                                    ->get();
         return view('livewire.dashboard')->layout('layout');
     }
 }

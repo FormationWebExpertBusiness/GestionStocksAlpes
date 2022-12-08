@@ -10,6 +10,55 @@
                 <h3 class="text-lg font-medium leading-6 text-gray-900 mt-10">Stock de Alpes Networks</h3>
 
                 <dl class="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-2">
+
+                    <div class="relative overflow-hidden rounded-lg bg-white px-4 pt-5 pb-12 shadow sm:px-6 sm:pt-6">
+                        <dt>
+                            <div class="absolute rounded-md bg-red-500 text-white p-3">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" />
+                                  </svg>
+                            </div>
+                            <p class="ml-16 truncate text-sm font-medium text-gray-500">Nombre de produit en quantité critique</p>
+                        </dt>
+                        <dd class="ml-16 flex items-baseline pb-6 sm:pb-7">
+                            <p class="text-2xl font-semibold text-gray-900">
+                                {{ App\Models\CommonProduct::filterOnquantityCritical(App\Models\CommonProduct::all())->count() }} produits
+                            </p>
+                            <div class="absolute inset-x-0 bottom-0 bg-gray-50 px-4 py-4 sm:px-6">
+                                <div class="text-sm">
+                                    <a href="/stock" class="font-medium text-indigo-600 hover:text-indigo-500">
+                                        Voir tout (marche pas encore)
+                                        <span class="sr-only"> Total du stock</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </dd>
+                    </div>
+
+                    <div class="relative overflow-hidden rounded-lg bg-white px-4 pt-5 pb-12 shadow sm:px-6 sm:pt-6">
+                        <dt>
+                            <div class="absolute rounded-md bg-orange-500 text-white p-3">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" />
+                                  </svg>                                  
+                            </div>
+                            <p class="ml-16 truncate text-sm font-medium text-gray-500">Nombre de produit en quantité faible</p>
+                        </dt>
+                        <dd class="ml-16 flex items-baseline pb-6 sm:pb-7">
+                            <p class="text-2xl font-semibold text-gray-900">
+                                {{ App\Models\CommonProduct::filterOnquantityLow(App\Models\CommonProduct::all())->count() }} produits
+                            </p>
+                            <div class="absolute inset-x-0 bottom-0 bg-gray-50 px-4 py-4 sm:px-6">
+                                <div class="text-sm">
+                                    <a href="/stock" class="font-medium text-indigo-600 hover:text-indigo-500">
+                                        Voir tout (marche pas encore)
+                                        <span class="sr-only"> Total du stock</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </dd>
+                    </div>
+
                     <div class="relative overflow-hidden rounded-lg bg-white px-4 pt-5 pb-12 shadow sm:px-6 sm:pt-6">
                         <dt>
                             <div class="absolute rounded-md bg-indigo-500 p-3">
@@ -27,69 +76,16 @@
                             <p class="text-2xl font-semibold text-gray-900">
                                 {{ App\Models\CommonProduct::totalCommonProduct() }} produits
                             </p>
-                            <p class="ml-2 flex items-baseline text-sm font-semibold text-red-500">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                    stroke-width="1.5" stroke="currentColor"
-                                    class="h-5 w-5 flex-shrink-0 self-center text-red-500">
-
-                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                        d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" />
-                                </svg>
-
-                                <span class="px-1">
-                                    {{ App\Models\CommonProduct::totalOutStockProduct() }} en rupture de stock
-
-
-                                </span>
-                            </p>
                             <div class="absolute inset-x-0 bottom-0 bg-gray-50 px-4 py-4 sm:px-6">
                                 <div class="text-sm">
                                     <a href="/stock" class="font-medium text-indigo-600 hover:text-indigo-500">
-                                        Voir
-                                        tout<span class="sr-only"> Total du stock</span></a>
+                                        Voir tout
+                                        <span class="sr-only"> Total du stock</span>
+                                    </a>
                                 </div>
                             </div>
                         </dd>
 
-                    </div>
-
-                    <div class="relative overflow-hidden rounded-lg bg-white px-4 pt-5 pb-12 shadow sm:px-6 sm:pt-6">
-                        <dt>
-                            <div class="absolute rounded-md bg-indigo-500 p-3">
-                                <!-- Heroicon name: outline/envelope-open -->
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                    stroke-width="1.5" stroke="currentColor" class="h-6 w-6 text-white">
-                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                        d="M14.25 7.756a4.5 4.5 0 100 8.488M7.5 10.5h5.25m-5.25 3h5.25M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                </svg>
-
-                            </div>
-                            <p class="ml-16 truncate text-sm font-medium text-gray-500">Le prix le plus élevé
-                            </p>
-                        </dt>
-                        <dd class="ml-16 flex items-baseline pb-6 sm:pb-7">
-                            <p class="text-2xl font-semibold text-gray-900">
-                                {{ App\Models\Product::mostExpensiveProduct()->price }} €
-                            </p>
-                            <p class="ml-2 flex items-baseline text-sm font-semibold text-green-600">
-                                <!-- Heroicon name: mini/arrow-up -->
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                    stroke-width="1.5" stroke="currentColor"
-                                    class="h-5 w-5 flex-shrink-0 self-center text-green-500">
-                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                        d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z" />
-                                </svg>
-                                <span class="px-1">
-                                    {{ App\Models\Product::mostExpensiveProduct()->model }}
-                                </span>
-                            </p>
-                            <div class="absolute inset-x-0 bottom-0 bg-gray-50 px-4 py-4 sm:px-6">
-                                <div class="text-sm">
-                                    <p class="text-gray-50">View all</p>
-                                    <span class="sr-only"> Avg. Open Rate stats</span>
-                                </div>
-                            </div>
-                        </dd>
                     </div>
 
                     <div class="relative overflow-hidden rounded-lg bg-white px-4 pt-5 pb-12 shadow sm:px-6 sm:pt-6">
@@ -111,36 +107,13 @@
                             </p>
                             <div class="absolute inset-x-0 bottom-0 bg-gray-50 px-4 py-4 sm:px-6">
                                 <div class="text-sm">
-                                    <p class="text-gray-50">View
-                                        all</p><span class="sr-only"> Avg. Open Rate stats</span>
+                                    <p class="text-gray-50"><br></p>
+                                    <span class="sr-only"> Avg. Open Rate stats</span>
                                 </div>
                             </div>
                         </dd>
                     </div>
-                    <div class="relative overflow-hidden rounded-lg bg-white px-4 pt-5 pb-12 shadow sm:px-6 sm:pt-6">
-                        <dt>
-                            <div class="absolute rounded-md bg-indigo-500 p-3">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
-                                    class="w-6 h-6 text-yellow-400 min-w-full">
-                                    <path fill-rule="evenodd"
-                                        d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z"
-                                        clip-rule="evenodd" />
-                                </svg>
 
-                            </div>
-                        </dt>
-                        <dd class="ml-16 flex items-baseline pb-6 sm:pb-7">
-                            <p class="my-2 text-2xl font-semibold text-gray-900">
-                                {{ App\Models\CommonProduct::totalFavoriteProduct() }} produits en favoris
-                            </p>
-                            <div class="absolute inset-x-0 bottom-0 bg-gray-50 px-4 py-4 sm:px-6">
-                                <div class="text-sm">
-                                    <p class="text-gray-50">View
-                                        all</p><span class="sr-only"> Avg. Open Rate stats</span>
-                                </div>
-                            </div>
-                        </dd>
-                    </div>
                 </dl>
             </div>
         </div>
@@ -215,17 +188,26 @@
                                         </td>
                                         <td class="whitespace-nowrap pl-4">
                                             @if ($commonProduct->quantity <= $commonProduct->quantity_critical)
-                                                <span
-                                                    class="items-center px-2 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">
-                                                    En rupture de stock</span>
+                                                <span class="inline-flex items-center rounded-full bg-red-100 px-3 py-0.5 text-sm font-medium text-red-800">
+                                                    <svg class="-ml-1 mr-1.5 h-2 w-2 text-red-400" fill="currentColor" viewBox="0 0 8 8">
+                                                        <circle cx="4" cy="4" r="3" />
+                                                    </svg>
+                                                    Quantité critique
+                                                </span>
                                             @elseif ($commonProduct->quantity <= $commonProduct->quantity_low)
-                                                <span
-                                                    class="items-center px-2 py-0.5 rounded-full text-xs font-medium bg-orange-100 text-orange-800">
-                                                    Bientôt en rupture de stock</span>
+                                                <span class="inline-flex items-center rounded-full bg-orange-100 px-3 py-0.5 text-sm font-medium text-orange-800">
+                                                    <svg class="-ml-1 mr-1.5 h-2 w-2 text-orange-400" fill="currentColor" viewBox="0 0 8 8">
+                                                        <circle cx="4" cy="4" r="3" />
+                                                    </svg>
+                                                    Quantité faible
+                                                </span>
                                             @else
-                                                <span
-                                                    class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800 capitalize">
-                                                    En stock</span>
+                                            <span class="inline-flex items-center rounded-full bg-green-100 px-3 py-0.5 text-sm font-medium text-green-800">
+                                                <svg class="-ml-1 mr-1.5 h-2 w-2 text-green-400" fill="currentColor" viewBox="0 0 8 8">
+                                                    <circle cx="4" cy="4" r="3" />
+                                                </svg>
+                                                En stock
+                                            </span>
                                             @endif
                                         </td>
                                         <td
