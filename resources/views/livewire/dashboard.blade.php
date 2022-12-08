@@ -21,8 +21,8 @@
                             <p class="ml-16 truncate text-sm font-medium text-gray-500">Nombre de produit en quantité critique</p>
                         </dt>
                         <dd class="ml-16 flex items-baseline pb-6 sm:pb-7">
-                            <p class="text-2xl font-semibold text-gray-900">
-                                {{ App\Models\CommonProduct::filterOnquantityStatut(App\Models\CommonProduct::all(), ['Quantité critique'])->count() }} produits
+                            <p class="text-2xl font-semibold text-gray-900"> 
+                                {{ App\Models\CommonProduct::filterOnquantityStatut(App\Models\CommonProduct::all(), [App\Models\CommonProduct::$statutesQuantity['C']])->count() }} produits
                             </p>
                             <div class="absolute inset-x-0 bottom-0 bg-gray-50 px-4 py-4 sm:px-6">
                                 <div class="text-sm">
@@ -187,27 +187,12 @@
                                             {{ $commonProduct->quantity }}
                                         </td>
                                         <td class="whitespace-nowrap pl-4">
-                                            @if ($commonProduct->quantity <= $commonProduct->quantity_critical)
-                                                <span class="inline-flex items-center rounded-full bg-red-100 px-3 py-0.5 text-sm font-medium text-red-800">
-                                                    <svg class="-ml-1 mr-1.5 h-2 w-2 text-red-400" fill="currentColor" viewBox="0 0 8 8">
-                                                        <circle cx="4" cy="4" r="3" />
-                                                    </svg>
-                                                    Quantité critique
-                                                </span>
-                                            @elseif ($commonProduct->quantity <= $commonProduct->quantity_low)
-                                                <span class="inline-flex items-center rounded-full bg-orange-100 px-3 py-0.5 text-sm font-medium text-orange-800">
-                                                    <svg class="-ml-1 mr-1.5 h-2 w-2 text-orange-400" fill="currentColor" viewBox="0 0 8 8">
-                                                        <circle cx="4" cy="4" r="3" />
-                                                    </svg>
-                                                    Quantité faible
-                                                </span>
+                                            @if ($commonProduct->code_status_quantity === 'C')
+                                                <x-dot_badge color="red" :text="$commonProduct->statut_quantity"/>
+                                            @elseif ($commonProduct->code_status_quantity === 'F')
+                                                <x-dot_badge color="orange" :text="$commonProduct->statut_quantity"/>
                                             @else
-                                            <span class="inline-flex items-center rounded-full bg-green-100 px-3 py-0.5 text-sm font-medium text-green-800">
-                                                <svg class="-ml-1 mr-1.5 h-2 w-2 text-green-400" fill="currentColor" viewBox="0 0 8 8">
-                                                    <circle cx="4" cy="4" r="3" />
-                                                </svg>
-                                                En stock
-                                            </span>
+                                                <x-dot_badge color="green" :text="$commonProduct->statut_quantity"/>
                                             @endif
                                         </td>
                                         <td

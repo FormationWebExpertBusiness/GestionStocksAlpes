@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\Models\Category;
+use App\Models\CommonProduct;
 use App\Models\Rack;
 use Illuminate\Support\Str;
 use Livewire\Component;
@@ -86,7 +87,7 @@ class Filtres extends Component
 
         $this->racks = Rack::all();
 
-        $this->statutes = ['En stock', 'Quantité faible', 'Quantité critique'];
+        $this->statutes = CommonProduct::$statutesQuantity;
 
         $levelMax = Rack::getRackLevelMax($this->racksFilter);
 
