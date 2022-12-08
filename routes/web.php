@@ -1,12 +1,12 @@
 <?php
 
-use App\Http\Controllers\DisplayController;
 use App\Http\Controllers\LoginController;
 use App\Http\Livewire\Configuration\ConfigBrands;
 use App\Http\Livewire\Configuration\ConfigCategories;
 use App\Http\Livewire\Configuration\ConfigRacks;
 use App\Http\Livewire\Dashboard;
 use App\Http\Livewire\History;
+use App\Http\Livewire\ViewAll;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -28,7 +28,7 @@ Route::get('login', [LoginController::class, 'displayLogin'])->name('login');
 
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', Dashboard::class);
-    Route::get('/stock', [DisplayController::class, 'displayStock'])->name('stock');
+    Route::get('/stock', ViewAll::class)->name('stock');
     Route::get('/history', History::class);
 
     Route::get('/configuration/category', ConfigCategories::class);

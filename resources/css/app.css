@@ -4,3 +4,9 @@
 /* @tailwind base;
 @tailwind components;
 @tailwind utilities; */
+
+div#toast-container > div{
+    opacity: 0.9;
+    -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=90);
+    filter: alpha(opacity=90);
+}

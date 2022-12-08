@@ -24,6 +24,8 @@ class CommonProductObserver
         {
             $cat->brands()->attach($commonProduct->brand_id);
         }
+
+        $commonProduct->UpdateStatusQuantity();
     }
 
     /**
@@ -34,17 +36,24 @@ class CommonProductObserver
      */
     public function updated(CommonProduct $commonProduct)
     {
-        if ($commonProduct->photo_product !== $commonProduct->getOriginal('photo_product') && $commonProduct->getOriginal('photo_product')) {
-            Storage::delete($commonProduct->getOriginal('photo_product'));
-        }
+        if ($commonProduct->getOriginal() !== []) {
 
-        if ($commonProduct->getOriginal('category') != $commonProduct->category || $commonProduct->getOriginal('brand') != $commonProduct->brand) {
-            
-            if(CommonProduct::where('category_id', $commonProduct->getOriginal('category_id'))->where('brand_id', $commonProduct->getOriginal('brand_id'))->get()->count() == 0){
-                Category::find($commonProduct->getOriginal('category_id'))->brands()->detach($commonProduct->getOriginal('brand_id'));
+            if ($commonProduct->photo_product !== $commonProduct->getOriginal('photo_product') && $commonProduct->getOriginal('photo_product')) {
+                Storage::delete($commonProduct->getOriginal('photo_product'));
             }
 
-            $cat = Category::find($commonProduct->category_id)->brands()->syncWithoutDetaching([$commonProduct->brand_id]);
+            if ($commonProduct->getOriginal('category_id') !== $commonProduct->category_id || $commonProduct->getOriginal('brand_id') !== $commonProduct->brand_id) {
+                
+                if(CommonProduct::where('category_id', $commonProduct->getOriginal('category_id'))->where('brand_id', $commonProduct->getOriginal('brand_id'))->get()->count() == 0){
+                    Category::find($commonProduct->getOriginal('category_id'))->brands()->detach($commonProduct->getOriginal('brand_id'));
+                }
+                
+                $cat = Category::find($commonProduct->category_id)->brands()->syncWithoutDetaching([$commonProduct->brand_id]);
+            }
+            
+            if (array_key_exists('quantity_low',$commonProduct->getChanges()) || array_key_exists('quantity_critical', $commonProduct->getChanges())) {
+                $commonProduct->UpdateStatusQuantity();
+            }
         }
     }
 

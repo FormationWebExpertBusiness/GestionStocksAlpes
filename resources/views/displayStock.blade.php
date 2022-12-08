@@ -1,9 +1,0 @@
-@extends('template')
-@section('title', 'Stock')
-@section('content')
-<div class="min-w-0 ml-64">
-    @livewire('view-all')
-</div>
-<script src="{{ asset('js/app.js') }}"></script>
-<livewire:scripts />
-@endsection

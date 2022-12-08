@@ -33,8 +33,8 @@ class CommonProductForm extends Component
         'brand_id' => ['nullable', 'integer'],
         'model' => ['required'],
         'photo_product' => ['nullable','image'],
-        'quantity_low' => ['nullable', 'integer', 'min:0'],
-        'quantity_critical' => ['nullable', 'integer', 'min:0'],
+        'quantity_low' => ['nullable', 'integer', 'min:-1'],
+        'quantity_critical' => ['nullable', 'integer', 'min:-1'],
     ];
 
     protected $listeners = [

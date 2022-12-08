@@ -199,7 +199,7 @@ class ViewAll extends Component
 
         $this->showToast = true;
 
-        return view('livewire.view-all', ['commonProducts' => $paginatedCommonProducts]);
+        return view('livewire.view-all', ['commonProducts' => $paginatedCommonProducts])->layout('layout');
     }
 
     public function downloadCommonProductCsv()
