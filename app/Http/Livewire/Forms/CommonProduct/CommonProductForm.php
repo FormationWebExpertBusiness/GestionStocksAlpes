@@ -87,18 +87,8 @@ class CommonProductForm extends Component
             $this->addDynamicRules();
         }
         $validatedData = $this->validate();
-        if ($this->photo_product) {
-            $photo = $this->photo_product->store('public');
-            $validatedData['photo_product'] = $photo;
-        }
 
-        if (!$validatedData['quantity_low']) {
-            $validatedData['quantity_low'] = 0;
-        }
-
-        if (!$validatedData['quantity_critical']) {
-            $validatedData['quantity_critical'] = 0;
-        }
+        $validatedData = $this->modifyValidatedData($validatedData);
 
         if (isset($this->commonProductToUpdate)) {
             $this->commonProductToUpdate->update($validatedData);
@@ -121,7 +111,7 @@ class CommonProductForm extends Component
     public function closeForm()
     {
         $this->resetInputs();
-        
+
         $this->isFormOpen = false;
     }
 
@@ -172,5 +162,22 @@ class CommonProductForm extends Component
 
             $this->brand_id = 1;
         }
+    }
+
+    private function modifyValidatedData($validatedData)
+    {
+        if ($this->photo_product) {
+            $photo = $this->photo_product->store('public');
+            $validatedData['photo_product'] = $photo;
+        }
+
+        if (! $validatedData['quantity_low']) {
+            $validatedData['quantity_low'] = 0;
+        }
+
+        if (! $validatedData['quantity_critical']) {
+            $validatedData['quantity_critical'] = 0;
+        }
+        return $validatedData;
     }
 }

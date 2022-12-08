@@ -9,7 +9,7 @@ use Livewire\Component;
 class ProductAddForm extends Component
 {
     public $show = false;
-    
+
     public $commonProduct;
 
     public $racks;

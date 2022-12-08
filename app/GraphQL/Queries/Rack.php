@@ -4,9 +4,7 @@ namespace App\GraphQL\Queries;
 
 use App\Models\Rack as ModelsRack;
 
-use Illuminate\Support\Facades\Log;
-
-final class Rack
+class Rack
 {
     /**
      * @param  null  $_

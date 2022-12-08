@@ -13,6 +13,12 @@ class CommonProduct extends Model
     use HasFactory;
     public $timestamps = true;
 
+    public static $statutesQuantity = [
+        'S' => 'Quantité suffisante',
+        'F' => 'Quantité faible',
+        'C' => 'Quantité critique',
+    ];
+
     protected $table = 'common_products';
     protected $primaryKey = 'id';
 
@@ -24,7 +30,7 @@ class CommonProduct extends Model
         'quantity_low',
         'quantity_critical',
         'photo_product',
-        'status_quantity',
+        'code_statut_quantity',
     ];
 
     protected $with = [
@@ -36,6 +42,7 @@ class CommonProduct extends Model
     protected $appends = [
         'quantity',
         'totalPrice',
+        'statutQuantity',
     ];
 
     public function getQuantityAttribute()
@@ -46,6 +53,11 @@ class CommonProduct extends Model
     public function getTotalPriceAttribute()
     {
         return Product::select(DB::raw('sum(price) as value'))->where('common_id', $this->id)->first()->value;
+    }
+
+    public function getStatutQuantityAttribute()
+    {
+        return CommonProduct::$statutesQuantity[$this->code_statut_quantity];
     }
 
     public function unitPrice()
@@ -108,14 +120,14 @@ class CommonProduct extends Model
         return $this->totalPriceOnRack($rack, $rack_level) / $this->quantityOnRack($rack, $rack_level);
     }
 
-    public function UpdateStatusQuantity()
+    public function updateStatusQuantity()
     {
         if ($this->quantity <= $this->quantity_critical) {
-            $this->status_quantity = 'Quantité critique';
-        } else if ($this->quantity <= $this->quantity_low) {
-            $this->status_quantity = 'Quantité faible';
+            $this->code_statut_quantity = 'C';
+        } elseif ($this->quantity <= $this->quantity_low) {
+            $this->code_statut_quantity = 'F';
         } else {
-            $this->status_quantity = 'En Stock';
+            $this->code_statut_quantity = 'S';
         }
         $this->save();
     }
@@ -163,19 +175,11 @@ class CommonProduct extends Model
         })->values();
     }
 
-    public static function filterOnquantityLow($commonProducts)
+    public static function filterOnquantitystatut($commonProducts, $statutes)
     {
-        return $commonProducts->filter(function ($value) {
-            if ($value->quantity <= $value->quantity_low && $value->quantity > $value->quantity_critical) {
-                return $value;
-            }
-        })->values();
-    }
-
-    public static function filterOnquantityCritical($commonProducts)
-    {
-        return $commonProducts->filter(function ($value) {
-            if ($value->quantity <= $value->quantity_critical) {
+        $statutes = count($statutes) === 0 ? CommonProduct::$statutesQuantity : $statutes;
+        return $commonProducts->filter(function ($value) use ($statutes) {
+            if (in_array($value->statut_quantity, $statutes)) {
                 return $value;
             }
         })->values();
@@ -233,6 +237,6 @@ class CommonProduct extends Model
 
     public static function totalOutStockProduct()
     {
-        return CommonProduct::where('status_quantity', 'Quantité critique')->count();
+        return CommonProduct::where('code_statut_quantity', 'C')->count();
     }
 }

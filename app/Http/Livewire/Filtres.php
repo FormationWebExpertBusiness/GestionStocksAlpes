@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\Models\Category;
+use App\Models\CommonProduct;
 use App\Models\Rack;
 use Illuminate\Support\Str;
 use Livewire\Component;
@@ -13,11 +14,13 @@ class Filtres extends Component
     public $isVisibleBrand = false;
     public $isVisibleRack = false;
     public $isVisibleRackLevel = false;
+    public $isVisibleStatut = false;
 
     public $categories;
     public $brands;
     public $racks;
     public $rackLevels;
+    public $statutes;
 
     public $quantityMin;
     public $quantityMax;
@@ -26,6 +29,7 @@ class Filtres extends Component
     public $brandsFilter = [];
     public $racksFilter = [];
     public $rackLevelsFilter = [];
+    public $statutesFilter = [];
 
     public $searchFilter;
 
@@ -62,6 +66,7 @@ class Filtres extends Component
         $this->brandsFilter = [];
         $this->racksFilter = [];
         $this->rackLevelsFilter = [];
+        $this->statutesFilter = [];
         $this->quantityMin = null;
         $this->quantityMax = null;
 
@@ -81,6 +86,8 @@ class Filtres extends Component
         $this->categories = Category::all();
 
         $this->racks = Rack::all();
+
+        $this->statutes = CommonProduct::$statutesQuantity;
 
         $levelMax = Rack::getRackLevelMax($this->racksFilter);
 
