@@ -23,6 +23,8 @@ class History extends Component
     public $dateTo;
     public $searchFilter;
 
+    public $readyToLoad = false;
+
     private $historyProducts;
 
     public function resetFilters()
@@ -49,6 +51,11 @@ class History extends Component
             $this->historyProducts = HistoryProduct::orderByDesc('created_at')
                 ->get();
         }
+    }
+
+    public function loadData()
+    {
+        $this->readyToLoad = true;
     }
 
     public function collectionToPaginator()
@@ -82,11 +89,16 @@ class History extends Component
 
         $this->categories = HistoryProduct::getAllCategories();
 
-        $this->filterOnSearchBar();
-        $this->historyProducts = HistoryProduct::filterOnBrands($this->historyProducts, $this->brandsFilter);
-        $this->historyProducts = HistoryProduct::filterOnCategories($this->historyProducts, $this->catsFilter);
-        $this->historyProducts = HistoryProduct::filterOnMovedAfter($this->historyProducts, $this->dateFrom);
-        $this->historyProducts = HistoryProduct::filterOnMovedBefore($this->historyProducts, $this->dateTo);
+        if ($this->readyToLoad) {
+            $this->filterOnSearchBar();
+            $this->historyProducts = HistoryProduct::filterOnBrands($this->historyProducts, $this->brandsFilter);
+            $this->historyProducts = HistoryProduct::filterOnCategories($this->historyProducts, $this->catsFilter);
+            $this->historyProducts = HistoryProduct::filterOnMovedAfter($this->historyProducts, $this->dateFrom);
+            $this->historyProducts = HistoryProduct::filterOnMovedBefore($this->historyProducts, $this->dateTo);
+        } else {
+            $this->historyProducts = collect();
+        }
+
         $paginatedHistoProducts = $this->collectionToPaginator();
 
         return view('livewire.history', ['historyProducts' => $paginatedHistoProducts])->layout('layout');

@@ -9,10 +9,16 @@ class Dashboard extends Component
 {
     public $commonProducts;
     public $search;
+    public $readyToLoad = false;
 
     protected $queryString = [
         'search' => ['except' => ''],
     ];
+
+    public function loadData()
+    {
+        $this->readyToLoad = true;
+    }
 
     public function toggleCatDropdown()
     {
@@ -21,14 +27,17 @@ class Dashboard extends Component
 
     public function render()
     {
-        $this->commonProducts = CommonProduct::select('common_products.*')
-            ->join('categories', 'categories.id', '=', 'common_products.category_id')
-            ->where('categories.name', 'like', '%' . $this->search . '%')
-            ->where('favorite', '=', true)
-            ->orWhere('model', 'like', '%' . $this->search . '%')
-            ->where('favorite', '=', true)
-            ->limit(20)
-            ->get();
+        $this->commonProducts = $this->readyToLoad
+            ? CommonProduct::select('common_products.*')
+                ->join('categories', 'categories.id', '=', 'common_products.category_id')
+                ->where('categories.name', 'like', '%' . $this->search . '%')
+                ->where('favorite', '=', true)
+                ->orWhere('model', 'like', '%' . $this->search . '%')
+                ->where('favorite', '=', true)
+                ->limit(20)
+                ->get()
+            : [] ;
+        // dump($this->commonProducts);
         return view('livewire.dashboard')->layout('layout');
     }
 }
