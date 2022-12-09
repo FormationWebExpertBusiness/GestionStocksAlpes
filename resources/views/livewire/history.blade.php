@@ -1,5 +1,5 @@
 <div>
-    <div class="px-4 sm:px-6 lg:px-8">
+    <div class="px-4 sm:px-6 lg:px-8" wire:init='loadData'>
         <div class="sm:flex sm:items-center mt-10 mb-6">
             <div class="sm:flex-auto">
                 <div class="min-w-0 flex-1">
@@ -215,17 +215,50 @@
                                         </tr>
                                     </div>
                                 @empty
-                                    <tr class="bg-white divide-x divide-gray-200 table w-full table-fixed">
-                                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                    <div class="text-center">
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-12 h-12 mx-auto text-gray-400">
-                                            <path stroke-linecap="round" stroke-linejoin="round" d="M21 7.5l-9-5.25L3 7.5m18 0l-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9" />
-                                          </svg>
-                                        <h3 class="mt-2 text-sm font-medium text-gray-900">Aucun mouvement dans le stock</h3>
-                                        
-                                      </div>
-                                    </td>
-                                    </tr>
+                                    @if ($readyToLoad)
+                                        <tr class="bg-white divide-x divide-gray-200 table w-full table-fixed">
+                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                        <div class="text-center">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-12 h-12 mx-auto text-gray-400">
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="M21 7.5l-9-5.25L3 7.5m18 0l-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9" />
+                                            </svg>
+                                            <h3 class="mt-2 text-sm font-medium text-gray-900">Aucun mouvement dans le stock</h3>
+                                            
+                                        </div>
+                                        </td>
+                                        </tr>
+                                    @else
+                                        @for ($i = 0; $i < 12; $i++)
+                                            <div>
+                                                <tr class="odd:bg-white even:bg-gray-50 divide-x divide-gray-200 table w-full table-fixed">
+                                                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 w-28">
+                                                        <p class="leading-relaxed rounded-md w-2/3 animate-pulse bg-gray-400 h-6"><br></p>
+                                                    </td>
+                                                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 w-44 justify-center">
+                                                        <p class="leading-relaxed rounded-md w-2/3 animate-pulse bg-gray-400 h-6"><br></p>
+                                                    </td>
+                                                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                                        <p class="leading-relaxed rounded-md w-2/3 animate-pulse bg-gray-400 h-6"><br></p>
+                                                    </td>
+                                                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                                        <p class="leading-relaxed rounded-md w-2/3 animate-pulse bg-gray-400 h-6"><br></p>
+                                                    </td>
+                                                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                                        <p class="leading-relaxed rounded-md w-2/3 animate-pulse bg-gray-400 h-6"><br></p>
+                                                    </td>
+                                                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                                        <p class="leading-relaxed rounded-md w-2/3 animate-pulse bg-gray-400 h-6"><br></p>
+                                                    </td>
+                                                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 w-32">
+                                                        <p class="leading-relaxed rounded-md w-2/3 animate-pulse bg-gray-400 h-6"><br></p>
+                                                    </td>
+                                                    <td class="whitespace-wrap px-3 py-4 text-sm text-gray-500 w-1/4">
+                                                        <p class="leading-relaxed rounded-md w-2/3 animate-pulse bg-gray-400 h-6"><br></p>
+                                                    </td>
+                                                </tr>
+                                            </div>
+                                        @endfor
+                                    @endif
                                 @endforelse
                             </tbody>
                         </table>

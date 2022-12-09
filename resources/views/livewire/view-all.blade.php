@@ -233,7 +233,7 @@
                                             </td>
                                         </tr>
                                     @else
-                                        @for ($i = 0; $i < 15; $i++)
+                                        @for ($i = 0; $i < 12; $i++)
                                             <tr class="odd:bg-white even:bg-gray-50 divide-x divide-gray-200 table w-full table-fixed">
                                                 <td class="whitespace-nowrap px-3 py-4 text-sm text-center text-gray-500 w-[5%]">
                                                     <p class="leading-relaxed rounded-md w-2/3 animate-pulse bg-gray-400 h-6"><br></p>
