@@ -10,6 +10,24 @@ afterEach(function () {
     $this->artisan('migrate:fresh');
 });
 
+test('test Rack method getQrcode', function() {
+    //data
+    $rack = Rack::create(['nb_level' => 5]);
+
+    //test
+    $this->assertMatchesRegularExpression('</svg>', $rack->getQrcode(1)->__toString());
+});
+
+test('test Rack method dataInQrcode', function() {
+    //data
+    $rack = Rack::create(['nb_level' => 5]);
+    $rack2 = Rack::create(['nb_level' => 7]);
+
+    //test
+    $this->assertEquals('{"rack_id":1, "rack_level":3}', $rack->dataInQrcode(3));
+    $this->assertEquals('{"rack_id":2, "rack_level":7}', $rack2->dataInQrcode(7));
+});
+
 test('test Rack method productsOn', function () {
     // datas
     $rack = Rack::create(['nb_level' => 5]);
