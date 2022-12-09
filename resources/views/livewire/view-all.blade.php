@@ -84,7 +84,7 @@
             </script>
         @endif
     @endif
-    <div class="px-4 sm:px-6 lg:px-8">
+    <div class="px-4 sm:px-6 lg:px-8" wire:init='loadData'>
         <div class="sm:flex sm:items-center mt-10 mb-6">
             <div class="sm:flex-auto">
                 <div class="min-w-0 flex-1">
@@ -215,22 +215,53 @@
                                         </tr>
                                     </div>
                                 @empty
-                                    <tr class="bg-white divide-x divide-gray-200 table w-full table-fixed">
-                                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                            <div class="text-center">
-                                                <svg class="mx-auto h-12 w-12 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                                </svg>
+                                    @if ($readyToLoad)
+                                        <tr class="bg-white divide-x divide-gray-200 table w-full table-fixed">
+                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                                <div class="text-center">
+                                                    <svg class="mx-auto h-12 w-12 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                                    </svg>
 
-                                                <h3 class="mt-2 text-sm font-medium text-gray-900">Aucun produit</h3>
-                                                <p class="mt-1 text-sm text-gray-500">Vous pouvez en ajouter un nouveau
-                                                </p>
-                                                <div class="mt-3">
-                                                    @livewire('forms.common-product.common-product-form')
+                                                    <h3 class="mt-2 text-sm font-medium text-gray-900">Aucun produit</h3>
+                                                    <p class="mt-1 text-sm text-gray-500">Vous pouvez en ajouter un nouveau
+                                                    </p>
+                                                    <div class="mt-3">
+                                                        @livewire('forms.common-product.common-product-form')
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </td>
-                                    </tr>
+                                            </td>
+                                        </tr>
+                                    @else
+                                        @for ($i = 0; $i < 15; $i++)
+                                            <tr class="odd:bg-white even:bg-gray-50 divide-x divide-gray-200 table w-full table-fixed">
+                                                <td class="whitespace-nowrap px-3 py-4 text-sm text-center text-gray-500 w-[5%]">
+                                                    <p class="leading-relaxed rounded-md w-2/3 animate-pulse bg-gray-400 h-6"><br></p>
+                                                </td>
+                                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 w-[5%]">
+                                                    <p class="leading-relaxed rounded-md w-2/3 animate-pulse bg-gray-400 h-6"><br></p>
+                                                </td>
+                                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                                    <p class="leading-relaxed rounded-md w-2/3 animate-pulse bg-gray-400 h-6"><br></p>
+                                                </td>
+                                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                                    <p class="leading-relaxed rounded-md w-2/3 animate-pulse bg-gray-400 h-6"><br></p>
+                                                </td>
+                                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                                    <p class="leading-relaxed rounded-md w-2/3 animate-pulse bg-gray-400 h-6"><br></p>
+                                                </td>
+                                                <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-500 w-[12%]">
+                                                    <p class="leading-relaxed rounded-md w-2/3 animate-pulse bg-gray-400 h-6"><br></p>
+                                                </td>
+                                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 w-[10%]">
+                                                    <p class="leading-relaxed rounded-md w-2/3 animate-pulse bg-gray-400 h-6"><br></p>
+                                                </td>
+                                                <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-center text-sm font-medium sm:pr-6 w-1/5">
+                                                    <p class="leading-relaxed rounded-md w-2/3 animate-pulse bg-gray-400 h-6"><br></p>
+                                                </td>
+                                            </tr>
+                                        @endfor
+                                    @endif
                                 @endforelse
                             </tbody>
                         </table>

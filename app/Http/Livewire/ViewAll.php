@@ -42,6 +42,8 @@ class ViewAll extends Component
 
     public $paginatedCommonProducts;
 
+    public $readyToLoad = false;
+
     protected $queryString = [
         'champ' => ['except' => 'id', 'as' => 'cha'],
         'mode' => ['as' => 'mod'],
@@ -138,6 +140,11 @@ class ViewAll extends Component
         }
     }
 
+    public function loadData()
+    {
+        $this->readyToLoad = true; 
+    }
+
     public function reOrder($champO)
     {
         $this->toggleMode();
@@ -193,16 +200,21 @@ class ViewAll extends Component
     {
         $this->csvExportId = Cache::get('csvExportId');
 
-        $this->filterOnSearchBar();
-        $this->commonProducts = CommonProduct::filterOnBrands($this->commonProducts, $this->brandsF);
-        $this->commonProducts = CommonProduct::filterOnCategories($this->commonProducts, $this->categoriesF);
-        $this->commonProducts = CommonProduct::filterOnquantitystatut($this->commonProducts, $this->statutesF);
-        if ($this->racksF || $this->rackLevelsF) {
-            $this->commonProducts = CommonProduct::filterOnRacksQuantities($this->commonProducts, $this->quantityMin, $this->quantityMax, $this->racksF, $this->rackLevelsF);
+        if($this->readyToLoad)
+        {
+            $this->filterOnSearchBar();
+            $this->commonProducts = CommonProduct::filterOnBrands($this->commonProducts, $this->brandsF);
+            $this->commonProducts = CommonProduct::filterOnCategories($this->commonProducts, $this->categoriesF);
+            $this->commonProducts = CommonProduct::filterOnquantitystatut($this->commonProducts, $this->statutesF);
+            if ($this->racksF || $this->rackLevelsF) {
+                $this->commonProducts = CommonProduct::filterOnRacksQuantities($this->commonProducts, $this->quantityMin, $this->quantityMax, $this->racksF, $this->rackLevelsF);
+            } else {
+                $this->commonProducts = CommonProduct::filterOnQuantities($this->commonProducts, $this->quantityMin, $this->quantityMax);
+            }
+            $this->sortCommonProducts();
         } else {
-            $this->commonProducts = CommonProduct::filterOnQuantities($this->commonProducts, $this->quantityMin, $this->quantityMax);
+            $this->commonProducts = collect();
         }
-        $this->sortCommonProducts();
         $paginatedCommonProducts = $this->collectionToPaginator();
 
         $this->showToast = true;
