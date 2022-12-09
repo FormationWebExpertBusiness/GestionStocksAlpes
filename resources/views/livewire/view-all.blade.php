@@ -99,7 +99,7 @@
             </div>
         </div>
         @livewire('warning-before-delete')
-        @livewire('filtres', ['search' => $searchValue, 'catsFilter' => $categoriesF, 'brandsFilter' => $brandsF, 'racksFilter' => $racksF, 'rackLevelsFilter' => $rackLevelsF, 'quantityMin' => $quantityMin, 'quantityMax' => $quantityMax])
+        @livewire('filtres', ['search' => $searchValue, 'catsFilter' => $categoriesF, 'brandsFilter' => $brandsF, 'statutesFilter' => $statutesF, 'racksFilter' => $racksF, 'rackLevelsFilter' => $rackLevelsF, 'quantityMin' => $quantityMin, 'quantityMax' => $quantityMax])
 
         <div class="flex flex-col">
             <div class="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
