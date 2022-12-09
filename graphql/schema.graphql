@@ -10,10 +10,19 @@ type Query {
 	products(
 		rack_id: Int!
 		rack_level: Int!
-		): [Product!]
+	): [Product!]
+
+	product(
+		id: ID! @eq
+	): Product! @find
 
 	"All CommonProducts with their products"
 	commonProducts: [CommonProduct!]
+
+	"A CommonProduct with his products"
+	commonProduct(
+		id: ID! @eq
+	): CommonProduct! @find
 
 	"A rack"
 	rack(
@@ -46,6 +55,7 @@ type CommonProduct {
 	category: Category!
 	brand: Brand! 
 	model: String!
+	quantity: Int!
 	quantity_low: Int!
 	quantity_critical: Int!
 	products: [Product!]
