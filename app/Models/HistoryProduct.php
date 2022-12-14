@@ -73,9 +73,7 @@ class HistoryProduct extends Model
     {
         if ($dateFrom) {//filter
             return $historyProducts->filter(function ($value) use ($dateFrom) {
-                // dump($value->created_at->format('d/m/Y'),'>=', $dateFrom);
-                if ($value->created_at->format('Y-m-d') >= $dateFrom) {
-                    // dump('ok');
+                if ($value->created_at->format('Y-m-d') >= $dateFrom->format('Y-m-d')) {
                     return $value;
                 }
             });
@@ -88,9 +86,7 @@ class HistoryProduct extends Model
     {
         if ($dateTo) {//filter
             return $historyProducts->filter(function ($value) use ($dateTo) {
-                // dump($value->created_at->format('d/m/Y'),'<=', $dateTo);
-                if ($value->created_at->format('Y-m-d') <= $dateTo) {
-                    // dump('ok');
+                if ($value->created_at->format('Y-m-d') <= $dateTo->format('Y-m-d')) {
                     return $value;
                 }
             });
