@@ -25,12 +25,12 @@ class HistoryProduct extends Model
 
     public static function oldestDate()
     {
-        return date('Y-m-d',strtotime(HistoryProduct::selectRaw('MIN(created_at) as oldest_date')->first()->oldest_date));
+        return date('Y-m-d', strtotime(HistoryProduct::selectRaw('MIN(created_at) as oldest_date')->first()->oldest_date));
     }
 
     public static function newestDate()
     {
-        return date('Y-m-d',strtotime(HistoryProduct::selectRaw('MAX(created_at) as newest_date')->first()->newest_date));
+        return date('Y-m-d', strtotime(HistoryProduct::selectRaw('MAX(created_at) as newest_date')->first()->newest_date));
     }
 
     public static function getAllBrands()
