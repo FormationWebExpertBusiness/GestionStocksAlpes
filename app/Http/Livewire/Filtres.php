@@ -14,7 +14,7 @@ class Filtres extends Component
     public $isVisibleBrand = false;
     public $isVisibleRack = false;
     public $isVisibleRackLevel = false;
-    public $isVisibleStatut = false;
+    public $isVisibleStatus = false;
 
     public $categories;
     public $brands;

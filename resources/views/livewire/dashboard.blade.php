@@ -22,7 +22,7 @@
                         </dt>
                         <dd class="ml-16 flex items-baseline pb-6 sm:pb-7">
                             <p class="text-2xl font-semibold text-gray-900"> 
-                                {{ App\Models\CommonProduct::filterOnquantityStatut(App\Models\CommonProduct::all(), [App\Models\CommonProduct::$statutesQuantity['C']])->count() }} produit
+                                {{ App\Models\CommonProduct::filterOnquantityStatus(App\Models\CommonProduct::all(), [App\Models\CommonProduct::$statutesQuantity['C']])->count() }} produit
                             </p>
                             <div class="absolute inset-x-0 bottom-0 bg-gray-50 px-4 py-4 sm:px-6">
                                 <div class="text-sm">
@@ -46,7 +46,7 @@
                         </dt>
                         <dd class="ml-16 flex items-baseline pb-6 sm:pb-7">
                             <p class="text-2xl font-semibold text-gray-900">
-                                {{ App\Models\CommonProduct::filterOnquantityStatut(App\Models\CommonProduct::all(), ['Quantité faible'])->count() }} produits
+                                {{ App\Models\CommonProduct::filterOnquantityStatus(App\Models\CommonProduct::all(), ['Quantité faible'])->count() }} produits
                             </p>
                             <div class="absolute inset-x-0 bottom-0 bg-gray-50 px-4 py-4 sm:px-6">
                                 <div class="text-sm">
@@ -186,11 +186,11 @@
                                         </td>
                                         <td class="whitespace-nowrap pl-4">
                                             @if ($commonProduct->code_status_quantity === 'C')
-                                                <x-dot_badge color="red" :text="$commonProduct->statut_quantity"/>
+                                                <x-dot_badge color="red" :text="$commonProduct->status_quantity"/>
                                             @elseif ($commonProduct->code_status_quantity === 'F')
-                                                <x-dot_badge color="orange" :text="$commonProduct->statut_quantity"/>
+                                                <x-dot_badge color="orange" :text="$commonProduct->status_quantity"/>
                                             @else
-                                                <x-dot_badge color="green" :text="$commonProduct->statut_quantity"/>
+                                                <x-dot_badge color="green" :text="$commonProduct->status_quantity"/>
                                             @endif
                                         </td>
                                         <td

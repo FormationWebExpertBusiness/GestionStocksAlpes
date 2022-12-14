@@ -22,7 +22,7 @@ return new class extends Migration
             $table->integer('quantity_critical')->default(-1);
             $table->boolean('favorite')->default(false);
             $table->string('photo_product')->nullable();
-            $table->string('code_statut_quantity')->default('S');
+            $table->string('code_status_quantity')->default('S');
             $table->foreign('category_id')->references('id')->on('categories')->onUpdate('restrict')->onDelete('cascade');
             $table->foreign('brand_id')->references('id')->on('brands')->onUpdate('restrict')->onDelete('cascade');
         

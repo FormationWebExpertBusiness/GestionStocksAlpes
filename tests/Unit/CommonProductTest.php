@@ -40,7 +40,7 @@ test('test CommonProduct method getTotalPriceAttribute', function () {
     $this->assertEquals(18, $commonProduct->getTotalPriceAttribute());
 });
 
-test('test CommonProduct method getStatutQuantityAttribute', function () {
+test('test CommonProduct method getStatusQuantityAttribute', function () {
     // datas
     Rack::create(['nb_level' => 5]);
     Brand::create(['name' => 'marque']);
@@ -67,9 +67,9 @@ test('test CommonProduct method getStatutQuantityAttribute', function () {
 
     // test
     
-    $this->assertEquals('Quantité faible', $commonProduct1->getStatutQuantityAttribute());
-    $this->assertEquals('Quantité critique', $commonProduct2->getStatutQuantityAttribute());
-    $this->assertEquals('Quantité suffisante', $commonProduct3->getStatutQuantityAttribute());
+    $this->assertEquals('Quantité faible', $commonProduct1->getStatusQuantityAttribute());
+    $this->assertEquals('Quantité critique', $commonProduct2->getStatusQuantityAttribute());
+    $this->assertEquals('Quantité suffisante', $commonProduct3->getStatusQuantityAttribute());
 });
 
 test('test CommonProduct method unitPrice', function () {
@@ -252,7 +252,7 @@ test('test CommonProduct method updateStatusQuantity', function () {
     Product::create(['price' => 10, 'serial_number' => 'ite8', 'common_id' => 3, 'rack_id' => 1, 'rack_level' => 1]);
     Product::create(['price' => 3, 'serial_number' => 'ite9', 'common_id' => 3, 'rack_id' => 1, 'rack_level' => 4]);
 
-    //methode change code_statut_quantity and it is call in ProductObserver on create/delete
+    //methode change code_status_quantity and it is call in ProductObserver on create/delete
 
     $commonProduct1 = CommonProduct::find(1);
     $commonProduct2 = CommonProduct::find(2);
@@ -260,9 +260,9 @@ test('test CommonProduct method updateStatusQuantity', function () {
 
     // test
     
-    $this->assertEquals('F', $commonProduct1->code_statut_quantity);
-    $this->assertEquals('C', $commonProduct2->code_statut_quantity);
-    $this->assertEquals('S', $commonProduct3->code_statut_quantity);
+    $this->assertEquals('F', $commonProduct1->code_status_quantity);
+    $this->assertEquals('C', $commonProduct2->code_status_quantity);
+    $this->assertEquals('S', $commonProduct3->code_status_quantity);
 });
 
 test('test CommonProduct method filterOnQuantities', function () {
@@ -393,7 +393,7 @@ test('test CommonProduct method filterOnCategories', function () {
     $this->expect(CommonProduct::filterOnCategories($commonProducts, [1,2,3]))->toEqual(collect([$commonProduct, $commonProduct2, $commonProduct3, $commonProduct4]));
 });
 
-test('test CommonProduct method filterOnquantityStatut', function () {
+test('test CommonProduct method filterOnquantityStatus', function () {
     // datas
     Rack::create(['nb_level' => 5]);
     Brand::create(['name' => 'marque']);
@@ -414,7 +414,7 @@ test('test CommonProduct method filterOnquantityStatut', function () {
     Product::create(['price' => 10, 'serial_number' => 'ite8', 'common_id' => 3, 'rack_id' => 1, 'rack_level' => 1]);
     Product::create(['price' => 3, 'serial_number' => 'ite9', 'common_id' => 3, 'rack_id' => 1, 'rack_level' => 4]);
 
-    //methode change code_statut_quantity and it is call in ProductObserver on create/delete
+    //methode change code_status_quantity and it is call in ProductObserver on create/delete
 
     $commonProducts = CommonProduct::all();
     $commonProduct1 = CommonProduct::find(1);
@@ -427,14 +427,14 @@ test('test CommonProduct method filterOnquantityStatut', function () {
 
 
     // test
-    $this->expect(CommonProduct::filterOnquantityStatut($commonProducts, [])->pluck('id')->toArray())->toEqual(collect([$commonProduct1, $commonProduct2, $commonProduct3])->pluck('id')->toArray());
-    $this->expect(CommonProduct::filterOnquantityStatut($commonProducts, [$f])->pluck('id')->toArray())->toEqual(collect([$commonProduct1])->pluck('id')->toArray());
-    $this->expect(CommonProduct::filterOnquantityStatut($commonProducts, [$c])->pluck('id')->toArray())->toEqual(collect([$commonProduct2])->pluck('id')->toArray());
-    $this->expect(CommonProduct::filterOnquantityStatut($commonProducts, [$s])->pluck('id')->toArray())->toEqual(collect([$commonProduct3])->pluck('id')->toArray());
-    $this->expect(CommonProduct::filterOnquantityStatut($commonProducts, [$f,$s])->pluck('id')->toArray())->toEqual(collect([$commonProduct1, $commonProduct3])->pluck('id')->toArray());
-    $this->expect(CommonProduct::filterOnquantityStatut($commonProducts, [$f,$c])->pluck('id')->toArray())->toEqual(collect([$commonProduct1, $commonProduct2])->pluck('id')->toArray());
-    $this->expect(CommonProduct::filterOnquantityStatut($commonProducts, [$c, $s])->pluck('id')->toArray())->toEqual(collect([$commonProduct2, $commonProduct3])->pluck('id')->toArray());
-    $this->expect(CommonProduct::filterOnquantityStatut($commonProducts, [$f, $c, $s])->pluck('id')->toArray())->toEqual(collect([$commonProduct1, $commonProduct2, $commonProduct3])->pluck('id')->toArray());
+    $this->expect(CommonProduct::filterOnquantityStatus($commonProducts, [])->pluck('id')->toArray())->toEqual(collect([$commonProduct1, $commonProduct2, $commonProduct3])->pluck('id')->toArray());
+    $this->expect(CommonProduct::filterOnquantityStatus($commonProducts, [$f])->pluck('id')->toArray())->toEqual(collect([$commonProduct1])->pluck('id')->toArray());
+    $this->expect(CommonProduct::filterOnquantityStatus($commonProducts, [$c])->pluck('id')->toArray())->toEqual(collect([$commonProduct2])->pluck('id')->toArray());
+    $this->expect(CommonProduct::filterOnquantityStatus($commonProducts, [$s])->pluck('id')->toArray())->toEqual(collect([$commonProduct3])->pluck('id')->toArray());
+    $this->expect(CommonProduct::filterOnquantityStatus($commonProducts, [$f,$s])->pluck('id')->toArray())->toEqual(collect([$commonProduct1, $commonProduct3])->pluck('id')->toArray());
+    $this->expect(CommonProduct::filterOnquantityStatus($commonProducts, [$f,$c])->pluck('id')->toArray())->toEqual(collect([$commonProduct1, $commonProduct2])->pluck('id')->toArray());
+    $this->expect(CommonProduct::filterOnquantityStatus($commonProducts, [$c, $s])->pluck('id')->toArray())->toEqual(collect([$commonProduct2, $commonProduct3])->pluck('id')->toArray());
+    $this->expect(CommonProduct::filterOnquantityStatus($commonProducts, [$f, $c, $s])->pluck('id')->toArray())->toEqual(collect([$commonProduct1, $commonProduct2, $commonProduct3])->pluck('id')->toArray());
 });
 
 test('test CommonProduct method sortOnCategories', function () {

@@ -100,7 +100,7 @@ class ViewAll extends Component
         $this->brandsF = $brands;
     }
 
-    public function updateStatutF($statutes)
+    public function updateStatusF($statutes)
     {
         $this->statutesF = $statutes;
     }
@@ -204,7 +204,7 @@ class ViewAll extends Component
             $this->filterOnSearchBar();
             $this->commonProducts = CommonProduct::filterOnBrands($this->commonProducts, $this->brandsF);
             $this->commonProducts = CommonProduct::filterOnCategories($this->commonProducts, $this->categoriesF);
-            $this->commonProducts = CommonProduct::filterOnquantityStatut($this->commonProducts, $this->statutesF);
+            $this->commonProducts = CommonProduct::filterOnquantityStatus($this->commonProducts, $this->statutesF);
             if ($this->racksF || $this->rackLevelsF) {
                 $this->commonProducts = CommonProduct::filterOnRacksQuantities($this->commonProducts, $this->quantityMin, $this->quantityMax, $this->racksF, $this->rackLevelsF);
             } else {
@@ -260,7 +260,7 @@ class ViewAll extends Component
             'stockUpdated' => 'reloadView',
             'catsFilter' => 'updateCatF',
             'brandsFilter' => 'updateBrandF',
-            'statutesFilter' => 'updateStatutF',
+            'statutesFilter' => 'updateStatusF',
             'racksFilter' => 'updateRackF',
             'rackLevelsFilter' => 'updateRackLevelF',
             'searchFilter' => 'search',
