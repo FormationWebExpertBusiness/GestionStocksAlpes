@@ -142,7 +142,7 @@ class ViewAll extends Component
 
     public function loadData()
     {
-        $this->readyToLoad = true; 
+        $this->readyToLoad = true;
     }
 
     public function reOrder($champO)
@@ -200,8 +200,7 @@ class ViewAll extends Component
     {
         $this->csvExportId = Cache::get('csvExportId');
 
-        if($this->readyToLoad)
-        {
+        if ($this->readyToLoad) {
             $this->filterOnSearchBar();
             $this->commonProducts = CommonProduct::filterOnBrands($this->commonProducts, $this->brandsF);
             $this->commonProducts = CommonProduct::filterOnCategories($this->commonProducts, $this->categoriesF);

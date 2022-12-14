@@ -13,12 +13,11 @@ class Product
     public function __invoke($_, array $args)
     {
         $product = Models\Product::find($args['id']);
-        
+
         $product->category = $product->getCategory();
         $product->brand = $product->getBrand();
         $product->model = $product->getModel();
-    
+
         return $product;
     }
-    
 }
