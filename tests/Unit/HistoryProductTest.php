@@ -125,9 +125,9 @@ test('test HistoryProduct method filterOnMovedAfter', function () {
     $historyProducts = HistoryProduct::all();
 
     // test
-    $this->assertEquals( [1,2,3], HistoryProduct::filterOnMovedAfter($historyProducts, Carbon::yesterday())->pluck('id')->toArray() );
-    $this->assertEquals( [1,2], HistoryProduct::filterOnMovedAfter($historyProducts, Carbon::today())->pluck('id')->toArray() );
-    $this->assertEquals( [1], HistoryProduct::filterOnMovedAfter($historyProducts, Carbon::tomorrow())->pluck('id')->toArray() );
+    $this->assertEquals( [1,2,3], HistoryProduct::filterOnMovedAfter($historyProducts, Carbon::yesterday()->format('Y-m-d'))->pluck('id')->toArray() );
+    $this->assertEquals( [1,2], HistoryProduct::filterOnMovedAfter($historyProducts, Carbon::today()->format('Y-m-d'))->pluck('id')->toArray() );
+    $this->assertEquals( [1], HistoryProduct::filterOnMovedAfter($historyProducts, Carbon::tomorrow()->format('Y-m-d'))->pluck('id')->toArray() );
 });
 
 test('test HistoryProduct method filterOnMovedBefore', function () {  
@@ -144,7 +144,7 @@ test('test HistoryProduct method filterOnMovedBefore', function () {
     $historyProducts = HistoryProduct::all();
 
     // test
-    $this->assertEquals( [3], HistoryProduct::filterOnMovedBefore($historyProducts, Carbon::yesterday())->pluck('id')->toArray() );
-    $this->assertEquals( [2,3], HistoryProduct::filterOnMovedBefore($historyProducts, Carbon::today())->pluck('id')->toArray() );
-    $this->assertEquals( [1,2,3], HistoryProduct::filterOnMovedBefore($historyProducts, Carbon::tomorrow())->pluck('id')->toArray() );
+    $this->assertEquals( [3], HistoryProduct::filterOnMovedBefore($historyProducts, Carbon::yesterday()->format('Y-m-d'))->pluck('id')->toArray() );
+    $this->assertEquals( [2,3], HistoryProduct::filterOnMovedBefore($historyProducts, Carbon::today()->format('Y-m-d'))->pluck('id')->toArray() );
+    $this->assertEquals( [1,2,3], HistoryProduct::filterOnMovedBefore($historyProducts, Carbon::tomorrow()->format('Y-m-d'))->pluck('id')->toArray() );
 });
