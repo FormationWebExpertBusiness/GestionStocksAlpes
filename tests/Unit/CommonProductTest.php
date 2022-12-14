@@ -6,23 +6,8 @@ use App\Models\Category;
 use App\Models\CommonProduct;
 use App\Models\Product;
 
-afterEach(function () {
+beforeEach(function () {
     $this->artisan('migrate:fresh');
-});
-
-test('test CommonProduct method products', function () {
-    // datas
-    $rack = Rack::create(['nb_level' => 5]);
-    $brand = Brand::create(['name' => 'marque']);
-    $category = Category::create(['name' => 'categorie']);
-    $commonProduct = CommonProduct::create(['category_id' => 1, 'brand_id' => 1, 'model' => 'ba']);
-
-    $product1 = Product::create(['price' => 5, 'serial_number' => 'ite1', 'common_id' => 1, 'rack_id' => 1, 'rack_level' => 2]);
-    $product2 = Product::create(['price' => 5, 'serial_number' => 'ite2', 'common_id' => 1, 'rack_id' => 1, 'rack_level' => 1]);
-    $product3 = Product::create(['price' => 5, 'serial_number' => 'ite3', 'common_id' => 1, 'rack_id' => 1, 'rack_level' => 4]);
-
-    // test
-    $this->assertEquals([1,2,3], $commonProduct->products()->pluck('id')->toArray());
 });
 
 test('test CommonProduct method getQuantityAttribute', function () {
@@ -53,6 +38,38 @@ test('test CommonProduct method getTotalPriceAttribute', function () {
 
     // test
     $this->assertEquals(18, $commonProduct->getTotalPriceAttribute());
+});
+
+test('test CommonProduct method getStatutQuantityAttribute', function () {
+    // datas
+    Rack::create(['nb_level' => 5]);
+    Brand::create(['name' => 'marque']);
+    Category::create(['name' => 'categorie']);
+    CommonProduct::create(['category_id' => 1, 'brand_id' => 1, 'model' => 'ba', 'quantity_low' => 4, 'quantity_critical' => 1]);
+    CommonProduct::create(['category_id' => 1, 'brand_id' => 1, 'model' => 'be', 'quantity_low' => 9, 'quantity_critical' => 4]);
+    CommonProduct::create(['category_id' => 1, 'brand_id' => 1, 'model' => 'bi', 'quantity_low' => 2, 'quantity_critical' => 1]);
+
+    Product::create(['price' => 5, 'serial_number' => 'ite1', 'common_id' => 1, 'rack_id' => 1, 'rack_level' => 2]);
+    Product::create(['price' => 10, 'serial_number' => 'ite2', 'common_id' => 1, 'rack_id' => 1, 'rack_level' => 1]);
+    Product::create(['price' => 3, 'serial_number' => 'ite3', 'common_id' => 1, 'rack_id' => 1, 'rack_level' => 4]);
+
+    Product::create(['price' => 5, 'serial_number' => 'ite4', 'common_id' => 2, 'rack_id' => 1, 'rack_level' => 2]);
+    Product::create(['price' => 10, 'serial_number' => 'ite5', 'common_id' => 2, 'rack_id' => 1, 'rack_level' => 1]);
+    Product::create(['price' => 3, 'serial_number' => 'ite6', 'common_id' => 2, 'rack_id' => 1, 'rack_level' => 4]);
+
+    Product::create(['price' => 5, 'serial_number' => 'ite7', 'common_id' => 3, 'rack_id' => 1, 'rack_level' => 2]);
+    Product::create(['price' => 10, 'serial_number' => 'ite8', 'common_id' => 3, 'rack_id' => 1, 'rack_level' => 1]);
+    Product::create(['price' => 3, 'serial_number' => 'ite9', 'common_id' => 3, 'rack_id' => 1, 'rack_level' => 4]);
+
+    $commonProduct1 = CommonProduct::find(1);
+    $commonProduct2 = CommonProduct::find(2);
+    $commonProduct3 = CommonProduct::find(3);
+
+    // test
+    
+    $this->assertEquals('Quantité faible', $commonProduct1->getStatutQuantityAttribute());
+    $this->assertEquals('Quantité critique', $commonProduct2->getStatutQuantityAttribute());
+    $this->assertEquals('Quantité suffisante', $commonProduct3->getStatutQuantityAttribute());
 });
 
 test('test CommonProduct method unitPrice', function () {
@@ -88,6 +105,38 @@ test('test CommonProduct method category', function () {
 
     // test
     $this->assertEquals([1], $commonProduct->category()->pluck('id')->toArray());
+});
+
+test('test CommonProduct method products', function () {
+    // datas
+    $rack = Rack::create(['nb_level' => 5]);
+    $brand = Brand::create(['name' => 'marque']);
+    $category = Category::create(['name' => 'categorie']);
+    $commonProduct = CommonProduct::create(['category_id' => 1, 'brand_id' => 1, 'model' => 'ba']);
+
+    $product1 = Product::create(['price' => 5, 'serial_number' => 'ite1', 'common_id' => 1, 'rack_id' => 1, 'rack_level' => 2]);
+    $product2 = Product::create(['price' => 5, 'serial_number' => 'ite2', 'common_id' => 1, 'rack_id' => 1, 'rack_level' => 1]);
+    $product3 = Product::create(['price' => 5, 'serial_number' => 'ite3', 'common_id' => 1, 'rack_id' => 1, 'rack_level' => 4]);
+
+    // test
+    $this->assertEquals([1,2,3], $commonProduct->products()->pluck('id')->toArray());
+});
+
+test('test CommonProduct method hasProduct', function () {
+    // datas
+    $rack = Rack::create(['nb_level' => 5]);
+    $brand = Brand::create(['name' => 'marque']);
+    $category = Category::create(['name' => 'categorie']);
+    $commonProduct1 = CommonProduct::create(['category_id' => 1, 'brand_id' => 1, 'model' => 'ba']);
+    $commonProduct2 = CommonProduct::create(['category_id' => 1, 'brand_id' => 1, 'model' => 'be']);
+
+    $product1 = Product::create(['price' => 5, 'serial_number' => 'ite1', 'common_id' => 1, 'rack_id' => 1, 'rack_level' => 2]);
+    $product2 = Product::create(['price' => 5, 'serial_number' => 'ite2', 'common_id' => 1, 'rack_id' => 1, 'rack_level' => 1]);
+    $product3 = Product::create(['price' => 5, 'serial_number' => 'ite3', 'common_id' => 1, 'rack_id' => 1, 'rack_level' => 4]);
+
+    // test
+    $this->assertEquals(true, $commonProduct1->hasProduct());
+    $this->assertEquals(false, $commonProduct2->hasProduct());
 });
 
 test('test CommonProduct method productsOnRack', function () {
@@ -180,6 +229,40 @@ test('test CommonProduct method unitPriceOnRack', function () {
     // test
     $this->expect(7.0)->toBe($commonProduct->unitPriceOnRack([2]));
     $this->expect(5.0)->toBe($commonProduct->unitPriceOnRack([1],[3,4]));
+});
+
+test('test CommonProduct method updateStatusQuantity', function () {
+    // datas
+    Rack::create(['nb_level' => 5]);
+    Brand::create(['name' => 'marque']);
+    Category::create(['name' => 'categorie']);
+    CommonProduct::create(['category_id' => 1, 'brand_id' => 1, 'model' => 'ba', 'quantity_low' => 4, 'quantity_critical' => 1]);
+    CommonProduct::create(['category_id' => 1, 'brand_id' => 1, 'model' => 'be', 'quantity_low' => 9, 'quantity_critical' => 4]);
+    CommonProduct::create(['category_id' => 1, 'brand_id' => 1, 'model' => 'bi', 'quantity_low' => 2, 'quantity_critical' => 1]);
+
+    Product::create(['price' => 5, 'serial_number' => 'ite1', 'common_id' => 1, 'rack_id' => 1, 'rack_level' => 2]);
+    Product::create(['price' => 10, 'serial_number' => 'ite2', 'common_id' => 1, 'rack_id' => 1, 'rack_level' => 1]);
+    Product::create(['price' => 3, 'serial_number' => 'ite3', 'common_id' => 1, 'rack_id' => 1, 'rack_level' => 4]);
+
+    Product::create(['price' => 5, 'serial_number' => 'ite4', 'common_id' => 2, 'rack_id' => 1, 'rack_level' => 2]);
+    Product::create(['price' => 10, 'serial_number' => 'ite5', 'common_id' => 2, 'rack_id' => 1, 'rack_level' => 1]);
+    Product::create(['price' => 3, 'serial_number' => 'ite6', 'common_id' => 2, 'rack_id' => 1, 'rack_level' => 4]);
+
+    Product::create(['price' => 5, 'serial_number' => 'ite7', 'common_id' => 3, 'rack_id' => 1, 'rack_level' => 2]);
+    Product::create(['price' => 10, 'serial_number' => 'ite8', 'common_id' => 3, 'rack_id' => 1, 'rack_level' => 1]);
+    Product::create(['price' => 3, 'serial_number' => 'ite9', 'common_id' => 3, 'rack_id' => 1, 'rack_level' => 4]);
+
+    //methode change code_statut_quantity and it is call in ProductObserver on create/delete
+
+    $commonProduct1 = CommonProduct::find(1);
+    $commonProduct2 = CommonProduct::find(2);
+    $commonProduct3 = CommonProduct::find(3);
+
+    // test
+    
+    $this->assertEquals('F', $commonProduct1->code_statut_quantity);
+    $this->assertEquals('C', $commonProduct2->code_statut_quantity);
+    $this->assertEquals('S', $commonProduct3->code_statut_quantity);
 });
 
 test('test CommonProduct method filterOnQuantities', function () {
@@ -308,6 +391,50 @@ test('test CommonProduct method filterOnCategories', function () {
     $this->expect(CommonProduct::filterOnCategories($commonProducts, [1,2]))->toEqual(collect([$commonProduct, $commonProduct2, $commonProduct4]));
     $this->expect(CommonProduct::filterOnCategories($commonProducts, [3,2]))->toEqual(collect([$commonProduct2, $commonProduct3, $commonProduct4]));
     $this->expect(CommonProduct::filterOnCategories($commonProducts, [1,2,3]))->toEqual(collect([$commonProduct, $commonProduct2, $commonProduct3, $commonProduct4]));
+});
+
+test('test CommonProduct method filterOnquantityStatut', function () {
+    // datas
+    Rack::create(['nb_level' => 5]);
+    Brand::create(['name' => 'marque']);
+    Category::create(['name' => 'categorie']);
+    CommonProduct::create(['category_id' => 1, 'brand_id' => 1, 'model' => 'ba', 'quantity_low' => 4, 'quantity_critical' => 1]);
+    CommonProduct::create(['category_id' => 1, 'brand_id' => 1, 'model' => 'be', 'quantity_low' => 9, 'quantity_critical' => 4]);
+    CommonProduct::create(['category_id' => 1, 'brand_id' => 1, 'model' => 'bi', 'quantity_low' => 2, 'quantity_critical' => 1]);
+
+    Product::create(['price' => 5, 'serial_number' => 'ite1', 'common_id' => 1, 'rack_id' => 1, 'rack_level' => 2]);
+    Product::create(['price' => 10, 'serial_number' => 'ite2', 'common_id' => 1, 'rack_id' => 1, 'rack_level' => 1]);
+    Product::create(['price' => 3, 'serial_number' => 'ite3', 'common_id' => 1, 'rack_id' => 1, 'rack_level' => 4]);
+
+    Product::create(['price' => 5, 'serial_number' => 'ite4', 'common_id' => 2, 'rack_id' => 1, 'rack_level' => 2]);
+    Product::create(['price' => 10, 'serial_number' => 'ite5', 'common_id' => 2, 'rack_id' => 1, 'rack_level' => 1]);
+    Product::create(['price' => 3, 'serial_number' => 'ite6', 'common_id' => 2, 'rack_id' => 1, 'rack_level' => 4]);
+
+    Product::create(['price' => 5, 'serial_number' => 'ite7', 'common_id' => 3, 'rack_id' => 1, 'rack_level' => 2]);
+    Product::create(['price' => 10, 'serial_number' => 'ite8', 'common_id' => 3, 'rack_id' => 1, 'rack_level' => 1]);
+    Product::create(['price' => 3, 'serial_number' => 'ite9', 'common_id' => 3, 'rack_id' => 1, 'rack_level' => 4]);
+
+    //methode change code_statut_quantity and it is call in ProductObserver on create/delete
+
+    $commonProducts = CommonProduct::all();
+    $commonProduct1 = CommonProduct::find(1);
+    $commonProduct2 = CommonProduct::find(2);
+    $commonProduct3 = CommonProduct::find(3);
+
+    $f = CommonProduct::$statutesQuantity['F'];
+    $c = CommonProduct::$statutesQuantity['C'];
+    $s = CommonProduct::$statutesQuantity['S'];
+
+
+    // test
+    $this->expect(CommonProduct::filterOnquantityStatut($commonProducts, [])->pluck('id')->toArray())->toEqual(collect([$commonProduct1, $commonProduct2, $commonProduct3])->pluck('id')->toArray());
+    $this->expect(CommonProduct::filterOnquantityStatut($commonProducts, [$f])->pluck('id')->toArray())->toEqual(collect([$commonProduct1])->pluck('id')->toArray());
+    $this->expect(CommonProduct::filterOnquantityStatut($commonProducts, [$c])->pluck('id')->toArray())->toEqual(collect([$commonProduct2])->pluck('id')->toArray());
+    $this->expect(CommonProduct::filterOnquantityStatut($commonProducts, [$s])->pluck('id')->toArray())->toEqual(collect([$commonProduct3])->pluck('id')->toArray());
+    $this->expect(CommonProduct::filterOnquantityStatut($commonProducts, [$f,$s])->pluck('id')->toArray())->toEqual(collect([$commonProduct1, $commonProduct3])->pluck('id')->toArray());
+    $this->expect(CommonProduct::filterOnquantityStatut($commonProducts, [$f,$c])->pluck('id')->toArray())->toEqual(collect([$commonProduct1, $commonProduct2])->pluck('id')->toArray());
+    $this->expect(CommonProduct::filterOnquantityStatut($commonProducts, [$c, $s])->pluck('id')->toArray())->toEqual(collect([$commonProduct2, $commonProduct3])->pluck('id')->toArray());
+    $this->expect(CommonProduct::filterOnquantityStatut($commonProducts, [$f, $c, $s])->pluck('id')->toArray())->toEqual(collect([$commonProduct1, $commonProduct2, $commonProduct3])->pluck('id')->toArray());
 });
 
 test('test CommonProduct method sortOnCategories', function () {

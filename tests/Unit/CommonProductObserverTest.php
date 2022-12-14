@@ -45,7 +45,7 @@ test('test CommonProductObserver method deleted', function () {
     $this->expect([])->toBe($category2->brands->pluck('id')->toArray());
 });
 
-test('test CommonProductObserver method updated from void to void', function () {
+test('test CommonProductObserver method updated with category from void to void', function () {
     // datas
     $brand = Brand::create(['name' => 'marque']);
     $brand2 = Brand::create(['name' => 'marque2']);
@@ -60,7 +60,7 @@ test('test CommonProductObserver method updated from void to void', function () 
     $this->expect([2])->toBe($category2->brands->pluck('id')->toArray());
 });
 
-test('test CommonProductObserver method updated from thing to thing', function () {
+test('test CommonProductObserver method updated with category from thing to thing', function () {
     // datas
     $brand = Brand::create(['name' => 'marque']);
     $brand2 = Brand::create(['name' => 'marque2']);
@@ -77,7 +77,7 @@ test('test CommonProductObserver method updated from thing to thing', function (
     $this->expect([2])->toBe($category2->brands->pluck('id')->toArray());
 });
 
-test('test CommonProductObserver method updated from thing to void', function () {
+test('test CommonProductObserver method updated with category from thing to void', function () {
     // datas
     $brand = Brand::create(['name' => 'marque']);
     $brand2 = Brand::create(['name' => 'marque2']);
@@ -93,7 +93,7 @@ test('test CommonProductObserver method updated from thing to void', function ()
     $this->expect([2])->toBe($category2->brands->pluck('id')->toArray());
 });
 
-test('test CommonProductObserver method updated from void to thing', function () {
+test('test CommonProductObserver method updated with category from void to thing', function () {
     // datas
     $brand = Brand::create(['name' => 'marque']);
     $brand2 = Brand::create(['name' => 'marque2']);

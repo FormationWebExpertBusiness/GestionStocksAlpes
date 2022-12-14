@@ -35,6 +35,19 @@ test('test category method hasBrand', function () {
     $this->expect($category->hasBrand($brand2))->toBe(false);
 });
 
+test('test category method hasCommonProduct', function () {
+    // datas
+    $brand = Brand::create(['name' => 'marque']);
+    $brand2 = Brand::create(['name' => 'marque2']);
+    $category = Category::create(['name' => 'categorie']);
+    $category2 = Category::create(['name' => 'categorie2']);
+    $commonProduct = CommonProduct::create(['category_id' => 1, 'brand_id' => 1, 'model' => 'ba']);
+
+    // test
+    $this->expect($category->hasCommonProduct())->toBe(true);
+    $this->expect($category2->hasCommonProduct())->toBe(false);
+});
+
 test('test category method getLinkedBrands', function () {
     // datas
     $brand = Brand::create(['name' => 'marque']);
