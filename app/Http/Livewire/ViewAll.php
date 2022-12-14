@@ -205,7 +205,7 @@ class ViewAll extends Component
             $this->filterOnSearchBar();
             $this->commonProducts = CommonProduct::filterOnBrands($this->commonProducts, $this->brandsF);
             $this->commonProducts = CommonProduct::filterOnCategories($this->commonProducts, $this->categoriesF);
-            $this->commonProducts = CommonProduct::filterOnquantitystatut($this->commonProducts, $this->statutesF);
+            $this->commonProducts = CommonProduct::filterOnquantityStatut($this->commonProducts, $this->statutesF);
             if ($this->racksF || $this->rackLevelsF) {
                 $this->commonProducts = CommonProduct::filterOnRacksQuantities($this->commonProducts, $this->quantityMin, $this->quantityMax, $this->racksF, $this->rackLevelsF);
             } else {

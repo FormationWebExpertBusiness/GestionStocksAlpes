@@ -175,7 +175,7 @@ class CommonProduct extends Model
         })->values();
     }
 
-    public static function filterOnquantitystatut($commonProducts, $statutes)
+    public static function filterOnquantityStatut($commonProducts, $statutes)
     {
         $statutes = count($statutes) === 0 ? CommonProduct::$statutesQuantity : $statutes;
         return $commonProducts->filter(function ($value) use ($statutes) {
