@@ -5,11 +5,8 @@ namespace App\Observers;
 use App\Models\CommonProduct;
 use App\Models\HistoryProduct;
 use App\Models\Product;
-use App\Models\User;
 use Illuminate\Support\Facades\App;
-use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Log;
 
 class ProductObserver
 {
