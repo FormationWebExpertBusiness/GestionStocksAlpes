@@ -144,6 +144,10 @@
                                     </th>
                                     <th scope="col"
                                         class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                                        Utilisateur
+                                    </th>
+                                    <th scope="col"
+                                        class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
                                         Catégorie
                                     </th>
                                     <th scope="col"
@@ -189,6 +193,13 @@
                                                         </svg>
                                                         Sortie du stock
                                                     </span>
+                                                @elseif ($historyProduct->code_action === 'U')
+                                                    <span class="inline-flex items-center rounded-md bg-blue-200 px-2.5 py-0.5 text-sm font-medium text-blue-800">
+                                                        <svg class="-ml-0.5 mr-1.5 h-2 w-2 text-blue-400" fill="currentColor" viewBox="0 0 8 8">
+                                                          <circle cx="4" cy="4" r="3" />
+                                                        </svg>
+                                                        Modification du produit
+                                                    </span>
                                                 @else
                                                     <span class="inline-flex items-center rounded-md bg-gray-200 px-2.5 py-0.5 text-sm font-medium text-gray-800">
                                                         <svg class="-ml-0.5 mr-1.5 h-2 w-2 text-gray-400" fill="currentColor" viewBox="0 0 8 8">
@@ -198,6 +209,8 @@
                                                     </span>
                                                 @endif
                                             </td>
+                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                                {{ $historyProduct->user->username }}</td>
                                             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                                                 {{ $historyProduct->category }}</td>
                                             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">

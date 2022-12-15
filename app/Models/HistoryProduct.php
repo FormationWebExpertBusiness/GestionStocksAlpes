@@ -20,8 +20,18 @@ class HistoryProduct extends Model
         'model',
         'serial_number',
         'price',
+        'user_id',
         'comment',
     ];
+
+    protected $with = [
+        'user',
+    ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 
     public static function oldestDate()
     {

@@ -35,7 +35,8 @@ type Mutation {
 	"delete product according to the id param"
 	deleteProduct(
 		id: ID!
-	): Product @delete
+		user_id: ID!
+	): Product 
 }
 
 type Product {

@@ -17,11 +17,13 @@ class UserSeeder extends Seeder
     {
         \App\Models\User::create([
             'username' => 'test',
+            'email' => 'test@test.test',
             'password' => Hash::make('test')
         ]);
 
         \App\Models\User::create([
             'username' => 'testt',
+            'email' => 'testt@test.test',
             'password' => Hash::make('testt')
         ]);
     }

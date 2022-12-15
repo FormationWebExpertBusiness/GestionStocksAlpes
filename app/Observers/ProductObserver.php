@@ -5,6 +5,8 @@ namespace App\Observers;
 use App\Models\CommonProduct;
 use App\Models\HistoryProduct;
 use App\Models\Product;
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Auth;
 
 class ProductObserver
 {
@@ -27,8 +29,11 @@ class ProductObserver
             'model' => $commonProduct->model,
             'serial_number' => $product->serial_number,
             'price' => $product->price,
+            'user_id' => $product->mobileUser->id ?? Auth::user()->id,
             'comment' => $product->comment,
         ]);
+
+        $product->mobileUser = null;
     }
 
     /**
@@ -39,7 +44,20 @@ class ProductObserver
      */
     public function updated(Product $product)
     {
-        
+        $commonProduct = CommonProduct::find($product->common_id);
+
+        $commonProduct->updateStatusQuantity();
+
+        HistoryProduct::create([
+            'code_action' => 'U',
+            'category' => $commonProduct->category->name,
+            'brand' => $commonProduct->brand->name,
+            'model' => $commonProduct->model,
+            'serial_number' => $product->serial_number,
+            'price' => $product->price,
+            'user_id' => $product->mobileUser->id ?? Auth::user()->id,
+            'comment' => $product->comment,
+        ]);
     }
 
     /**
@@ -61,6 +79,7 @@ class ProductObserver
             'model' => $commonProduct->model,
             'serial_number' => $product->serial_number,
             'price' => $product->price,
+            'user_id' => $product->mobileUser->id ?? Auth::user()->id,
             'comment' => $product->comment,
         ]);
     }

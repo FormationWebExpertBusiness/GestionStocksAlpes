@@ -1,17 +1,29 @@
 <?php
 
+use App\Models\User;
 use App\Models\Rack;
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\CommonProduct;
 use App\Models\Product;
+use Illuminate\Support\Facades\Hash;
+
+dataset('user', function(){
+    yield fn() => User::create([
+        'username' => 'test',
+        'email' => 'test@test.test',
+        'password' => Hash::make('test')
+    ]);
+
+});
 
 beforeEach(function () {
     $this->artisan('migrate:fresh');
 });
 
-test('test CommonProduct method getQuantityAttribute', function () {
+test('test CommonProduct method getQuantityAttribute', function ($user) {
     // datas
+    $this->be($user);
     $rack = Rack::create(['nb_level' => 5]);
     $brand = Brand::create(['name' => 'marque']);
     $category = Category::create(['name' => 'categorie']);
@@ -23,10 +35,11 @@ test('test CommonProduct method getQuantityAttribute', function () {
 
     // test
     $this->assertEquals(3, $commonProduct->getQuantityAttribute());
-});
+})->with('user');
 
-test('test CommonProduct method getTotalPriceAttribute', function () {
+test('test CommonProduct method getTotalPriceAttribute', function ($user) {
     // datas
+    $this->be($user);
     $rack = Rack::create(['nb_level' => 5]);
     $brand = Brand::create(['name' => 'marque']);
     $category = Category::create(['name' => 'categorie']);
@@ -38,10 +51,11 @@ test('test CommonProduct method getTotalPriceAttribute', function () {
 
     // test
     $this->assertEquals(18, $commonProduct->getTotalPriceAttribute());
-});
+})->with('user');
 
-test('test CommonProduct method getStatusQuantityAttribute', function () {
+test('test CommonProduct method getStatusQuantityAttribute', function ($user) {
     // datas
+    $this->be($user);
     Rack::create(['nb_level' => 5]);
     Brand::create(['name' => 'marque']);
     Category::create(['name' => 'categorie']);
@@ -70,10 +84,11 @@ test('test CommonProduct method getStatusQuantityAttribute', function () {
     $this->assertEquals('Quantité faible', $commonProduct1->getStatusQuantityAttribute());
     $this->assertEquals('Quantité critique', $commonProduct2->getStatusQuantityAttribute());
     $this->assertEquals('Quantité suffisante', $commonProduct3->getStatusQuantityAttribute());
-});
+})->with('user');
 
-test('test CommonProduct method unitPrice', function () {
+test('test CommonProduct method unitPrice', function ($user) {
     // datas
+    $this->be($user);
     $rack = Rack::create(['nb_level' => 5]);
     $brand = Brand::create(['name' => 'marque']);
     $category = Category::create(['name' => 'categorie']);
@@ -85,30 +100,33 @@ test('test CommonProduct method unitPrice', function () {
 
     // test
     $this->assertEquals(5, $commonProduct->unitPrice());
-});
+})->with('user');
 
-test('test CommonProduct method brand', function () {
+test('test CommonProduct method brand', function ($user) {
     // datas
+    $this->be($user);
     $brand = Brand::create(['name' => 'marque']);
     $category = Category::create(['name' => 'categorie']);
     $commonProduct = CommonProduct::create(['category_id' => 1, 'brand_id' => 1, 'model' => 'ba']);
 
     // test
     $this->assertEquals([1], $commonProduct->brand()->pluck('id')->toArray());
-});
+})->with('user');
 
-test('test CommonProduct method category', function () {
+test('test CommonProduct method category', function ($user) {
     // datas
+    $this->be($user);
     $brand = Brand::create(['name' => 'marque']);
     $category = Category::create(['name' => 'categorie']);
     $commonProduct = CommonProduct::create(['category_id' => 1, 'brand_id' => 1, 'model' => 'ba']);
 
     // test
     $this->assertEquals([1], $commonProduct->category()->pluck('id')->toArray());
-});
+})->with('user');
 
-test('test CommonProduct method products', function () {
+test('test CommonProduct method products', function ($user) {
     // datas
+    $this->be($user);
     $rack = Rack::create(['nb_level' => 5]);
     $brand = Brand::create(['name' => 'marque']);
     $category = Category::create(['name' => 'categorie']);
@@ -120,10 +138,11 @@ test('test CommonProduct method products', function () {
 
     // test
     $this->assertEquals([1,2,3], $commonProduct->products()->pluck('id')->toArray());
-});
+})->with('user');
 
-test('test CommonProduct method hasProduct', function () {
+test('test CommonProduct method hasProduct', function ($user) {
     // datas
+    $this->be($user);
     $rack = Rack::create(['nb_level' => 5]);
     $brand = Brand::create(['name' => 'marque']);
     $category = Category::create(['name' => 'categorie']);
@@ -137,10 +156,11 @@ test('test CommonProduct method hasProduct', function () {
     // test
     $this->assertEquals(true, $commonProduct1->hasProduct());
     $this->assertEquals(false, $commonProduct2->hasProduct());
-});
+})->with('user');
 
-test('test CommonProduct method productsOnRack', function () {
+test('test CommonProduct method productsOnRack', function ($user) {
     // datas
+    $this->be($user);
     $rack = Rack::create(['nb_level' => 5]);
     $rack = Rack::create(['nb_level' => 2]);
 
@@ -160,10 +180,11 @@ test('test CommonProduct method productsOnRack', function () {
     // test
     $this->expect([5,6])->toBe($commonProduct->productsOnRack([2])->pluck('id')->toArray());
     $this->expect([1,3,4])->toBe($commonProduct->productsOnRack([1], [3,4])->pluck('id')->toArray());
-});
+})->with('user');
 
-test('test CommonProduct method quantityOnRack', function () {
+test('test CommonProduct method quantityOnRack', function ($user) {
     // datas
+    $this->be($user);
     $rack = Rack::create(['nb_level' => 5]);
     $rack = Rack::create(['nb_level' => 2]);
 
@@ -183,10 +204,11 @@ test('test CommonProduct method quantityOnRack', function () {
     // test
     $this->expect(2)->toBe($commonProduct->quantityOnRack([2]));
     $this->expect(3)->toBe($commonProduct->quantityOnRack([1],[3,4]));
-});
+})->with('user');
 
-test('test CommonProduct method totalPriceOnRack', function () {
+test('test CommonProduct method totalPriceOnRack', function ($user) {
     // datas
+    $this->be($user);
     $rack = Rack::create(['nb_level' => 5]);
     $rack = Rack::create(['nb_level' => 2]);
 
@@ -206,10 +228,11 @@ test('test CommonProduct method totalPriceOnRack', function () {
     // test
     $this->expect(8.0)->toBe($commonProduct->totalPriceOnRack([2]));
     $this->expect(13.0)->toBe($commonProduct->totalPriceOnRack([1],[3,4]));
-});
+})->with('user');
 
-test('test CommonProduct method unitPriceOnRack', function () {
+test('test CommonProduct method unitPriceOnRack', function ($user) {
     // datas
+    $this->be($user);
     $rack = Rack::create(['nb_level' => 5]);
     $rack = Rack::create(['nb_level' => 2]);
 
@@ -229,10 +252,11 @@ test('test CommonProduct method unitPriceOnRack', function () {
     // test
     $this->expect(7.0)->toBe($commonProduct->unitPriceOnRack([2]));
     $this->expect(5.0)->toBe($commonProduct->unitPriceOnRack([1],[3,4]));
-});
+})->with('user');
 
-test('test CommonProduct method updateStatusQuantity', function () {
+test('test CommonProduct method updateStatusQuantity', function ($user) {
     // datas
+    $this->be($user);
     Rack::create(['nb_level' => 5]);
     Brand::create(['name' => 'marque']);
     Category::create(['name' => 'categorie']);
@@ -263,10 +287,11 @@ test('test CommonProduct method updateStatusQuantity', function () {
     $this->assertEquals('F', $commonProduct1->code_status_quantity);
     $this->assertEquals('C', $commonProduct2->code_status_quantity);
     $this->assertEquals('S', $commonProduct3->code_status_quantity);
-});
+})->with('user');
 
-test('test CommonProduct method filterOnQuantities', function () {
+test('test CommonProduct method filterOnQuantities', function ($user) {
     // datas
+    $this->be($user);
     $rack = Rack::create(['nb_level' => 5]);
     $rack = Rack::create(['nb_level' => 2]);
 
@@ -296,10 +321,11 @@ test('test CommonProduct method filterOnQuantities', function () {
     $this->expect(CommonProduct::filterOnQuantities($commonProducts, 0, 4))->toEqual(collect([$commonProduct2]));
     $this->expect(CommonProduct::filterOnQuantities($commonProducts, 4, 6))->toEqual(collect([$commonProduct, $commonProduct2]));
     $this->expect(CommonProduct::filterOnQuantities($commonProducts, 2, null))->toEqual(collect([$commonProduct, $commonProduct2]));
-});
+})->with('user');
 
-test('test CommonProduct method filterOnRacksQuantities', function () {
+test('test CommonProduct method filterOnRacksQuantities', function ($user) {
     // datas
+    $this->be($user);
     $rack = Rack::create(['nb_level' => 5]);
     $rack = Rack::create(['nb_level' => 2]);
 
@@ -337,10 +363,11 @@ test('test CommonProduct method filterOnRacksQuantities', function () {
     $this->expect(CommonProduct::filterOnRacksQuantities($commonProducts, 0, null, [1], [5]))->toEqual(collect([]));
     $this->expect(CommonProduct::filterOnRacksQuantities($commonProducts, 1, null, [2], [3]))->toEqual(collect([$commonProduct2]));
 
-});
+})->with('user');
 
-test('test CommonProduct method filterOnBrands', function () {
+test('test CommonProduct method filterOnBrands', function ($user) {
     // datas
+    $this->be($user);
     $rack = Rack::create(['nb_level' => 5]);
     $rack = Rack::create(['nb_level' => 2]);
 
@@ -364,10 +391,11 @@ test('test CommonProduct method filterOnBrands', function () {
     $this->expect(CommonProduct::filterOnBrands($commonProducts, [1,2]))->toEqual(collect([$commonProduct, $commonProduct2, $commonProduct4]));
     $this->expect(CommonProduct::filterOnBrands($commonProducts, [3,2]))->toEqual(collect([$commonProduct2, $commonProduct3, $commonProduct4]));
     $this->expect(CommonProduct::filterOnBrands($commonProducts, [1,2,3]))->toEqual(collect([$commonProduct, $commonProduct2, $commonProduct3, $commonProduct4]));
-});
+})->with('user');
 
-test('test CommonProduct method filterOnCategories', function () {
+test('test CommonProduct method filterOnCategories', function ($user) {
     // datas
+    $this->be($user);
     $rack = Rack::create(['nb_level' => 5]);
     $rack = Rack::create(['nb_level' => 2]);
 
@@ -391,10 +419,11 @@ test('test CommonProduct method filterOnCategories', function () {
     $this->expect(CommonProduct::filterOnCategories($commonProducts, [1,2]))->toEqual(collect([$commonProduct, $commonProduct2, $commonProduct4]));
     $this->expect(CommonProduct::filterOnCategories($commonProducts, [3,2]))->toEqual(collect([$commonProduct2, $commonProduct3, $commonProduct4]));
     $this->expect(CommonProduct::filterOnCategories($commonProducts, [1,2,3]))->toEqual(collect([$commonProduct, $commonProduct2, $commonProduct3, $commonProduct4]));
-});
+})->with('user');
 
-test('test CommonProduct method filterOnquantityStatus', function () {
+test('test CommonProduct method filterOnquantityStatus', function ($user) {
     // datas
+    $this->be($user);
     Rack::create(['nb_level' => 5]);
     Brand::create(['name' => 'marque']);
     Category::create(['name' => 'categorie']);
@@ -435,10 +464,11 @@ test('test CommonProduct method filterOnquantityStatus', function () {
     $this->expect(CommonProduct::filterOnquantityStatus($commonProducts, [$f,$c])->pluck('id')->toArray())->toEqual(collect([$commonProduct1, $commonProduct2])->pluck('id')->toArray());
     $this->expect(CommonProduct::filterOnquantityStatus($commonProducts, [$c, $s])->pluck('id')->toArray())->toEqual(collect([$commonProduct2, $commonProduct3])->pluck('id')->toArray());
     $this->expect(CommonProduct::filterOnquantityStatus($commonProducts, [$f, $c, $s])->pluck('id')->toArray())->toEqual(collect([$commonProduct1, $commonProduct2, $commonProduct3])->pluck('id')->toArray());
-});
+})->with('user');
 
-test('test CommonProduct method sortOnCategories', function () {
+test('test CommonProduct method sortOnCategories', function ($user) {
     // datas
+    $this->be($user);
     $rack = Rack::create(['nb_level' => 5]);
     $rack = Rack::create(['nb_level' => 2]);
 
@@ -456,10 +486,11 @@ test('test CommonProduct method sortOnCategories', function () {
     // test
     $this->expect(CommonProduct::sortOnCategories($commonProducts, 'asc'))->toEqual(collect([$commonProduct, $commonProduct2, $commonProduct4, $commonProduct3]));
     $this->expect(CommonProduct::sortOnCategories($commonProducts, 'desc'))->toEqual(collect([$commonProduct3, $commonProduct2, $commonProduct4, $commonProduct]));
-});
+})->with('user');
 
-test('test CommonProduct method sortOnBrands', function () {
+test('test CommonProduct method sortOnBrands', function ($user) {
     // datas
+    $this->be($user);
     $rack = Rack::create(['nb_level' => 5]);
     $rack = Rack::create(['nb_level' => 2]);
 
@@ -477,10 +508,11 @@ test('test CommonProduct method sortOnBrands', function () {
     // test
     $this->expect(CommonProduct::sortOnBrands($commonProducts, 'asc'))->toEqual(collect([$commonProduct, $commonProduct2, $commonProduct4, $commonProduct3]));
     $this->expect(CommonProduct::sortOnBrands($commonProducts, 'desc'))->toEqual(collect([$commonProduct3, $commonProduct2, $commonProduct4, $commonProduct]));
-});
+})->with('user');
 
-test('test CommonProduct method sortOnModels', function () {
+test('test CommonProduct method sortOnModels', function ($user) {
     // datas
+    $this->be($user);
     $rack = Rack::create(['nb_level' => 5]);
     $rack = Rack::create(['nb_level' => 2]);
 
@@ -496,10 +528,11 @@ test('test CommonProduct method sortOnModels', function () {
     // test
     $this->expect(CommonProduct::sortOnModels($commonProducts, 'asc'))->toEqual(collect([$commonProduct, $commonProduct2, $commonProduct3, $commonProduct4]));
     $this->expect(CommonProduct::sortOnModels($commonProducts, 'desc'))->toEqual(collect([$commonProduct4, $commonProduct3, $commonProduct2, $commonProduct]));
-});
+})->with('user');
 
-test('test CommonProduct method sortOnQuantitiesOnRack', function () {
+test('test CommonProduct method sortOnQuantitiesOnRack', function ($user) {
     // datas
+    $this->be($user);
     $rack = Rack::create(['nb_level' => 5]);
     $rack = Rack::create(['nb_level' => 2]);
 
@@ -546,10 +579,11 @@ test('test CommonProduct method sortOnQuantitiesOnRack', function () {
 
     $this->expect(CommonProduct::sortOnQuantitiesOnRack($commonProducts, 'asc', [1], [4]))->toEqual(collect([$commonProduct3, $commonProduct4, $commonProduct, $commonProduct2]));
     $this->expect(CommonProduct::sortOnQuantitiesOnRack($commonProducts, 'desc', [2], [3]))->toEqual(collect([$commonProduct2, $commonProduct3, $commonProduct, $commonProduct4]));
-});
+})->with('user');
 
-test('test CommonProduct method sortOnTotalPricesOnRack', function () {
+test('test CommonProduct method sortOnTotalPricesOnRack', function ($user) {
     // datas
+    $this->be($user);
     $rack = Rack::create(['nb_level' => 5]);
     $rack = Rack::create(['nb_level' => 2]);
 
@@ -596,10 +630,11 @@ test('test CommonProduct method sortOnTotalPricesOnRack', function () {
 
     $this->expect(CommonProduct::sortOnTotalPricesOnRack($commonProducts, 'asc', [1], [4]))->toEqual(collect([$commonProduct3, $commonProduct4, $commonProduct, $commonProduct2]));
     $this->expect(CommonProduct::sortOnTotalPricesOnRack($commonProducts, 'desc', [2], [3]))->toEqual(collect([$commonProduct3, $commonProduct2, $commonProduct, $commonProduct4]));
-});
+})->with('user');
 
-test('test CommonProduct method totalQuantity', function () {
+test('test CommonProduct method totalQuantity', function ($user) {
     // datas
+    $this->be($user);
     $rack = Rack::create(['nb_level' => 5]);
     $rack = Rack::create(['nb_level' => 2]);
 
@@ -628,10 +663,11 @@ test('test CommonProduct method totalQuantity', function () {
     
     // test
     $this->assertEquals(21, CommonProduct::totalQuantity());
-});
+})->with('user');
 
-test('test CommonProduct method totalCommonProduct', function () {
+test('test CommonProduct method totalCommonProduct', function ($user) {
     // datas
+    $this->be($user);
     $rack = Rack::create(['nb_level' => 5]);
     $rack = Rack::create(['nb_level' => 2]);
 
@@ -645,10 +681,11 @@ test('test CommonProduct method totalCommonProduct', function () {
     
     // test
     $this->assertEquals(4, CommonProduct::totalCommonProduct());
-});
+})->with('user');
 
-test('test CommonProduct method totalFavoriteProduct', function () {
+test('test CommonProduct method totalFavoriteProduct', function ($user) {
     // datas
+    $this->be($user);
     $rack = Rack::create(['nb_level' => 5]);
     $rack = Rack::create(['nb_level' => 2]);
 
@@ -662,10 +699,11 @@ test('test CommonProduct method totalFavoriteProduct', function () {
     
     // test
     $this->assertEquals(2, CommonProduct::totalFavoriteProduct());
-});
+})->with('user');
 
-test('test CommonProduct method totalOutStockProduct', function () {
+test('test CommonProduct method totalOutStockProduct', function ($user) {
     // datas
+    $this->be($user);
     $rack = Rack::create(['nb_level' => 5]);
     $rack = Rack::create(['nb_level' => 2]);
 
@@ -680,4 +718,4 @@ test('test CommonProduct method totalOutStockProduct', function () {
     
     // test
     $this->assertEquals(3, CommonProduct::totalOutStockProduct());
-});
+})->with('user');
