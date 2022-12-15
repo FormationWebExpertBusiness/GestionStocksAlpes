@@ -25,12 +25,12 @@ class HistoryProduct extends Model
 
     public static function oldestDate()
     {
-        return HistoryProduct::selectRaw('DATE_FORMAT(MIN(created_at),"%Y-%m-%d") as oldest_date')->first()->oldest_date;
+        return date('Y-m-d', strtotime(HistoryProduct::selectRaw('MIN(created_at) as oldest_date')->first()->oldest_date));
     }
 
     public static function newestDate()
     {
-        return HistoryProduct::selectRaw('DATE_FORMAT(MAX(created_at),"%Y-%m-%d") as newest_date')->first()->newest_date;
+        return date('Y-m-d', strtotime(HistoryProduct::selectRaw('MAX(created_at) as newest_date')->first()->newest_date));
     }
 
     public static function getAllBrands()
@@ -73,9 +73,7 @@ class HistoryProduct extends Model
     {
         if ($dateFrom) {//filter
             return $historyProducts->filter(function ($value) use ($dateFrom) {
-                // dump($value->created_at->format('d/m/Y'),'>=', $dateFrom);
                 if ($value->created_at->format('Y-m-d') >= $dateFrom) {
-                    // dump('ok');
                     return $value;
                 }
             });
@@ -88,9 +86,7 @@ class HistoryProduct extends Model
     {
         if ($dateTo) {//filter
             return $historyProducts->filter(function ($value) use ($dateTo) {
-                // dump($value->created_at->format('d/m/Y'),'<=', $dateTo);
                 if ($value->created_at->format('Y-m-d') <= $dateTo) {
-                    // dump('ok');
                     return $value;
                 }
             });

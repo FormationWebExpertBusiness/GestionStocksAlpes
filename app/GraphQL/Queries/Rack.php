@@ -13,7 +13,7 @@ class Rack
     public function __invoke($_, array $args)
     {
         $rack = ModelsRack::find($args['id']);
-        $rack->nb_product = $rack->productsOnLevel($args['level'])->count();
+        $rack->nb_products = $rack->productsOnLevel($args['level'])->count();
         return $rack;
     }
 }

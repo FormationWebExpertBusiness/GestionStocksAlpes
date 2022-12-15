@@ -30,7 +30,7 @@ class CommonProduct extends Model
         'quantity_low',
         'quantity_critical',
         'photo_product',
-        'code_statut_quantity',
+        'code_status_quantity',
     ];
 
     protected $with = [
@@ -42,7 +42,7 @@ class CommonProduct extends Model
     protected $appends = [
         'quantity',
         'totalPrice',
-        'statutQuantity',
+        'statusQuantity',
     ];
 
     public function getQuantityAttribute()
@@ -55,9 +55,9 @@ class CommonProduct extends Model
         return Product::select(DB::raw('sum(price) as value'))->where('common_id', $this->id)->first()->value;
     }
 
-    public function getStatutQuantityAttribute()
+    public function getStatusQuantityAttribute()
     {
-        return CommonProduct::$statutesQuantity[$this->code_statut_quantity];
+        return CommonProduct::$statutesQuantity[$this->code_status_quantity];
     }
 
     public function unitPrice()
@@ -123,11 +123,11 @@ class CommonProduct extends Model
     public function updateStatusQuantity()
     {
         if ($this->quantity <= $this->quantity_critical) {
-            $this->code_statut_quantity = 'C';
+            $this->code_status_quantity = 'C';
         } elseif ($this->quantity <= $this->quantity_low) {
-            $this->code_statut_quantity = 'F';
+            $this->code_status_quantity = 'F';
         } else {
-            $this->code_statut_quantity = 'S';
+            $this->code_status_quantity = 'S';
         }
         $this->save();
     }
@@ -175,11 +175,11 @@ class CommonProduct extends Model
         })->values();
     }
 
-    public static function filterOnquantitystatut($commonProducts, $statutes)
+    public static function filterOnquantityStatus($commonProducts, $statutes)
     {
         $statutes = count($statutes) === 0 ? CommonProduct::$statutesQuantity : $statutes;
         return $commonProducts->filter(function ($value) use ($statutes) {
-            if (in_array($value->statut_quantity, $statutes)) {
+            if (in_array($value->status_quantity, $statutes)) {
                 return $value;
             }
         })->values();
@@ -237,6 +237,6 @@ class CommonProduct extends Model
 
     public static function totalOutStockProduct()
     {
-        return CommonProduct::where('code_statut_quantity', 'C')->count();
+        return CommonProduct::where('code_status_quantity', 'C')->count();
     }
 }

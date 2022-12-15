@@ -10,10 +10,19 @@ type Query {
 	products(
 		rack_id: Int!
 		rack_level: Int!
-		): [Product!]
+	): [Product!]
+
+	product(
+		id: ID!
+	): Product!
 
 	"All CommonProducts with their products"
 	commonProducts: [CommonProduct!]
+
+	"A CommonProduct with his products"
+	commonProduct(
+		id: ID! @eq
+	): CommonProduct! @find
 
 	"A rack"
 	rack(
@@ -32,9 +41,9 @@ type Mutation {
 type Product {
 	id: ID!
 	serial_number: String!
-	category: Category!
-	brand: Brand!
-	model: String!
+	category: Category
+	brand: Brand
+	model: String
 	comment: String
 	rack: Rack!
 	rack_level: Int!
@@ -44,8 +53,9 @@ type Product {
 type CommonProduct {
 	id: ID!
 	category: Category!
-	brand: Brand! 
+	brand: Brand
 	model: String!
+	quantity: Int!
 	quantity_low: Int!
 	quantity_critical: Int!
 	products: [Product!]
@@ -62,5 +72,5 @@ type Brand {
 type Rack {
 	id: ID!
 	name: String!
-	nb_product: Int
+	nb_products: Int
 }

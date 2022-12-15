@@ -36,7 +36,7 @@ class Dashboard extends Component
                 ->where('favorite', '=', true)
                 ->limit(20)
                 ->get()
-            : [] ;
+            : [];
         // dump($this->commonProducts);
         return view('livewire.dashboard')->layout('layout');
     }

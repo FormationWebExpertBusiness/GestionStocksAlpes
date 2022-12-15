@@ -94,9 +94,9 @@
 									</div>
 								@endif
 							</div>
-							{{-- Statut Dropdown --}}
+							{{-- Status Dropdown --}}
 							<div class="relative inline-block px-4 text-left">
-								<button type="button" wire:click="$toggle('isVisibleStatut')" class="group inline-flex justify-center text-sm font-medium text-gray-700 hover:text-gray-900" aria-expanded="false">
+								<button type="button" wire:click="$toggle('isVisibleStatus')" class="group inline-flex justify-center text-sm font-medium text-gray-700 hover:text-gray-900" aria-expanded="false">
 								<span>Statut</span>
 								<span class="ml-1.5 rounded bg-gray-200 py-0.5 px-1.5 text-xs font-semibold tabular-nums text-gray-700">{{ count($statutesFilter) }}</span>
 								<!-- Heroicon name: mini/chevron-down -->
@@ -104,14 +104,14 @@
 									<path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
 								</svg>
 								</button>
-								@if ($isVisibleStatut)
-									<div class="absolute right-0 z-10 mt-2 origin-top-right rounded-md bg-white p-4 shadow-2xl ring-1 ring-black ring-opacity-5 focus:outline-none" @click.outside="$wire.isVisibleStatut = false">
+								@if ($isVisibleStatus)
+									<div class="absolute right-0 z-10 mt-2 origin-top-right rounded-md bg-white p-4 shadow-2xl ring-1 ring-black ring-opacity-5 focus:outline-none" @click.outside="$wire.isVisibleStatus = false">
 										<form class="space-y-1">
-										@foreach ($statutes as $statut)
+										@foreach ($statutes as $status)
 											<div class="flex items-center">
-												<input id="{{ $statut }}" name="{{ $statut }}"
-												value="{{ $statut }}" type="checkbox" wire:model='statutesFilter' class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
-												<label for="{{ $statut }}" class="ml-3 whitespace-nowrap pr-6 text-sm font-medium text-gray-900">{{ $statut }}</label>
+												<input id="{{ $status }}" name="{{ $status }}"
+												value="{{ $status }}" type="checkbox" wire:model='statutesFilter' class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+												<label for="{{ $status }}" class="ml-3 whitespace-nowrap pr-6 text-sm font-medium text-gray-900">{{ $status }}</label>
 											</div>
 										@endforeach
 										</form>

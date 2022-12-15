@@ -100,7 +100,7 @@ class ViewAll extends Component
         $this->brandsF = $brands;
     }
 
-    public function updateStatutF($statutes)
+    public function updateStatusF($statutes)
     {
         $this->statutesF = $statutes;
     }
@@ -142,7 +142,7 @@ class ViewAll extends Component
 
     public function loadData()
     {
-        $this->readyToLoad = true; 
+        $this->readyToLoad = true;
     }
 
     public function reOrder($champO)
@@ -200,12 +200,11 @@ class ViewAll extends Component
     {
         $this->csvExportId = Cache::get('csvExportId');
 
-        if($this->readyToLoad)
-        {
+        if ($this->readyToLoad) {
             $this->filterOnSearchBar();
             $this->commonProducts = CommonProduct::filterOnBrands($this->commonProducts, $this->brandsF);
             $this->commonProducts = CommonProduct::filterOnCategories($this->commonProducts, $this->categoriesF);
-            $this->commonProducts = CommonProduct::filterOnquantitystatut($this->commonProducts, $this->statutesF);
+            $this->commonProducts = CommonProduct::filterOnquantityStatus($this->commonProducts, $this->statutesF);
             if ($this->racksF || $this->rackLevelsF) {
                 $this->commonProducts = CommonProduct::filterOnRacksQuantities($this->commonProducts, $this->quantityMin, $this->quantityMax, $this->racksF, $this->rackLevelsF);
             } else {
@@ -261,7 +260,7 @@ class ViewAll extends Component
             'stockUpdated' => 'reloadView',
             'catsFilter' => 'updateCatF',
             'brandsFilter' => 'updateBrandF',
-            'statutesFilter' => 'updateStatutF',
+            'statutesFilter' => 'updateStatusF',
             'racksFilter' => 'updateRackF',
             'rackLevelsFilter' => 'updateRackLevelF',
             'searchFilter' => 'search',
