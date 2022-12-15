@@ -9,7 +9,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 
-final class DeleteProduct
+class DeleteProduct
 {
     /**
      * @param  null  $_

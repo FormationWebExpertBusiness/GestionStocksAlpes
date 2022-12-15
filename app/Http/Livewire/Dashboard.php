@@ -27,17 +27,19 @@ class Dashboard extends Component
 
     public function render()
     {
-        $this->commonProducts = $this->readyToLoad
-            ? CommonProduct::select('common_products.*')
+        if ($this->readyToLoad) {
+            $this->commonProducts = CommonProduct::select('common_products.*')
                 ->join('categories', 'categories.id', '=', 'common_products.category_id')
                 ->where('categories.name', 'like', '%' . $this->search . '%')
                 ->where('favorite', '=', true)
                 ->orWhere('model', 'like', '%' . $this->search . '%')
                 ->where('favorite', '=', true)
                 ->limit(20)
-                ->get()
-            : [];
-        // dump($this->commonProducts);
+                ->get();
+        } else {
+            $this->commonProducts = [];
+        }
+
         return view('livewire.dashboard')->layout('layout');
     }
 }
