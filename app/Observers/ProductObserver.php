@@ -41,7 +41,20 @@ class ProductObserver
      */
     public function updated(Product $product)
     {
-        
+        $commonProduct = CommonProduct::find($product->common_id);
+
+        $commonProduct->updateStatusQuantity();
+
+        HistoryProduct::create([
+            'code_action' => 'U',
+            'category' => $commonProduct->category->name,
+            'brand' => $commonProduct->brand->name,
+            'model' => $commonProduct->model,
+            'serial_number' => $product->serial_number,
+            'price' => $product->price,
+            'user_id' => $product->mobileUser->id ?? Auth::user()->id,
+            'comment' => $product->comment,
+        ]);
     }
 
     /**
