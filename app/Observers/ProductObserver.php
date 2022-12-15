@@ -5,7 +5,11 @@ namespace App\Observers;
 use App\Models\CommonProduct;
 use App\Models\HistoryProduct;
 use App\Models\Product;
+use App\Models\User;
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class ProductObserver
 {
@@ -28,9 +32,11 @@ class ProductObserver
             'model' => $commonProduct->model,
             'serial_number' => $product->serial_number,
             'price' => $product->price,
-            'user_id' => Auth::user()->id ?? 1,
+            'user_id' => $product->mobileUser->id ?? Auth::user()->id,
             'comment' => $product->comment,
         ]);
+
+        $product->mobileUser = null;
     }
 
     /**

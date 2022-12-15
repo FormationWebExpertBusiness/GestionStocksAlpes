@@ -10,8 +10,9 @@ beforeEach(function () {
     $this->artisan('migrate:fresh');
 });
 
-test('test Product method getCategory', function () {
+test('test Product method getCategory', function ( $user) {
     // datas
+    $this->be($user);
     $rack = Rack::create(['nb_level' => 5]);
     $brand = Brand::create(['name' => 'marque']);
     $category = Category::create(['name' => 'categorie']);
@@ -25,10 +26,11 @@ test('test Product method getCategory', function () {
     // test
     $this->assertEquals(1, $product->getCategory()->id);
     $this->assertEquals(2, $product2->getCategory()->id);
-});
+})->with('user');
 
-test('test Product method getBrand', function () {
+test('test Product method getBrand', function ( $user) {
     // datas
+    $this->be($user);
     $rack = Rack::create(['nb_level' => 5]);
     $brand = Brand::create(['name' => 'marque']);
     $brand2 = Brand::create(['name' => 'marque2']);
@@ -42,10 +44,11 @@ test('test Product method getBrand', function () {
     // test
     $this->assertEquals(1, $product->getBrand()->id);
     $this->assertEquals(2, $product2->getBrand()->id);
-});
+})->with('user');
 
-test('test Product method getModel', function () {
+test('test Product method getModel', function ( $user) {
     // datas
+    $this->be($user);
     $rack = Rack::create(['nb_level' => 5]);
     $brand = Brand::create(['name' => 'marque']);
     $category = Category::create(['name' => 'categorie']);
@@ -58,10 +61,11 @@ test('test Product method getModel', function () {
     // test
     $this->assertEquals('ba', $product->getModel());
     $this->assertEquals('be', $product2->getModel());
-});
+})->with('user');
 
-test('test Product method rack', function () {
+test('test Product method rack', function ( $user) {
     // datas
+    $this->be($user);
     $rack = Rack::create(['nb_level' => 5]);
     $brand = Brand::create(['name' => 'marque']);
     $category = Category::create(['name' => 'categorie']);
@@ -71,10 +75,11 @@ test('test Product method rack', function () {
 
     // test
     $this->assertEquals([1], $product2->rack()->pluck('id')->toArray());
-});
+})->with('user');
 
-test('test Product method mostExpensiveProduct', function () {
+test('test Product method mostExpensiveProduct', function ( $user) {
     // datas
+    $this->be($user);
     $rack = Rack::create(['nb_level' => 5]);
     $brand = Brand::create(['name' => 'marque']);
     $category = Category::create(['name' => 'categorie']);
@@ -88,4 +93,4 @@ test('test Product method mostExpensiveProduct', function () {
 
     // test
     $this->assertEquals($product5->id, $product->mostExpensiveProduct()->id);
-});
+})->with('user');
