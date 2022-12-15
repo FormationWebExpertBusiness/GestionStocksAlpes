@@ -5,6 +5,7 @@ namespace App\Observers;
 use App\Models\CommonProduct;
 use App\Models\HistoryProduct;
 use App\Models\Product;
+use Illuminate\Support\Facades\Auth;
 
 class ProductObserver
 {
@@ -27,6 +28,7 @@ class ProductObserver
             'model' => $commonProduct->model,
             'serial_number' => $product->serial_number,
             'price' => $product->price,
+            'user_id' => Auth::user()->id ?? 1,
             'comment' => $product->comment,
         ]);
     }
@@ -61,6 +63,7 @@ class ProductObserver
             'model' => $commonProduct->model,
             'serial_number' => $product->serial_number,
             'price' => $product->price,
+            'user_id' => $product->mobileUser->id ?? Auth::user()->id,
             'comment' => $product->comment,
         ]);
     }

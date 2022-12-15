@@ -23,6 +23,8 @@ return new class extends Migration
             $table->string('serial_number');
             $table->float('price');
             $table->string('comment')->nullable();
+            $table->foreignId('user_id')->constrained('users')->onUpdate('restrict')->onDelete('restrict');
+
             $table->timestamps();
         });
     }

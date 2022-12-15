@@ -144,6 +144,10 @@
                                     </th>
                                     <th scope="col"
                                         class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                                        Utilisateur
+                                    </th>
+                                    <th scope="col"
+                                        class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
                                         Catégorie
                                     </th>
                                     <th scope="col"
@@ -198,6 +202,8 @@
                                                     </span>
                                                 @endif
                                             </td>
+                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                                {{ $historyProduct->user->username }}</td>
                                             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                                                 {{ $historyProduct->category }}</td>
                                             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
