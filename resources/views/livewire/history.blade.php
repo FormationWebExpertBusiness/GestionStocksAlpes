@@ -135,7 +135,7 @@
                             <thead class="bg-gray-100 block">
                                 <tr class="table w-full table-fixed">
                                     <th scope="col"
-                                        class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 w-28">
+                                        class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 w-20">
                                         Date
                                     </th>
                                     <th scope="col"
@@ -143,17 +143,17 @@
                                         Action
                                     </th>
                                     <th scope="col"
-                                        class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                                        class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 w-38">
                                         Utilisateur
                                     </th>
                                     <th scope="col"
                                         class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
                                         Catégorie
                                     </th>
-                                    <th scope="col"
+                                    {{-- <th scope="col"
                                         class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
                                         Marque
-                                    </th>
+                                    </th> --}}
                                     <th scope="col"
                                         class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
                                         Modèle
@@ -162,10 +162,10 @@
                                         class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
                                         Numéro de série
                                     </th>
-                                    <th scope="col"
-                                        class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 w-32">
+                                    {{-- <th scope="col"
+                                        class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 w-24">
                                         Prix
-                                    </th>
+                                    </th> --}}
                                     <th scope="col" 
                                         class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 w-1/4">
                                         Commentaire
@@ -176,7 +176,7 @@
                                 @forelse ($historyProducts as $historyProduct)
                                     <div wire:key="History-product-{{ $historyProduct->id }}">
                                         <tr class="odd:bg-white even:bg-gray-50 divide-x divide-gray-200 table w-full table-fixed">
-                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 w-28">
+                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 w-20">
                                                 {{ $historyProduct->created_at->format('d/m/y') }}</td>
                                             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 w-44 justify-center">
                                                 @if ($historyProduct->code_action === 'C')
@@ -209,19 +209,19 @@
                                                     </span>
                                                 @endif
                                             </td>
-                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 truncate w-38">
                                                 {{ $historyProduct->user->username }}</td>
-                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 truncate">
                                                 {{ $historyProduct->category }}</td>
-                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                                {{ $historyProduct->brand }}</td>
-                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                            {{-- <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 truncate">
+                                                {{ $historyProduct->brand }}</td> --}}
+                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 truncate">
                                                 {{ $historyProduct->model }}</td>
-                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                                {{ $historyProduct->serial_number }}
+                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 truncate">
+                                                    {{ $historyProduct->serial_number }}
                                             </td>
-                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 w-32">
-                                                {{ number_format($historyProduct->price, 2, ',', ' '); }} €</td>
+                                            {{-- <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 w-24">
+                                                {{ number_format($historyProduct->price, 2, ',', ' '); }} €</td> --}}
                                             <td class="whitespace-wrap px-3 py-4 text-sm text-gray-500 w-1/4">
                                                 {{ $historyProduct->comment }}
                                             </td>
@@ -244,27 +244,27 @@
                                         @for ($i = 0; $i < 12; $i++)
                                             <div>
                                                 <tr class="odd:bg-white even:bg-gray-50 divide-x divide-gray-200 table w-full table-fixed">
-                                                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 w-28">
+                                                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 w-20">
                                                         <p class="leading-relaxed rounded-md w-2/3 animate-pulse bg-gray-400 h-6"><br></p>
                                                     </td>
                                                     <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 w-44 justify-center">
                                                         <p class="leading-relaxed rounded-md w-2/3 animate-pulse bg-gray-400 h-6"><br></p>
                                                     </td>
+                                                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 w-38">
+                                                        <p class="leading-relaxed rounded-md w-2/3 animate-pulse bg-gray-400 h-6"><br></p>
+                                                    </td>
+                                                    {{-- <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                                        <p class="leading-relaxed rounded-md w-2/3 animate-pulse bg-gray-400 h-6"><br></p>
+                                                    </td> --}}
                                                     <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                                                         <p class="leading-relaxed rounded-md w-2/3 animate-pulse bg-gray-400 h-6"><br></p>
                                                     </td>
                                                     <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                                                         <p class="leading-relaxed rounded-md w-2/3 animate-pulse bg-gray-400 h-6"><br></p>
                                                     </td>
-                                                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                                    {{-- <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 w-24">
                                                         <p class="leading-relaxed rounded-md w-2/3 animate-pulse bg-gray-400 h-6"><br></p>
-                                                    </td>
-                                                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                                        <p class="leading-relaxed rounded-md w-2/3 animate-pulse bg-gray-400 h-6"><br></p>
-                                                    </td>
-                                                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 w-32">
-                                                        <p class="leading-relaxed rounded-md w-2/3 animate-pulse bg-gray-400 h-6"><br></p>
-                                                    </td>
+                                                    </td> --}}
                                                     <td class="whitespace-wrap px-3 py-4 text-sm text-gray-500 w-1/4">
                                                         <p class="leading-relaxed rounded-md w-2/3 animate-pulse bg-gray-400 h-6"><br></p>
                                                     </td>
