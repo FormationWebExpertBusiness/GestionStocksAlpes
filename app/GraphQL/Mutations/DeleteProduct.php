@@ -2,11 +2,8 @@
 
 namespace App\GraphQL\Mutations;
 
-use App\Models\CommonProduct;
-use App\Models\HistoryProduct;
 use App\Models\Product;
 use App\Models\User;
-use Illuminate\Support\Facades\Auth;
 
 class DeleteProduct
 {

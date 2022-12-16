@@ -4,7 +4,6 @@ namespace App\GraphQL\Mutations;
 
 use App\Models\Product;
 use App\Models\User;
-use Illuminate\Support\Facades\Log;
 
 class AddProduct
 {
@@ -16,7 +15,7 @@ class AddProduct
     {
         $user_id = $args['user_id'];
         unset($args['user_id']);
-     
+
         $product = new Product($args);
         $product->mobileUser = User::find($user_id);
         $product->save();
