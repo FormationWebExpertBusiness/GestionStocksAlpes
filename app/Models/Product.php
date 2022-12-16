@@ -58,4 +58,9 @@ class Product extends Model
     {
         return Product::orderby('price', 'desc')->first();
     }
+
+    public static function sortOnCreatedAt($products, $mode)
+    {
+        return $products->sortBy([['id', $mode]])->values();
+    }
 }

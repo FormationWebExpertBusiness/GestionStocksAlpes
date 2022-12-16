@@ -1,5 +1,6 @@
 <?php
 
+use App\GraphQL\Queries\Products;
 use App\Models\Rack;
 use App\Models\Brand;
 use App\Models\Category;
@@ -93,4 +94,25 @@ test('test Product method mostExpensiveProduct', function ( $user) {
 
     // test
     $this->assertEquals($product5->id, $product->mostExpensiveProduct()->id);
+})->with('user');
+
+test('test Product method sortOnCreatedAt', function ( $user) {
+    // datas
+    $this->be($user);
+    $rack = Rack::create(['nb_level' => 5]);
+    $brand = Brand::create(['name' => 'marque']);
+    $category = Category::create(['name' => 'categorie']);
+    $commonProduct = CommonProduct::create(['category_id' => 1, 'brand_id' => 1, 'model' => 'ba']);
+
+    $product = Product::create(['price' => 5, 'serial_number' => 'ite2', 'common_id' => 1, 'rack_id' => 1, 'rack_level' => 2]);
+    $product2 = Product::create(['price' => 7, 'serial_number' => 'ite2', 'common_id' => 1, 'rack_id' => 1, 'rack_level' => 2]);
+    $product3 = Product::create(['price' => 9, 'serial_number' => 'ite2', 'common_id' => 1, 'rack_id' => 1, 'rack_level' => 2]);
+    $product4 = Product::create(['price' => 1, 'serial_number' => 'ite2', 'common_id' => 1, 'rack_id' => 1, 'rack_level' => 2]);
+    $product5 = Product::create(['price' => 12, 'serial_number' => 'ite2', 'common_id' => 1, 'rack_id' => 1, 'rack_level' => 2]);
+
+    $products = Product::all();
+
+    // test
+    $this->assertEquals([5,4,3,2,1], Product::sortOnCreatedAt($products, 'desc')->pluck('id')->toArray());
+    $this->assertEquals([1,2,3,4,5], Product::sortOnCreatedAt($products, 'asc')->pluck('id')->toArray());
 })->with('user');
