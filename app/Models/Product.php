@@ -11,6 +11,8 @@ class Product extends Model
     use HasFactory;
     public $timestamps = true;
 
+    public $mobileUser;
+
     protected $table = 'products';
     protected $primaryKey = 'id';
 
@@ -55,5 +57,10 @@ class Product extends Model
     public static function mostExpensiveProduct()
     {
         return Product::orderby('price', 'desc')->first();
+    }
+
+    public static function sortOnCreatedAt($products, $mode)
+    {
+        return $products->sortBy([['id', $mode]])->values();
     }
 }

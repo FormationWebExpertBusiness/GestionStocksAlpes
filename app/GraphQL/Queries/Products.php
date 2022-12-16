@@ -2,6 +2,7 @@
 
 namespace App\GraphQL\Queries;
 
+use App\Models\Product;
 use App\Models\Rack;
 
 class Products
@@ -18,6 +19,6 @@ class Products
             $product->brand = $product->getBrand();
             $product->model = $product->getModel();
         }
-        return $products;
+        return Product::sortOnCreatedAt($products, 'desc');
     }
 }

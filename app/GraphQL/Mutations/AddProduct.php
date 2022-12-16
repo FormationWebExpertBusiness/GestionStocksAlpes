@@ -5,7 +5,7 @@ namespace App\GraphQL\Mutations;
 use App\Models\Product;
 use App\Models\User;
 
-class DeleteProduct
+class AddProduct
 {
     /**
      * @param  null  $_
@@ -13,10 +13,12 @@ class DeleteProduct
      */
     public function __invoke($_, array $args)
     {
-        $product = Product::find($args['id']);
-        $product->mobileUser = User::find($args['user_id']);
+        $user_id = $args['user_id'];
+        unset($args['user_id']);
 
-        $product->delete();
+        $product = new Product($args);
+        $product->mobileUser = User::find($user_id);
+        $product->save();
 
         return $product;
     }
