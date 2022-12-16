@@ -7,6 +7,7 @@ use App\Models\HistoryProduct;
 use App\Models\Product;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class ProductObserver
 {
@@ -18,6 +19,7 @@ class ProductObserver
      */
     public function created(Product $product)
     {
+        //erreur $product->mobileUser peut pas entrer en base
         $commonProduct = CommonProduct::find($product->common_id);
 
         $commonProduct->updateStatusQuantity();
@@ -33,7 +35,7 @@ class ProductObserver
             'comment' => $product->comment,
         ]);
 
-        $product->mobileUser = null;
+        unset($product->mobileUser);
     }
 
     /**

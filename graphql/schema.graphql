@@ -37,6 +37,17 @@ type Mutation {
 		id: ID!
 		user_id: ID!
 	): Product 
+
+	"add product with to the given param, return error if params not allow"
+	addProduct(
+		common_id: ID!
+		serial_number: String!
+		price: Float!
+		comment: String
+		rack_id: ID!
+		rack_level: Int!
+		user_id: ID!
+	): Product 
 }
 
 type Product {
