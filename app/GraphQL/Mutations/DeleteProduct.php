@@ -15,6 +15,7 @@ class DeleteProduct
     {
         $product = Product::find($args['id']);
         $product->mobileUser = User::find($args['user_id']);
+        $product->comment = $args['comment'] ?? $product->comment;
 
         $product->delete();
 

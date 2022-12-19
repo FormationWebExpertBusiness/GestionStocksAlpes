@@ -73,6 +73,32 @@ class Filtres extends Component
         $this->emit('resetFilters');
     }
 
+    public function getAllFilters()
+    {
+        $catsFilter = [];
+        $brandsFilter = [];
+        $racksFilter = [];
+        $rackLevelsFilter = [];
+        $statutesFilter = $this->statutesFilter;
+        foreach ($this->catsFilter as $filter) {
+            $catsFilter[] = $this->categories->where('id', $filter)->first()->name;
+        }
+
+        foreach ($this->brandsFilter as $filter) {
+            $brandsFilter[] = $this->brands->where('id', $filter)->first()->name;
+        }
+
+        foreach ($this->racksFilter as $filter) {
+            $racksFilter[] = $this->racks->where('id', $filter)->first()->name;
+        }
+
+        foreach ($this->rackLevelsFilter as $filter) {
+            $rackLevelsFilter[] = 'Étage '.$filter;
+        }
+
+        return array_merge($catsFilter, $brandsFilter, $racksFilter, $rackLevelsFilter, $statutesFilter);
+    }
+
     public function resetSearchBar()
     {
         $this->search = '';

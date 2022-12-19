@@ -17,6 +17,6 @@ class CommonProductSeeder extends Seeder
      */
     public function run()
     {
-        \App\Models\CommonProduct::factory()->count(136)->create();
+        \App\Models\CommonProduct::factory()->count(36)->create();
     }
 }

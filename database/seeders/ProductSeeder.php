@@ -21,7 +21,7 @@ class ProductSeeder extends Seeder
 
     private function createRand()
     {
-        \App\Models\Product::factory()->count(2000)->create();
+        \App\Models\Product::factory()->count(200)->create();
     }
 
     private function createCustom()
