@@ -53,6 +53,7 @@ class Rack extends Model
         $max = 0;
         if (count($racks) === 0) {
             $allNbLevels = Rack::pluck('nb_level')->toArray();
+            $allNbLevels[] = 0;
             $max = max($allNbLevels);
         } else {
             foreach ($racks as $rack) {
