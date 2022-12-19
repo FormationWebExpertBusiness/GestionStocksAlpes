@@ -124,6 +124,7 @@ class ViewAll extends Component
     {
         $this->categoriesF = [];
         $this->brandsF = [];
+        $this->statutesF = [];
         $this->racksF = [];
         $this->rackLevelsF = [];
 
