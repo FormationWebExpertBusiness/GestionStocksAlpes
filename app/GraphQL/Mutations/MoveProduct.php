@@ -5,7 +5,7 @@ namespace App\GraphQL\Mutations;
 use App\Models\Product;
 use App\Models\User;
 
-final class MoveProduct
+class MoveProduct
 {
     /**
      * @param  null  $_
@@ -18,7 +18,7 @@ final class MoveProduct
         $product->rack_level = $args['rack_level'];
         $product->mobileUser = User::find($args['user_id']);
         $product->save();
-        
+
         return $product;
     }
 }
