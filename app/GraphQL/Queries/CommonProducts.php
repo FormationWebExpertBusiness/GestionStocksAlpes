@@ -12,6 +12,8 @@ class CommonProducts
      */
     public function __invoke($_, array $args)
     {
-        return CommonProduct::all();
+        $commonProducts = CommonProduct::all();
+        $commonProducts = CommonProduct::sortOnModels($commonProducts, 'asc');
+        return CommonProduct::sortOnCategories($commonProducts, 'asc');
     }
 }
