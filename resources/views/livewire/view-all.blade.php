@@ -140,7 +140,7 @@
                                     </th>
                                 </tr>
                             </thead>
-                            <tbody class="bg-white block max-h-[62vh] overflow-y-scroll">
+                            <tbody class="bg-white block max-h-[54vh] overflow-y-scroll">
                                 @forelse ($commonProducts as $commonProduct)
                                     <div wire:key="Common-product-{{ $commonProduct->id }}">
                                         <tr class="odd:bg-white even:bg-gray-50 divide-x divide-gray-200 table w-full table-fixed">

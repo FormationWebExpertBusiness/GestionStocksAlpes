@@ -2,7 +2,7 @@
 	<header class="bg-white pb-2 rounded-t-lg">
         <section aria-labelledby="filter-heading">
 			<div class="bg-white pb-4">
-				<div class="mx-auto flex max-w-full items-center justify-center ">
+				<div class="mx-auto flex max-w-full items-center justify-center">
 					<div class="flow-root">
 						<div class="-mx-4 flex items-center divide-x divide-gray-200">
 							{{-- search bar --}}
@@ -173,6 +173,33 @@
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99" />
                                     </svg>                                      
 								</button>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- Active filters -->
+				<div class="bg-gray-100 mt-4 -mx-8">
+					<div class="mx-auto max-w-7xl px-4 sm:flex sm:items-center sm:px-6 lg:px-8">
+						<h3 class="text-sm font-medium text-gray-500 whitespace-nowrap">
+							filtres actifs
+							<span class="sr-only">, active</span>
+						</h3>
+			  
+						<div class="h-5 w-px bg-gray-800 sm:ml-4 sm:block"></div>
+				
+						<div class="my-2 sm:ml-4 max-w-full overflow-x-auto overflow-y-hidden white-space:nowrap min-w-full max-h-12 min-h-12 mt-2">
+							<div class="flex items-center h-12">
+								@foreach ($this->getAllFilters() as $filter)
+									<span class="m-1 inline-flex items-center rounded-full border border-gray-200 bg-white py-1.5 pl-3 pr-2 text-sm font-medium text-gray-900 mb-2">
+										<span class="whitespace-nowrap">{{ $filter }}</span>
+										<button type="button" class="ml-1 inline-flex h-4 w-4 flex-shrink-0 rounded-full p-1 text-gray-400 hover:bg-gray-200 hover:text-gray-500">
+											<span class="sr-only">Remove filter for Objects</span>
+											<svg class="h-2 w-2" stroke="currentColor" fill="none" viewBox="0 0 8 8">
+												<path stroke-linecap="round" stroke-width="1.5" d="M1 1l6 6m0-6L1 7" />
+											</svg>
+										</button>
+									</span>
+								@endforeach
 							</div>
 						</div>
 					</div>
