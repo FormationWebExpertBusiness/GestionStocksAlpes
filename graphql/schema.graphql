@@ -48,7 +48,15 @@ type Mutation {
 		rack_id: ID!
 		rack_level: Int!
 		user_id: ID!
-	): Product 
+	): Product
+
+	"move a product to the given position"
+	moveProduct(
+		id: ID!
+		rack_id: ID!
+		rack_level: Int!
+		user_id: ID!
+	): Product
 }
 
 type Product {

@@ -139,7 +139,7 @@
                                         Date
                                     </th>
                                     <th scope="col"
-                                        class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 w-44">
+                                        class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 w-52">
                                         Action
                                     </th>
                                     <th scope="col"
@@ -178,13 +178,13 @@
                                         <tr class="odd:bg-white even:bg-gray-50 divide-x divide-gray-200 table w-full table-fixed">
                                             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 w-20">
                                                 {{ $historyProduct->created_at->format('d/m/y') }}</td>
-                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 w-44 justify-center">
+                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 w-52 justify-center">
                                                 @if ($historyProduct->code_action === 'C')
                                                     <span class="inline-flex items-center rounded-md bg-green-200 px-2.5 py-0.5 text-sm font-medium text-green-800">
                                                         <svg class="-ml-0.5 mr-1.5 h-2 w-2 text-green-400" fill="currentColor" viewBox="0 0 8 8">
                                                           <circle cx="4" cy="4" r="3" />
                                                         </svg>
-                                                        Entrée du stock
+                                                        Entrée en stock
                                                     </span>
                                                 @elseif ($historyProduct->code_action === 'D')
                                                     <span class="inline-flex items-center rounded-md bg-red-200 px-2.5 py-0.5 text-sm font-medium text-red-800">
@@ -247,7 +247,7 @@
                                                     <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 w-20">
                                                         <p class="leading-relaxed rounded-md w-2/3 animate-pulse bg-gray-400 h-6"><br></p>
                                                     </td>
-                                                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 w-44 justify-center">
+                                                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 w-52 justify-center">
                                                         <p class="leading-relaxed rounded-md w-2/3 animate-pulse bg-gray-400 h-6"><br></p>
                                                     </td>
                                                     <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 w-38">
