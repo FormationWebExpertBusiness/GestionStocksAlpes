@@ -71,10 +71,7 @@
                                             </td>
                                             <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-center text-sm font-medium sm:pr-6 w-1/6">
                                                 <div class="inline-block px-6">
-                                                    {{-- @livewire('details.product.detail-modal', ['product' => $product], key('product-detail-' . $product->id)) --}}
-                                                </div>
-                                                <div class="inline-block px-6">
-                                                    {{-- @livewire('forms.common-product.common-product-form', ['productToUpdate' => $product], key('common-product-form-' . $product->id)) --}}
+                                                    @livewire('forms.product.product-edit-form', ['product' => $product], key('product-edit-form-'. $product->id))
                                                 </div>
                                                 <div class="inline-block px-6">
                                                     <button wire:click="openWarningDelete({{ $product->id }})" class="text-indigo-600 hover:text-indigo-900">
