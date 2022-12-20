@@ -27,7 +27,7 @@ class ViewAll extends Component
 
     public $searchValue = '';
 
-    public $warningDeleteProductSignal = 'deleteProduct';
+    public $warningDeleteProductSignal = 'deleteCommonProduct';
 
     public $categoriesF = [];
     public $brandsF = [];
@@ -39,8 +39,6 @@ class ViewAll extends Component
     public $csvExportId;
 
     public $showToast = true;
-
-    public $paginatedCommonProducts;
 
     public $readyToLoad = false;
 
@@ -68,11 +66,11 @@ class ViewAll extends Component
         $this->emit('deleteWarning', $commonProductId, $this->warningDeleteProductSignal, 'CommonProduct', 'model', $deleteMessage);
     }
 
-    public function deleteProduct($commonProductId)
+    public function deleteCommonProduct($commonProductId)
     {
         $commonProduct = CommonProduct::findOrFail($commonProductId);
         $commonProduct->delete();
-        return redirect()->with('status', 'Le produit '.$commonProduct->model.' a bien été supprimé !');
+        return redirect()->with('status', 'Le type de produit '.$commonProduct->model.' a bien été supprimé !');
     }
 
     public function closeToast()
@@ -268,7 +266,7 @@ class ViewAll extends Component
             'resetFilters' => 'resetAllFilters',
             'quantityMin' => 'getQuantityMin',
             'quantityMax' => 'getQuantityMax',
-            'deleteProduct' => 'deleteProduct',
+            'deleteCommonProduct' => 'deleteCommonProduct',
             'downloadCommonProductCsv' => 'downloadCommonProductCsv',
             "echo-private:commonproductcsv.{$this->csvExportId},EndedCommonProductCsvExport" => 'downloadCommonProductCsv',
         ];

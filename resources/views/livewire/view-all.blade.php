@@ -186,12 +186,12 @@
                                                     </div>
                                                 </div>
                                                 <div class="w-2/6 inline-block">
-                                                    <div class="inline-block align-middle min-w-[15%]">
+                                                    {{-- <div class="inline-block align-middle min-w-[15%]">
                                                         @livewire('forms.product.product-add-form', ['commonProduct' => $commonProduct], key('product-add-form-' . $commonProduct->id))
                                                     </div>
                                                     <div class="inline-block align-middle min-w-[15%]">
                                                         @livewire('forms.product.product-delete-form', ['commonProduct' => $commonProduct], key('product-delete-form-' . $commonProduct->id))
-                                                    </div>
+                                                    </div> --}}
                                                 </div>
                                             </td>
                                             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 w-[10%]">
