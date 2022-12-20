@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\Models\Category;
+use App\Models\CommonProduct;
 use App\Models\Product;
 use App\Models\Rack;
 use Illuminate\Pagination\LengthAwarePaginator;
@@ -15,16 +16,19 @@ class Inventory extends Component
 
     public $isVisibleCat = false;
     public $isVisibleBrand = false;
+    public $isVisibleCommonProduct = false;
     public $isVisibleRack = false;
     public $isVisibleRackLevel = false;
 
     public $categories;
     public $brands;
+    public $commonProducts;
     public $racks;
     public $rackLevels;
 
     public $catsFilter = [];
     public $brandsFilter = [];
+    public $commonProductsFilter = [];
     public $racksFilter = [];
     public $rackLevelsFilter = [];
 
@@ -35,6 +39,7 @@ class Inventory extends Component
         // 'mode' => ['as' => 'mod'],
         'catsFilter' => ['as' => 'cat'],
         'brandsFilter' => ['as' => 'bra'],
+        'commonProductsFilter' => ['as' => 'com'],
         'racksFilter' => ['as' => 'rac'],
         'rackLevelsFilter' => ['as' => 'rlv'],
         'searchFilter' => ['except' => '', 'as' => 'sea'],
@@ -63,6 +68,7 @@ class Inventory extends Component
     {
         $this->catsFilter = [];
         $this->brandsFilter = [];
+        $this->commonProductsFilter = [];
         $this->racksFilter = [];
         $this->rackLevelsFilter = [];
     }
@@ -71,6 +77,7 @@ class Inventory extends Component
     {
         $catsFilter = [];
         $brandsFilter = [];
+        $commonProductsFilter = [];
         $racksFilter = [];
         $rackLevelsFilter = [];
         foreach ($this->catsFilter as $filter) {
@@ -81,6 +88,10 @@ class Inventory extends Component
             $brandsFilter[] = $this->brands->where('id', $filter)->first()->name;
         }
 
+        foreach ($this->commonProductsFilter as $filter) {
+            $commonProductsFilter[] = $this->commonProducts->where('id', $filter)->first()->model;
+        }
+
         foreach ($this->racksFilter as $filter) {
             $racksFilter[] = $this->racks->where('id', $filter)->first()->name;
         }
@@ -89,7 +100,7 @@ class Inventory extends Component
             $rackLevelsFilter[] = 'Étage '.$filter;
         }
 
-        return array_merge($catsFilter, $brandsFilter, $racksFilter, $rackLevelsFilter);
+        return array_merge($catsFilter, $brandsFilter, $commonProductsFilter, $racksFilter, $rackLevelsFilter);
     }
 
     public function resetSearchBar()
@@ -121,6 +132,8 @@ class Inventory extends Component
         $this->brands = Category::getLinkedBrands($this->catsFilter);
 
         $this->categories = Category::all();
+
+        $this->commonProducts = CommonProduct::all();
 
         $this->racks = Rack::all();
 

@@ -49,7 +49,7 @@
                                     </svg>
                                     </button>
                                     @if ($isVisibleRack)
-                                        <div class="absolute right-0 z-10 mt-2 origin-top-right rounded-md bg-white p-4 shadow-2xl ring-1 ring-black ring-opacity-5 focus:outline-none" @click.outside="$wire.isVisibleRack = false">
+                                        <div class="absolute right-0 z-10 mt-2 origin-top-right rounded-md bg-white p-4 shadow-2xl ring-1 ring-black ring-opacity-5 focus:outline-none max-h-64 overflow-scroll" @click.outside="$wire.isVisibleRack = false">
                                             <form class="space-y-1">
                                             @foreach ($racks as $rack)
                                                 <div class="flex items-center">
@@ -73,7 +73,7 @@
                                     </svg>
                                     </button>
                                     @if ($isVisibleRackLevel)
-                                        <div class="absolute right-0 z-10 mt-2 origin-top-right rounded-md bg-white p-4 shadow-2xl ring-1 ring-black ring-opacity-5 focus:outline-none" @click.outside="$wire.isVisibleRackLevel = false">
+                                        <div class="absolute right-0 z-10 mt-2 origin-top-right rounded-md bg-white p-4 shadow-2xl ring-1 ring-black ring-opacity-5 focus:outline-none max-h-64 overflow-scroll" @click.outside="$wire.isVisibleRackLevel = false">
                                             <form class="space-y-1">
                                             @foreach ($rackLevels as $rackLevel)
                                                 <div class="flex items-center">
@@ -85,7 +85,29 @@
                                             </form>
                                         </div>
                                     @endif
-                                </div>    
+                                </div>
+                                {{-- commonProduct Dropdown --}}
+                                <div class="relative inline-block px-4 text-left">
+                                    <button type="button" wire:click="$toggle('isVisibleCommonProduct')" class="group inline-flex justify-center text-sm font-medium text-gray-700 hover:text-gray-900" aria-expanded="false">
+                                        <span>Type de produit</span>
+                                        <span class="ml-1.5 rounded bg-gray-200 py-0.5 px-1.5 text-xs font-semibold tabular-nums text-gray-700">{{ count($commonProductsFilter) }}</span>
+                                        <svg class="-mr-1 ml-1 h-5 w-5 flex-shrink-0 text-gray-400 group-hover:text-gray-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                            <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
+                                        </svg>
+                                    </button>
+                                    @if ($isVisibleCommonProduct)
+                                        <div class="absolute right-0 z-10 mt-2 origin-top-right rounded-md bg-white p-4 shadow-2xl ring-1 ring-black ring-opacity-5 focus:outline-none max-h-64 overflow-scroll" @click.outside="$wire.isVisibleCommonProduct = false">
+                                            <form class="space-y-1">
+                                                @foreach ($commonProducts as $commonProduct)
+                                                    <div class="flex items-center">
+                                                        <input id="{{ 'commonProduct' . $commonProduct->id }}" name="{{ $commonProduct->model }}" value="{{ $commonProduct->id }}" type="checkbox" wire:model='commonProductsFilter' class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+                                                        <label for="{{ $commonProduct->model }}" class="ml-3 whitespace-nowrap pr-6 text-sm font-medium text-gray-900">{{ $commonProduct->model }}</label>
+                                                    </div>
+                                                @endforeach
+                                            </form>
+                                        </div>
+                                    @endif
+                                </div>
                                 {{-- categories Dropdown --}}
                                 <div class="relative inline-block px-4 text-left">
                                     <button type="button" wire:click="$toggle('isVisibleCat')" class="group inline-flex justify-center text-sm font-medium text-gray-700 hover:text-gray-900" aria-expanded="false">
@@ -96,7 +118,7 @@
                                         </svg>
                                     </button>
                                     @if ($isVisibleCat)
-                                        <div class="absolute right-0 z-10 mt-2 origin-top-right rounded-md bg-white p-4 shadow-2xl ring-1 ring-black ring-opacity-5 focus:outline-none" @click.outside="$wire.isVisibleCat = false">
+                                        <div class="absolute right-0 z-10 mt-2 origin-top-right rounded-md bg-white p-4 shadow-2xl ring-1 ring-black ring-opacity-5 focus:outline-none max-h-64 overflow-scroll" @click.outside="$wire.isVisibleCat = false">
                                             <form class="space-y-1">
                                                 @foreach ($categories as $category)
                                                     <div class="flex items-center">
@@ -118,7 +140,7 @@
                                         </svg>
                                     </button>
                                     @if ($isVisibleBrand)
-                                        <div class="absolute right-0 z-10 mt-2 origin-top-right rounded-md bg-white p-4 shadow-2xl ring-1 ring-black ring-opacity-5 focus:outline-none" @click.outside="$wire.isVisibleBrand = false">
+                                        <div class="absolute right-0 z-10 mt-2 origin-top-right rounded-md bg-white p-4 shadow-2xl ring-1 ring-black ring-opacity-5 focus:outline-none max-h-64 overflow-scroll" @click.outside="$wire.isVisibleBrand = false">
                                             <form class="space-y-1">
                                                 @foreach ($brands as $brand)
                                                     <div class="flex items-center">
