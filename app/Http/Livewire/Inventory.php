@@ -27,6 +27,7 @@ class Inventory extends Component
         $product = Product::find($id);
         $product->delete();
         $this->dispatchBrowserEvent('alert', ['type' => 'success',  'message' => 'Le produit '.$product->serial_number.' a bien été supprimé !']);
+        $this->emit('refreshComponent');
     }
 
     public function loadData()
@@ -63,6 +64,7 @@ class Inventory extends Component
     {
         return [
             'deleteProduct' => 'deleteProduct',
+            'refreshComponent' => '$refresh',
         ];
     }
 }

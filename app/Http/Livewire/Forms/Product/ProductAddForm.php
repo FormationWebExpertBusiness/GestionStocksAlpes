@@ -66,7 +66,7 @@ class ProductAddForm extends Component
         Product::create($validatedData);
         $this->toggleAddForm();
         $this->dispatchBrowserEvent('alert', ['type' => 'success',  'message' => 'Le produit '.$nom.' a bien été ajouté !']);
-        
+        $this->emit('refreshComponent');
     }
 
     public function toggleAddForm()
