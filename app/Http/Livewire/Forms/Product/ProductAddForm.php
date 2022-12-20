@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Forms\Product;
 
+use App\Models\CommonProduct;
 use App\Models\Product;
 use App\Models\Rack;
 use Livewire\Component;
@@ -11,6 +12,7 @@ class ProductAddForm extends Component
     public $show = false;
 
     public $commonProduct;
+    public $commonProducts;
 
     public $racks;
     public $serial_number;
@@ -43,6 +45,9 @@ class ProductAddForm extends Component
     public function mount()
     {
         $this->resetInput();
+        $this->commonProducts = CommonProduct::all();
+        $this->commonProducts = CommonProduct::sortOnModels($this->commonProducts, 'asc');
+        $this->commonProducts = CommonProduct::sortOnCategories($this->commonProducts, 'asc');
     }
 
     public function updated($property)
@@ -60,7 +65,8 @@ class ProductAddForm extends Component
         $validatedData = $this->validate();
         Product::create($validatedData);
         $this->toggleAddForm();
-        return redirect('stock')->with('status', 'Le produit '.$nom.' a bien été ajouté !');
+        $this->dispatchBrowserEvent('alert', ['type' => 'success',  'message' => 'Le produit '.$nom.' a bien été ajouté !']);
+        
     }
 
     public function toggleAddForm()
@@ -76,7 +82,7 @@ class ProductAddForm extends Component
 
     public function resetInput()
     {
-        $this->common_id = $this->commonProduct->id;
+        $this->common_id = null;
         $this->serial_number = null;
         $this->price = null;
         $this->comment = null;
@@ -88,6 +94,7 @@ class ProductAddForm extends Component
 
     public function render()
     {
+        $this->commonProduct = CommonProduct::find($this->common_id) ?? null;
         return view('livewire.forms.product.product-add-form');
     }
 }

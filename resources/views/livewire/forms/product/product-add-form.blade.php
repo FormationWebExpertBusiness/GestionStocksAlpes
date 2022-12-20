@@ -1,10 +1,6 @@
 <div>
-    <button wire:click="toggleAddForm" class="text-indigo-600 group flex items-center py-2 text-sm" role="menuitem"
-        tabindex="-1" id="menu-item-1">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-            class="w-6 h-6">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-        </svg>
+    <button wire:click="toggleAddForm" class="inline-flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:w-auto">
+        Ajouter un produit
     </button>
     @if ($show)
         <div class="relative z-10" aria-labelledby="modal-title" role="dialog" aria-modal="true">
@@ -37,18 +33,18 @@
                                     <div class="overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6">
                                         <dt class="truncate text-sm font-medium text-gray-500">Catégorie</dt>
                                         <dd class="mt-1 mb-2 text-xl font-semibold tracking-tight text-gray-900">
-                                            {{ $commonProduct->category->name }}
+                                            {{ $commonProduct?->category->name ?? '...' }}
                                         </dd>
                                         <dt class="truncate text-sm font-medium text-gray-500">Marque</dt>
                                         <dd class="mt-1 mb-2 text-xl font-semibold tracking-tight text-gray-900">
-                                            {{ $commonProduct->brand->name }}
+                                            {{ $commonProduct?->brand->name ?? '...' }}
                                         </dd>
                                         <dt class="truncate text-sm font-medium text-gray-500">Model</dt>
                                         <dd class="mt-1 mb-2 text-xl font-semibold tracking-tight text-gray-900">
-                                            {{ $commonProduct->model }}
+                                            {{ $commonProduct?->model ?? '...' }}
                                         </dd>
 
-                                        @if ($commonProduct->photo_product)
+                                        @if ($commonProduct?->photo_product)
                                             <div class="overflow-hidden rounded-lg bg-white shadow w-4/6 mx-auto">
                                                 <div class="w-full h-full flex items-center justify-center over" x-data="{ open: false }"
                                                     @keydown.escape="open = false">
@@ -102,6 +98,49 @@
 
                         <div class="bg-white rounded-r-lg py-16 px-4 sm:px-6 lg:col-span-3 lg:py-24 lg:px-8 xl:pl-12">
                             <form wire:submit.prevent="saveProduct" wire:key='add-product-{{ $common_id }}'>
+
+                                {{-- common_id select field --}}
+                                <div class="">
+                                    <div class="flex justify-between">
+                                        <label for="common_id"
+                                            class="block text-sm font-medium text-gray-700">Type de produit</label>
+                                    </div>
+                                    <div class="mt-1">
+                                        
+                                        <div class="relative">
+                                            <select wire:model="common_id" id="common_id"
+                                                name="common_id"
+                                                @if ($errors->has('common_id'))
+                                                    class="mt-1 block text-red-900 placeholder-red-300 w-full rounded-md border-red-300 py-3 pl-3 pr-10 text-base focus:border-red-500 focus:outline-none focus:ring-red-500 sm:text-sm"
+                                                @else
+                                                    class="mt-1 block w-full rounded-md border-gray-300 py-3 pl-3 pr-10 text-base focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                                                @endif
+                                                >
+                                                <option value="">---</option>
+                                                @foreach ($commonProducts as $commonProduct)
+                                                    <option value="{{$commonProduct->id}}">{{ $commonProduct->category->name }} - {{$commonProduct->model}}</option>
+                                                @endforeach
+                                            </select>
+                                            @if ($errors->has('common_id'))
+                                                <div
+                                                    class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+                                                    <svg class="h-5 w-5 text-red-500"
+                                                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                                                        fill="currentColor" aria-hidden="true">
+                                                        <path fill-rule="evenodd"
+                                                            d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-5a.75.75 0 01.75.75v4.5a.75.75 0 01-1.5 0v-4.5A.75.75 0 0110 5zm0 10a1 1 0 100-2 1 1 0 000 2z"
+                                                            clip-rule="evenodd" />
+                                                    </svg>
+                                                </div>
+                                            @endif
+                                        </div>
+
+                                        @error('common_id')
+                                            <p class="mt-2 h-4 text-sm text-red-600" id="email-error">
+                                                {{ $message }}</p>
+                                        @enderror
+                                    </div>
+                                </div>
 
                                 {{-- serial_number text field --}}
                                 <div>
