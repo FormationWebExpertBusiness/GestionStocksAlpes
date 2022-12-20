@@ -84,6 +84,16 @@ class Product extends Model
         })->values();
     }
 
+    public static function filterOnCommonProduct($products, $commonProducts)
+    {
+        $commonProducts = count($commonProducts) === 0 ? CommonProduct::pluck('id')->toArray() : $commonProducts;
+        return $products->filter(function ($value) use ($commonProducts) {
+            if (in_array($value->common_id, $commonProducts)) {
+                return $value;
+            }
+        })->values();
+    }
+
     public static function filterOnRack($products, $racks)
     {
         $racks = count($racks) === 0 ? Rack::pluck('id')->toArray() : $racks;

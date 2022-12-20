@@ -150,13 +150,16 @@ class Inventory extends Component
                 $this->products = Product::filterOnCategories($this->products, $this->catsFilter);
             }
             if ($this->brandsFilter) {
-                $this->products = Product::filterOnCategories($this->products, $this->brandsFilter);
+                $this->products = Product::filterOnBrands($this->products, $this->brandsFilter);
+            }
+            if ($this->commonProductsFilter) {
+                $this->products = Product::filterOnCommonProduct($this->products, $this->commonProductsFilter);
             }
             if ($this->racksFilter) {
-                $this->products = Product::filterOnCategories($this->products, $this->racksFilter);
+                $this->products = Product::filterOnRack($this->products, $this->racksFilter);
             }
             if ($this->rackLevelsFilter) {
-                $this->products = Product::filterOnCategories($this->products, $this->rackLevelsFilter);
+                $this->products = Product::filterOnRackLevel($this->products, $this->rackLevelsFilter);
             }
         } else {
             $this->products = collect();
