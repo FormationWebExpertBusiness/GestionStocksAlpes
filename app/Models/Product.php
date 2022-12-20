@@ -63,4 +63,51 @@ class Product extends Model
     {
         return $products->sortBy([['id', $mode]])->values();
     }
+
+    public static function filterOnBrands($products, $brands)
+    {
+        $brands = count($brands) === 0 ? Brand::pluck('id')->toArray() : $brands;
+        return $products->filter(function ($value) use ($brands) {
+            if (in_array($value->getBrand()->id, $brands)) {
+                return $value;
+            }
+        })->values();
+    }
+
+    public static function filterOnCategories($products, $categories)
+    {
+        $categories = count($categories) === 0 ? Category::pluck('id')->toArray() : $categories;
+        return $products->filter(function ($value) use ($categories) {
+            if (in_array($value->getCategory()->id, $categories)) {
+                return $value;
+            }
+        })->values();
+    }
+
+    public static function filterOnRack($products, $racks)
+    {
+        $racks = count($racks) === 0 ? Rack::pluck('id')->toArray() : $racks;
+        return $products->filter(function ($value) use ($racks) {
+            if (in_array($value->getCategory()->id, $racks)) {
+                return $value;
+            }
+        })->values();
+    }
+
+    public static function filterOnRackLevel($products, $rackLevels)
+    {
+        if (count($rackLevels) === 0) {
+            $levelMax = Rack::getRackLevelMax();
+    
+            $rackLevels = collect();
+            for ($i = 1; $i <= $levelMax; $i++) {
+                $rackLevels->push($i);
+            }
+        }
+        return $products->filter(function ($value) use ($rackLevels) {
+            if (in_array($value->rack_id, $rackLevels)) {
+                return $value;
+            }
+        })->values();
+    }
 }
