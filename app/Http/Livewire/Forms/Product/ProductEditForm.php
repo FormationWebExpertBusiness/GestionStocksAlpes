@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Forms\Product;
 
 use App\Models\CommonProduct;
+use App\Models\Product;
 use App\Models\Rack;
 use Livewire\Component;
 
@@ -47,7 +48,7 @@ class ProductEditForm extends Component
     public function mount()
     {
         $this->resetInput();
-        $this->commonProducts = CommonProduct::all();
+        $this->commonProducts = CommonProduct::select('id', 'model', 'code_status_quantity')->get();
         $this->commonProducts = CommonProduct::sortOnModels($this->commonProducts, 'asc');
         $this->commonProducts = CommonProduct::sortOnCategories($this->commonProducts, 'asc');
     }
@@ -77,6 +78,12 @@ class ProductEditForm extends Component
         $this->resetInput();
     }
 
+    public function initProduct($product_id)
+    {
+        $this->product = Product::find($product_id);
+        $this->toggleEditForm();
+    }
+
     public function getSelectedRack()
     {
         return Rack::find($this->rack_id);
@@ -98,5 +105,12 @@ class ProductEditForm extends Component
     {
         $this->commonProduct = CommonProduct::find($this->common_id) ?? null;
         return view('livewire.forms.product.product-edit-form');
+    }
+
+    protected function getListeners()
+    {
+        return [
+            'refreshEditComponent' => 'initProduct',
+        ];
     }
 }

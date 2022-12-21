@@ -14,18 +14,6 @@ class Inventory extends Component
 {
     use WithPagination;
 
-    public $isVisibleCat = false;
-    public $isVisibleBrand = false;
-    public $isVisibleCommonProduct = false;
-    public $isVisibleRack = false;
-    public $isVisibleRackLevel = false;
-
-    public $categories;
-    public $brands;
-    public $commonProducts;
-    public $racks;
-    public $rackLevels;
-
     public $catsFilter = [];
     public $brandsFilter = [];
     public $commonProductsFilter = [];
@@ -64,6 +52,31 @@ class Inventory extends Component
         $this->emit('refreshComponent');
     }
 
+    public function updateCatsFilter($cats)
+    {
+        $this->catsFilter = $cats;
+    }
+
+    public function updateBrandsFilter($brands)
+    {
+        $this->brandsFilter = $brands;
+    }
+
+    public function updateCommonProductsFilter($commonProducts)
+    {
+        $this->commonProductsFilter = $commonProducts;
+    }
+
+    public function updateRacksFilter($racks)
+    {
+        $this->racksFilter = $racks;
+    }
+
+    public function updateRackLevelsFilter($rackLevels)
+    {
+        $this->rackLevelsFilter = $rackLevels;
+    }
+
     public function resetFilters()
     {
         $this->catsFilter = [];
@@ -72,42 +85,7 @@ class Inventory extends Component
         $this->racksFilter = [];
         $this->rackLevelsFilter = [];
     }
-
-    public function getAllFilters()
-    {
-        $catsFilter = [];
-        $brandsFilter = [];
-        $commonProductsFilter = [];
-        $racksFilter = [];
-        $rackLevelsFilter = [];
-        foreach ($this->catsFilter as $filter) {
-            $catsFilter[] = $this->categories->where('id', $filter)->first()->name;
-        }
-
-        foreach ($this->brandsFilter as $filter) {
-            $brandsFilter[] = $this->brands->where('id', $filter)->first()->name;
-        }
-
-        foreach ($this->commonProductsFilter as $filter) {
-            $commonProductsFilter[] = $this->commonProducts->where('id', $filter)->first()->model;
-        }
-
-        foreach ($this->racksFilter as $filter) {
-            $racksFilter[] = $this->racks->where('id', $filter)->first()->name;
-        }
-
-        foreach ($this->rackLevelsFilter as $filter) {
-            $rackLevelsFilter[] = 'Étage '.$filter;
-        }
-
-        return array_merge($catsFilter, $brandsFilter, $commonProductsFilter, $racksFilter, $rackLevelsFilter);
-    }
-
-    public function resetSearchBar()
-    {
-        $this->search = '';
-    }
-
+    
     public function loadData()
     {
         $this->readyToLoad = true;
@@ -118,9 +96,14 @@ class Inventory extends Component
         $this->showToast = false;
     }
 
+    public function EditProduct($product_id)
+    {
+        $this->emit('refreshEditComponent', $product_id);
+    }
+
     public function collectionToPaginator()
     {
-        $perPage = 20;
+        $perPage = 12;
 
         $productsOnPage = $this->products->forPage($this->page, $perPage);
 
@@ -129,23 +112,8 @@ class Inventory extends Component
 
     public function render()
     {
-        $this->brands = Category::getLinkedBrands($this->catsFilter);
-
-        $this->categories = Category::all();
-
-        $this->commonProducts = CommonProduct::all();
-
-        $this->racks = Rack::all();
-
-        $levelMax = Rack::getRackLevelMax($this->racksFilter);
-        $this->rackLevels = collect();
-        for ($i = 1; $i <= $levelMax; $i++) {
-            $this->rackLevels->push($i);
-        }
-
         if ($this->readyToLoad) {
-            $this->products = Product::all();
-
+            $this->products = Product::get(['id', 'price', 'comment', 'rack_level', 'serial_number', 'rack_id', 'common_id']);
             if ($this->catsFilter) {
                 $this->products = Product::filterOnCategories($this->products, $this->catsFilter);
             }
@@ -173,6 +141,12 @@ class Inventory extends Component
         return [
             'deleteProduct' => 'deleteProduct',
             'refreshComponent' => '$refresh',
+            'catsFilter' => 'updateCatsFilter',
+            'brandsFilter' => 'updateBrandsFilter',
+            'commonProductsFilter' => 'updateCommonProductsFilter',
+            'racksFilter' => 'updateRacksFilter',
+            'rackLevelsFilter' => 'updateRackLevelsFilter',
+            'resetFilters' => 'resetFilters',
         ];
     }
 }

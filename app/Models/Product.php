@@ -109,9 +109,9 @@ class Product extends Model
         if (count($rackLevels) === 0) {
             $levelMax = Rack::getRackLevelMax();
     
-            $rackLevels = collect();
+            $rackLevels = [];
             for ($i = 1; $i <= $levelMax; $i++) {
-                $rackLevels->push($i);
+                $rackLevels[] = $i;
             }
         }
         return $products->filter(function ($value) use ($rackLevels) {
