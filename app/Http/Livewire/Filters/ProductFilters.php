@@ -55,31 +55,49 @@ class ProductFilters extends Component
         $racksFilter = [];
         $rackLevelsFilter = [];
         foreach ($this->catsFilter as $filter) {
-            $catsFilter[] = $this->categories->where('id', $filter)->first()->name;
+            $f = $this->categories->where('id', $filter)->first();
+            $f->badge = $f->name;
+            $catsFilter[] = $f;
         }
 
         foreach ($this->brandsFilter as $filter) {
-            $brandsFilter[] = $this->brands->where('id', $filter)->first()->name;
+            $f = $this->brands->where('id', $filter)->first();
+            $f->badge = $f->name;
+            $brandsFilter[] = $f;
         }
 
         foreach ($this->commonProductsFilter as $filter) {
-            $commonProductsFilter[] = $this->commonProducts->where('id', $filter)->first()->model;
+            $f = $this->commonProducts->where('id', $filter)->first();
+            $f->badge = $f->model;
+            $commonProductsFilter[] = $f;
         }
 
         foreach ($this->racksFilter as $filter) {
-            $racksFilter[] = $this->racks->where('id', $filter)->first()->name;
+            $f = $this->racks->where('id', $filter)->first();
+            $f->badge = $f->name;
+            $racksFilter[] = $f;
         }
 
         foreach ($this->rackLevelsFilter as $filter) {
-            $rackLevelsFilter[] = 'Étage '.$filter;
+            $f = collect(['id' => $filter, 'badge' => 'Étage '.$filter]);
+            $rackLevelsFilter[] = $f;
         }
 
-        return array_merge($catsFilter, $brandsFilter, $commonProductsFilter, $racksFilter, $rackLevelsFilter);
+        return ['catsFilter' => $catsFilter, 'brandsFilter' => $brandsFilter, 'commonProductsFilter' => $commonProductsFilter, 'racksFilter' => $racksFilter, 'rackLevelsFilter' => $rackLevelsFilter];
     }
 
     public function resetSearchBar()
     {
         $this->search = '';
+    }
+
+    public function removeFilter($filter, $arrayFilterName)
+    {
+        $filterKey = array_search($filter['id'], $this->$arrayFilterName);
+        if ($filterKey !== false) {
+            unset($this->$arrayFilterName[$filterKey]);
+            $this->emit($arrayFilterName, $this->$arrayFilterName);
+        }
     }
 
     public function mount()

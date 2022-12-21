@@ -162,16 +162,19 @@
                 
                         <div class="my-2 sm:ml-4 max-w-full overflow-x-auto overflow-y-hidden white-space:nowrap min-w-full max-h-12 min-h-12 mt-2">
                             <div class="flex items-center h-12">
-                                @foreach ($this->getAllFilters() as $filter)
+                                @foreach ($this->getAllFilters() as $key => $filters)
+                                @foreach ($filters as $filter)
                                     <span class="m-1 inline-flex items-center rounded-full border border-gray-200 bg-white py-1.5 pl-3 pr-2 text-sm font-medium text-gray-900 mb-2">
-                                        <span class="whitespace-nowrap">{{ $filter }}</span>
-                                        <button type="button" class="ml-1 inline-flex h-4 w-4 flex-shrink-0 rounded-full p-1 text-gray-400 hover:bg-gray-200 hover:text-gray-500">
+                                        <span class="whitespace-nowrap">{{ $filter['badge'] }}</span>
+                                        <button type="button" class="ml-1 inline-flex h-4 w-4 flex-shrink-0 rounded-full p-1 text-gray-400 hover:bg-gray-200 hover:text-gray-500"
+                                            wire:click="removeFilter({{ $filter }}, '{{ $key }}')">
                                             <span class="sr-only">Remove filter for Objects</span>
                                             <svg class="h-2 w-2" stroke="currentColor" fill="none" viewBox="0 0 8 8">
                                                 <path stroke-linecap="round" stroke-width="1.5" d="M1 1l6 6m0-6L1 7" />
                                             </svg>
                                         </button>
                                     </span>
+                                @endforeach
                                 @endforeach
                             </div>
                         </div>
