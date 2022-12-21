@@ -77,6 +77,11 @@ class Inventory extends Component
         $this->rackLevelsFilter = $rackLevels;
     }
 
+    public function searchFilter($search)
+    {
+        $this->searchFilter = $search;
+    }
+
     public function resetFilters()
     {
         $this->catsFilter = [];
@@ -101,6 +106,23 @@ class Inventory extends Component
         $this->emit('refreshEditComponent', $product_id);
     }
 
+    public function filterOnSearchBar()
+    {
+        if ($this->searchFilter) {
+            $this->products = Product::select('products.*')
+                ->join('common_products', 'products.common_id', '=', 'common_products.id')
+                ->join('brands', 'common_products.brand_id', '=', 'brands.id')
+                ->join('categories', 'common_products.category_id', '=', 'categories.id')
+                ->where('common_products.model', 'LIKE', '%'.$this->searchFilter.'%')
+                ->orWhere('categories.name', 'LIKE', '%'.$this->searchFilter.'%')
+                ->orWhere('brands.name', 'LIKE', '%'.$this->searchFilter.'%')
+                ->orWhere('products.serial_number', 'LIKE', '%'.$this->searchFilter.'%')
+                ->get();
+        } else {
+            $this->products = Product::get();
+        }
+    }
+
     public function collectionToPaginator()
     {
         $perPage = 12;
@@ -113,7 +135,7 @@ class Inventory extends Component
     public function render()
     {
         if ($this->readyToLoad) {
-            $this->products = Product::get(['id', 'price', 'comment', 'rack_level', 'serial_number', 'rack_id', 'common_id']);
+            $this->filterOnSearchBar();
             if ($this->catsFilter) {
                 $this->products = Product::filterOnCategories($this->products, $this->catsFilter);
             }
@@ -146,6 +168,7 @@ class Inventory extends Component
             'commonProductsFilter' => 'updateCommonProductsFilter',
             'racksFilter' => 'updateRacksFilter',
             'rackLevelsFilter' => 'updateRackLevelsFilter',
+            'searchFilter' => 'searchFilter',
             'resetFilters' => 'resetFilters',
         ];
     }

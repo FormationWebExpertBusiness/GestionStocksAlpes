@@ -16,7 +16,7 @@
         @livewire('warning-before-delete')
         @livewire('forms.product.product-edit-form', key('product-edit-form'))
         {{-- filters --}}
-        @livewire('filters.product-filters', ['catsFilter' => $catsFilter, 'brandsFilter' => $brandsFilter, 'commonProductsFilter' => $commonProductsFilter, 'racksFilter' => $racksFilter, 'rackLevelsFilter' => $rackLevelsFilter], key('product-filters'))
+        @livewire('filters.product-filters', ['catsFilter' => $catsFilter, 'brandsFilter' => $brandsFilter, 'commonProductsFilter' => $commonProductsFilter, 'racksFilter' => $racksFilter, 'rackLevelsFilter' => $rackLevelsFilter, 'searchFilter' => $searchFilter], key('product-filters'))
 
         <div class="flex flex-col">
             <div class="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -25,6 +25,9 @@
                         <table class="min-w-full divide-y divide-gray-300">
                             <thead class="bg-gray-100 block">
                                 <tr class="table w-full table-fixed">
+                                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 w-[9%]">
+                                        Entrée en stock
+                                    </th>
                                     <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
                                         Catégorie
                                     </th>
@@ -55,6 +58,8 @@
                                 @forelse ($products as $product)
                                     <div wire:key="Common-product-{{ $product->id }}">
                                         <tr class="odd:bg-white even:bg-gray-50 divide-x divide-gray-200 table w-full table-fixed">
+                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 w-[9%]">
+                                                {{ $product->created_at->format('d/m/y') }}</td>
                                             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                                                 {{ $product->getCategory()->name }}</td>
                                             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
@@ -115,6 +120,9 @@
                                     @else
                                         @for ($i = 0; $i < 12; $i++)
                                             <tr class="odd:bg-white even:bg-gray-50 divide-x divide-gray-200 table w-full table-fixed">
+                                                <td scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 w-[9%]">
+                                                    <p class="leading-relaxed rounded-md w-2/3 animate-pulse bg-gray-400 h-6"><br></p>
+                                                </td>
                                                 <td scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
                                                     <p class="leading-relaxed rounded-md w-2/3 animate-pulse bg-gray-400 h-6"><br></p>
                                                 </td>
