@@ -127,7 +127,7 @@ class CommonProductForm extends Component
 
     public function addDynamicRules()
     {
-        array_push($this->rules['model'], 'unique:common_products,model,NULL,id,brand_id,' . $this->brand_id); //vérifie si le model n'existe pas déjà pour la marque sélectionner
+        $this->rules['model'][] = 'unique:common_products,model,NULL,id,brand_id,' . $this->brand_id; //vérifie si le model n'existe pas déjà pour la marque sélectionner
     }
 
     public function updateCatF($categories)

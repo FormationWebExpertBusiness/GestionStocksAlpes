@@ -31,16 +31,16 @@ class RackEditForm extends Component
     public function updated($property)
     {
         if ($this->name !== $this->rack->name) {
-            array_push($this->rules['name'], 'unique:racks,name');
+            $this->rules['name'][] = 'unique:racks,name';
         }
         $this->validateOnly($property);
     }
 
     public function updateRack()
     {
-        array_push($this->rules['nb_level'], new NotEmptyRackLevel());
+        $this->rules['nb_level'][] = new NotEmptyRackLevel();
         if ($this->name !== $this->rack->name) {
-            array_push($this->rules['name'], 'unique:racks,name');
+            $this->rules['name'][] = 'unique:racks,name';
         }
         $validatedData = $this->validate();
         $oldNbLevel = $this->rack->nb_level;
