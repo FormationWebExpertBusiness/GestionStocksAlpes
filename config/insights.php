@@ -100,6 +100,9 @@ return [
         ForbiddenPrivateMethods::class => [
             'title' => 'The usage of private methods is not idiomatic in Laravel.',
         ],
+        \SlevomatCodingStandard\Sniffs\Functions\FunctionLengthSniff::class => [
+            'maxLinesLength' => 40,
+        ]
     ],
 
     /*
@@ -116,7 +119,7 @@ return [
     'requirements' => [
        'min-quality' => 90,
        'min-complexity' => 80,
-       'min-architecture' => 90,
+       'min-architecture' => 95,
        'min-style' => 95,
        'disable-security-check' => false,
     ],
