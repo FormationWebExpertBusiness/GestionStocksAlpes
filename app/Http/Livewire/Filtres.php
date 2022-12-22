@@ -4,7 +4,6 @@ namespace App\Http\Livewire;
 
 use App\Models\Category;
 use App\Models\CommonProduct;
-use App\Models\Rack;
 use Illuminate\Support\Str;
 use Livewire\Component;
 
@@ -12,14 +11,10 @@ class Filtres extends Component
 {
     public $isVisibleCat = false;
     public $isVisibleBrand = false;
-    public $isVisibleRack = false;
-    public $isVisibleRackLevel = false;
     public $isVisibleStatus = false;
 
     public $categories;
     public $brands;
-    public $racks;
-    public $rackLevels;
     public $statutes;
 
     public $quantityMin;
@@ -27,8 +22,6 @@ class Filtres extends Component
 
     public $catsFilter = [];
     public $brandsFilter = [];
-    public $racksFilter = [];
-    public $rackLevelsFilter = [];
     public $statutesFilter = [];
 
     public $searchFilter;
@@ -64,8 +57,6 @@ class Filtres extends Component
     {
         $this->catsFilter = [];
         $this->brandsFilter = [];
-        $this->racksFilter = [];
-        $this->rackLevelsFilter = [];
         $this->statutesFilter = [];
         $this->quantityMin = null;
         $this->quantityMax = null;
@@ -77,8 +68,6 @@ class Filtres extends Component
     {
         $catsFilter = [];
         $brandsFilter = [];
-        $racksFilter = [];
-        $rackLevelsFilter = [];
         $statutesFilter = $this->statutesFilter;
         foreach ($this->catsFilter as $filter) {
             $catsFilter[] = $this->categories->where('id', $filter)->first()->name;
@@ -88,15 +77,7 @@ class Filtres extends Component
             $brandsFilter[] = $this->brands->where('id', $filter)->first()->name;
         }
 
-        foreach ($this->racksFilter as $filter) {
-            $racksFilter[] = $this->racks->where('id', $filter)->first()->name;
-        }
-
-        foreach ($this->rackLevelsFilter as $filter) {
-            $rackLevelsFilter[] = 'Étage '.$filter;
-        }
-
-        return array_merge($catsFilter, $brandsFilter, $racksFilter, $rackLevelsFilter, $statutesFilter);
+        return array_merge($catsFilter, $brandsFilter, $statutesFilter);
     }
 
     public function resetSearchBar()
@@ -111,16 +92,7 @@ class Filtres extends Component
 
         $this->categories = Category::all();
 
-        $this->racks = Rack::all();
-
         $this->statutes = CommonProduct::$statutesQuantity;
-
-        $levelMax = Rack::getRackLevelMax($this->racksFilter);
-
-        $this->rackLevels = collect();
-        for ($i = 1; $i <= $levelMax; $i++) {
-            $this->rackLevels->push($i);
-        }
 
         return view('livewire.filtres');
     }

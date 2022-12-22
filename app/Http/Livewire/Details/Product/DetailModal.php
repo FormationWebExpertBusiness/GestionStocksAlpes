@@ -32,9 +32,9 @@ class DetailModal extends Component
         return view('livewire.details.product.detail-modal');
     }
 
-    public function openWarningDelete($productId)
+    public function openWarningDelete($product)
     {
-        $this->emit('deleteWarning', $productId, $this->warningDeleteProductSignal, 'Product', 'serial_number');
+        return redirect('/inventory?com[0]='.$product['id']);
     }
 
     public function getRack($rack)

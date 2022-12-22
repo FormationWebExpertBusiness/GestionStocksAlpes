@@ -27,20 +27,16 @@ class ViewAll extends Component
 
     public $searchValue = '';
 
-    public $warningDeleteProductSignal = 'deleteProduct';
+    public $warningDeleteProductSignal = 'deleteCommonProduct';
 
     public $categoriesF = [];
     public $brandsF = [];
-    public $racksF = [];
-    public $rackLevelsF = [];
     public $statutesF = [];
     public $search;
 
     public $csvExportId;
 
     public $showToast = true;
-
-    public $paginatedCommonProducts;
 
     public $readyToLoad = false;
 
@@ -50,8 +46,6 @@ class ViewAll extends Component
         'categoriesF' => ['as' => 'cat'],
         'brandsF' => ['as' => 'bra'],
         'statutesF' => ['as' => 'sta'],
-        'racksF' => ['as' => 'rac'],
-        'rackLevelsF' => ['as' => 'rlv'],
         'searchValue' => ['except' => '', 'as' => 'sea'],
         'quantityMin' => ['except' => '', 'as' => 'qmin'],
         'quantityMax' => ['except' => '', 'as' => 'qmax'],
@@ -68,11 +62,11 @@ class ViewAll extends Component
         $this->emit('deleteWarning', $commonProductId, $this->warningDeleteProductSignal, 'CommonProduct', 'model', $deleteMessage);
     }
 
-    public function deleteProduct($commonProductId)
+    public function deleteCommonProduct($commonProductId)
     {
         $commonProduct = CommonProduct::findOrFail($commonProductId);
         $commonProduct->delete();
-        return redirect()->with('status', 'Le produit '.$commonProduct->model.' a bien été supprimé !');
+        return redirect()->with('status', 'Le type de produit '.$commonProduct->model.' a bien été supprimé !');
     }
 
     public function closeToast()
@@ -105,16 +99,6 @@ class ViewAll extends Component
         $this->statutesF = $statutes;
     }
 
-    public function updateRackF($racks)
-    {
-        $this->racksF = $racks;
-    }
-
-    public function updateRackLevelF($rackLevels)
-    {
-        $this->rackLevelsF = $rackLevels;
-    }
-
     public function search($searchV)
     {
         $this->searchValue = $searchV;
@@ -125,8 +109,6 @@ class ViewAll extends Component
         $this->categoriesF = [];
         $this->brandsF = [];
         $this->statutesF = [];
-        $this->racksF = [];
-        $this->rackLevelsF = [];
 
         $this->quantityMin = null;
         $this->quantityMax = null;
@@ -180,10 +162,10 @@ class ViewAll extends Component
                 $this->commonProducts = CommonProduct::sortOnModels($this->commonProducts, $this->mode);
                 break;
             case 'quantity':
-                $this->commonProducts = CommonProduct::sortOnQuantitiesOnRack($this->commonProducts, $this->mode, $this->racksF, $this->rackLevelsF);
+                $this->commonProducts = CommonProduct::sortOnQuantities($this->commonProducts, $this->mode);
                 break;
             case 'price':
-                $this->commonProducts = CommonProduct::sortOnTotalPricesOnRack($this->commonProducts, $this->mode, $this->racksF, $this->rackLevelsF);
+                $this->commonProducts = CommonProduct::sortOnTotalPrices($this->commonProducts, $this->mode);
                 break;
         }
     }
@@ -206,11 +188,7 @@ class ViewAll extends Component
             $this->commonProducts = CommonProduct::filterOnBrands($this->commonProducts, $this->brandsF);
             $this->commonProducts = CommonProduct::filterOnCategories($this->commonProducts, $this->categoriesF);
             $this->commonProducts = CommonProduct::filterOnquantityStatus($this->commonProducts, $this->statutesF);
-            if ($this->racksF || $this->rackLevelsF) {
-                $this->commonProducts = CommonProduct::filterOnRacksQuantities($this->commonProducts, $this->quantityMin, $this->quantityMax, $this->racksF, $this->rackLevelsF);
-            } else {
-                $this->commonProducts = CommonProduct::filterOnQuantities($this->commonProducts, $this->quantityMin, $this->quantityMax);
-            }
+            $this->commonProducts = CommonProduct::filterOnQuantities($this->commonProducts, $this->quantityMin, $this->quantityMax);
             $this->sortCommonProducts();
         } else {
             $this->commonProducts = collect();
@@ -262,13 +240,11 @@ class ViewAll extends Component
             'catsFilter' => 'updateCatF',
             'brandsFilter' => 'updateBrandF',
             'statutesFilter' => 'updateStatusF',
-            'racksFilter' => 'updateRackF',
-            'rackLevelsFilter' => 'updateRackLevelF',
             'searchFilter' => 'search',
             'resetFilters' => 'resetAllFilters',
             'quantityMin' => 'getQuantityMin',
             'quantityMax' => 'getQuantityMax',
-            'deleteProduct' => 'deleteProduct',
+            'deleteCommonProduct' => 'deleteCommonProduct',
             'downloadCommonProductCsv' => 'downloadCommonProductCsv',
             "echo-private:commonproductcsv.{$this->csvExportId},EndedCommonProductCsvExport" => 'downloadCommonProductCsv',
         ];

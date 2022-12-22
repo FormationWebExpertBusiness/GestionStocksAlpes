@@ -1,7 +1,4 @@
 <div>
-    <button wire:click="toggleAddForm" class="inline-flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:w-auto">
-        Ajouter un produit
-    </button>
     @if ($show)
         <div class="relative z-10" aria-labelledby="modal-title" role="dialog" aria-modal="true">
             <div class="fixed inset-0 bg-gray-500 bg-opacity-50 transition-opacity"></div>
@@ -10,7 +7,7 @@
                     <div class="relative mx-auto content-center ml-[30%] max-w-5xl lg:grid lg:grid-cols-5">
                         <div class="bg-gray-50 rounded-l-lg py-16 px-4 sm:px-6 lg:col-span-2 lg:px-8 lg:py-24 xl:pr-12">
                             <div class="hidden sm:block absolute top-0 right-0 pt-4 pr-4">
-                                <button wire:click="toggleAddForm" type="button"
+                                <button wire:click="toggleEditForm" type="button"
                                     class="bg-white rounded-md text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                                     <span class="sr-only">Close</span>
                                     <!-- Heroicon name: outline/x -->
@@ -97,7 +94,7 @@
                         </div>
 
                         <div class="bg-white rounded-r-lg py-16 px-4 sm:px-6 lg:col-span-3 lg:py-24 lg:px-8 xl:pl-12">
-                            <form wire:submit.prevent="saveProduct" wire:key='add-product-{{ $common_id }}'>
+                            <form wire:submit.prevent="saveProduct" wire:key='edit-product-{{ $common_id }}'>
 
                                 {{-- common_id select field --}}
                                 <div class="">
@@ -187,7 +184,7 @@
                                     </div>
                                     <div class="mt-1">
                                         <div class="relative">
-                                            <input wire:model="price" type="number" name="price"
+                                            <input wire:model="price" type="text" name="price"
                                                 id="price" autocomplete="price" placeholder="Ex: 250"
                                                 @if ($errors->has('price'))
                                                     class="block w-full py-3 px-4 rounded-md border-red-300 pr-10 text-red-900 placeholder-red-300 focus:border-red-500 focus:outline-none focus:ring-red-500"
@@ -352,7 +349,7 @@
                                         class="inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
                                         Enregistrer
                                     </button>
-                                    <button wire:click="toggleAddForm" type="button"
+                                    <button wire:click="toggleEditForm" type="button"
                                         class="mt-3 inline-flex w-full justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-base font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:mt-0 sm:w-auto sm:text-sm">
                                         Annuler
                                     </button>

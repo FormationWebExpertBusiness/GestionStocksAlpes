@@ -99,7 +99,7 @@
             </div>
         </div>
         @livewire('warning-before-delete')
-        @livewire('filtres', ['search' => $searchValue, 'catsFilter' => $categoriesF, 'brandsFilter' => $brandsF, 'statutesFilter' => $statutesF, 'racksFilter' => $racksF, 'rackLevelsFilter' => $rackLevelsF, 'quantityMin' => $quantityMin, 'quantityMax' => $quantityMax])
+        @livewire('filtres', ['search' => $searchValue, 'catsFilter' => $categoriesF, 'brandsFilter' => $brandsF, 'statutesFilter' => $statutesF, 'quantityMin' => $quantityMin, 'quantityMax' => $quantityMax])
 
         <div class="flex flex-col">
             <div class="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -164,7 +164,7 @@
                                                 {{ $commonProduct->model }}</td>
                                             <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-500 w-[12%]">
                                                 @php
-                                                    $quantity = $commonProduct->quantityOnRack($racksF, $rackLevelsF);
+                                                    $quantity = $commonProduct->quantity;
                                                 @endphp
                                                 <div class="w-4/6 inline-block">
                                                     <div class="inline-block align-middle font-bold text-base">
@@ -186,16 +186,10 @@
                                                     </div>
                                                 </div>
                                                 <div class="w-2/6 inline-block">
-                                                    <div class="inline-block align-middle min-w-[15%]">
-                                                        @livewire('forms.product.product-add-form', ['commonProduct' => $commonProduct], key('product-add-form-' . $commonProduct->id))
-                                                    </div>
-                                                    <div class="inline-block align-middle min-w-[15%]">
-                                                        @livewire('forms.product.product-delete-form', ['commonProduct' => $commonProduct], key('product-delete-form-' . $commonProduct->id))
-                                                    </div>
                                                 </div>
                                             </td>
                                             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 w-[10%]">
-                                                {{ number_format($commonProduct->totalPriceOnRack($racksF, $rackLevelsF), 2, ',', ' ') }}€
+                                                {{ number_format($commonProduct->totalPrice, 2, ',', ' ') }}€
                                             </td>
                                             <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-center text-sm font-medium sm:pr-6 w-1/5">
                                                 <div class="inline-block px-6">

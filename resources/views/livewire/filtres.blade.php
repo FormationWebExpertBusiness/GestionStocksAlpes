@@ -45,54 +45,6 @@
                                         </div>
                                     @enderror
                                 </div>
-							</div>	
-							{{-- Rack Dropdown --}}
-							<div class="relative inline-block px-4 text-left">
-								<button type="button" wire:click="$toggle('isVisibleRack')" class="group inline-flex justify-center text-sm font-medium text-gray-700 hover:text-gray-900" aria-expanded="false">
-								<span>Étagère</span>
-								<span class="ml-1.5 rounded bg-gray-200 py-0.5 px-1.5 text-xs font-semibold tabular-nums text-gray-700">{{ count($racksFilter) }}</span>
-								<!-- Heroicon name: mini/chevron-down -->
-								<svg class="-mr-1 ml-1 h-5 w-5 flex-shrink-0 text-gray-400 group-hover:text-gray-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-									<path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
-								</svg>
-								</button>
-								@if ($isVisibleRack)
-									<div class="absolute right-0 z-10 mt-2 origin-top-right rounded-md bg-white p-4 shadow-2xl ring-1 ring-black ring-opacity-5 focus:outline-none" @click.outside="$wire.isVisibleRack = false">
-										<form class="space-y-1">
-										@foreach ($racks as $rack)
-											<div class="flex items-center">
-												<input id="{{ 'rack' . $rack->id }}" name="{{ $rack->name }}"
-												value="{{ $rack->id }}" type="checkbox" wire:model='racksFilter' class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
-												<label for="{{ 'rack' . $rack->id }}" class="ml-3 whitespace-nowrap pr-6 text-sm font-medium text-gray-900">{{ $rack->name }}</label>
-											</div>
-										@endforeach
-										</form>
-									</div>
-								@endif
-							</div>
-							{{-- RackLevel Dropdown --}}
-							<div class="relative inline-block px-4 text-left">
-								<button type="button" wire:click="$toggle('isVisibleRackLevel')" class="group inline-flex justify-center text-sm font-medium text-gray-700 hover:text-gray-900" aria-expanded="false">
-								<span>Numéro d'étage</span>
-								<span class="ml-1.5 rounded bg-gray-200 py-0.5 px-1.5 text-xs font-semibold tabular-nums text-gray-700">{{ count($rackLevelsFilter) }}</span>
-								<!-- Heroicon name: mini/chevron-down -->
-								<svg class="-mr-1 ml-1 h-5 w-5 flex-shrink-0 text-gray-400 group-hover:text-gray-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-									<path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
-								</svg>
-								</button>
-								@if ($isVisibleRackLevel)
-									<div class="absolute right-0 z-10 mt-2 origin-top-right rounded-md bg-white p-4 shadow-2xl ring-1 ring-black ring-opacity-5 focus:outline-none" @click.outside="$wire.isVisibleRackLevel = false">
-										<form class="space-y-1">
-										@foreach ($rackLevels as $rackLevel)
-											<div class="flex items-center">
-												<input id="{{ 'rackLevel' . $rackLevel }}" name="{{ 'rackLevel' . $rackLevel }}"
-												value="{{ $rackLevel }}" type="checkbox" wire:model='rackLevelsFilter' class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
-												<label for="{{ 'rackLevel' . $rackLevel }}" class="ml-3 whitespace-nowrap pr-6 text-sm font-medium text-gray-900">Étage {{ $rackLevel }}</label>
-											</div>
-										@endforeach
-										</form>
-									</div>
-								@endif
 							</div>
 							{{-- Status Dropdown --}}
 							<div class="relative inline-block px-4 text-left">

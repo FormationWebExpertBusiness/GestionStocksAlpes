@@ -100,6 +100,9 @@ return [
         ForbiddenPrivateMethods::class => [
             'title' => 'The usage of private methods is not idiomatic in Laravel.',
         ],
+        \SlevomatCodingStandard\Sniffs\Functions\FunctionLengthSniff::class => [
+            'maxLinesLength' => 40,
+        ]
     ],
 
     /*

@@ -7,9 +7,11 @@ use App\Models\Product;
 use App\Models\Rack;
 use Livewire\Component;
 
-class ProductAddForm extends Component
+class ProductEditForm extends Component
 {
     public $show = false;
+
+    public $product;
 
     public $commonProduct;
     public $commonProducts;
@@ -30,6 +32,7 @@ class ProductAddForm extends Component
         'rack_id' => ['integer', 'required'],
         'rack_level' => ['required', 'integer', 'min:1'],
     ];
+
     protected $messages = [
         'serial_number.required' => 'Le numéro de série dois être renseigné',
         'serial_number.alpha_num' => 'Le numéro de série ne peut contenir que des chiffres et des lettres',
@@ -45,7 +48,7 @@ class ProductAddForm extends Component
     public function mount()
     {
         $this->resetInput();
-        $this->commonProducts = CommonProduct::all();
+        $this->commonProducts = CommonProduct::select('id', 'model', 'code_status_quantity')->get();
         $this->commonProducts = CommonProduct::sortOnModels($this->commonProducts, 'asc');
         $this->commonProducts = CommonProduct::sortOnCategories($this->commonProducts, 'asc');
     }
@@ -63,16 +66,22 @@ class ProductAddForm extends Component
     {
         $nom = $this->serial_number;
         $validatedData = $this->validate();
-        Product::create($validatedData);
-        $this->toggleAddForm();
-        $this->dispatchBrowserEvent('alert', ['type' => 'success',  'message' => 'Le produit '.$nom.' a bien été ajouté !']);
+        $this->product->update($validatedData);
+        $this->toggleEditForm();
+        $this->dispatchBrowserEvent('alert', ['type' => 'success',  'message' => 'Le produit '.$nom.' a bien été modifié !']);
         $this->emit('refreshComponent');
     }
 
-    public function toggleAddForm()
+    public function toggleEditForm()
     {
         $this->show = ! $this->show;
         $this->resetInput();
+    }
+
+    public function initProduct($product_id)
+    {
+        $this->product = Product::find($product_id);
+        $this->toggleEditForm();
     }
 
     public function getSelectedRack()
@@ -82,12 +91,12 @@ class ProductAddForm extends Component
 
     public function resetInput()
     {
-        $this->common_id = null;
-        $this->serial_number = null;
-        $this->price = null;
-        $this->comment = null;
-        $this->rack_id = null;
-        $this->rack_level = null;
+        $this->common_id = $this->product?->common_id;
+        $this->serial_number = $this->product?->serial_number;
+        $this->price = $this->product?->price;
+        $this->comment = $this->product?->comment;
+        $this->rack_id = $this->product?->rack_id;
+        $this->rack_level = $this->product?->rack_level;
 
         $this->racks = Rack::all();
     }
@@ -95,6 +104,13 @@ class ProductAddForm extends Component
     public function render()
     {
         $this->commonProduct = CommonProduct::find($this->common_id) ?? null;
-        return view('livewire.forms.product.product-add-form');
+        return view('livewire.forms.product.product-edit-form');
+    }
+
+    protected function getListeners()
+    {
+        return [
+            'refreshEditComponent' => 'initProduct',
+        ];
     }
 }

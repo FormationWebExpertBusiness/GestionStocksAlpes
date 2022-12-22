@@ -63,4 +63,118 @@ class Product extends Model
     {
         return $products->sortBy([['id', $mode]])->values();
     }
+
+    public static function sortOnCategories($products, $mode)
+    {
+        $sorted = $products->sortBy(function ($product) {
+            return $product->getCategory()->name;
+        });
+        if ($mode === 'desc') {
+            $sorted = $sorted->reverse();
+        }
+        return $sorted->values();
+    }
+
+    public static function sortOnBrands($products, $mode)
+    {
+        $sorted = $products->sortBy(function ($product) {
+            return $product->getBrand()->name;
+        });
+        if ($mode === 'desc') {
+            $sorted = $sorted->reverse();
+        }
+        return $sorted->values();
+    }
+
+    public static function sortOnModels($products, $mode)
+    {
+        $sorted = $products->sortBy(function ($product) {
+            return $product->getModel();
+        });
+        if ($mode === 'desc') {
+            $sorted = $sorted->reverse();
+        }
+        return $sorted->values();
+    }
+
+    public static function sortOnSerialNumbers($products, $mode)
+    {
+        return $products->sortBy([['serial_number', $mode]])->values();
+    }
+
+    public static function sortOnRacks($products, $mode)
+    {
+        $sorted = $products->sortBy(function ($product) {
+            return $product->rack_level;
+        });
+        $sorted = $sorted->sortBy(function ($product) {
+            return $product->rack->name;
+        });
+        if ($mode === 'desc') {
+            $sorted = $sorted->reverse();
+        }
+        return $sorted->values();
+    }
+
+    public static function sortOnPrices($products, $mode)
+    {
+        return $products->sortBy([['price', $mode]])->values();
+    }
+
+    public static function filterOnBrands($products, $brands)
+    {
+        $brands = count($brands) === 0 ? Brand::pluck('id')->toArray() : $brands;
+        return $products->filter(function ($value) use ($brands) {
+            if (in_array($value->getBrand()->id, $brands)) {
+                return $value;
+            }
+        })->values();
+    }
+
+    public static function filterOnCategories($products, $categories)
+    {
+        $categories = count($categories) === 0 ? Category::pluck('id')->toArray() : $categories;
+        return $products->filter(function ($value) use ($categories) {
+            if (in_array($value->getCategory()->id, $categories)) {
+                return $value;
+            }
+        })->values();
+    }
+
+    public static function filterOnCommonProduct($products, $commonProducts)
+    {
+        $commonProducts = count($commonProducts) === 0 ? CommonProduct::pluck('id')->toArray() : $commonProducts;
+        return $products->filter(function ($value) use ($commonProducts) {
+            if (in_array($value->common_id, $commonProducts)) {
+                return $value;
+            }
+        })->values();
+    }
+
+    public static function filterOnRack($products, $racks)
+    {
+        $racks = count($racks) === 0 ? Rack::pluck('id')->toArray() : $racks;
+        return $products->filter(function ($value) use ($racks) {
+            if (in_array($value->rack->id, $racks)) {
+                return $value;
+            }
+        })->values();
+    }
+
+    public static function filterOnRackLevel($products, $rackLevels)
+    {
+        if (count($rackLevels) === 0) {
+            $levelMax = Rack::getRackLevelMax();
+
+            $rackLevels = [];
+            for ($i = 1; $i <= $levelMax; $i++) {
+                $rackLevels[] = $i;
+            }
+        }
+        return $products->filter(function ($value) use ($rackLevels) {
+            if (in_array($value->rack_level, $rackLevels)) {
+                return $value;
+            }
+        })->values();
+    }
 }
