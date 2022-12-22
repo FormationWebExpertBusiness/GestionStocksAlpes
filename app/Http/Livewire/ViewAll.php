@@ -162,10 +162,10 @@ class ViewAll extends Component
                 $this->commonProducts = CommonProduct::sortOnModels($this->commonProducts, $this->mode);
                 break;
             case 'quantity':
-                $this->commonProducts = CommonProduct::sortOnQuantitiesOnRack($this->commonProducts, $this->mode, $this->racksF, $this->rackLevelsF);
+                $this->commonProducts = CommonProduct::sortOnQuantities($this->commonProducts, $this->mode);
                 break;
             case 'price':
-                $this->commonProducts = CommonProduct::sortOnTotalPricesOnRack($this->commonProducts, $this->mode, $this->racksF, $this->rackLevelsF);
+                $this->commonProducts = CommonProduct::sortOnTotalPrices($this->commonProducts, $this->mode);
                 break;
         }
     }

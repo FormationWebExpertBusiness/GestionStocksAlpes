@@ -200,6 +200,16 @@ class CommonProduct extends Model
         return $commonProducts->sortBy([['model', $mode]])->values();
     }
 
+    public static function sortOnQuantities($commonProducts, $mode)
+    {
+        return $commonProducts->sortBy([['quantity', $mode]])->values();
+    }
+
+    public static function sortOnTotalPrices($commonProducts, $mode)
+    {
+        return $commonProducts->sortBy([['totalPrice', $mode]])->values();
+    }
+
     public static function sortOnQuantitiesOnRack($commonProducts, $mode, $racksF, $rackLevelsF)
     {
         return $commonProducts->sortBy(function ($commonProduct) use ($mode, $racksF, $rackLevelsF) {
