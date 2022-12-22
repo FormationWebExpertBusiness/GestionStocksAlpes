@@ -89,7 +89,6 @@
                                             </td>
                                             <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-center text-sm font-medium sm:pr-6">
                                                 <div class="inline-block px-5">
-                                                    {{-- @livewire('forms.product.product-edit-form', ['product' => $product], key('product-edit-form-'. $product->id)) --}}
                                                     <button class="text-indigo-600 hover:text-indigo-900" wire:click.prevent="$emit('refreshEditComponent', {{ $product->id }})">
                                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                                                             stroke="currentColor" class="w-6 h-6">

@@ -47,37 +47,14 @@ class ProductFilters extends Component
         $this->emit('resetFilters');
     }
 
-    public function getAllFilters()
+    public function getAllActiveFilters()
     {
-        $catsFilter = [];
-        $brandsFilter = [];
-        $commonProductsFilter = [];
-        $racksFilter = [];
+        $catsFilter = $this->getActiveFilters('catsFilter', 'categories', 'name');
+        $brandsFilter = $this->getActiveFilters('brandsFilter', 'brands', 'name');
+        $commonProductsFilter = $this->getActiveFilters('commonProductsFilter', 'commonProducts', 'model');
+        $racksFilter = $this->getActiveFilters('racksFilter', 'racks', 'name');
+
         $rackLevelsFilter = [];
-        foreach ($this->catsFilter as $filter) {
-            $f = $this->categories->where('id', $filter)->first();
-            $f->badge = $f->name;
-            $catsFilter[] = $f;
-        }
-
-        foreach ($this->brandsFilter as $filter) {
-            $f = $this->brands->where('id', $filter)->first();
-            $f->badge = $f->name;
-            $brandsFilter[] = $f;
-        }
-
-        foreach ($this->commonProductsFilter as $filter) {
-            $f = $this->commonProducts->where('id', $filter)->first();
-            $f->badge = $f->model;
-            $commonProductsFilter[] = $f;
-        }
-
-        foreach ($this->racksFilter as $filter) {
-            $f = $this->racks->where('id', $filter)->first();
-            $f->badge = $f->name;
-            $racksFilter[] = $f;
-        }
-
         foreach ($this->rackLevelsFilter as $filter) {
             $f = collect(['id' => $filter, 'badge' => 'Étage '.$filter]);
             $rackLevelsFilter[] = $f;
@@ -119,5 +96,16 @@ class ProductFilters extends Component
             $this->rackLevels->push($i);
         }
         return view('livewire.filters.product-filters');
+    }
+
+    private function getActiveFilters($arrayFilter, $sources, $field)
+    {
+        $filters = [];
+        foreach ($this->$arrayFilter as $filter) {
+            $f = $this->$sources->where('id', $filter)->first();
+            $f->badge = $f->$field;
+            $filters[] = $f;
+        }
+        return $filters;
     }
 }

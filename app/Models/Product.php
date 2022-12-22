@@ -162,7 +162,7 @@ class Product extends Model
     {
         if (count($rackLevels) === 0) {
             $levelMax = Rack::getRackLevelMax();
-    
+
             $rackLevels = [];
             for ($i = 1; $i <= $levelMax; $i++) {
                 $rackLevels[] = $i;

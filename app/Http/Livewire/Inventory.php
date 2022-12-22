@@ -2,10 +2,7 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\Category;
-use App\Models\CommonProduct;
 use App\Models\Product;
-use App\Models\Rack;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -24,6 +21,10 @@ class Inventory extends Component
 
     public $champ;
     public $mode;
+    public $readyToLoad = false;
+    public $showToast = true;
+
+    public $warningDeleteProductSignal = 'deleteProduct';
 
     protected $queryString = [
         'champ' => ['except' => 'id', 'as' => 'cha'],
@@ -37,10 +38,6 @@ class Inventory extends Component
     ];
 
     private $products;
-    public $readyToLoad = false;
-    public $showToast = true;
-
-    public $warningDeleteProductSignal = 'deleteProduct';
 
     public function openWarningDelete($productId)
     {
@@ -135,7 +132,7 @@ class Inventory extends Component
                 break;
         }
     }
-    
+
     public function loadData()
     {
         $this->readyToLoad = true;
@@ -144,11 +141,6 @@ class Inventory extends Component
     public function closeToast()
     {
         $this->showToast = false;
-    }
-
-    public function EditProduct($product_id)
-    {
-        $this->emit('refreshEditComponent', $product_id);
     }
 
     public function filterOnSearchBar()
@@ -180,24 +172,7 @@ class Inventory extends Component
     public function render()
     {
         if ($this->readyToLoad) {
-            $this->filterOnSearchBar();
-            if ($this->catsFilter) {
-                $this->products = Product::filterOnCategories($this->products, $this->catsFilter);
-            }
-            if ($this->brandsFilter) {
-                $this->products = Product::filterOnBrands($this->products, $this->brandsFilter);
-            }
-            if ($this->commonProductsFilter) {
-                $this->products = Product::filterOnCommonProduct($this->products, $this->commonProductsFilter);
-            }
-            if ($this->racksFilter) {
-                $this->products = Product::filterOnRack($this->products, $this->racksFilter);
-            }
-            if ($this->rackLevelsFilter) {
-                $this->products = Product::filterOnRackLevel($this->products, $this->rackLevelsFilter);
-            }
-
-            $this->sortProducts();
+            $this->loadProducts();
         } else {
             $this->products = collect();
         }
@@ -218,5 +193,26 @@ class Inventory extends Component
             'searchFilter' => 'searchFilter',
             'resetFilters' => 'resetFilters',
         ];
+    }
+
+    private function loadProducts()
+    {
+        $this->filterOnSearchBar();
+        if ($this->catsFilter) {
+            $this->products = Product::filterOnCategories($this->products, $this->catsFilter);
+        }
+        if ($this->brandsFilter) {
+            $this->products = Product::filterOnBrands($this->products, $this->brandsFilter);
+        }
+        if ($this->commonProductsFilter) {
+            $this->products = Product::filterOnCommonProduct($this->products, $this->commonProductsFilter);
+        }
+        if ($this->racksFilter) {
+            $this->products = Product::filterOnRack($this->products, $this->racksFilter);
+        }
+        if ($this->rackLevelsFilter) {
+            $this->products = Product::filterOnRackLevel($this->products, $this->rackLevelsFilter);
+        }
+        $this->sortProducts();
     }
 }
