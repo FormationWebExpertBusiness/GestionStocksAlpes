@@ -530,6 +530,96 @@ test('test CommonProduct method sortOnModels', function ($user) {
     $this->expect(CommonProduct::sortOnModels($commonProducts, 'desc'))->toEqual(collect([$commonProduct4, $commonProduct3, $commonProduct2, $commonProduct]));
 })->with('user');
 
+test('test CommonProduct method sortOnQuantities', function ($user) {
+    // datas
+    $this->be($user);
+    $rack = Rack::create(['nb_level' => 5]);
+    $rack = Rack::create(['nb_level' => 2]);
+
+    $brand = Brand::create(['name' => 'marque']);
+    $category = Category::create(['name' => 'categorie']);
+    $commonProduct = CommonProduct::create(['category_id' => 1, 'brand_id' => 1, 'model' => 'ba']);
+    $commonProduct2 = CommonProduct::create(['category_id' => 1, 'brand_id' => 1, 'model' => 'be']);
+    $commonProduct3 = CommonProduct::create(['category_id' => 1, 'brand_id' => 1, 'model' => 'bi']);
+    $commonProduct4 = CommonProduct::create(['category_id' => 1, 'brand_id' => 1, 'model' => 'bo']);
+
+    $product1 = Product::create(['price' => 2, 'serial_number' => 'ite1', 'common_id' => 1, 'rack_id' => 1, 'rack_level' => 3]);
+    $product2 = Product::create(['price' => 10, 'serial_number' => 'ite2', 'common_id' => 1, 'rack_id' => 1, 'rack_level' => 1]);
+    $product3 = Product::create(['price' => 3, 'serial_number' => 'ite3', 'common_id' => 1, 'rack_id' => 1, 'rack_level' => 3]);
+    $product4 = Product::create(['price' => 10, 'serial_number' => 'ite4', 'common_id' => 1, 'rack_id' => 1, 'rack_level' => 4]);
+    $product5 = Product::create(['price' => 3, 'serial_number' => 'ite5', 'common_id' => 1, 'rack_id' => 2, 'rack_level' => 1]);
+    $product6 = Product::create(['price' => 11, 'serial_number' => 'ite6', 'common_id' => 1, 'rack_id' => 2, 'rack_level' => 2]);
+
+    Product::create(['price' => 2, 'serial_number' => 'ite11', 'common_id' => 2, 'rack_id' => 1, 'rack_level' => 3]);
+    Product::create(['price' => 10, 'serial_number' => 'ite12', 'common_id' => 2, 'rack_id' => 1, 'rack_level' => 1]);
+    Product::create(['price' => 3, 'serial_number' => 'ite13', 'common_id' => 2, 'rack_id' => 2, 'rack_level' => 3]);
+    Product::create(['price' => 10, 'serial_number' => 'ite14', 'common_id' => 2, 'rack_id' => 1, 'rack_level' => 4]);
+
+    Product::create(['price' => 2, 'serial_number' => 'ite11', 'common_id' => 3, 'rack_id' => 1, 'rack_level' => 1]);
+    Product::create(['price' => 2, 'serial_number' => 'ite11', 'common_id' => 3, 'rack_id' => 2, 'rack_level' => 2]);
+    Product::create(['price' => 2, 'serial_number' => 'ite11', 'common_id' => 3, 'rack_id' => 1, 'rack_level' => 3]);
+    Product::create(['price' => 2, 'serial_number' => 'ite11', 'common_id' => 3, 'rack_id' => 2, 'rack_level' => 2]);
+    Product::create(['price' => 2, 'serial_number' => 'ite11', 'common_id' => 3, 'rack_id' => 2, 'rack_level' => 4]);
+    Product::create(['price' => 2, 'serial_number' => 'ite11', 'common_id' => 3, 'rack_id' => 2, 'rack_level' => 4]);
+    Product::create(['price' => 2, 'serial_number' => 'ite11', 'common_id' => 3, 'rack_id' => 2, 'rack_level' => 4]);
+    Product::create(['price' => 2, 'serial_number' => 'ite11', 'common_id' => 3, 'rack_id' => 2, 'rack_level' => 3]);
+    Product::create(['price' => 2, 'serial_number' => 'ite11', 'common_id' => 3, 'rack_id' => 1, 'rack_level' => 1]);
+    Product::create(['price' => 2, 'serial_number' => 'ite11', 'common_id' => 3, 'rack_id' => 1, 'rack_level' => 1]);
+
+    Product::create(['price' => 2, 'serial_number' => 'ite11', 'common_id' => 4, 'rack_id' => 1, 'rack_level' => 3]);
+
+    $commonProducts = collect([$commonProduct, $commonProduct2, $commonProduct3, $commonProduct4]);
+    
+    // test
+    $this->expect(CommonProduct::sortOnQuantities($commonProducts, 'asc'))->toEqual(collect([$commonProduct4, $commonProduct2, $commonProduct, $commonProduct3]));
+    $this->expect(CommonProduct::sortOnQuantities($commonProducts, 'desc'))->toEqual(collect([$commonProduct3, $commonProduct, $commonProduct2, $commonProduct4]));
+})->with('user');
+
+test('test CommonProduct method sortOnTotalPrices', function ($user) {
+    // datas
+    $this->be($user);
+    $rack = Rack::create(['nb_level' => 5]);
+    $rack = Rack::create(['nb_level' => 2]);
+
+    $brand = Brand::create(['name' => 'marque']);
+    $category = Category::create(['name' => 'categorie']);
+    $commonProduct = CommonProduct::create(['category_id' => 1, 'brand_id' => 1, 'model' => 'ba']);
+    $commonProduct2 = CommonProduct::create(['category_id' => 1, 'brand_id' => 1, 'model' => 'be']);
+    $commonProduct3 = CommonProduct::create(['category_id' => 1, 'brand_id' => 1, 'model' => 'bi']);
+    $commonProduct4 = CommonProduct::create(['category_id' => 1, 'brand_id' => 1, 'model' => 'bo']);
+
+    $product1 = Product::create(['price' => 2, 'serial_number' => 'ite1', 'common_id' => 1, 'rack_id' => 1, 'rack_level' => 3]);
+    $product2 = Product::create(['price' => 10, 'serial_number' => 'ite2', 'common_id' => 1, 'rack_id' => 1, 'rack_level' => 1]);
+    $product3 = Product::create(['price' => 3, 'serial_number' => 'ite3', 'common_id' => 1, 'rack_id' => 1, 'rack_level' => 3]);
+    $product4 = Product::create(['price' => 10, 'serial_number' => 'ite4', 'common_id' => 1, 'rack_id' => 1, 'rack_level' => 4]);
+    $product5 = Product::create(['price' => 3, 'serial_number' => 'ite5', 'common_id' => 1, 'rack_id' => 2, 'rack_level' => 1]);
+    $product6 = Product::create(['price' => 11, 'serial_number' => 'ite6', 'common_id' => 1, 'rack_id' => 2, 'rack_level' => 2]);
+
+    Product::create(['price' => 2, 'serial_number' => 'ite11', 'common_id' => 2, 'rack_id' => 1, 'rack_level' => 3]);
+    Product::create(['price' => 10, 'serial_number' => 'ite12', 'common_id' => 2, 'rack_id' => 1, 'rack_level' => 1]);
+    Product::create(['price' => 3, 'serial_number' => 'ite13', 'common_id' => 2, 'rack_id' => 2, 'rack_level' => 3]);
+    Product::create(['price' => 10, 'serial_number' => 'ite14', 'common_id' => 2, 'rack_id' => 1, 'rack_level' => 4]);
+
+    Product::create(['price' => 2, 'serial_number' => 'ite11', 'common_id' => 3, 'rack_id' => 1, 'rack_level' => 1]);
+    Product::create(['price' => 20, 'serial_number' => 'ite11', 'common_id' => 3, 'rack_id' => 2, 'rack_level' => 2]);
+    Product::create(['price' => 5, 'serial_number' => 'ite11', 'common_id' => 3, 'rack_id' => 1, 'rack_level' => 3]);
+    Product::create(['price' => 7, 'serial_number' => 'ite11', 'common_id' => 3, 'rack_id' => 2, 'rack_level' => 2]);
+    Product::create(['price' => 8, 'serial_number' => 'ite11', 'common_id' => 3, 'rack_id' => 2, 'rack_level' => 4]);
+    Product::create(['price' => 8, 'serial_number' => 'ite11', 'common_id' => 3, 'rack_id' => 2, 'rack_level' => 4]);
+    Product::create(['price' => 10, 'serial_number' => 'ite11', 'common_id' => 3, 'rack_id' => 2, 'rack_level' => 4]);
+    Product::create(['price' => 23, 'serial_number' => 'ite11', 'common_id' => 3, 'rack_id' => 2, 'rack_level' => 3]);
+    Product::create(['price' => 29, 'serial_number' => 'ite11', 'common_id' => 3, 'rack_id' => 1, 'rack_level' => 1]);
+    Product::create(['price' => 18, 'serial_number' => 'ite11', 'common_id' => 3, 'rack_id' => 1, 'rack_level' => 1]);
+
+    Product::create(['price' => 13, 'serial_number' => 'ite11', 'common_id' => 4, 'rack_id' => 1, 'rack_level' => 3]);
+
+    $commonProducts = collect([$commonProduct, $commonProduct2, $commonProduct3, $commonProduct4]);
+    
+    // test
+    $this->expect(CommonProduct::sortOnTotalPrices($commonProducts, 'asc'))->toEqual(collect([$commonProduct4, $commonProduct2, $commonProduct, $commonProduct3]));
+    $this->expect(CommonProduct::sortOnTotalPrices($commonProducts, 'desc'))->toEqual(collect([$commonProduct3, $commonProduct, $commonProduct2, $commonProduct4]));
+})->with('user');
+
 test('test CommonProduct method sortOnQuantitiesOnRack', function ($user) {
     // datas
     $this->be($user);

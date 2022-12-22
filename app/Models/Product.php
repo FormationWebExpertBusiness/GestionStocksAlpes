@@ -63,6 +63,7 @@ class Product extends Model
     {
         return $products->sortBy([['id', $mode]])->values();
     }
+
     public static function sortOnCategories($products, $mode)
     {
         $sorted = $products->sortBy(function ($product) {
@@ -73,6 +74,7 @@ class Product extends Model
         }
         return $sorted->values();
     }
+
     public static function sortOnBrands($products, $mode)
     {
         $sorted = $products->sortBy(function ($product) {
@@ -83,6 +85,7 @@ class Product extends Model
         }
         return $sorted->values();
     }
+
     public static function sortOnModels($products, $mode)
     {
         $sorted = $products->sortBy(function ($product) {
@@ -93,26 +96,26 @@ class Product extends Model
         }
         return $sorted->values();
     }
+
     public static function sortOnSerialNumbers($products, $mode)
     {
         return $products->sortBy([['serial_number', $mode]])->values();
     }
+
     public static function sortOnRacks($products, $mode)
     {
-        $sorted = null;
+        $sorted = $products->sortBy(function ($product) {
+            return $product->rack_level;
+        });
+        $sorted = $sorted->sortBy(function ($product) {
+            return $product->rack->name;
+        });
         if ($mode === 'desc') {
-            $sorted = $products->sortBy([
-                fn ($a, $b) => $a->rack_level <=> $b->rack_level,
-                fn ($a, $b) => $a->rack->name <=> $b->rack->name,
-            ]);
-        } else {
-            $sorted = $products->sortBy([
-                fn ($a, $b) => $b->rack_level <=> $a->rack_level,
-                fn ($a, $b) => $b->rack->name <=> $a->rack->name,
-            ]);
+            $sorted = $sorted->reverse();
         }
         return $sorted->values();
     }
+
     public static function sortOnPrices($products, $mode)
     {
         return $products->sortBy([['price', $mode]])->values();
@@ -152,7 +155,7 @@ class Product extends Model
     {
         $racks = count($racks) === 0 ? Rack::pluck('id')->toArray() : $racks;
         return $products->filter(function ($value) use ($racks) {
-            if (in_array($value->getCategory()->id, $racks)) {
+            if (in_array($value->rack->id, $racks)) {
                 return $value;
             }
         })->values();
@@ -169,7 +172,7 @@ class Product extends Model
             }
         }
         return $products->filter(function ($value) use ($rackLevels) {
-            if (in_array($value->rack_id, $rackLevels)) {
+            if (in_array($value->rack_level, $rackLevels)) {
                 return $value;
             }
         })->values();
