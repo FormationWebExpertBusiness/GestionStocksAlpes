@@ -25,32 +25,41 @@
                         <table class="min-w-full divide-y divide-gray-300">
                             <thead class="bg-gray-100 block">
                                 <tr class="table w-full table-fixed">
-                                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 w-[9%]">
+                                    <th wire:click="reOrder('created_at')" scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 w-[10.5%]">
                                         Entrée en stock
+                                        <x-ordering-arrows champ='created_at' champF={{$champ}} modeF={{$mode}}></x-ordering-arrows>
                                     </th>
-                                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                                    <th wire:click="reOrder('category')" scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
                                         Catégorie
+                                        <x-ordering-arrows champ='category' champF={{$champ}} modeF={{$mode}}></x-ordering-arrows>
                                     </th>
-                                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                                    <th wire:click="reOrder('brand')" scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
                                         Marque
+                                        <x-ordering-arrows champ='brand' champF={{$champ}} modeF={{$mode}}></x-ordering-arrows>
                                     </th>
-                                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                                    <th wire:click="reOrder('model')" scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
                                         Modèle
+                                        <x-ordering-arrows champ='model' champF={{$champ}} modeF={{$mode}}></x-ordering-arrows>
                                     </th>
-                                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                                    <th wire:click="reOrder('serial_number')" scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
                                         Numéro de série
+                                        <x-ordering-arrows champ='serial_number' champF={{$champ}} modeF={{$mode}}></x-ordering-arrows>
                                     </th>
-                                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 w-[8%]">
+                                    <th wire:click="reOrder('rack')" scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 w-[9%]">
                                         Position
+                                        <x-ordering-arrows champ='rack' champF={{$champ}} modeF={{$mode}}></x-ordering-arrows>
                                     </th>
-                                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 w-[8%]">
-                                        Prix Total
+                                    <th wire:click="reOrder('price')" scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 w-[7%]">
+                                        Prix
+                                        <x-ordering-arrows champ='price' champF={{$champ}} modeF={{$mode}}></x-ordering-arrows>
                                     </th>
                                     <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 w-1/6">
                                         Commentaire
                                     </th>
-                                    <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-6 w-1/6">
+                                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
                                         <span class="sr-only">Actions</span>
+                                        <div class="inline-block px-5"></div>
+                                        <div class="inline-block px-5"></div>
                                     </th>
                                 </tr>
                             </thead>
@@ -58,7 +67,7 @@
                                 @forelse ($products as $product)
                                     <div wire:key="Common-product-{{ $product->id }}">
                                         <tr class="odd:bg-white even:bg-gray-50 divide-x divide-gray-200 table w-full table-fixed">
-                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 w-[9%]">
+                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 w-[10.5%]">
                                                 {{ $product->created_at->format('d/m/y') }}</td>
                                             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                                                 {{ $product->getCategory()->name }}</td>
@@ -68,18 +77,18 @@
                                                 {{ $product->getModel() }}</td>
                                             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                                                 {{ $product->serial_number }}</td>
-                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 w-[8%]">
+                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 w-[9%]">
                                                 {{ $product->rack->name }} <br>
                                                 Étage {{ $product->rack_level }}
                                             </td>
-                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 w-[8%]">
+                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 w-[7%]">
                                                 {{ number_format($product->price, 2, ',', ' ') }}€
                                             </td>
                                             <td class="whitespace-wrap px-3 py-4 text-sm text-gray-500 w-1/6">
                                                 {{ $product->comment }}
                                             </td>
-                                            <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-center text-sm font-medium sm:pr-6 w-1/6">
-                                                <div class="inline-block px-6">
+                                            <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-center text-sm font-medium sm:pr-6">
+                                                <div class="inline-block px-5">
                                                     {{-- @livewire('forms.product.product-edit-form', ['product' => $product], key('product-edit-form-'. $product->id)) --}}
                                                     <button class="text-indigo-600 hover:text-indigo-900" wire:click.prevent="$emit('refreshEditComponent', {{ $product->id }})">
                                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -89,7 +98,7 @@
                                                         </svg>
                                                     </button>
                                                 </div>
-                                                <div class="inline-block px-6">
+                                                <div class="inline-block px-5">
                                                     <button wire:click="openWarningDelete({{ $product->id }})" class="text-indigo-600 hover:text-indigo-900">
                                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                                                             <path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
@@ -120,31 +129,31 @@
                                     @else
                                         @for ($i = 0; $i < 12; $i++)
                                             <tr class="odd:bg-white even:bg-gray-50 divide-x divide-gray-200 table w-full table-fixed">
+                                                <td scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 w-[10.5%]">
+                                                    <p class="leading-relaxed rounded-md w-2/3 animate-pulse bg-gray-400 h-6"><br></p>
+                                                </td>
+                                                <td scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                                                    <p class="leading-relaxed rounded-md w-2/3 animate-pulse bg-gray-400 h-6"><br></p>
+                                                </td>
+                                                <td scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                                                    <p class="leading-relaxed rounded-md w-2/3 animate-pulse bg-gray-400 h-6"><br></p>
+                                                </td>
+                                                <td scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                                                    <p class="leading-relaxed rounded-md w-2/3 animate-pulse bg-gray-400 h-6"><br></p>
+                                                </td>
+                                                <td scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                                                    <p class="leading-relaxed rounded-md w-2/3 animate-pulse bg-gray-400 h-6"><br></p>
+                                                </td>
                                                 <td scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 w-[9%]">
                                                     <p class="leading-relaxed rounded-md w-2/3 animate-pulse bg-gray-400 h-6"><br></p>
                                                 </td>
-                                                <td scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-                                                    <p class="leading-relaxed rounded-md w-2/3 animate-pulse bg-gray-400 h-6"><br></p>
-                                                </td>
-                                                <td scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-                                                    <p class="leading-relaxed rounded-md w-2/3 animate-pulse bg-gray-400 h-6"><br></p>
-                                                </td>
-                                                <td scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-                                                    <p class="leading-relaxed rounded-md w-2/3 animate-pulse bg-gray-400 h-6"><br></p>
-                                                </td>
-                                                <td scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-                                                    <p class="leading-relaxed rounded-md w-2/3 animate-pulse bg-gray-400 h-6"><br></p>
-                                                </td>
-                                                <td scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 w-[8%]">
-                                                    <p class="leading-relaxed rounded-md w-2/3 animate-pulse bg-gray-400 h-6"><br></p>
-                                                </td>
-                                                <td scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 w-[8%]">
+                                                <td scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 w-[7%]">
                                                     <p class="leading-relaxed rounded-md w-2/3 animate-pulse bg-gray-400 h-6"><br></p>
                                                 </td>
                                                 <td scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 w-1/6">
                                                     <p class="leading-relaxed rounded-md w-2/3 animate-pulse bg-gray-400 h-6"><br></p>
                                                 </td>
-                                                <td scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-6 w-1/6">
+                                                <td scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-6">
                                                     <p class="leading-relaxed rounded-md w-2/3 animate-pulse bg-gray-400 h-6"><br></p>
                                                 </td>
                                             </tr>

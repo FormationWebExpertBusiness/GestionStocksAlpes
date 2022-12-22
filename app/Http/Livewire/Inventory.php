@@ -22,9 +22,12 @@ class Inventory extends Component
 
     public $searchFilter;
 
+    public $champ;
+    public $mode;
+
     protected $queryString = [
-        // 'champ' => ['except' => 'id', 'as' => 'cha'],
-        // 'mode' => ['as' => 'mod'],
+        'champ' => ['except' => 'id', 'as' => 'cha'],
+        'mode' => ['as' => 'mod'],
         'catsFilter' => ['as' => 'cat'],
         'brandsFilter' => ['as' => 'bra'],
         'commonProductsFilter' => ['as' => 'com'],
@@ -90,6 +93,48 @@ class Inventory extends Component
         $this->racksFilter = [];
         $this->rackLevelsFilter = [];
     }
+
+    public function toggleMode()
+    {
+        if ($this->mode === 'asc') {
+            $this->mode = 'desc';
+        } else {
+            $this->mode = 'asc';
+        }
+    }
+
+    public function reOrder($champO)
+    {
+        $this->toggleMode();
+        $this->champ = $champO;
+    }
+
+    public function sortProducts()
+    {
+        switch ($this->champ) {
+            case 'created_at':
+                $this->products = Product::sortOnCreatedAt($this->products, $this->mode);
+                break;
+            case 'category':
+                $this->products = Product::sortOnCategories($this->products, $this->mode);
+                break;
+            case 'brand':
+                $this->products = Product::sortOnBrands($this->products, $this->mode);
+                break;
+            case 'model':
+                $this->products = Product::sortOnModels($this->products, $this->mode);
+                break;
+            case 'serial_number':
+                $this->products = Product::sortOnSerialNumbers($this->products, $this->mode);
+                break;
+            case 'rack':
+                $this->products = Product::sortOnRacks($this->products, $this->mode);
+                break;
+            case 'price':
+                $this->products = Product::sortOnPrices($this->products, $this->mode);
+                break;
+        }
+    }
     
     public function loadData()
     {
@@ -151,6 +196,8 @@ class Inventory extends Component
             if ($this->rackLevelsFilter) {
                 $this->products = Product::filterOnRackLevel($this->products, $this->rackLevelsFilter);
             }
+
+            $this->sortProducts();
         } else {
             $this->products = collect();
         }
