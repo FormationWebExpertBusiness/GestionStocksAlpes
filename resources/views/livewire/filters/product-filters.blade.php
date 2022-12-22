@@ -85,7 +85,7 @@
                                             @foreach ($commonProducts as $commonProduct)
                                                 <div class="flex items-center">
                                                     <input id="{{ 'commonProduct' . $commonProduct->id }}" name="{{ $commonProduct->model }}" value="{{ $commonProduct->id }}" type="checkbox" wire:model='commonProductsFilter' class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
-                                                    <label for="{{ $commonProduct->model }}" class="ml-3 whitespace-nowrap pr-6 text-sm font-medium text-gray-900">{{ $commonProduct->model }}</label>
+                                                    <label for="{{ 'commonProduct' . $commonProduct->id }}" class="ml-3 whitespace-nowrap pr-6 text-sm font-medium text-gray-900">{{ $commonProduct->model }}</label>
                                                 </div>
                                             @endforeach
                                         </form>
@@ -107,7 +107,7 @@
                                             @foreach ($categories as $category)
                                                 <div class="flex items-center">
                                                     <input id="{{ 'cat' . $category->id }}" name="{{ $category->name }}" value="{{ $category->id }}" type="checkbox" wire:model='catsFilter' class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
-                                                    <label for="{{ $category->name }}" class="ml-3 whitespace-nowrap pr-6 text-sm font-medium text-gray-900">{{ $category->name }}</label>
+                                                    <label for="{{ 'cat' . $category->id }}" class="ml-3 whitespace-nowrap pr-6 text-sm font-medium text-gray-900">{{ $category->name }}</label>
                                                 </div>
                                             @endforeach
                                         </form>

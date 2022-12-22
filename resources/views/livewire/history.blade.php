@@ -65,7 +65,7 @@
                                     </div>
                                 </div>
                                 {{-- categories Dropdown --}}
-                                <div class="relative inline-flex items-center px-4 h-10 text-left">
+                                <div class="relative inline-block px-4 text-left">
                                     <button type="button" wire:click="$toggle('isVisibleCat')" class="group inline-flex justify-center text-sm font-medium text-gray-700 hover:text-gray-900" aria-expanded="false">
                                         <span>Catégories</span>
                                         <span class="ml-1.5 rounded bg-gray-200 py-0.5 px-1.5 text-xs font-semibold tabular-nums text-gray-700">{{ count($catsFilter) }}</span>
@@ -87,7 +87,7 @@
                                     @endif
                                 </div>
                                 {{-- brands Dropdown --}}
-                                <div class="relative inline-flex items-center px-4 h-10 text-left">
+                                <div class="relative inline-block px-4 text-left">
                                     <button wire:click="$toggle('isVisibleBrand')" type="button" class="group inline-flex justify-center text-sm font-medium text-gray-700 hover:text-gray-900" aria-expanded="false">
                                         <span>Marques</span>
                                         <span class="ml-1.5 rounded bg-gray-200 py-0.5 px-1.5 text-xs font-semibold tabular-nums text-gray-700">{{ count($brandsFilter) }}</span>
