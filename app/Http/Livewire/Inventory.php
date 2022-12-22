@@ -172,7 +172,23 @@ class Inventory extends Component
     public function render()
     {
         if ($this->readyToLoad) {
-            $this->loadProducts();
+            $this->filterOnSearchBar();
+            if ($this->catsFilter) {
+                $this->products = Product::filterOnCategories($this->products, $this->catsFilter);
+            }
+            if ($this->brandsFilter) {
+                $this->products = Product::filterOnBrands($this->products, $this->brandsFilter);
+            }
+            if ($this->commonProductsFilter) {
+                $this->products = Product::filterOnCommonProduct($this->products, $this->commonProductsFilter);
+            }
+            if ($this->racksFilter) {
+                $this->products = Product::filterOnRack($this->products, $this->racksFilter);
+            }
+            if ($this->rackLevelsFilter) {
+                $this->products = Product::filterOnRackLevel($this->products, $this->rackLevelsFilter);
+            }
+            $this->sortProducts();
         } else {
             $this->products = collect();
         }
@@ -193,26 +209,5 @@ class Inventory extends Component
             'searchFilter' => 'searchFilter',
             'resetFilters' => 'resetFilters',
         ];
-    }
-
-    private function loadProducts()
-    {
-        $this->filterOnSearchBar();
-        if ($this->catsFilter) {
-            $this->products = Product::filterOnCategories($this->products, $this->catsFilter);
-        }
-        if ($this->brandsFilter) {
-            $this->products = Product::filterOnBrands($this->products, $this->brandsFilter);
-        }
-        if ($this->commonProductsFilter) {
-            $this->products = Product::filterOnCommonProduct($this->products, $this->commonProductsFilter);
-        }
-        if ($this->racksFilter) {
-            $this->products = Product::filterOnRack($this->products, $this->racksFilter);
-        }
-        if ($this->rackLevelsFilter) {
-            $this->products = Product::filterOnRackLevel($this->products, $this->rackLevelsFilter);
-        }
-        $this->sortProducts();
     }
 }
