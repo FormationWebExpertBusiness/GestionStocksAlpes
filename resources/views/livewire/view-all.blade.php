@@ -151,9 +151,12 @@
                                                 @if ($commonProduct->photo_product)
                                                     @include('livewire.lightbox')
                                                 @else
-                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="mx-auto h-6 w-6 text-red-500 hover:text-red-700">
-                                                        <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                                    </svg>
+                                                    <div class="inline-flex items-center rounded-md border border-transparent p-3 text-gray-600">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 inline-block">
+                                                            <path fill-rule="evenodd" d="M1.5 6a2.25 2.25 0 012.25-2.25h16.5A2.25 2.25 0 0122.5 6v12a2.25 2.25 0 01-2.25 2.25H3.75A2.25 2.25 0 011.5 18V6zM3 16.06V18c0 .414.336.75.75.75h16.5A.75.75 0 0021 18v-1.94l-2.69-2.689a1.5 1.5 0 00-2.12 0l-.88.879.97.97a.75.75 0 11-1.06 1.06l-5.16-5.159a1.5 1.5 0 00-2.12 0L3 16.061zm10.125-7.81a1.125 1.125 0 112.25 0 1.125 1.125 0 01-2.25 0z" clip-rule="evenodd" />
+                                                        </svg>
+                                                    </div>
+                                                      
                                                 @endif
                                             </td>
                                             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
@@ -191,18 +194,18 @@
                                             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 w-[10%]">
                                                 {{ number_format($commonProduct->totalPrice, 2, ',', ' ') }}€
                                             </td>
-                                            <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-center text-sm font-medium sm:pr-6 w-1/5">
-                                                <div class="inline-block px-6">
+                                            <td class="whitespace-nowrap py-4 pl-3 pr-4 text-center text-sm font-medium sm:pr-6 w-1/5">
+                                                <div class="inline-block px-2">
                                                     @livewire('details.product.detail-modal', ['commonProduct' => $commonProduct], key('product-detail-' . $commonProduct->id))
                                                 </div>
-                                                <div class="inline-block px-6">
+                                                <div class="inline-block px-2">
                                                     @livewire('forms.common-product.common-product-form', ['commonProductToUpdate' => $commonProduct], key('common-product-form-' . $commonProduct->id))
                                                 </div>
-                                                <div class="inline-block px-6">
-                                                    <button wire:click="openWarningDelete({{ $commonProduct->id }})" class="text-indigo-600 hover:text-indigo-900">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                            <path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
-                                                        </svg>
+                                                <div class="inline-block px-2">
+                                                    <button wire:click="openWarningDelete({{ $commonProduct->id }})" class="inline-flex items-center rounded-md border border-transparent bg-white p-3 text-red-600 shadow hover:bg-red-600 hover:text-white focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+                                                            <path fill-rule="evenodd" d="M16.5 4.478v.227a48.816 48.816 0 013.878.512.75.75 0 11-.256 1.478l-.209-.035-1.005 13.07a3 3 0 01-2.991 2.77H8.084a3 3 0 01-2.991-2.77L4.087 6.66l-.209.035a.75.75 0 01-.256-1.478A48.567 48.567 0 017.5 4.705v-.227c0-1.564 1.213-2.9 2.816-2.951a52.662 52.662 0 013.369 0c1.603.051 2.815 1.387 2.815 2.951zm-6.136-1.452a51.196 51.196 0 013.273 0C14.39 3.05 15 3.684 15 4.478v.113a49.488 49.488 0 00-6 0v-.113c0-.794.609-1.428 1.364-1.452zm-.355 5.945a.75.75 0 10-1.5.058l.347 9a.75.75 0 101.499-.058l-.346-9zm5.48.058a.75.75 0 10-1.498-.058l-.347 9a.75.75 0 001.5.058l.345-9z" clip-rule="evenodd" />
+                                                        </svg>                                                          
                                                     </button>
                                                 </div>
                                             </td>
