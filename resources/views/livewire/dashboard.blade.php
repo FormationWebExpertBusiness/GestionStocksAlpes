@@ -18,18 +18,29 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" />
                                 </svg>
                             </div>
-                            <p class="ml-16 truncate text-sm font-medium text-gray-500">Nombre de produit en quantité critique</p>
+                            <p class="ml-16 truncate text-sm font-medium text-gray-500">Nombre de produits dont la quantité est critique</p>
                         </dt>
                         <dd class="ml-16 flex items-baseline pb-6 sm:pb-7">
                             <p class="text-2xl font-semibold text-gray-900"> 
-                                {{ App\Models\CommonProduct::filterOnquantityStatus(App\Models\CommonProduct::all(), [App\Models\CommonProduct::$statutesQuantity['C']])->count() }} produit
+                                @php
+                                    $quantity = App\Models\CommonProduct::filterOnquantityStatus(App\Models\CommonProduct::all(), [App\Models\CommonProduct::$statutesQuantity['C']])->count();
+                                @endphp
+                                @if ($quantity <= 1)
+                                    {{ $quantity }} produit                                
+                                @else
+                                    {{ $quantity }} produits
+                                @endif
                             </p>
                             <div class="absolute inset-x-0 bottom-0 bg-gray-50 px-4 py-4 sm:px-6">
                                 <div class="text-sm">
-                                    <a href="/stock?sta[0]=Quantité+critique" class="font-medium text-indigo-600 hover:text-indigo-500">
-                                        Voir tout
-                                        <span class="sr-only"> Total du stock</span>
-                                    </a>
+                                    @if ($quantity != 0)
+                                        <a href="/stock?sta[0]=Quantité+critique" class="font-medium text-indigo-600 hover:text-indigo-500">
+                                            Voir tout
+                                            <span class="sr-only"> Total du stock</span>
+                                        </a>
+                                    @else
+                                        <p class="text-gray-50"><br></p>
+                                    @endif
                                 </div>
                             </div>
                         </dd>
@@ -42,18 +53,29 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" />
                                   </svg>                                  
                             </div>
-                            <p class="ml-16 truncate text-sm font-medium text-gray-500">Nombre de produit en quantité faible</p>
+                            <p class="ml-16 truncate text-sm font-medium text-gray-500">Nombre de produits dont la quantité est faibles</p>
                         </dt>
                         <dd class="ml-16 flex items-baseline pb-6 sm:pb-7">
                             <p class="text-2xl font-semibold text-gray-900">
-                                {{ App\Models\CommonProduct::filterOnquantityStatus(App\Models\CommonProduct::all(), ['Quantité faible'])->count() }} produits
+                                @php
+                                    $quantity = App\Models\CommonProduct::filterOnquantityStatus(App\Models\CommonProduct::all(), [App\Models\CommonProduct::$statutesQuantity['F']])->count()
+                                @endphp
+                                @if ($quantity <= 1)
+                                    {{ $quantity }} produit                                    
+                                @else
+                                    {{ $quantity }} produits
+                                @endif
                             </p>
                             <div class="absolute inset-x-0 bottom-0 bg-gray-50 px-4 py-4 sm:px-6">
                                 <div class="text-sm">
-                                    <a href="/stock?sta[0]=Quantité+faible" class="font-medium text-indigo-600 hover:text-indigo-500">
-                                        Voir tout
-                                        <span class="sr-only"> Total du stock</span>
-                                    </a>
+                                    @if ($quantity != 0)
+                                        <a href="/stock?sta[0]=Quantité+faible" class="font-medium text-indigo-600 hover:text-indigo-500">
+                                            Voir tout
+                                            <span class="sr-only"> Total du stock</span>
+                                        </a>
+                                    @else
+                                        <p class="text-gray-50"><br></p>
+                                    @endif
                                 </div>
                             </div>
                         </dd>
@@ -69,19 +91,30 @@
                                         d="M21 7.5l-9-5.25L3 7.5m18 0l-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9" />
                                 </svg>
                             </div>
-                            <p class="ml-16 truncate text-sm font-medium text-gray-500">Stock total des produits
+                            <p class="ml-16 truncate text-sm font-medium text-gray-500">Nombre total de produits différents
                             </p>
                         </dt>
                         <dd class="ml-16 flex items-baseline pb-6 sm:pb-7">
                             <p class="text-2xl font-semibold text-gray-900">
-                                {{ App\Models\CommonProduct::totalCommonProduct() }} produits
+                                @php
+                                    $quantity = App\Models\CommonProduct::totalCommonProduct(); 
+                                @endphp
+                                @if ($quantity <= 1)
+                                    {{ $quantity }} produit
+                                @else
+                                    {{ $quantity }} produits
+                                @endif
                             </p>
                             <div class="absolute inset-x-0 bottom-0 bg-gray-50 px-4 py-4 sm:px-6">
                                 <div class="text-sm">
-                                    <a href="/stock" class="font-medium text-indigo-600 hover:text-indigo-500">
-                                        Voir tout
-                                        <span class="sr-only"> Total du stock</span>
-                                    </a>
+                                    @if ($quantity != 0)
+                                        <a href="/stock" class="font-medium text-indigo-600 hover:text-indigo-500">
+                                            Voir tout
+                                            <span class="sr-only"> Total du stock</span>
+                                        </a>
+                                    @else
+                                        <p class="text-gray-50"><br></p>
+                                    @endif
                                 </div>
                             </div>
                         </dd>
@@ -124,7 +157,7 @@
         <div class="sm:flex sm:items-center mb-5">
             <div class="sm:flex-auto">
                 <h1 class="text-xl font-semibold text-gray-900">Stocks</h1>
-                <p class="mt-2 text-sm text-gray-700">La liste totale des derniers produits ajoutées de Alpes Network.
+                <p class="mt-2 text-sm text-gray-700">La liste totale des derniers produits ajoutés de Alpes Network.
                 </p>
             </div>
         </div>
@@ -157,7 +190,7 @@
                                     </th>
                                     <th scope="col"
                                         class="py-3.5 pl-4 pr-4 text-left text-sm font-semibold text-gray-900 sm:pr-6">
-                                        Status</th>
+                                        Statut</th>
 
                                     <th scope="col"
                                         class="py-3.5 pl-4 pr-4 text-left text-sm font-semibold text-gray-900 sm:pr-6">
