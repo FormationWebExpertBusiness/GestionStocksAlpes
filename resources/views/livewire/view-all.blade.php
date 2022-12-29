@@ -89,7 +89,7 @@
             <div class="sm:flex-auto">
                 <div class="min-w-0 flex-1">
                     <h2 class="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">
-                        Stock</h2>
+                        Produits</h2>
                 </div>
                 <p class="mt-2 text-sm text-gray-700">Liste de tout les produits du stock</p>
             </div>
