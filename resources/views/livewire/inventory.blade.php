@@ -45,7 +45,7 @@
                                         Numéro de série
                                         <x-ordering-arrows champ='serial_number' champF={{$champ}} modeF={{$mode}}></x-ordering-arrows>
                                     </th>
-                                    <th wire:click="reOrder('rack')" scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 w-[9%]">
+                                    <th wire:click="reOrder('rack')" scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
                                         Position
                                         <x-ordering-arrows champ='rack' champF={{$champ}} modeF={{$mode}}></x-ordering-arrows>
                                     </th>
@@ -77,9 +77,13 @@
                                                 {{ $product->getModel() }}</td>
                                             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                                                 {{ $product->serial_number }}</td>
-                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 w-[9%]">
-                                                {{ $product->rack->name }} <br>
-                                                Étage {{ $product->rack_level }}
+                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                                <span class="inline-flex items-center rounded-full bg-stone-200 pr-1.5 pl-3 py-1 text-sm font-medium text-stone-800">
+                                                    {{ $product->rack->name }}
+                                                    <span class="inline-flex items-center rounded-full rounded-l-none bg-white px-2 py-0.5 ml-2 text-sm font-medium text-stone-800">
+                                                        Étage {{ $product->rack_level }}
+                                                    </span>
+                                                </span>
                                             </td>
                                             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 w-[7%]">
                                                 {{ number_format($product->price, 2, ',', ' ') }}€
@@ -143,7 +147,7 @@
                                                 <td scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
                                                     <p class="leading-relaxed rounded-md w-2/3 animate-pulse bg-gray-400 h-6"><br></p>
                                                 </td>
-                                                <td scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 w-[9%]">
+                                                <td scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
                                                     <p class="leading-relaxed rounded-md w-2/3 animate-pulse bg-gray-400 h-6"><br></p>
                                                 </td>
                                                 <td scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 w-[7%]">
