@@ -95,15 +95,14 @@
                             </span>
                         @endif
                     </span>
+                    <div class="absolute -left-24 items-left justify-start max-w-full mt-2">
+                        <p class="text-sm text-gray-700 leading-5">
+                            <span class="font-medium">{{ $paginator->total() }}</span>
+                            <span>{!! __('résultats') !!}</span>
+                        </p>
+                    </div>
                 </span>
             </div>
-
         </div>
     </nav>
-    <div class="flex items-center justify-center max-w-full mt-2">
-        <p class="text-sm text-gray-700 leading-5">
-            <span class="font-medium">{{ $paginator->total() }}</span>
-            <span>{!! __('résultats') !!}</span>
-        </p>
-    </div>
 </div>

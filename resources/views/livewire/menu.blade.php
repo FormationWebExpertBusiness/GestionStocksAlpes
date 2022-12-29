@@ -82,31 +82,31 @@
                 <div class="space-y-1" id="sub-menu-1">
                     @if ($route === 'configuration/category')
                         <a href="/configuration/category" class="bg-indigo-800 text-white group flex items-center px-2 py-2 text-sm font-medium rounded-md pl-11">
-                            Catégorie
+                            Catégories
                         </a>
                     @else
                         <a href="/configuration/category" class="text-indigo-100 hover:bg-indigo-600 hover:bg-opacity-75 group flex items-center px-2 py-2 text-sm font-medium rounded-md pl-11">
-                            Catégorie
+                            Catégories
                         </a>
                     @endif
 
                     @if ($route === 'configuration/brand')
                         <a href="/configuration/brand" class="bg-indigo-800 text-white group flex items-center px-2 py-2 text-sm font-medium rounded-md pl-11">
-                            Marque
+                            Marques
                         </a>
                     @else
                         <a href="/configuration/brand" class="text-indigo-100 hover:bg-indigo-600 hover:bg-opacity-75 group flex items-center px-2 py-2 text-sm font-medium rounded-md pl-11">
-                            Marque
+                            Marques
                         </a>
                     @endif
 
                     @if ($route === 'configuration/rack')
                         <a href="/configuration/rack" class="bg-indigo-800 text-white group flex items-center px-2 py-2 text-sm font-medium rounded-md pl-11">
-                            Étagère
+                            Étagères
                         </a>
                     @else
                         <a href="/configuration/rack" class="text-indigo-100 hover:bg-indigo-600 hover:bg-opacity-75 group flex items-center px-2 py-2 text-sm font-medium rounded-md pl-11">
-                            Étagère
+                            Étagères
                         </a>
                         
                     @endif
@@ -129,31 +129,31 @@
                     <div class="space-y-1" id="sub-menu-1">
                         @if ($route === 'configuration/category')
                             <a href="/configuration/category" class="bg-indigo-800 text-white group flex items-center px-2 py-2 text-sm font-medium rounded-md pl-11">
-                                Catégorie
+                                Catégories
                             </a>
                         @else
                             <a href="/configuration/category" class="text-indigo-100 hover:bg-indigo-600 hover:bg-opacity-75 group flex items-center px-2 py-2 text-sm font-medium rounded-md pl-11">
-                                Catégorie
+                                Catégories
                             </a>
                         @endif
     
                         @if ($route === 'configuration/brand')
                             <a href="/configuration/brand" class="bg-indigo-800 text-white group flex items-center px-2 py-2 text-sm font-medium rounded-md pl-11">
-                                Marque
+                                Marques
                             </a>
                         @else
                             <a href="/configuration/brand" class="text-indigo-100 hover:bg-indigo-600 hover:bg-opacity-75 group flex items-center px-2 py-2 text-sm font-medium rounded-md pl-11">
-                                Marque
+                                Marques
                             </a>
                         @endif
     
                         @if ($route === 'configuration/rack')
                             <a href="/configuration/rack" class="bg-indigo-800 text-white group flex items-center px-2 py-2 text-sm font-medium rounded-md pl-11">
-                                Étagère
+                                Étagères
                             </a>
                         @else
                             <a href="/configuration/rack" class="text-indigo-100 hover:bg-indigo-600 hover:bg-opacity-75 group flex items-center px-2 py-2 text-sm font-medium rounded-md pl-11">
-                                Étagère
+                                Étagères
                             </a>
                             
                         @endif
